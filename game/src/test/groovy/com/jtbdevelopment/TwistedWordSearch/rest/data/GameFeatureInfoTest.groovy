@@ -7,61 +7,64 @@ import com.jtbdevelopment.TwistedWordSearch.state.GameFeature
  * Time: 4:26 PM
  */
 class GameFeatureInfoTest extends GroovyTestCase {
-    GameFeatureInfo test = new GameFeatureInfo(GameFeature.Grid,
+    GameFeatureInfo test = new GameFeatureInfo(GameFeature.Option1,
             [
-                    new GameFeatureInfo.Detail(GameFeature.Grid40X40),
-                    new GameFeatureInfo.Detail(GameFeature.SomeOverlap)
+                    new GameFeatureInfo.Detail(GameFeature.Choice1),
+                    new GameFeatureInfo.Detail(GameFeature.Choice2),
+                    new GameFeatureInfo.Detail(GameFeature.Choice3)
             ]
     )
 
     void testEquals() {
-        assert GameFeature.Grid.hashCode() == test.hashCode()
+        assert GameFeature.Option1.hashCode() == test.hashCode()
     }
 
     void testHashCode() {
-        assertFalse new GameFeatureInfo(GameFeature.Grid, []) == test
-        assertFalse new GameFeatureInfo(GameFeature.FillDifficulty, []) == test
-        assert new GameFeatureInfo(GameFeature.Grid,
+        assertFalse new GameFeatureInfo(GameFeature.Option1, []) == test
+        assertFalse new GameFeatureInfo(GameFeature.Option2, []) == test
+        assert new GameFeatureInfo(GameFeature.Option1,
                 [
-                        new GameFeatureInfo.Detail(GameFeature.Grid40X40),
-                        new GameFeatureInfo.Detail(GameFeature.SomeOverlap)
+                        new GameFeatureInfo.Detail(GameFeature.Choice1),
+                        new GameFeatureInfo.Detail(GameFeature.Choice2),
+                        new GameFeatureInfo.Detail(GameFeature.Choice3)
                 ]
         ) == test
     }
 
     void testGetFeature() {
         GameFeatureInfo.Detail detail = test.feature
-        assert GameFeature.Grid.description == detail.description
-        assert GameFeature.Grid.groupType == detail.groupType
-        assert GameFeature.Grid.label == detail.label
-        assert GameFeature.Grid == detail.feature
+        assert GameFeature.Option1.description == detail.description
+        assert GameFeature.Option1.groupType == detail.groupType
+        assert GameFeature.Option1.label == detail.label
+        assert GameFeature.Option1 == detail.feature
     }
 
     void testGetOptions() {
         assert [
-                new GameFeatureInfo.Detail(GameFeature.Grid40X40),
-                new GameFeatureInfo.Detail(GameFeature.SomeOverlap)
+                new GameFeatureInfo.Detail(GameFeature.Choice1),
+                new GameFeatureInfo.Detail(GameFeature.Choice2),
+                new GameFeatureInfo.Detail(GameFeature.Choice3)
         ] == test.options
     }
 
     void testGetOptionDetailOfOption() {
         GameFeatureInfo.Detail detail = test.options[0]
-        assert GameFeature.Grid40X40 == detail.feature
-        assert GameFeature.Grid40X40.description == detail.description
-        assert GameFeature.Grid40X40.groupType == detail.groupType
-        assert GameFeature.Grid40X40.groupType == detail.groupType
-        assert GameFeature.Grid40X40.label == detail.label
+        assert GameFeature.Choice1 == detail.feature
+        assert GameFeature.Choice1.description == detail.description
+        assert GameFeature.Choice1.groupType == detail.groupType
+        assert GameFeature.Choice1.groupType == detail.groupType
+        assert GameFeature.Choice1.label == detail.label
     }
 
     void testGetDetailHashCode() {
-        assert GameFeature.Grid40X40.hashCode() == test.options[0].hashCode()
-        assert GameFeature.SomeOverlap.hashCode() == test.options[1].hashCode()
+        assert GameFeature.Choice1.hashCode() == test.options[0].hashCode()
+        assert GameFeature.Choice2.hashCode() == test.options[1].hashCode()
     }
 
     void testGetDetailEquals() {
-        assert new GameFeatureInfo.Detail(GameFeature.Grid40X40) == test.options[0]
-        assert new GameFeatureInfo.Detail(GameFeature.SomeOverlap) == test.options[1]
-        assertFalse new GameFeatureInfo.Detail(GameFeature.Grid40X40) == test.options[1]
-        assertFalse new GameFeatureInfo.Detail(GameFeature.SomeOverlap) == test.options[0]
+        assert new GameFeatureInfo.Detail(GameFeature.Choice1) == test.options[0]
+        assert new GameFeatureInfo.Detail(GameFeature.Choice2) == test.options[1]
+        assertFalse new GameFeatureInfo.Detail(GameFeature.Compete) == test.options[1]
+        assertFalse new GameFeatureInfo.Detail(GameFeature.Solo) == test.options[0]
     }
 }

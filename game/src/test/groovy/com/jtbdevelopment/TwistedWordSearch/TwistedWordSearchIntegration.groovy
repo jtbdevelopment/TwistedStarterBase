@@ -54,56 +54,26 @@ class TwistedWordSearchIntegration extends AbstractGameIntegration<TWSGame, Mask
                 })
         assert features == [
                 new GameFeatureInfo(
-                        GameFeature.Grid,
+                        GameFeature.Option1,
                         [
-                                new GameFeatureInfo.Detail(GameFeature.Grid40X40),
-                                new GameFeatureInfo.Detail(GameFeature.Grid20X20),
-                                new GameFeatureInfo.Detail(GameFeature.Grid10X10),
-                                new GameFeatureInfo.Detail(GameFeature.CircleX20),
-                                new GameFeatureInfo.Detail(GameFeature.CircleX40),
-                                new GameFeatureInfo.Detail(GameFeature.PyramidX20),
-                                new GameFeatureInfo.Detail(GameFeature.PyramidX40),
+                                new GameFeatureInfo.Detail(GameFeature.Choice1),
+                                new GameFeatureInfo.Detail(GameFeature.Choice2),
+                                new GameFeatureInfo.Detail(GameFeature.Choice3),
                         ]
                 ),
                 new GameFeatureInfo(
-                        GameFeature.WordWrap,
+                        GameFeature.Option2,
                         [
-                                new GameFeatureInfo.Detail(GameFeature.WordWrapYes),
-                                new GameFeatureInfo.Detail(GameFeature.WordWrapNo),
+                                new GameFeatureInfo.Detail(GameFeature.Option2Yes),
+                                new GameFeatureInfo.Detail(GameFeature.Option2No),
                         ]
                 ),
                 new GameFeatureInfo(
-                        GameFeature.JumbleOnFind,
+                        GameFeature.Option3,
                         [
-                                new GameFeatureInfo.Detail(GameFeature.JumbleOnFindNo),
-                                new GameFeatureInfo.Detail(GameFeature.JumbleOnFindYes),
-                        ]
-                ),
-                new GameFeatureInfo(
-                        GameFeature.AverageWordLength,
-                        [
-                                new GameFeatureInfo.Detail(GameFeature.AverageOf5),
-                                new GameFeatureInfo.Detail(GameFeature.AverageOf4),
-                                new GameFeatureInfo.Detail(GameFeature.AverageOf3),
-                                new GameFeatureInfo.Detail(GameFeature.AverageOf6),
-                                new GameFeatureInfo.Detail(GameFeature.AverageOf7),
-                        ]
-                ),
-                new GameFeatureInfo(
-                        GameFeature.FillDifficulty,
-                        [
-                                new GameFeatureInfo.Detail(GameFeature.RandomFill),
-                                new GameFeatureInfo.Detail(GameFeature.SomeOverlap),
-                                new GameFeatureInfo.Detail(GameFeature.StrongOverlap),
-                                new GameFeatureInfo.Detail(GameFeature.WordChunks)
-                        ]
-                ),
-                new GameFeatureInfo(
-                        GameFeature.HideWordLetters,
-                        [
-                                new GameFeatureInfo.Detail(GameFeature.HideWordLettersNone),
-                                new GameFeatureInfo.Detail(GameFeature.HideWordLettersSome),
-                                new GameFeatureInfo.Detail(GameFeature.HideWordLettersMany),
+                                new GameFeatureInfo.Detail(GameFeature.Solo),
+                                new GameFeatureInfo.Detail(GameFeature.Collaborate),
+                                new GameFeatureInfo.Detail(GameFeature.Compete),
                         ]
                 ),
         ]
@@ -116,12 +86,9 @@ class TwistedWordSearchIntegration extends AbstractGameIntegration<TWSGame, Mask
         MaskedGame game = newGame(P3,
                 new FeaturesAndPlayers(
                         features: [
-                                GameFeature.Grid20X20,
-                                GameFeature.HideWordLettersNone,
-                                GameFeature.JumbleOnFindNo,
-                                GameFeature.AverageOf6,
-                                GameFeature.StrongOverlap,
-                                GameFeature.WordWrapYes,
+                                GameFeature.Option2No,
+                                GameFeature.Choice3,
+                                GameFeature.Compete,
                         ] as Set,
                         players: [TEST_PLAYER3.md5],
                 ))

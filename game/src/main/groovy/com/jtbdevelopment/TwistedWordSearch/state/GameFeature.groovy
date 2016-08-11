@@ -8,48 +8,20 @@ import groovy.transform.CompileStatic
  */
 @CompileStatic
 enum GameFeature {
-    //  TODO - more - random jumble on timer
-    Grid(1, GameFeatureGroupType.Difficulty, 'Grid', 'Type of grid to play on.'),
-    Grid40X40(1, '40x40', '40 x 40 square grid.', Grid),
-    Grid20X20(2, '20x20', '20 x 20 square grid.', Grid),
-    Grid10X10(3, '10x10', '10 x 10 square grid.', Grid),
-    CircleX20(3, 'CircleX20', '20 letter diameter circle.', Grid),
-    CircleX40(4, 'CircleX40', '40 letter diameter circle.', Grid),
-    PyramidX20(5, 'PyramidX20', 'Pyramid with 20 letter wide base.', Grid),
-    PyramidX40(5, 'PyramidX20', 'Pyramid with 40 letter wide base.', Grid),
+    //  TODO - real options
+    Option1(1, GameFeatureGroupType.Difficulty, 'Option 1', 'Some sort of option.'),
+    Choice1(1, 'Choice1', 'Tada!', Option1),
+    Choice2(2, 'Two', 'Super info!', Option1),
+    Choice3(3, 'Choice3', 'Don\'t pick me.', Option1),
 
-    WordWrap(2, GameFeatureGroupType.Difficulty, 'Word Wrap', 'Words can wrap around edges.'),
-    WordWrapYes(1, 'Yes', 'Allows words to wrap around edges.', WordWrap),
-    WordWrapNo(2, 'No', 'Prevents words from wrapping around edges.', WordWrap),
+    Option2(1, GameFeatureGroupType.Difficulty, 'Option 2', 'Some sort of option.'),
+    Option2Yes(1, 'Yes', 'Turns on cool feature!', Option2),
+    Option2No(2, 'No', 'Game will suck!', Option2),
 
-    JumbleOnFind(3, GameFeatureGroupType.Difficulty, 'Jumble', 'Finding a word causes the puzzle to re-jumble remaining letters.'),
-    JumbleOnFindNo(1, 'No', 'Puzzle not rearranged after finding a word.', JumbleOnFind),
-    JumbleOnFindYes(2, 'Yes', 'Puzzle is re-jumbled after each word find.', JumbleOnFind),
-
-    AverageWordLength(4, GameFeatureGroupType.Difficulty, 'Word Length', 'Average word length.'),
-    AverageOf5(1, '5', 'Average word length to be near 5 letters.', AverageWordLength),
-    AverageOf4(2, '4', 'Average word length to be near 4 letters.', AverageWordLength),
-    AverageOf3(3, '3', 'Average word length to be near 3 letters.', AverageWordLength),
-    AverageOf6(4, '6', 'Average word length to be near 6 letters.', AverageWordLength),
-    AverageOf7(5, '7+', 'Average word length to be near 7+ letters.', AverageWordLength),
-
-    FillDifficulty(5, GameFeatureGroupType.Difficulty, 'Fill Difficulty', 'How random are fill letters vs words?'),
-    RandomFill(1, 'Random', 'Fill letters are random', FillDifficulty),
-    SomeOverlap(2, 'Less random', 'Fill letters will use word letters some what more often than randomly', FillDifficulty),
-    StrongOverlap(3, 'Word Letters', 'Fill letters will fill mostly with letters from words', FillDifficulty),
-    WordChunks(4, 'Word Chunks', 'Fill with chunks of words.', FillDifficulty),
-
-    HideWordLetters(6, GameFeatureGroupType.Difficulty, 'Partial words.', 'Hide some of the letters in the words to find.'),
-    HideWordLettersNone(1, 'None', 'Words to find are shown completely.', HideWordLetters),
-    HideWordLettersSome(2, 'Some', 'Words to find show more than 75% of their letters.', HideWordLetters),
-    HideWordLettersMany(3, 'Many', 'Words to find show less than 75% of their letters.', HideWordLetters),
-
-    //  TODO - multi player options
-    /*
-    Competitiveness(2, GameFeatureGroupType.MultiPlayer, GameFeature.class, Competitive, 'Multi Player Mode', 'Do friends compete or help?'),
-    Competitive(1, 'Competitive', 'Each friend searches independently, fastest friend wins.', Competitiveness),
-    Cooperative(2, 'Cooperative', 'Work together, friend with most finds wins.', Grid),
-    */
+    Option3(1, GameFeatureGroupType.MultiPlayer, 'Multiplayer Option', 'Some sort of multi-player option.'),
+    Solo(1, 'Solo', 'Make more friends!', Option3),
+    Collaborate(2, 'Friends', 'Play together', Option3),
+    Compete(3, 'Enemies', 'Play head to head.', Option3),
 
     final GameFeatureGroupType groupType
     final GameFeature group

@@ -9,5 +9,5 @@ import groovy.transform.CompileStatic
 @CompileStatic
 enum GameFeatureGroupType {
     Difficulty,
-    //MultiPlayer
+    MultiPlayer
 }
