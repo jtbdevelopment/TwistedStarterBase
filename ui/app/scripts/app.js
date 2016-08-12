@@ -38,15 +38,20 @@ angular
             .when('/main', {
                 templateUrl: 'views/main.html'
             })
-            .when('/about', {
-                templateUrl: 'views/about.html',
-                controller: 'AboutCtrl',
-                controllerAs: 'about'
+            .when('/help', {
+                templateUrl: 'views/help.html',
+                controller: 'HelpCtrl',
+                controllerAs: 'help'
             })
             .when('/admin', {
-                templateUrl: 'views/admin.html',
-                controller: 'AdminCtrl',
+                templateUrl: 'views/admin/admin.html',
+                controller: 'CoreAdminCtrl',
                 controllerAs: 'admin'
+            })
+            .when('/profile', {
+                templateUrl: 'views/profile.html',
+                controller: 'ProfileCtrl',
+                controllerAs: 'profile'
             })
             .when('/create', {
                 templateUrl: 'views/create.html',
