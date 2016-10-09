@@ -3,4 +3,18 @@
     margin-left: 0;
     margin-right: 0;
   }
+
+  .create-game-button {
+    font-weight: bold;
+    width: 100%;
+  }
+
+  .ui-select-match-item.btn.btn-default {
+    background-color: green;
+    color: white;
+  }
+  .invite-friends-button {
+    margin-top: 10px;
+    width: 100%;
+  }
 }

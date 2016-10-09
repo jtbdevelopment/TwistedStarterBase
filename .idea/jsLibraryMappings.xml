@@ -2,6 +2,6 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$/ui" libraries="{starter/ui/node_modules}" />
-    <file url="PROJECT" libraries="{angular-scenario-DefinitelyTyped, jasmine-DefinitelyTyped, karma-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{angular-scenario-DefinitelyTyped, angular-ui-bootstrap-DefinitelyTyped, angularjs-DefinitelyTyped, jasmine-DefinitelyTyped, karma-DefinitelyTyped}" />
   </component>
 </project>

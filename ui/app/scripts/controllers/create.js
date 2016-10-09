@@ -2,18 +2,51 @@
 
 angular.module('twsUI').controller('CreateGameCtrl',
     [
-        '$http', 'jtbGameFeatureService', 'jtbGameCache', 'jtbPlayerService',
-        function ($http, jtbGameFeatureService, jtbGameCache, jtbPlayerService) {
+        'jtbGameFeatureService', 'jtbGameCache', 'jtbPlayerService', 'jtbBootstrapGameActions', '$uibModal',
+        function (jtbGameFeatureService, jtbGameCache, jtbPlayerService, jtbBootstrapGameActions, $uibModal) {
             var controller = this;
 
-            controller.features = {};
+            controller.features = [];
             controller.choices = {};
+
+            controller.chosenFriends = [];
+            controller.invitableFBFriends = [];
+            controller.friends = [];
+            controller.createGameButtonText = 'Create Game';
+            controller.disableCreate = false;
+
+            //  TODO - should this be service?
+            jtbPlayerService.currentPlayerFriends().then(function (data) {
+                angular.forEach(data.maskedFriends, function (displayName, hash) {
+                    var friend = {
+                        md5: hash,
+                        displayName: displayName
+                    };
+                    controller.friends.push(friend);
+                });
+                if (jtbPlayerService.currentPlayer().source === 'facebook') {
+                    angular.forEach(data.invitableFriends, function (friend) {
+                        var invite = {
+                            id: friend.id,
+                            name: friend.name
+                        };
+                        if (angular.isDefined(friend.picture) && angular.isDefined(friend.picture.url)) {
+                            invite.url = friend.picture.url;
+                        }
+                        controller.invitableFBFriends.push(invite);
+                    });
+                }
+            });
+
             jtbGameFeatureService.features().then(
                 function (features) {
+                    var trackingGroup = {};
                     angular.forEach(features, function (feature) {
                         var group = feature.feature.groupType;
-                        if (angular.isUndefined(controller.features[group])) {
-                            controller.features[group] = [];
+                        if (angular.isUndefined(trackingGroup[group])) {
+                            var groupDetails = {group: group, features: []};
+                            trackingGroup[group] = groupDetails;
+                            controller.features.push(groupDetails);
                         }
 
                         var newFeature = {
@@ -24,39 +57,54 @@ angular.module('twsUI').controller('CreateGameCtrl',
                         };
 
                         angular.forEach(feature.options, function (option) {
-                            newFeature.options.push({
+                            var item = {
                                 feature: option.feature,
                                 label: option.label,
-                                description: option.description
-                            });
+                                description: option.description,
+                                icon: undefined
+                            };
+                            //  TODO - define icons and alternate labels here
+                            newFeature.options.push(item);
                         });
 
-                        controller.features[group].push(newFeature);
+                        trackingGroup[group].features.push(newFeature);
                         controller.choices[newFeature.feature] = newFeature.options[0].feature;
                     });
-                },
-                function () {
-                    //  TODO
-                }
-            );
+                });
+
+            //  TODO - create common service?
+            controller.inviteFriends = function () {
+                $uibModal.open({
+                    templateUrl: 'views/inviteDialog.html',
+                    controller: 'CoreBootstrapInviteCtrl',
+                    controllerAs: 'invite',
+                    size: 'lg',
+                    resolve: {
+                        invitableFriends: function () {
+                            return controller.invitableFBFriends;
+                        },
+                        message: function () {
+                            return 'Come play Twisted Wordsearch with me!';
+                        }
+                    }
+                });
+            };
 
             controller.createGame = function () {
+                controller.createGameButtonText = 'Creating game...';
+                controller.disableCreate = true;
+
                 //  TODO - ads
                 //  TODO - multi-player
                 var featureSet = [];
                 angular.forEach(controller.choices, function (value) {
                     featureSet.push(value);
                 });
-                var playersAndFeatures = {'players': [], 'features': featureSet};
-                $http.post(jtbPlayerService.currentPlayerBaseURL() + '/new', playersAndFeatures).then(
-                    function (response) {
-                        jtbGameCache.putUpdatedGame(response.data);
-                    },
-                    function (error) {
-                        console.log(JSON.stringify(error));
-                        //  TODO
-                    }
-                );
+                var players = controller.chosenFriends.map(function (player) {
+                    return player.md5;
+                });
+                var playersAndFeatures = {'players': players, 'features': featureSet};
+                jtbBootstrapGameActions.new(playersAndFeatures);
             };
         }
     ]
