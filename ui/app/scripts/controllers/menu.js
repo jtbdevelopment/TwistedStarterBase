@@ -42,9 +42,6 @@ angular.module('twsUI').controller('MenuCtrl',
                         controller.games[key] = [];
                         controller.phaseCollapsed[key] = false;
                     });
-                },
-                function () {
-                    //  TODO
                 });
 
             function updateGames() {

@@ -401,7 +401,7 @@ module.exports = function (grunt) {
         ngtemplates: {
             dist: {
                 options: {
-                    module: 'uiApp',
+                    module: 'twsUI',
                     htmlmin: '<%= htmlmin.dist.options %>',
                     usemin: 'scripts/scripts.js'
                 },

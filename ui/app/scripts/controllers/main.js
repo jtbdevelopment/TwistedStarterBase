@@ -12,12 +12,15 @@ angular.module('twsUI').controller('MainCtrl',
         function ($scope, $rootScope, jtbPlayerService, $location) {
             var controller = this;
 
+            controller.showHelp = false;
+            controller.showAdmin = false;
+
             function fullSizeBody() {
-                controller.mainBodySize = 'col-xs-12 col-md-12';
+                controller.mainBodySize = 'col-xs-12 col-sm-12 col-md-12';
             }
 
             function partialSizeBody() {
-                controller.mainBodySize = 'col-xs-8 col-md-10';
+                controller.mainBodySize = 'col-xs-8 col-sm-9 col-md-10';
             }
 
             function setEmptySideBar() {
@@ -33,7 +36,7 @@ angular.module('twsUI').controller('MainCtrl',
 
             function setButtonSideBar() {
                 controller.sideBarTemplate = 'views/sidebar/games.html';
-                controller.sideBarSize = 'col-xs-4 col-md-2';
+                controller.sideBarSize = 'col-xs-4 col-sm-3 col-md-2';
                 partialSizeBody();
             }
 
@@ -47,10 +50,6 @@ angular.module('twsUI').controller('MainCtrl',
             controller.go = function (where) {
                 $location.path(where);
                 //  TODO - hide menu?
-            };
-
-            controller.refreshGames = function () {
-                $rootScope.$broadcast('refreshGames');
             };
 
             controller.toggleMenu = function () {
@@ -84,7 +83,9 @@ angular.module('twsUI').controller('MainCtrl',
                 setButtonSideBar();
                 angular.copy(jtbPlayerService.currentPlayer(), controller.player);
                 controller.showLogout = controller.player.source === 'MANUAL';
-                controller.showAdmin = controller.player.adminUser || controller.showLogout;
+                controller.showAdmin =
+                    controller.player.adminUser ||
+                    controller.showAdmin;  //  Once an admin always an admin for ui
             });
         }
     ]

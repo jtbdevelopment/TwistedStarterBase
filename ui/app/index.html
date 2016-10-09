@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 </head>
-<body ng-app="twsUI" ng-controller="MainCtrl as main">
+<body ng-app="twsUIBackground" ng-controller="MainCtrl as main">
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -27,6 +27,7 @@
     <div class="container-fluid"></div>
     <ul class="nav navbar-nav pull-left" ng-show="main.player.displayName !== undefined">
         <li>
+            <!--  TODO - determine if hover is annoying for this game -->
             <a href="" ng-click="main.toggleMenu()" ng-mouseover="main.hoverMenu()"
                ng-mouseleave="main.stopHoverMenu()">
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
@@ -35,11 +36,6 @@
         <li>
             <a ng-href="#/create">
                 <span class="glyphicon glyphicon-plus"></span>
-            </a>
-        </li>
-        <li>
-            <a href="" ng-click="main.refreshGames()">
-                <span ng-click="" class="glyphicon glyphicon-refresh"></span>
             </a>
         </li>
     </ul>
@@ -55,7 +51,7 @@
             </a>
         </li>
         <li>
-            <a ng-href="#/help">
+            <a ng-href="#/help" ng-show="main.player.displayName !== undefined">
                 <span class="glyphicon glyphicon-question-sign"></span>
             </a>
         </li>
@@ -74,7 +70,7 @@
         <div class="{{main.sideBarSize}}"
              ng-include="main.sideBarTemplate"
              uib-collapse="main.hideGames" horizontal></div>
-        <div class="{{main.mainBodySize}}">
+        <div class="{{main.mainBodySize}} main-body">
             <div ng-view=""></div>
         </div>
     </div>

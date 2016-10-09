@@ -9,12 +9,18 @@
  * Main module of the application.
  */
 
+function endsWith(str, suffix) {
+    return (str.substr(str.length - suffix.length, suffix.length) === suffix);
+}
 
-angular.module('twsUIBackground', ['twsUI'])
+//  TODO - eliminate when you have real services
+angular.module('twsUI.services', []);
+
+angular.module('twsUIBackground', ['twsUI.services', 'twsUI'])
 //  Separate module to avoid interfering with tests
     .run(function ($rootScope, $location) {
         $rootScope.$on('gameUpdated', function (message, oldGame, newGame) {
-            if ($location.path().endsWith(oldGame.id) && oldGame.gamePhase !== newGame.gamePhase) {
+            if (endsWith($location.path(), oldGame.id) && oldGame.gamePhase !== newGame.gamePhase) {
                 $location.path('/game/' + newGame.gamePhase.toLowerCase() + '/' + newGame.id);
             }
         });

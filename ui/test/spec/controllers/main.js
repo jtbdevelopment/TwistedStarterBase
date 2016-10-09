@@ -32,7 +32,7 @@ describe('Controller: MainCtrl', function () {
 
     it('initializes to full screen empty side bar', function () {
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/empty.html');
-        expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-md-12');
+        expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
         expect(MainCtrl.sideBarSize).toEqual('hidden');
         expect(MainCtrl.showAdmin).toEqual(false);
         expect(MainCtrl.showLogout).toEqual(false);
@@ -45,8 +45,8 @@ describe('Controller: MainCtrl', function () {
         $scope.$broadcast('playerLoaded');
         $scope.$apply();
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
-        expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
-        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-md-2');
+        expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
+        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
         expect(MainCtrl.showAdmin).toEqual(false);
         expect(MainCtrl.showLogout).toEqual(false);
         expect(MainCtrl.hideGames).toEqual(false);
@@ -58,8 +58,8 @@ describe('Controller: MainCtrl', function () {
         $scope.$broadcast('playerLoaded');
         $scope.$apply();
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
-        expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
-        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-md-2');
+        expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
+        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
         expect(MainCtrl.showAdmin).toEqual(true);
         expect(MainCtrl.showLogout).toEqual(false);
         expect(MainCtrl.hideGames).toEqual(false);
@@ -71,12 +71,30 @@ describe('Controller: MainCtrl', function () {
         $scope.$broadcast('playerLoaded');
         $scope.$apply();
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
-        expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
-        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-md-2');
+        expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
+        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
+        expect(MainCtrl.showAdmin).toEqual(false);
+        expect(MainCtrl.showLogout).toEqual(true);
+        expect(MainCtrl.hideGames).toEqual(false);
+        expect(MainCtrl.player).toEqual(playerDetails);
+    });
+
+    it('once an admin always and admin for session', function () {
+        playerDetails = {adminUser: true, source: 'MANUAL'};
+        $scope.$broadcast('playerLoaded');
+        $scope.$apply();
+        expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
+        expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
+        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
         expect(MainCtrl.showAdmin).toEqual(true);
         expect(MainCtrl.showLogout).toEqual(true);
         expect(MainCtrl.hideGames).toEqual(false);
         expect(MainCtrl.player).toEqual(playerDetails);
+        playerDetails = {adminUser: false, source: 'FACEBOOK'};
+        $scope.$broadcast('playerLoaded');
+        $scope.$apply();
+        expect(MainCtrl.showAdmin).toEqual(true);
+        expect(MainCtrl.showLogout).toEqual(false);
     });
 
     it('handles logout for manual players', function () {
@@ -85,15 +103,15 @@ describe('Controller: MainCtrl', function () {
         $scope.$apply();
         MainCtrl.toggleMenu();
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
-        expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-md-12');
-        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-md-2');
-        expect(MainCtrl.showAdmin).toEqual(true);
+        expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
+        expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
+        expect(MainCtrl.showAdmin).toEqual(false);
         expect(MainCtrl.showLogout).toEqual(true);
         expect(MainCtrl.hideGames).toEqual(true);
 
         MainCtrl.logout();
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/empty.html');
-        expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-md-12');
+        expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
         expect(MainCtrl.sideBarSize).toEqual('hidden');
         expect(MainCtrl.showAdmin).toEqual(false);
         expect(MainCtrl.showLogout).toEqual(false);
@@ -107,11 +125,6 @@ describe('Controller: MainCtrl', function () {
         expect($location.path).toHaveBeenCalledWith('/somewhere');
     });
 
-    it('broadcasts refresh games on action', function () {
-        MainCtrl.refreshGames();
-        expect($rootScope.$broadcast).toHaveBeenCalledWith('refreshGames');
-    });
-
     describe('menu tests', function () {
         beforeEach(function () {
             playerDetails = {adminUser: false, source: 'MANUAL'};
@@ -123,30 +136,30 @@ describe('Controller: MainCtrl', function () {
             expect(MainCtrl.hideGames).toEqual(false);
             MainCtrl.toggleMenu();
             expect(MainCtrl.hideGames).toEqual(true);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-md-12');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
             MainCtrl.toggleMenu();
             expect(MainCtrl.hideGames).toEqual(false);
             MainCtrl.toggleMenu();
             expect(MainCtrl.hideGames).toEqual(true);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-md-12');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
         });
 
         it('hovering when menu visible', function () {
             expect(MainCtrl.hideGames).toEqual(false);
             expect(MainCtrl.forceShowGames).toEqual(false);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
 
             MainCtrl.hoverMenu();
 
             expect(MainCtrl.hideGames).toEqual(false);
             expect(MainCtrl.forceShowGames).toEqual(false);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
 
             MainCtrl.stopHoverMenu();
 
             expect(MainCtrl.hideGames).toEqual(false);
             expect(MainCtrl.forceShowGames).toEqual(false);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
         });
 
         it('hovering when menu not visible', function () {
@@ -154,19 +167,19 @@ describe('Controller: MainCtrl', function () {
 
             expect(MainCtrl.hideGames).toEqual(true);
             expect(MainCtrl.forceShowGames).toEqual(false);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-md-12');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
 
             MainCtrl.hoverMenu();
 
             expect(MainCtrl.hideGames).toEqual(false);
             expect(MainCtrl.forceShowGames).toEqual(true);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
 
             MainCtrl.stopHoverMenu();
 
             expect(MainCtrl.hideGames).toEqual(true);
             expect(MainCtrl.forceShowGames).toEqual(false);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-md-12');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
         });
 
         it('enabling disabled menu while hovering', function () {
@@ -174,24 +187,24 @@ describe('Controller: MainCtrl', function () {
 
             expect(MainCtrl.hideGames).toEqual(true);
             expect(MainCtrl.forceShowGames).toEqual(false);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-md-12');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
 
             MainCtrl.hoverMenu();
 
             expect(MainCtrl.hideGames).toEqual(false);
             expect(MainCtrl.forceShowGames).toEqual(true);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
 
             MainCtrl.toggleMenu();
             expect(MainCtrl.hideGames).toEqual(false);
             expect(MainCtrl.forceShowGames).toEqual(false);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
 
             MainCtrl.stopHoverMenu();
 
             expect(MainCtrl.hideGames).toEqual(false);
             expect(MainCtrl.forceShowGames).toEqual(false);
-            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-md-10');
+            expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
         });
     });
 });

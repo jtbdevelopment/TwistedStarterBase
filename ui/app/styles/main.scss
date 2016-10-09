@@ -17,10 +17,37 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 body {
   padding-top: 10px;
+  padding-bottom: 45px;
 
   .navbar {
     padding-left: 5px;
     padding-right: 5px;
+    border-width: 0;
+    .navbar-brand {
+      img {
+        width: 24px;
+        height: 24px;
+        display: inline;
+      }
+      small {
+        @media(max-width: $screen-sm-max) {
+          display: none;
+        }
+      }
+      @media (max-width: $screen-xs-max) {
+        display: none;
+      }
+    }
+  }
+
+  .modal-dialog {
+    .modal-header {
+      border-width: 0;
+    }
+
+    .modal-footer {
+      border-width: 0;
+    }
   }
 }
 
@@ -28,3 +55,25 @@ body {
   padding-left: 5px;
 }
 
+.game-features {
+  text-align: center;
+  display: inline;
+  .game-feature {
+    width: auto;
+    display: inline-block;
+    padding-right: 2px;
+  }
+}
+
+.main-body {
+  padding-left: 0;
+}
+
+.jumbotron {
+  .small-screen-warning {
+    font-size: 48pt;
+    @media (min-width: $screen-sm-min) {
+      display: none;
+    }
+  }
+}
