@@ -72,10 +72,9 @@ angular.module('twsUI').controller('CreateGameCtrl',
                     });
                 });
 
-            //  TODO - create common service?
             controller.inviteFriends = function () {
                 $uibModal.open({
-                    templateUrl: 'views/inviteDialog.html',
+                    templateUrl: 'views/core-bs/friends/invite-friends.html',
                     controller: 'CoreBootstrapInviteCtrl',
                     controllerAs: 'invite',
                     size: 'lg',
