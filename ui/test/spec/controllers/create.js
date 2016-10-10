@@ -18,10 +18,6 @@ describe('Controller: CreateGameCtrl', function () {
         }
     };
 
-    var jtbGameCache = {
-        putUpdatedGame: jasmine.createSpy('')
-    };
-
     var longName = 'Twisted Something';
 
     var featurePromise;
@@ -126,7 +122,6 @@ describe('Controller: CreateGameCtrl', function () {
         CreateGameCtrl = $controller('CreateGameCtrl', {
             jtbAppLongName: longName,
             jtbPlayerService: jtbPlayerService,
-            jtbGameCache: jtbGameCache,
             jtbGameFeatureService: jtbGameFeatures,
             $uibModal: uibModal,
             jtbBootstrapGameActions: jtbGameActions
