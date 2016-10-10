@@ -18,7 +18,7 @@
         <!--  TODO - determine if this is best location for friends for this game and number of friends -->
         <div class="form-group friend-select">
             <label uib-tooltip="Select up to 0-4 friends to help.">
-                Add up to 4 friends who play Twisted Wordsearch
+                Add up to 4 friends who play {{main.appName}}
             </label>
             <ui-select multiple limit="4" ng-model="create.chosenFriends" theme="bootstrap" reset-search-input="true">
                 <ui-select-match placeholder="Select friends...">{{$item.displayName}}</ui-select-match>
@@ -33,7 +33,7 @@
             {{create.createGameButtonText}}
         </button>
         <button class="btn btn-info invite-friends-button" ng-click="create.inviteFriends()">
-            Invite friends to play Twisted Wordsearch
+            Invite friends to play {{main.appName}}
         </button>
     </form>
 </div>

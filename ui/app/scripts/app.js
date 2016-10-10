@@ -39,6 +39,8 @@ angular
         'coreGamesUi',
         'coreGamesBootstrapUi'
     ])
+    //  TODO - change me
+    .constant('jtbAppLongName', 'Twisted SampleApp')
     .config(function ($routeProvider) {
         $routeProvider
             .when('/main', {

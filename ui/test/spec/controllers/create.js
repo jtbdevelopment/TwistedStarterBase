@@ -22,6 +22,8 @@ describe('Controller: CreateGameCtrl', function () {
         putUpdatedGame: jasmine.createSpy('')
     };
 
+    var longName = 'Twisted Something';
+
     var featurePromise;
     var standardFeatures = [
         {
@@ -99,7 +101,7 @@ describe('Controller: CreateGameCtrl', function () {
             expect(params.controllerAs).toEqual('invite');
             expect(params.size).toEqual('lg');
             expect(params.resolve.invitableFriends()).toEqual(expectedFriends);
-            expect(params.resolve.message()).toEqual('Come play Twisted Wordsearch with me!');
+            expect(params.resolve.message()).toEqual('Come play ' + longName + ' with me!');
             modalOpened = true;
         }
     };
@@ -122,6 +124,7 @@ describe('Controller: CreateGameCtrl', function () {
         playerSource = 'facebook';
         $rootScope = _$rootScope_;
         CreateGameCtrl = $controller('CreateGameCtrl', {
+            jtbAppLongName: longName,
             jtbPlayerService: jtbPlayerService,
             jtbGameCache: jtbGameCache,
             jtbGameFeatureService: jtbGameFeatures,

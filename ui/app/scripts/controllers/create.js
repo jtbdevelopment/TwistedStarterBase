@@ -2,8 +2,8 @@
 
 angular.module('twsUI').controller('CreateGameCtrl',
     [
-        'jtbGameFeatureService', 'jtbGameCache', 'jtbPlayerService', 'jtbBootstrapGameActions', '$uibModal',
-        function (jtbGameFeatureService, jtbGameCache, jtbPlayerService, jtbBootstrapGameActions, $uibModal) {
+        'jtbAppLongName', 'jtbGameFeatureService', 'jtbGameCache', 'jtbPlayerService', 'jtbBootstrapGameActions', '$uibModal',
+        function (jtbAppLongName, jtbGameFeatureService, jtbGameCache, jtbPlayerService, jtbBootstrapGameActions, $uibModal) {
             var controller = this;
 
             controller.features = [];
@@ -83,7 +83,7 @@ angular.module('twsUI').controller('CreateGameCtrl',
                             return controller.invitableFBFriends;
                         },
                         message: function () {
-                            return 'Come play Twisted Wordsearch with me!';
+                            return 'Come play ' + jtbAppLongName + ' with me!';
                         }
                     }
                 });

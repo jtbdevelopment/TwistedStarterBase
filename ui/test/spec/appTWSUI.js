@@ -41,9 +41,17 @@ describe('testing app js primary app', function () {
             });
 
             module('twsUI');
+
         });
 
-        beforeEach(inject());
+        var longName;
+        beforeEach(inject(function(jtbAppLongName) {
+            longName = jtbAppLongName;
+        }));
+
+        it('it should define app name', function() {
+            expect(longName).toEqual('Twisted SampleApp');
+        });
 
         it('should configure url router default', function () {
             expect($routeProvider.otherwise).toHaveBeenCalledWith({redirectTo: '/signin'});
