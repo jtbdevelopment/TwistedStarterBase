@@ -7,15 +7,13 @@ describe('Controller: CreateGameCtrl', function () {
 
     var CreateGameCtrl;
     var $q, $rootScope;
-    var friendPromise, playerSource;
+    var playerSource;
     var jtbPlayerService = {
         currentPlayer: function () {
             return {source: playerSource};
         },
-        currentPlayerFriends: function () {
-            friendPromise = $q.defer();
-            return friendPromise.promise;
-        }
+
+        initializeFriendsForController: jasmine.createSpy('initializeFriendsForController')
     };
 
     var longName = 'Twisted Something';
@@ -119,6 +117,7 @@ describe('Controller: CreateGameCtrl', function () {
         expectedFriends = [];
         playerSource = 'facebook';
         $rootScope = _$rootScope_;
+        jtbPlayerService.initializeFriendsForController.calls.reset();
         CreateGameCtrl = $controller('CreateGameCtrl', {
             jtbAppLongName: longName,
             jtbPlayerService: jtbPlayerService,
@@ -131,73 +130,9 @@ describe('Controller: CreateGameCtrl', function () {
     it('initializes to empty options and choices', function () {
         expect(CreateGameCtrl.features).toEqual([]);
         expect(CreateGameCtrl.choices).toEqual({});
-        expect(CreateGameCtrl.friends).toEqual([]);
-        expect(CreateGameCtrl.chosenFriends).toEqual([]);
-        expect(CreateGameCtrl.invitableFBFriends).toEqual([]);
         expect(CreateGameCtrl.disableCreate).toEqual(false);
         expect(CreateGameCtrl.createGameButtonText).toEqual('Create Game');
-    });
-
-    it('initializes friends for fb player', function () {
-        friendPromise.resolve({
-            maskedFriends: {
-                'md51': 'Friend 1',
-                'md52': 'Friend 52'
-            },
-            invitableFriends: [
-                {
-                    id: 'fbid1',
-                    name: 'FB Friend',
-                    picture: {
-                        url: 'http://xyz'
-                    }
-                },
-                {
-                    id: 'fbid2',
-                    name: 'FB Stalker'
-                }
-            ]
-        });
-        $rootScope.$apply();
-        expect(CreateGameCtrl.friends).toEqual([
-            {md5: 'md51', displayName: 'Friend 1'},
-            {md5: 'md52', displayName: 'Friend 52'}
-        ]);
-        expect(CreateGameCtrl.chosenFriends).toEqual([]);
-        expect(CreateGameCtrl.invitableFBFriends).toEqual([
-            {id: 'fbid1', name: 'FB Friend', url: 'http://xyz'},
-            {id: 'fbid2', name: 'FB Stalker'}
-        ]);
-    });
-
-    it('initializes friends for non-fb player', function () {
-        playerSource = 'x';
-        friendPromise.resolve({
-            maskedFriends: {
-                'md51': 'Friend 1',
-                'md52': 'Friend 52'
-            },
-            invitableFriends: [
-                {
-                    id: 'fbid1',
-                    name: 'FB Friend',
-                    picture: {
-                        url: 'http://xyz'
-                    }
-                },
-                {
-                    id: 'fbid2',
-                    name: 'FB Stalker'
-                }
-            ]
-        });
-        $rootScope.$apply();
-        expect(CreateGameCtrl.friends).toEqual([
-            {md5: 'md51', displayName: 'Friend 1'},
-            {md5: 'md52', displayName: 'Friend 52'}
-        ]);
-        expect(CreateGameCtrl.chosenFriends).toEqual([]);
-        expect(CreateGameCtrl.invitableFBFriends).toEqual([]);
+        expect(jtbPlayerService.initializeFriendsForController).toHaveBeenCalledWith(CreateGameCtrl);
     });
 
     it('invite friends modal', function () {
@@ -308,6 +243,7 @@ describe('Controller: CreateGameCtrl', function () {
             'Feature2': 'Feature2Option3',
             'Feature3': 'Feature3Option1'
         });
+        CreateGameCtrl.chosenFriends = [];
 
         CreateGameCtrl.createGame();
         expect(CreateGameCtrl.disableCreate).toEqual(true);
