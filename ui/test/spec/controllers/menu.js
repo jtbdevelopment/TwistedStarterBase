@@ -13,18 +13,23 @@ describe('Controller: MenuCtrl', function () {
             return games[phase];
         }
     };
-    var phasePromise;
-    var phaseService = {
-        phases: function () {
-            phasePromise = $q.defer();
-            return phasePromise.promise;
-        }
+    var testPhasesAndIcons = {
+        'Phase 1 Description': 'icon1',
+        'Aha.': 'icon3',
+        'Description Phase 2': 'icon2'
     };
 
-    var testPhases = {
-        Phase1: ['Phase 1 Description', 'Phase1 Label'],
-        PhaseX: ['Aha!', 'X'],
-        Phase2: ['Description Phase 2', 'Label Phase2']
+    var jtbGameClassifier = {
+        getIcons: function () {
+            return testPhasesAndIcons;
+        },
+        getClassifications: function () {
+            var c = [];
+            angular.forEach(testPhasesAndIcons, function (value, key) {
+                c.push(key);
+            });
+            return c;
+        }
     };
 
     // Initialize the controller and a mock scope
@@ -34,58 +39,54 @@ describe('Controller: MenuCtrl', function () {
         $rootScope = _$rootScope_;
         MenuCtrl = $controller('MenuCtrl', {
             $scope: $scope,
-            jtbGamePhaseService: phaseService,
+            jtbGameClassifier: jtbGameClassifier,
             jtbGameCache: gameCache
         });
     }));
 
     it('initializes', function () {
-        expect(MenuCtrl.phases).toEqual([]);
-        expect(MenuCtrl.phaseLabels).toEqual({});
-        expect(MenuCtrl.phaseDescriptions).toEqual({});
-        expect(MenuCtrl.phaseCollapsed).toEqual({});
-        expect(MenuCtrl.games).toEqual({});
-        expect(MenuCtrl.phaseGlyphicons).toEqual({
-            Playing: 'play',
-            Setup: 'comment',
-            Challenged: 'inbox',
-            RoundOver: 'repeat',
-            Declined: 'remove',
-            NextRoundStarted: 'ok-sign',
-            Quit: 'flag'
-        });
-    });
-
-    it('initializes after phases deferred', function () {
-        phasePromise.resolve(testPhases);
-        $rootScope.$apply();
-        expect(MenuCtrl.phases).toEqual(['Phase1', 'PhaseX', 'Phase2']);
+        expect(MenuCtrl.phases).toEqual(['Phase 1 Description', 'Aha.', 'Description Phase 2']);
         expect(MenuCtrl.phaseLabels).toEqual({
-            Phase1: 'Phase1 Label',
-            PhaseX: 'X',
-            Phase2: 'Label Phase2'
+            'Phase 1 Description': 'Phase 1 Description',
+            'Aha.': 'Aha.',
+            'Description Phase 2': 'Description Phase 2'
         });
         expect(MenuCtrl.phaseDescriptions).toEqual({
-            Phase1: 'Phase 1 Description',
-            PhaseX: 'Aha!',
-            Phase2: 'Description Phase 2'
+            'Phase 1 Description': 'Phase 1 Description',
+            'Aha.': 'Aha.',
+            'Description Phase 2': 'Description Phase 2'
         });
-        expect(MenuCtrl.phaseCollapsed).toEqual({Phase1: false, PhaseX: false, Phase2: false});
-        expect(MenuCtrl.games).toEqual({Phase1: [], PhaseX: [], Phase2: []});
+
+        expect(MenuCtrl.phaseStyles).toEqual({
+            'Phase 1 Description': 'phase-1-description',
+            'Aha.': 'aha',
+            'Description Phase 2': 'description-phase-2'
+        });
+        expect(MenuCtrl.phaseCollapsed).toEqual({
+            'Phase 1 Description': false,
+            'Aha.': false,
+            'Description Phase 2': false
+        });
+        expect(MenuCtrl.games).toEqual({
+            'Phase 1 Description': [],
+            'Aha.': [],
+            'Description Phase 2': []
+        });
+        expect(MenuCtrl.phaseGlyphicons).toEqual({
+            'Phase 1 Description': 'icon1',
+            'Aha.': 'icon3',
+            'Description Phase 2': 'icon2'
+        });
     });
 
     describe('updates games from cache on various broadcast messages', function () {
-        beforeEach(function () {
-            phasePromise.resolve(testPhases);
-            $rootScope.$apply();
-        });
         angular.forEach(['gameCachesLoaded', 'gameRemoved', 'gameAdded', 'gameUpdated'], function (message) {
             games = {};
-            angular.forEach(testPhases, function (value, key) {
+            angular.forEach(testPhasesAndIcons, function (value, key) {
                 var gamesToCreate = Math.floor(Math.random() * 10);
                 games[key] = [];
                 for (var i = 0; i < gamesToCreate; ++i) {
-                    games[key].push({id: Math.floor(Math.random() * 10000)});
+                    games[key].push({id: Math.floor(Math.random() * 100000)});
                 }
             });
 
@@ -93,19 +94,12 @@ describe('Controller: MenuCtrl', function () {
                 $rootScope.$broadcast(message);
                 $rootScope.$apply();
                 expect(MenuCtrl.games).toEqual(games);
+                angular.forEach(games, function (phase) {
+                    angular.forEach(phase, function(game) {
+                        expect(MenuCtrl.descriptions[game.id]).toEqual('TODO');
+                    });
+                });
             });
-        });
-    });
-
-    describe('can describe games', function () {
-        beforeEach(function () {
-            phasePromise.resolve(testPhases);
-            $rootScope.$apply();
-        });
-
-        //  TODO
-        it('placeholder test', function () {
-            expect(MenuCtrl.describeGame()).toEqual('');
         });
     });
 });

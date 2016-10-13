@@ -1,3 +1,7 @@
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
 .game-bar {
   padding-left: 5px;
 
@@ -25,22 +29,30 @@
   .btn-group-games {
     width: 100%;
 
-    img {
-      width: 25px;
-      height: 25px;
-    }
+    .game-wrapper {
+      width: 100%;
 
-    .btn-group-game {
-      padding: 4px;
-      alignment: left;
-      text-align: left;
-      -ms-word-wrap: break-word;
-      word-wrap: break-word;
-      white-space: normal;
-      font-weight: bold;
-      span {
-        span {
+      .btn-group-game {
+        width: 100%;
+        padding: 4px;
+        alignment: left;
+        text-align: left;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
+        font-weight: bold;
+        .game-description {
           font-weight: bold;
+        }
+
+        .player-image {
+          margin: 3px 1px;
+          width: 25px;
+          height: 25px;
+          @media (max-width: $screen-sm-max) {
+            width: 20px;
+            height: 20px;
+          }
         }
       }
     }

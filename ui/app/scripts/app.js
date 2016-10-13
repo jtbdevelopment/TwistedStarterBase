@@ -13,7 +13,6 @@ function endsWith(str, suffix) {
     return (str.substr(str.length - suffix.length, suffix.length) === suffix);
 }
 
-//  TODO - eliminate when you have real services
 angular.module('twsUI.services', []);
 
 angular.module('twsUIBackground', ['twsUI.services', 'twsUI'])

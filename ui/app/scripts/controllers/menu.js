@@ -8,45 +8,37 @@
  * Controller of the twsUI
  */
 angular.module('twsUI').controller('MenuCtrl',
-    ['$scope', 'jtbGameCache', 'jtbGamePhaseService',
-        function ($scope, jtbGameCache, jtbGamePhaseService) {
+    ['$scope', 'jtbGameCache', 'jtbGameClassifier',
+        function ($scope, jtbGameCache, jtbGameClassifier) {
             var controller = this;
 
             controller.phases = [];
+            controller.phaseStyles = {};
             controller.phaseLabels = {};
             controller.phaseDescriptions = {};
             controller.phaseCollapsed = {};
             controller.games = {};
-            controller.describeGame = function () {
-                return '';
-            };
+            controller.descriptions = {};
 
-            //  TODO - customize if using custom classifier
-            controller.phaseGlyphicons = {
-                Playing: 'play',
-                Setup: 'comment',
-                Challenged: 'inbox',
-                RoundOver: 'repeat',
-                Declined: 'remove',
-                NextRoundStarted: 'ok-sign',
-                Quit: 'flag'
-            };
-
-            jtbGamePhaseService.phases().then(
-                function (phases) {
-                    controller.phases = [];
-                    angular.forEach(phases, function (value, key) {
-                        controller.phases.push(key);
-                        controller.phaseLabels[key] = value[1];
-                        controller.phaseDescriptions[key] = value[0];
-                        controller.games[key] = [];
-                        controller.phaseCollapsed[key] = false;
-                    });
-                });
+            controller.phaseGlyphicons = jtbGameClassifier.getIcons();
+            controller.phases = [];
+            angular.forEach(jtbGameClassifier.getClassifications(), function (value) {
+                controller.phases.push(value);
+                controller.phaseLabels[value] = value;
+                controller.phaseDescriptions[value] = value;
+                controller.games[value] = [];
+                controller.phaseCollapsed[value] = false;
+                //  TODO - why multiple replace
+                controller.phaseStyles[value] = value.toLowerCase().replace(' ', '-').replace(' ', '-').replace('.', '');
+            });
 
             function updateGames() {
                 angular.forEach(controller.phases, function (phase) {
                     controller.games[phase] = jtbGameCache.getGamesForPhase(phase);
+                    angular.forEach(controller.games[phase], function (game) {
+                        //  TODO
+                        controller.descriptions[game.id] = 'TODO';
+                    });
                 });
             }
 
