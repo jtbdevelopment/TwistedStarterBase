@@ -19,6 +19,8 @@ angular.module('twsUI.services').factory('jtbGameClassifier',
 
                 getClassification: function (game) {
 
+                    //  TODO - if this game has a setup phase
+                    //  TODO - other nuances in phases
                     var action = game.gamePhase === 'Playing' || game.gamePhase === 'RoundOver';
                     if (game.gamePhase === 'Challenged') {
                         action = game.playerStates[jtbPlayerService.currentPlayer().md5] === 'Pending';
