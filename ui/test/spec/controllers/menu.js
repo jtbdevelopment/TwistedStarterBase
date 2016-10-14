@@ -5,7 +5,7 @@ describe('Controller: MenuCtrl', function () {
     // load the controller's module
     beforeEach(module('twsUI'));
 
-    var MenuCtrl, $q, $scope, $rootScope;
+    var MenuCtrl, $scope, $rootScope;
 
     var games = {};
     var gameCache = {
@@ -33,9 +33,8 @@ describe('Controller: MenuCtrl', function () {
     };
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, _$rootScope_, _$q_) {
+    beforeEach(inject(function ($controller, _$rootScope_) {
         $scope = _$rootScope_.$new();
-        $q = _$q_;
         $rootScope = _$rootScope_;
         MenuCtrl = $controller('MenuCtrl', {
             $scope: $scope,
