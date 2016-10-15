@@ -2,10 +2,8 @@
 
 describe('Controller: PlayerListCtrl', function () {
 
-    // load the controller's module
     beforeEach(module('twsUI'));
 
-//    ['$scope', '$routeParams', 'jtbGameCache', 'jtbBootstrapGameActions', 'jtbPlayerService',
     var expectedGameID;
     var $routeParams = {
         gameID: expectedGameID

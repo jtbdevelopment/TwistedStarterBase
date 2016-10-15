@@ -2,7 +2,6 @@
 
 describe('Controller: HelpCtrl', function () {
 
-    // load the controller's module
     beforeEach(module('twsUI'));
 
     var HelpCtrl;
