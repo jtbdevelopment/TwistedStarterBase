@@ -42,9 +42,15 @@
             <artifactId>games-websocket</artifactId>
             <version>${core.games.version}</version>
         </dependency>
+        <!--  TODO - are these what this game wants  -->
         <dependency>
             <groupId>com.jtbdevelopment.core-games</groupId>
             <artifactId>games-std-tracker</artifactId>
+            <version>${core.games.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtbdevelopment.core-games</groupId>
+            <artifactId>games-std-maintenance</artifactId>
             <version>${core.games.version}</version>
         </dependency>
         <!--
@@ -58,8 +64,9 @@
             <artifactId>games-push-notifications</artifactId>
             <version>${core.games.version}</version>
         </dependency>
-
         -->
+
+
         <dependency>
             <groupId>com.jtbdevelopment.core-games</groupId>
             <artifactId>games-web</artifactId>
