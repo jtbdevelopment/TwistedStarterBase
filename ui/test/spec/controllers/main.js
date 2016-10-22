@@ -29,6 +29,7 @@ describe('Controller: MainCtrl', function () {
     it('initializes to full screen empty side bar', function () {
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/empty.html');
         expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
+        expect(MainCtrl.adTemplate).toEqual('views/ads/empty.html');
         expect(MainCtrl.sideBarSize).toEqual('hidden');
         expect(MainCtrl.showAdmin).toEqual(false);
         expect(MainCtrl.showLogout).toEqual(false);
@@ -41,6 +42,7 @@ describe('Controller: MainCtrl', function () {
         playerDetails = {adminUser: false, source: 'facebook'};
         $rootScope.$broadcast('playerLoaded');
         $rootScope.$apply();
+        expect(MainCtrl.adTemplate).toEqual('views/ads/ad-holder.html');
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
         expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
         expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
@@ -54,6 +56,7 @@ describe('Controller: MainCtrl', function () {
         playerDetails = {adminUser: true, source: 'facebook'};
         $rootScope.$broadcast('playerLoaded');
         $rootScope.$apply();
+        expect(MainCtrl.adTemplate).toEqual('views/ads/ad-holder.html');
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
         expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
         expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
@@ -67,6 +70,7 @@ describe('Controller: MainCtrl', function () {
         playerDetails = {adminUser: false, source: 'MANUAL'};
         $rootScope.$broadcast('playerLoaded');
         $rootScope.$apply();
+        expect(MainCtrl.adTemplate).toEqual('views/ads/ad-holder.html');
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
         expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
         expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
@@ -80,6 +84,7 @@ describe('Controller: MainCtrl', function () {
         playerDetails = {adminUser: true, source: 'MANUAL'};
         $rootScope.$broadcast('playerLoaded');
         $rootScope.$apply();
+        expect(MainCtrl.adTemplate).toEqual('views/ads/ad-holder.html');
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
         expect(MainCtrl.mainBodySize).toEqual('col-xs-8 col-sm-9 col-md-10');
         expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
@@ -99,6 +104,7 @@ describe('Controller: MainCtrl', function () {
         $rootScope.$broadcast('playerLoaded');
         $rootScope.$apply();
         MainCtrl.toggleMenu();
+        expect(MainCtrl.adTemplate).toEqual('views/ads/ad-holder.html');
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/games.html');
         expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
         expect(MainCtrl.sideBarSize).toEqual('col-xs-4 col-sm-3 col-md-2');
@@ -108,6 +114,7 @@ describe('Controller: MainCtrl', function () {
 
         MainCtrl.logout();
         expect(MainCtrl.sideBarTemplate).toEqual('views/sidebar/empty.html');
+        expect(MainCtrl.adTemplate).toEqual('views/ads/empty.html');
         expect(MainCtrl.mainBodySize).toEqual('col-xs-12 col-sm-12 col-md-12');
         expect(MainCtrl.sideBarSize).toEqual('hidden');
         expect(MainCtrl.showAdmin).toEqual(false);
