@@ -70,8 +70,6 @@ angular.module('twsUI').controller('CreateGameCtrl',
                 controller.createGameButtonText = 'Creating game...';
                 controller.disableCreate = true;
 
-                //  TODO - ads
-                //  TODO - multi-player
                 var featureSet = [];
                 angular.forEach(controller.choices, function (value) {
                     featureSet.push(value);
