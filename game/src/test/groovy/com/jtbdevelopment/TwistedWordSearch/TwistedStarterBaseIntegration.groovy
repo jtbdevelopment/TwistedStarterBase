@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType
  * Date: 7/13/16
  * Time: 6:57 PM
  */
-class TwistedWordSearchIntegration extends AbstractGameIntegration<TWSGame, MaskedGame> {
+class TwistedStarterBaseIntegration extends AbstractGameIntegration<TWSGame, MaskedGame> {
     Class<MaskedGame> returnedGameClass() {
         return MaskedGame.class
     }

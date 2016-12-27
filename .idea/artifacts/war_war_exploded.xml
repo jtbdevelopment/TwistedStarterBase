@@ -7,9 +7,7 @@
           <element id="module-output" name="war" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="game-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="game" />
-          </element>
+          <element id="library" level="project" name="Maven: com.jtbdevelopment.TwistedWordSearch:game:1.0-SNAPSHOT" />
           <element id="library" level="project" name="Maven: com.jtbdevelopment.core-games:games-mongo:1.5" />
           <element id="library" level="project" name="Maven: com.jtbdevelopment.core-common:core-spring-jackson:1.8" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.5" />
