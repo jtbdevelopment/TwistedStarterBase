@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name twsUI.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the twsUI
- */
-angular.module('twsUI').controller('MainCtrl',
+angular.module('tsbUI').controller('MainCtrl',
     ['$rootScope', 'jtbPlayerService', 'jtbAppLongName',
         function ($rootScope, jtbPlayerService, jtbAppLongName) {
             var controller = this;

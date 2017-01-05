@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Service: gameClassifier', function () {
-    beforeEach(module('twsUI.services'));
+    beforeEach(module('tsbUI.services'));
 
     var playerMD5 = 'anmd5!';
     var mockPlayerService = {

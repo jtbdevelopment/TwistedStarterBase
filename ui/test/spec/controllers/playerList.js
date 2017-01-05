@@ -2,7 +2,7 @@
 
 describe('Controller: PlayerListCtrl', function () {
 
-    beforeEach(module('twsUI'));
+    beforeEach(module('tsbUI'));
 
     var expectedGameID;
     var $routeParams = {

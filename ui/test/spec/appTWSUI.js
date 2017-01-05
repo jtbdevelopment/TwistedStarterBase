@@ -12,7 +12,7 @@ describe('testing app js primary app', function () {
         };
 
         beforeEach(function () {
-            moduleUnderTest = angular.module('twsUI');
+            moduleUnderTest = angular.module('tsbUI');
             dependencies = moduleUnderTest.requires;
         });
 
@@ -40,7 +40,7 @@ describe('testing app js primary app', function () {
                 spyOn($routeProvider, 'otherwise').and.callThrough();
             });
 
-            module('twsUI');
+            module('tsbUI');
 
         });
 
@@ -50,7 +50,7 @@ describe('testing app js primary app', function () {
         }));
 
         it('it should define app name', function() {
-            expect(longName).toEqual('Twisted SampleApp');
+            expect(longName).toEqual('Twisted StarterBase');
         });
 
         it('should configure url router default', function () {

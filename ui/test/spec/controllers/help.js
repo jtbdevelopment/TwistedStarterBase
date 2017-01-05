@@ -2,7 +2,7 @@
 
 describe('Controller: HelpCtrl', function () {
 
-    beforeEach(module('twsUI'));
+    beforeEach(module('tsbUI'));
 
     var HelpCtrl;
 

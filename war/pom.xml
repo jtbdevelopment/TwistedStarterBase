@@ -31,7 +31,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.jtbdevelopment.TwistedWordSearch</groupId>
+            <groupId>com.jtbdevelopment.TwistedStarterBase</groupId>
             <artifactId>game</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

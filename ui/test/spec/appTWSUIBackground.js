@@ -11,19 +11,19 @@ describe('Background Events', function () {
         };
 
         beforeEach(function () {
-            moduleUnderTest = angular.module('twsUIBackground');
+            moduleUnderTest = angular.module('tsbUIBackground');
             dependencies = moduleUnderTest.requires;
         });
 
         it('should load outside dependencies', function () {
-            expect(hasModule('twsUI.services')).toBeTruthy();
-            expect(hasModule('twsUI')).toBeTruthy();
+            expect(hasModule('tsbUI.services')).toBeTruthy();
+            expect(hasModule('tsbUI')).toBeTruthy();
         });
     });
 
     describe('functional tests', function () {
 
-        beforeEach(module('twsUIBackground'));
+        beforeEach(module('tsbUIBackground'));
 
         var $rootScope, $location;
         beforeEach(inject(function ($controller, _$rootScope_, _$location_) {

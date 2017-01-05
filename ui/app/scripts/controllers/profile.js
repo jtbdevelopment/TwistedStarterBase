@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('twsUI')
+angular.module('tsbUI')
     .controller('ProfileCtrl',
         ['jtbPlayerService',
             function (jtbPlayerService) {

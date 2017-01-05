@@ -1,14 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name twsUI.controller:HelpCtrl
- * @description
- * Controller of the twsUI
- *
- * TODO - delete proxyTest which is just handy to confirm setup is working after initial setup
- */
-angular.module('twsUI')
+angular.module('tsbUI')
     .controller('HelpCtrl',
         ['$http',
             function ($http) {

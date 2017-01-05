@@ -2,7 +2,7 @@
 
 describe('Controller: ProfileCtrl', function () {
 
-    beforeEach(module('twsUI'));
+    beforeEach(module('tsbUI'));
 
     var ProfileCtrl;
 

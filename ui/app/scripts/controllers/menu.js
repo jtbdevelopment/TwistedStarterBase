@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name twsUI.controller:MenuCtrl
- * @description
- * # MenuCtrl
- * Controller of the twsUI
- */
-angular.module('twsUI').controller('MenuCtrl',
+angular.module('tsbUI').controller('MenuCtrl',
     ['$scope', 'jtbGameCache', 'jtbGameClassifier',
         function ($scope, jtbGameCache, jtbGameClassifier) {
             var controller = this;

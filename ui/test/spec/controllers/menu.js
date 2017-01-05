@@ -2,7 +2,7 @@
 
 describe('Controller: MenuCtrl', function () {
 
-    beforeEach(module('twsUI'));
+    beforeEach(module('tsbUI'));
 
     var MenuCtrl, $scope, $rootScope;
 

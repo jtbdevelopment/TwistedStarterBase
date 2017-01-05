@@ -1,7 +1,6 @@
 'use strict';
 
-//  TODO - update of game state
-angular.module('twsUI').controller('PlayerListCtrl',
+angular.module('tsbUI').controller('PlayerListCtrl',
     ['$scope', '$routeParams', 'jtbGameCache', 'jtbBootstrapGameActions', 'jtbPlayerService',
         function ($scope, $routeParams, jtbGameCache, jtbBootstrapGameActions, jtbPlayerService) {
             var controller = this;

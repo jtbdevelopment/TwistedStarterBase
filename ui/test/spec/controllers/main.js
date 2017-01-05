@@ -2,7 +2,7 @@
 
 describe('Controller: MainCtrl', function () {
 
-    beforeEach(module('twsUI'));
+    beforeEach(module('tsbUI'));
 
     var MainCtrl, $rootScope;
 

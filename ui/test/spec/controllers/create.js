@@ -2,7 +2,7 @@
 
 describe('Controller: CreateGameCtrl', function () {
 
-    beforeEach(module('twsUI'));
+    beforeEach(module('tsbUI'));
 
     var CreateGameCtrl;
     var $q, $rootScope;

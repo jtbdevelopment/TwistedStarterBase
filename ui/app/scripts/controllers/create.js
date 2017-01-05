@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('twsUI').controller('CreateGameCtrl',
+angular.module('tsbUI').controller('CreateGameCtrl',
     [
         'jtbAppLongName', 'jtbGameFeatureService', 'jtbPlayerService', 'jtbBootstrapGameActions', '$uibModal',
         function (jtbAppLongName, jtbGameFeatureService, jtbPlayerService, jtbBootstrapGameActions, $uibModal) {

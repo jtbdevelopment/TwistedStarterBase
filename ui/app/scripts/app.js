@@ -1,11 +1,6 @@
 'use strict';
 
 /**
- * @ngdoc overview
- * @name twsUI
- * @description
- * # twsUI
- *
  * Main module of the application.
  */
 
@@ -13,9 +8,9 @@ function endsWith(str, suffix) {
     return (str.substr(str.length - suffix.length, suffix.length) === suffix);
 }
 
-angular.module('twsUI.services', []);
+angular.module('tsbUI.services', []);
 
-angular.module('twsUIBackground', ['twsUI.services', 'twsUI'])
+angular.module('tsbUIBackground', ['tsbUI.services', 'tsbUI'])
 //  Separate module to avoid interfering with tests
     .run(function ($rootScope, $location) {
         $rootScope.$on('gameUpdated', function (message, oldGame, newGame) {
@@ -26,7 +21,7 @@ angular.module('twsUIBackground', ['twsUI.services', 'twsUI'])
     });
 
 angular
-    .module('twsUI', [
+    .module('tsbUI', [
         'ngAnimate',
         'ngCookies',
         'ngResource',
@@ -39,7 +34,7 @@ angular
         'coreGamesBootstrapUi'
     ])
     //  TODO - change me
-    .constant('jtbAppLongName', 'Twisted SampleApp')
+    .constant('jtbAppLongName', 'Twisted StarterBase')
     .config(function ($routeProvider) {
         $routeProvider
             .when('/main', {
