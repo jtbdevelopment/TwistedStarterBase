@@ -1,6 +1,6 @@
 package com.jtbdevelopment.TwistedStarterBase.state
 
-import com.jtbdevelopment.games.state.transition.AbstractGamePhaseTransitionEngine
+import com.jtbdevelopment.games.state.transition.AbstractMPGamePhaseTransitionEngine
 import groovy.transform.CompileStatic
 import org.springframework.stereotype.Component
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Component
  */
 @CompileStatic
 @Component
-class GamePhaseTransitionEngine extends AbstractGamePhaseTransitionEngine<TSBGame> {
+class GamePhaseTransitionEngine extends AbstractMPGamePhaseTransitionEngine<TSBGame> {
 }

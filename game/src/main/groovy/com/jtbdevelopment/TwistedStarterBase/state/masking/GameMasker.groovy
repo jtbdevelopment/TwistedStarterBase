@@ -2,9 +2,8 @@ package com.jtbdevelopment.TwistedStarterBase.state.masking
 
 import com.jtbdevelopment.TwistedStarterBase.state.GameFeature
 import com.jtbdevelopment.TwistedStarterBase.state.TSBGame
-import com.jtbdevelopment.games.state.masking.AbstractMultiPlayerGameMasker
+import com.jtbdevelopment.games.mongo.state.masking.AbstractMongoMultiPlayerGameMasker
 import groovy.transform.CompileStatic
-import org.bson.types.ObjectId
 import org.springframework.stereotype.Component
 
 /**
@@ -13,12 +12,8 @@ import org.springframework.stereotype.Component
  */
 @Component
 @CompileStatic
-class GameMasker extends AbstractMultiPlayerGameMasker<ObjectId, GameFeature, TSBGame, MaskedGame> {
+class GameMasker extends AbstractMongoMultiPlayerGameMasker<GameFeature, TSBGame, MaskedGame> {
     protected MaskedGame newMaskedGame() {
         return new MaskedGame()
-    }
-
-    Class<ObjectId> getIDClass() {
-        return ObjectId.class
     }
 }
