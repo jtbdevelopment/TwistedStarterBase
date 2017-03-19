@@ -1,0 +1,39 @@
+<nav class="navbar fixed-bottom" ng-cloak="">
+  <ul class="navbar-nav mr-auto" ng-show="player.displayName !== undefined">
+    <li class="nav-item">
+      <!--  TODO - determine if hover is annoying for this game -->
+      <a href="" ng-click="toggleMenu()" ng-mouseover="hoverMenu()"
+         ng-mouseleave="stopHoverMenu()">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a ng-href="#/create" class="nav-link">
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+    </li>
+  </ul>
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">{{appName}}
+      <small>Welcome {{player.displayName}}</small>
+    </a>
+  </div>
+  <ul class="nav navbar-nav pull-right">
+    <li>
+      <a ng-href="#/profile" ng-show="player.displayName !== undefined">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </li>
+    <li>
+      <a ng-href="#/help" ng-show="player.displayName !== undefined">
+        <span class="glyphicon glyphicon-question-sign"></span>
+      </a>
+    </li>
+    <li>
+      <a ng-href="#/admin" ng-show="showAdmin">
+        <span class="glyphicon glyphicon-eye-open"></span>
+      </a>
+    </li>
+    <li><a ng-click="logout()" ng-show="showLogout">Logout</a></li>
+  </ul>
+</nav>
