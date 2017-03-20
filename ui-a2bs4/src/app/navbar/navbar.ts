@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {AppConfig} from '../appconfig';
+import {Observable} from "rxjs";
+import {PlayerDetails} from "../core-ui/player/PlayerDetails";
 
 @Component({
     selector: 'navbar',
@@ -7,7 +9,8 @@ import {AppConfig} from '../appconfig';
     styles: [require('./navbar.scss').toString()]
 })
 export class NavBarComponent {
-    public player: Object = {};
+    //  should be in service?
+    public player: Observable<PlayerDetails> = new Observable();
     public showAdmin: boolean = false;
     public showLogout: boolean = false;
     appName: string;
