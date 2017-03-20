@@ -17,9 +17,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="example-war" />
-        <module name="game" />
-        <module name="ui" />
-        <module name="war" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

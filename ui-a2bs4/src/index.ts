@@ -6,7 +6,7 @@ import 'rxjs';
 
 import './index.scss';
 import 'bootstrap/dist/css/bootstrap.css';
-require('font-awesome/css/font-awesome.css');
+import 'font-awesome/css/font-awesome.css';
 import {enableProdMode} from '@angular/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {AppModule} from './app';
