@@ -1,4 +1,4 @@
-import {FooterComponent} from './footer';
+import {FooterComponent} from './navbar';
 import {TestBed, async} from '@angular/core/testing';
 
 describe('footer component', () => {
