@@ -5,12 +5,14 @@ import {MainComponent} from './main';
 import {NavBarComponent} from './navbar/navbar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppConfig} from './appconfig';
+import {JTBCoreUI} from './core-ui/jtb.core.ui';
 
 @NgModule({
     imports: [
         BrowserModule,
         routing,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        JTBCoreUI
     ],
     declarations: [
         RootComponent,

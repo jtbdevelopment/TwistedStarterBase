@@ -1,12 +1,13 @@
+<!--  TODO - break down to further components?  -->
 <nav class="navbar navbar-toggleable-sm navbar-light bg-faded fixed-bottom">
-    <ul class="navbar-nav" *ngIf="player.displayName !== undefined">
+    <ul class="navbar-nav" *ngIf="playerName !== undefined">
         <li class="nav-item">
             <!--  TODO TSB - determine if hover is annoying for this game -->
-            <a href="" class="nav-link">
-                <!--
-            <a href="" ng-click="toggleMenu()" ng-mouseover="hoverMenu()"
-               ng-mouseleave="stopHoverMenu()">
-               -->
+            <a href="javascript:void(0)"
+               (click)="toggleMenu()"
+               (mouseover)="hoverMenu()"
+               (mouseleave)="stopHoverMenu()"
+               class="nav-link">
                 <span class="fa fa-bars"></span>
             </a>
         </li>
@@ -17,16 +18,16 @@
         </li>
     </ul>
     <a class="navbar-brand" href="/">{{appName}}
-        <small>Welcome {{player.displayName}}</small>
+        <small>Welcome {{playerName}}</small>
     </a>
     <ul class="navbar-nav ml-auto float-right">
         <li>
-            <a routerLink="/profile" *ngIf="player.displayName !== undefined" class="nav-link">
+            <a routerLink="/profile" *ngIf="playerName !== undefined" class="nav-link">
                 <span class="fa fa-user"></span>
             </a>
         </li>
         <li>
-            <a routerLink="/help" *ngIf="player.displayName !== undefined" class="nav-link">
+            <a routerLink="/help" *ngIf="playerName !== undefined" class="nav-link">
                 <span class="fa fa-question"></span>
             </a>
         </li>
@@ -36,6 +37,6 @@
             </a>
         </li>
         <!--  TODO - ng-click fix -->
-        <li><a ng-click="logout()" *ngIf="showLogout" class="nav-link">Logout</a></li>
+        <li><a href="javascript:void(0)" (click)="logout()" *ngIf="showLogout" class="nav-link">Logout</a></li>
     </ul>
 </nav>

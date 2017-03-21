@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {AppConfig} from '../appconfig';
-import {Observable} from "rxjs";
-import {PlayerDetails} from "../core-ui/player/PlayerDetails";
+import {PlayerService} from '../core-ui/player/playerService';
 
 @Component({
     selector: 'navbar',
@@ -9,13 +8,33 @@ import {PlayerDetails} from "../core-ui/player/PlayerDetails";
     styles: [require('./navbar.scss').toString()]
 })
 export class NavBarComponent {
-    //  should be in service?
-    public player: Observable<PlayerDetails> = new Observable();
-    public showAdmin: boolean = false;
-    public showLogout: boolean = false;
+    playerName: string;
+    showAdmin: boolean = false;
+    showLogout: boolean = false;
     appName: string;
 
-    constructor(config: AppConfig) {
+    constructor(config: AppConfig, playerService: PlayerService) {
         this.appName = config.appName;
+        playerService.loggedInPlayer.subscribe(login => {
+            this.showAdmin = login.adminUser;
+        });
+        playerService.player.subscribe(user => {
+            this.showLogout = (user.source === 'Manual');
+            this.playerName = user.displayName;
+        });
+    }
+
+    logout(): void {
+        //  TODO
+        console.log('logout ' + this.playerName);
+    }
+
+    hoverMenu(): void {
+    }
+
+    stopHoverMenu(): void {
+    }
+
+    toggleMenu(): void {
     }
 }

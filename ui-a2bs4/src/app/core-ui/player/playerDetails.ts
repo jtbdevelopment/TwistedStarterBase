@@ -11,6 +11,6 @@ export class PlayerDetails {
     imageUrl: string;
     profileUrl: string;
     lastVersionNotes: string;
-    adminUser: string;
-    gameSpecificPlayerAttributes: GameTracker;
+    adminUser: boolean;
+    gameSpecificPlayerAttributes: GameTracker = new GameTracker();
 }

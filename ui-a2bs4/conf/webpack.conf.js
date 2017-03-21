@@ -4,6 +4,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FailPlugin = require('webpack-fail-plugin');
+const WatchIgnorePlugin = require('watch-ignore-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
@@ -55,6 +56,9 @@ module.exports = {
     ]
   },
   plugins: [
+      new WatchIgnorePlugin([
+          path.resolve(__dirname, './node_modules/')
+      ]),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     FailPlugin,
