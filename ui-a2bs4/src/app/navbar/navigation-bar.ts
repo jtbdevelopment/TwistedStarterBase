@@ -5,7 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {JTBCoreUI} from '../core-ui/jtb.core.ui';
 import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-toggle';
 import {NavigationBarNewGameComponent} from './navigation-bar-new-game';
-import {NavigationBarRightMenuComponent} from "./navigation-bar-right-menu";
+import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu';
 
 @Component({
     selector: 'navigation-bar',

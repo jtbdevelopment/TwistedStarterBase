@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {GameMenuService} from '../game-menu/gamemenuservice';
 
 @Component({
     selector: 'navigation-bar-game-menu-toggle',
@@ -7,15 +8,21 @@ import {Component, Input} from '@angular/core';
 export class NavigationBarGameMenuToggleComponent {
     @Input() playerLoaded: boolean;
 
+    private beforeHoverMenuValue: boolean;
+
+    constructor(private gameMenuService: GameMenuService) {
+    }
+
     hoverGameMenu(): void {
-        //  TODO
+        this.beforeHoverMenuValue = this.gameMenuService.getShowGames();
+        this.gameMenuService.setShowGames(true);
     }
 
     stopHoverGameMenu(): void {
-        //  TODO
+        this.gameMenuService.setShowGames(this.beforeHoverMenuValue);
     }
 
     toggleGameMenu(): void {
-        //  TODO
+        this.gameMenuService.setShowGames(!this.gameMenuService.getShowGames());
     }
 }

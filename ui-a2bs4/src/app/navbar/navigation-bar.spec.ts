@@ -1,15 +1,17 @@
 import {TestBed, async} from '@angular/core/testing';
 import {AppConfig} from '../appconfig';
-import {NavigationBarComponent} from './navigation-bar';
+import {NavigationBarComponent, NavigationBarModule} from './navigation-bar';
+import {GameMenuService} from '../game-menu/gamemenuservice';
 
 describe('footer component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                NavigationBarComponent
+            imports: [
+                NavigationBarModule
             ],
             providers: [
-                AppConfig
+                AppConfig,
+                GameMenuService
             ],
         });
         TestBed.compileComponents();
