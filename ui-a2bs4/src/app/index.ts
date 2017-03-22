@@ -1,23 +1,19 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {routing, RootComponent} from './routes';
-import {MainComponent} from './main';
-import {NavBarComponent} from './navbar/navbar';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {AppConfig} from './appconfig';
-import {JTBCoreUI} from './core-ui/jtb.core.ui';
+import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
+import {routing, RootComponent} from "./routes";
+import {MainComponent} from "./main";
+import {AppConfig} from "./appconfig";
+import {NavigationBarModule} from "./navbar/navigation-bar";
 
 @NgModule({
     imports: [
         BrowserModule,
         routing,
-        NgbModule.forRoot(),
-        JTBCoreUI
+        NavigationBarModule
     ],
     declarations: [
         RootComponent,
-        MainComponent,
-        NavBarComponent
+        MainComponent
     ],
     bootstrap: [RootComponent],
     providers: [AppConfig]
