@@ -3,7 +3,7 @@ import {AppConfig} from '../appconfig';
 import {PlayerService} from '../core-ui/player/playerService';
 
 @Component({
-    selector: 'navbar',
+    selector: 'navigation-bar',
     template: require('./navbar.html'),
     styles: [require('./navbar.scss').toString()]
 })

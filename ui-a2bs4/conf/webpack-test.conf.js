@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const conf = require('./gulp.conf');
+const autoprefixer = require('autoprefixer');
+
 module.exports = {
   module: {
     loaders: [
@@ -9,6 +11,15 @@ module.exports = {
           'json-loader'
         ]
       },
+        {
+            test: /\.(css|scss)$/,
+            loaders: [
+                'style-loader',
+                'css-loader',
+                'sass-loader',
+                'postcss-loader'
+            ]
+        },
       {
         test: /\.ts$/,
         exclude: /node_modules/,
@@ -37,6 +48,7 @@ module.exports = {
     ),
     new webpack.LoaderOptionsPlugin({
       options: {
+        postcss: () => [autoprefixer],
         resolve: {},
         ts: {
           configFileName: 'tsconfig.json'

@@ -1,12 +1,16 @@
-import {NavBarComponent} from "./navbar";
-import {TestBed, async} from "@angular/core/testing";
+import {NavBarComponent} from './navbar';
+import {TestBed, async} from '@angular/core/testing';
+import {AppConfig} from "../appconfig";
 
 describe('footer component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 NavBarComponent
-            ]
+            ],
+            providers: [
+                AppConfig
+            ],
         });
         TestBed.compileComponents();
     }));
