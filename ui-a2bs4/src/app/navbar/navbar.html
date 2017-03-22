@@ -1,6 +1,7 @@
 <!--  TODO - break down to further components?  -->
 <nav class="navbar navbar-toggleable-sm navbar-light bg-faded fixed-bottom">
     <ul class="navbar-nav" *ngIf="playerName !== undefined">
+        <!--  TODO -->
         <li class="nav-item">
             <!--  TODO TSB - determine if hover is annoying for this game -->
             <a href="javascript:void(0)"
@@ -11,7 +12,10 @@
                 <span class="fa fa-bars"></span>
             </a>
         </li>
+    </ul>
+    <ul class="navbar-nav" *ngIf="playerName !== undefined">
         <li class="nav-item">
+            <!--  TODO -->
             <a routerLink="/create" class="nav-link">
                 <span class="fa fa-plus"></span>
             </a>
@@ -22,21 +26,24 @@
     </a>
     <ul class="navbar-nav ml-auto float-right">
         <li>
+            <!--  TODO -->
             <a routerLink="/profile" *ngIf="playerName !== undefined" class="nav-link">
                 <span class="fa fa-user"></span>
             </a>
         </li>
         <li>
+            <!--  TODO -->
             <a routerLink="/help" *ngIf="playerName !== undefined" class="nav-link">
                 <span class="fa fa-question"></span>
             </a>
         </li>
         <li>
+            <!--  TODO -->
             <a routerLink="/admin" *ngIf="showAdmin" class="nav-link">
                 <span class="fa fa-eye"></span>
             </a>
         </li>
-        <!--  TODO - ng-click fix -->
+        <!--  TODO -->
         <li><a href="javascript:void(0)" (click)="logout()" *ngIf="showLogout" class="nav-link">Logout</a></li>
     </ul>
 </nav>
