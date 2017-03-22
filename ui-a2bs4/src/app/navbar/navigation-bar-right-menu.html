@@ -1,0 +1,22 @@
+<ul class="navbar-nav">
+    <li>
+        <!--  TODO -->
+        <a routerLink="/profile" *ngIf="playerLoaded" class="nav-link">
+            <span class="fa fa-user"></span>
+        </a>
+    </li>
+    <li>
+        <!--  TODO -->
+        <a routerLink="/help" *ngIf="playerLoaded" class="nav-link">
+            <span class="fa fa-question"></span>
+        </a>
+    </li>
+    <li>
+        <!--  TODO -->
+        <a routerLink="/admin" *ngIf="showAdmin" class="nav-link">
+            <span class="fa fa-eye"></span>
+        </a>
+    </li>
+    <!--  TODO -->
+    <li><a href="javascript:void(0)" (click)="logout()" *ngIf="showLogout" class="nav-link">Logout</a></li>
+</ul>
