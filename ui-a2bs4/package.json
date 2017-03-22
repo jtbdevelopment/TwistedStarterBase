@@ -60,7 +60,8 @@
     "url-loader": "^0.5.8",
     "watch-ignore-webpack-plugin": "^1.0.0",
     "webpack": "^2.2.1",
-    "webpack-fail-plugin": "^1.0.5"
+    "webpack-fail-plugin": "^1.0.5",
+    "webpack-split-chunks": "^0.2.0"
   },
   "scripts": {
     "build": "gulp",

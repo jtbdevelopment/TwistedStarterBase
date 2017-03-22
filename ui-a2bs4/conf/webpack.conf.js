@@ -5,8 +5,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FailPlugin = require('webpack-fail-plugin');
 const WatchIgnorePlugin = require('watch-ignore-webpack-plugin');
+const ChunksPlugin = require('webpack-split-chunks');
 const autoprefixer = require('autoprefixer');
 
+//  TODO - figure out why chunk plugin is emiting 0.js stuff
 module.exports = {
   module: {
     loaders: [
@@ -56,6 +58,10 @@ module.exports = {
     ]
   },
   plugins: [
+      new ChunksPlugin({
+          to: 'vendor',
+          test: /node_modules/ // or an array of regex
+      }),
       new WatchIgnorePlugin([
           path.resolve(__dirname, './node_modules/')
       ]),
@@ -85,8 +91,7 @@ module.exports = {
   ],
   devtool: 'source-map',
   output: {
-    path: path.join(process.cwd(), conf.paths.tmp),
-    filename: 'index.js'
+    path: path.join(process.cwd(), conf.paths.tmp)
   },
   resolve: {
     extensions: [
