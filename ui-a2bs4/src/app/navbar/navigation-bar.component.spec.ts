@@ -1,7 +1,8 @@
 import {TestBed, async} from '@angular/core/testing';
 import {AppConfig} from '../appconfig';
-import {NavigationBarComponent, NavigationBarModule} from './navigation-bar';
-import {GameMenuService} from '../game-menu/gamemenuservice';
+import {NavigationBarComponent} from './navigation-bar.component';
+import {GameMenuService} from '../game-menu/game-menu.service';
+import {NavigationBarModule} from './navigation-bar.module';
 
 describe('footer component', () => {
     beforeEach(async(() => {

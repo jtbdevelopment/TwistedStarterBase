@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {GameMenuService} from '../game-menu/gamemenuservice';
+import {GameMenuService} from '../game-menu/game-menu.service';
 
 @Component({
     selector: 'navigation-bar-game-menu-toggle',
-    template: require('./navigation-bar-game-menu-toggle.html')
+    template: require('./navigation-bar-game-menu-toggle.component.html')
 })
 export class NavigationBarGameMenuToggleComponent {
     @Input() playerLoaded: boolean;

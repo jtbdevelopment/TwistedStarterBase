@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {PlayerDetails} from './PlayerDetails';
+import {Player} from './player';
 import {Observable, BehaviorSubject} from 'rxjs';
 
 @Injectable()
@@ -8,19 +8,19 @@ export class PlayerService {
     //  In general, these two will be the same, unless an admin player
     //  switches to simulation mode - then loggedInPlayer will retain the admin details
     //  while player will switch to the simulated player
-    player: Observable<PlayerDetails>;
-    loggedInPlayer: Observable<PlayerDetails>;
+    player: Observable<Player>;
+    loggedInPlayer: Observable<Player>;
 
-    private playerSubject: BehaviorSubject<PlayerDetails> = new BehaviorSubject(new PlayerDetails());
-    private loggedInSubject: BehaviorSubject<PlayerDetails> = new BehaviorSubject(new PlayerDetails());
+    private playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
+    private loggedInSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
 
     constructor() {
-        this.player = Observable.from<PlayerDetails>(this.playerSubject);
-        this.loggedInPlayer = Observable.from<PlayerDetails>(this.loggedInSubject);
+        this.player = Observable.from<Player>(this.playerSubject);
+        this.loggedInPlayer = Observable.from<Player>(this.loggedInSubject);
         //  TODO - eliminate
         let timer = Observable.timer(2000, 1000);
         timer.subscribe(t => {
-            let p = new PlayerDetails();
+            let p = new Player();
             p.displayName = 'Testing';
             p.source = 'Manual';
             p.adminUser = true;

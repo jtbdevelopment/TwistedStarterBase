@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {PlayerService} from './player/playerService';
+import {PlayerService} from './player/player.service';
 
 @NgModule({
     providers: [PlayerService]

@@ -1,16 +1,16 @@
 import {Component, NgModule} from '@angular/core';
 import {AppConfig} from '../appconfig';
-import {PlayerService} from '../core-ui/player/playerService';
+import {PlayerService} from '../core-ui/player/player.service';
 import {BrowserModule} from '@angular/platform-browser';
-import {JTBCoreUI} from '../core-ui/jtb.core.ui';
-import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-toggle';
-import {NavigationBarNewGameComponent} from './navigation-bar-new-game';
-import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu';
+import {JTBCoreUI} from '../core-ui/jtb.core.ui.module';
+import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-toggle.component';
+import {NavigationBarNewGameComponent} from './navigation-bar-new-game.component';
+import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.component';
 
 @Component({
     selector: 'navigation-bar',
-    template: require('./navigation-bar.html'),
-    styles: [require('./navigation-bar.scss').toString()]
+    template: require('./navigation-bar.component.html'),
+    styles: [require('./navigation-bar.component.scss').toString()]
 })
 export class NavigationBarComponent {
     playerName: string;
@@ -38,23 +38,5 @@ export class NavigationBarComponent {
         //  TODO
         console.log('logout ' + this.playerName);
     }
-}
-
-@NgModule({
-    imports: [
-        BrowserModule,
-        JTBCoreUI,
-    ],
-    exports: [
-        NavigationBarComponent
-    ],
-    declarations: [
-        NavigationBarComponent,
-        NavigationBarGameMenuToggleComponent,
-        NavigationBarNewGameComponent,
-        NavigationBarRightMenuComponent
-    ]
-})
-export class NavigationBarModule {
 }
 

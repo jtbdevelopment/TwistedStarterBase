@@ -1,5 +1,5 @@
 import {async} from '@angular/core/testing';
-import {GameMenuService} from './gamemenuservice';
+import {GameMenuService} from './game-menu.service';
 describe('Service: game menu service', () => {
     let gameMenuService: GameMenuService;
     beforeEach(async(() => {
