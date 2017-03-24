@@ -18,6 +18,7 @@ export class PlayerService {
         this.player = Observable.from<Player>(this.playerSubject);
         this.loggedInPlayer = Observable.from<Player>(this.loggedInSubject);
         //  TODO - eliminate
+        /*
         let timer = Observable.timer(2000, 1000);
         timer.subscribe(t => {
             let p = new Player();
@@ -27,5 +28,6 @@ export class PlayerService {
             this.playerSubject.next(p);
             this.loggedInSubject.next(p);
         });
+        */
     }
 }
