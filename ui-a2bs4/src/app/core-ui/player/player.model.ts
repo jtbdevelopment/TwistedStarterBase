@@ -5,7 +5,7 @@ export class Player {
     imageUrl: string;
     profileUrl: string;
     lastVersionNotes: string;
-    adminUser: boolean;
+    adminUser: boolean = false;
     //  TODO
     //gameSpecificPlayerAttributes: Map<string, string> = new Map<string, string>();
 }

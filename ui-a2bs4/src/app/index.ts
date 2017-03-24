@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {routing, RootComponent} from './routes';
 import {MainComponent} from './main';
-import {AppConfig} from './appconfig';
+import {TwistedAppConfig} from './app.config';
 import {NavigationBarModule} from './navbar/navigation-bar.module';
 
 @NgModule({
@@ -16,7 +16,7 @@ import {NavigationBarModule} from './navbar/navigation-bar.module';
         MainComponent
     ],
     bootstrap: [RootComponent],
-    providers: [AppConfig]
+    providers: [{provide: 'AppConfig', useClass: TwistedAppConfig}]
 })
 export class AppModule {
 }
