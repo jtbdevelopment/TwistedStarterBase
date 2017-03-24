@@ -1,13 +1,13 @@
-<ul class="navbar-nav">
+<ul class="navbar-nav" *ngIf="playerLoaded">
     <li>
         <!--  TODO -->
-        <a routerLink="/profile" *ngIf="playerLoaded" class="nav-link">
+        <a routerLink="/profile" class="nav-link">
             <span class="fa fa-user"></span>
         </a>
     </li>
     <li>
         <!--  TODO -->
-        <a routerLink="/help" *ngIf="playerLoaded" class="nav-link">
+        <a routerLink="/help" class="nav-link">
             <span class="fa fa-question"></span>
         </a>
     </li>
