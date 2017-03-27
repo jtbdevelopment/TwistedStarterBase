@@ -4,12 +4,14 @@ import {routing, RootComponent} from './routes';
 import {MainComponent} from './main';
 import {TwistedAppConfig} from './app.config';
 import {NavigationBarModule} from './navbar/navigation-bar.module';
+import {JTBCoreUIBootstrap} from './core-ui-bs/jtb.core.ui.bs.module';
 
 @NgModule({
     imports: [
         BrowserModule,
         routing,
         NavigationBarModule,
+        JTBCoreUIBootstrap
     ],
     declarations: [
         RootComponent,

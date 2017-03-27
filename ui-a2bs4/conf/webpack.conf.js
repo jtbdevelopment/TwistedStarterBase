@@ -10,52 +10,55 @@ const autoprefixer = require('autoprefixer');
 
 //  TODO - figure out why chunk plugin is emiting 0.js stuff
 module.exports = {
-  module: {
-    loaders: [
-      {
-        test: /\.json$/,
+    module: {
         loaders: [
-          'json-loader'
+            {
+                test: /\.json$/,
+                loaders: [
+                    'json-loader'
+                ]
+            },
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                loader: 'tslint-loader',
+                enforce: 'pre'
+            },
+            {
+                test: /\.(css|scss)$/,
+                loaders: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                    'postcss-loader'
+                ]
+            },
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                loaders: [
+                    'ts-loader'
+                ]
+            },
+            {
+                test: /\.html$/,
+                loaders: [
+                    'html-loader'
+                ]
+            },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader?limit=10000&minetype=application/font-woff"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                loader: "url-loader?limit=50000&name=[path][name].[ext]"
+            }
         ]
-      },
-      {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        loader: 'tslint-loader',
-        enforce: 'pre'
-      },
-      {
-        test: /\.(css|scss)$/,
-        loaders: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-          'postcss-loader'
-        ]
-      },
-      {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        loaders: [
-          'ts-loader'
-        ]
-      },
-      {
-        test: /\.html$/,
-        loaders: [
-          'html-loader'
-        ]
-      },
-        {
-            test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "url-loader?limit=10000&minetype=application/font-woff"
-        },
-        {
-            test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "file-loader"
-        }
-
-    ]
   },
   plugins: [
       new ChunksPlugin({
@@ -65,16 +68,13 @@ module.exports = {
       new WatchIgnorePlugin([
           path.resolve(__dirname, './node_modules/')
       ]),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    FailPlugin,
-    new HtmlWebpackPlugin({
-      template: conf.path.src('index.html')
-    }),
-    new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      conf.paths.src
-    ),
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
+      FailPlugin,
+      new HtmlWebpackPlugin({
+          template: conf.path.src('index.html')
+      }),
+      new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/, conf.paths.src),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer],
