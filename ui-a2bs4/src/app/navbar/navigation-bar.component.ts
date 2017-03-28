@@ -19,8 +19,8 @@ export class NavigationBarComponent {
         playerService.loggedInPlayer.subscribe(login => {
             this.showAdmin = login.adminUser;
             this.playerLoaded =
-                login != undefined &&
-                login.displayName != undefined &&
+                login !== undefined &&
+                login.displayName !== undefined &&
                 login.displayName !== '';
         });
         playerService.player.subscribe(user => {

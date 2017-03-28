@@ -18,19 +18,14 @@ export class PlayerService {
     constructor(private http: Http) {
         this.player = Observable.from<Player>(this.playerSubject);
         this.loggedInPlayer = Observable.from<Player>(this.loggedInSubject);
-        this.player.subscribe(p => {
-            console.log(p);
-        });
-        this.loggedInPlayer.subscribe(p => {
-            console.log(p);
-        });
     }
 
     public loadLoggedInPlayer(): void {
         this.http.get('/api/security').subscribe(response => {
             let value = response.json() as Player;
-            this.playerSubject.next(value);
-            this.loggedInSubject.next(value);
+            let fixed = new Player(value);
+            this.playerSubject.next(fixed);
+            this.loggedInSubject.next(fixed);
         });
     }
 }
