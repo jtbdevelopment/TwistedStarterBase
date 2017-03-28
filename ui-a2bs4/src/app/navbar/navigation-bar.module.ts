@@ -6,12 +6,14 @@ import {NavigationBarNewGameComponent} from './navigation-bar-new-game.component
 import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.component';
 import {NavigationBarComponent} from './navigation-bar.component';
 import {GameMenuModule} from '../game-menu/game-menu.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
     imports: [
         BrowserModule,
         JTBCoreUI,
-        GameMenuModule
+        GameMenuModule,
+        RouterModule
     ],
     exports: [
         NavigationBarComponent,

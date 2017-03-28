@@ -1,19 +1,19 @@
 <ul class="navbar-nav" *ngIf="playerLoaded">
     <li>
         <!--  TODO -->
-        <a routerLink="/profile" class="nav-link">
+        <a [routerLink]="['/profile']" class="nav-link">
             <span class="fa fa-user"></span>
         </a>
     </li>
     <li>
         <!--  TODO -->
-        <a routerLink="/help" class="nav-link">
+        <a [routerLink]="['/help']" class="nav-link">
             <span class="fa fa-question"></span>
         </a>
     </li>
     <li>
         <!--  TODO -->
-        <a routerLink="/admin" *ngIf="showAdmin" class="nav-link">
+        <a [routerLink]="['/admin']" *ngIf="showAdmin" class="nav-link">
             <span class="fa fa-eye"></span>
         </a>
     </li>

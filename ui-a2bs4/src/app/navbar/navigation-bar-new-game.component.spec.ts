@@ -1,10 +1,14 @@
 import {TestBed, async} from '@angular/core/testing';
 import {NavigationBarNewGameComponent} from './navigation-bar-new-game.component';
+import {RouterTestingModule} from '@angular/router/testing';
 
 
 describe('Component:  nav bar new game component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule
+            ],
             declarations: [
                 NavigationBarNewGameComponent,
             ],

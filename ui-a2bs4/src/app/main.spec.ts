@@ -20,6 +20,6 @@ describe('Main Component', () => {
     const fixture = TestBed.createComponent(MainComponent);
     fixture.detectChanges();
     const main = fixture.nativeElement;
-    expect(main.querySelector('navigation-bar')).not.toBeNull();
+    expect(main.querySelector('main')).not.toBeNull();
   });
 });
