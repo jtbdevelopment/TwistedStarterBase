@@ -8,10 +8,7 @@ import {Router} from '@angular/router';
 export class SignedInComponent {
     constructor(private playerService: PlayerService, private router: Router) {
         this.playerService.loadLoggedInPlayer();
-        this.router.navigateByUrl('/main').then(b => {
-            if (!b) {
-                console.log('something went wrong with navigation');
-            }
-        })
+        //noinspection JSIgnoredPromiseFromCall
+        this.router.navigateByUrl('/main');
     }
 }
