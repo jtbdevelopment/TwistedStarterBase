@@ -50,7 +50,7 @@ describe('Component:  nav bar game menu toggle component', () => {
         const toggle = fixture.nativeElement;
         expect(toggle.querySelector('ul').textContent.trim()).toBe('');
     });
-    
+
     it('can toggle menu on/off from non-hover', () => {
         const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
         fixture.detectChanges();

@@ -37,7 +37,7 @@ describe('Component:  signed in component', () => {
     it('displays login successful', () => {
         const fixture = TestBed.createComponent(SignedInComponent);
         fixture.detectChanges();
-        const toggle = fixture.nativeElement;
-        expect(toggle.querySelector('p').textContent.trim()).toContain('Login successful...');
+        const screen = fixture.nativeElement;
+        expect(screen.querySelector('p').textContent.trim()).toContain('Login successful...');
     });
 });

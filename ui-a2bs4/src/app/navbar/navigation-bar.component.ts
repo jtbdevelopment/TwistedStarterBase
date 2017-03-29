@@ -10,7 +10,7 @@ import {PlayerService} from '../core-ui/player/player.service';
 export class NavigationBarComponent {
     playerName: string;
     showAdmin: boolean = false;
-    showLogout: boolean = false;                                
+    showLogout: boolean = false;
     appName: string;
     playerLoaded: boolean = false;
 

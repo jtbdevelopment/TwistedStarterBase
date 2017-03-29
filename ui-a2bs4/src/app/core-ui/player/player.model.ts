@@ -7,7 +7,7 @@ export class Player {
     lastVersionNotes: string;
     adminUser: boolean = false;
     //  TODO
-    //gameSpecificPlayerAttributes: Map<string, string> = new Map<string, string>();
+    // gameSpecificPlayerAttributes: Map<string, string> = new Map<string, string>();
 
     constructor(copyFrom?: Player) {
         if (copyFrom) {

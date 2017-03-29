@@ -1,19 +1,19 @@
 <div class="sign-in">
-    <div class="container-fluid">
+    <div id="sign-in-message" class="container-fluid">
         <div class="row text-center">
             <div class="col">
                 <p>{{message}}</p>
             </div>
         </div>
     </div>
-    <div class="container-fluid" *ngIf="showFacebook">
+    <div id="sign-in-facebook" class="container-fluid" *ngIf="showFacebook">
         <div class="row text-center">
             <div class="col">
                 <a href="javascript:void(0)" (click)="fbLogin()"><img src="../../../images/sign-in-with-facebook.png"/></a>
             </div>
         </div>
     </div>
-    <div class="container-fluid" *ngIf="showManual">
+    <div id="sign-in-manul" class="container-fluid" *ngIf="showManual">
         <div class="row text-center">
             <div class="col">
                 <p>Don't want to login with Facebook?</p>
