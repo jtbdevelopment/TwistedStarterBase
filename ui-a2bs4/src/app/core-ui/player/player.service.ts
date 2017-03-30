@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Player} from './player.model';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {Http} from '@angular/http';
+import {MessageBusService} from '../messagebus/messagebus.service';
 
 @Injectable()
 export class PlayerService {
@@ -15,9 +16,20 @@ export class PlayerService {
     private playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
     private loggedInSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
 
-    constructor(private http: Http) {
+    //  TODO - not currently possible to test message bus updates when logged in != current
+    constructor(private http: Http, private messageBus: MessageBusService) {
         this.player = Observable.from<Player>(this.playerSubject);
         this.loggedInPlayer = Observable.from<Player>(this.loggedInSubject);
+        this.messageBus.playerUpdates.subscribe(player => {
+            if (player.id === this.playerSubject.getValue().id) {
+                console.log('player update ' + JSON.stringify(player));
+                this.playerSubject.next(player);
+            }
+            if (player.id === this.loggedInSubject.getValue().id) {
+                console.log('logged in update ' + JSON.stringify(player));
+                this.loggedInSubject.next(player);
+            }
+        });
     }
 
     public loadLoggedInPlayer(): void {
