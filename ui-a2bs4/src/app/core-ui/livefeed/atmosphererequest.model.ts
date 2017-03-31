@@ -1,6 +1,11 @@
 import {BehaviorSubject, Subject} from 'rxjs';
 
-export class AtmosphereRequest {
+export interface IAtmosphereRequest {
+    requestConnectionStatus: BehaviorSubject<boolean>;
+    messageSubject: Subject<any>;
+}
+
+export class AtmosphereRequest implements IAtmosphereRequest {
     requestConnectionStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     messageSubject: Subject<any> = new Subject<any>();
 

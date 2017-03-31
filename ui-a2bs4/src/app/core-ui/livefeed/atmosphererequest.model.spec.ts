@@ -27,7 +27,7 @@ describe('Model: atmosphererequest', () => {
             request = new AtmosphereRequest('', '34');
             request.requestConnectionStatus.subscribe(newStatus => {
                 status = newStatus;
-            })
+            });
         });
 
         it('publishes when connected', () => {
