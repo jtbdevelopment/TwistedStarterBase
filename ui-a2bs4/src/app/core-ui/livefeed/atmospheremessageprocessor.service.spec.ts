@@ -103,9 +103,9 @@ describe('Service: atmosphere message handler service', () => {
             let r2: AtmosphereRequest = new AtmosphereRequest('', '');
             processor.listen(r2);
             expect(lastStatus).toBeFalsy();
-            r1.requestConnectionStatus.next(true);  //ignored
+            r1.requestConnectionStatus.next(true);  // ignored
             expect(lastStatus).toBeFalsy();
-            r2.requestConnectionStatus.next(true);  //ignored
+            r2.requestConnectionStatus.next(true);  // ignored
 
             expect(lastStatus).toBeTruthy();
             let p2: Player = new Player();
