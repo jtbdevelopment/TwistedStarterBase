@@ -18,10 +18,10 @@ module.exports = function (config) {
         ],
         files: [
             'node_modules/es6-shim/es6-shim.js',
-            conf.path.src('index.spec.js')
+            conf.path.src('index.spec.ts')
         ],
         preprocessors: {
-            [conf.path.src('index.spec.js')]: [
+            [conf.path.src('index.spec.ts')]: [
                 'webpack'
             ]
         },
