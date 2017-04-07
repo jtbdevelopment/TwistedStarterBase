@@ -10,29 +10,22 @@ module.exports = function (config) {
             outputDir: 'test-reports'
         },
         browsers: [
-            //'Chrome'
             'PhantomJS'
         ],
         frameworks: [
-            'jasmine'
+            'jasmine', 'karma-typescript'
         ],
         files: [
-            'node_modules/es6-shim/es6-shim.js',
-            conf.path.src('index.spec.ts')
+            {pattern: 'src/index.spec.ts'},
+            {pattern: 'src/app/**/*.+(ts|html)'},
+            {pattern: 'src/**/*.png', included: false, watched: false, served: true, nocache: false}
         ],
         preprocessors: {
-            [conf.path.src('index.spec.ts')]: [
-                'webpack'
-            ]
+            '**/*.ts': ['karma-typescript']
         },
-        reporters: ['progress', 'coverage'],
-        coverageReporter: {
-            type: 'html',
-            dir: 'coverage/'
-        },
-        webpack: require('./webpack-test.conf'),
-        webpackMiddleware: {
-            noInfo: true
+        reporters: ['progress', 'karma-typescript'],
+        proxies: {
+            '/images/': '/base/src/images/'
         },
         phantomjsLauncher: {
             // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
@@ -41,10 +34,8 @@ module.exports = function (config) {
         plugins: [
             require('karma-jasmine'),
             require('karma-junit-reporter'),
-            require('karma-coverage'),
-//      require('karma-chrome-launcher'),
-            require('karma-phantomjs-launcher'),
-            require('karma-webpack')
+            require('karma-typescript'),
+            require('karma-phantomjs-launcher')
         ]
     };
 
