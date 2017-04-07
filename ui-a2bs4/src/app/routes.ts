@@ -17,6 +17,11 @@ export class RootComponent {
 }
 
 export const routes: Routes = [
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'signin'
+    },
   {
     path: 'main',
     component: MainComponent
@@ -31,4 +36,4 @@ export const routes: Routes = [
   }
 ];
 
-export const routing = RouterModule.forRoot(routes);
+export const routing = RouterModule.forRoot(routes, {useHash: true});
