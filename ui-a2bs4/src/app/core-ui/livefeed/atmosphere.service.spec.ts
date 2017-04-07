@@ -46,6 +46,19 @@ describe('Service: atmosphere service', () => {
         expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
     });
 
+    it('will attempt another subscribe if first attempt failed', () => {
+        mockAtmosphere.subscribe.and.throwError('No good!');
+        playerService.player.next(new Player({id: '1'} as Player));
+        expect(processor.listen).toHaveBeenCalled();
+        expect(processor.listen.calls.argsFor(0)[0].url).toEqual('/livefeed/1');
+        expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
+        mockAtmosphere.subscribe.and.returnValue(socket);
+        playerService.player.next(new Player({id: '1'} as Player));
+        expect(processor.listen).toHaveBeenCalledTimes(2);
+        expect(processor.listen.calls.argsFor(1)[0].url).toEqual('/livefeed/1');
+        expect(mockAtmosphere.subscribe.calls.argsFor(1)[0]).toEqual(processor.listen.calls.argsFor(1)[0]);
+    });
+
     it('basic listen setup when player changed with endpoint specified', () => {
         atmosphereService.endPoint = 'http://xyx.com';
         playerService.player.next(new Player({id: '3'} as Player));
