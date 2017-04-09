@@ -1,0 +1,10 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.jumbotron {
+  .small-screen-warning {
+    font-size: 48pt;
+    @include media-breakpoint-up(sm) {
+      display: none;
+    }
+  }
+}

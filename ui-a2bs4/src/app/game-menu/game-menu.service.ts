@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 export class GameMenuService {
     public showGames: Observable<boolean>;
 
-    private showGamesSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
+    private showGamesSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor() {
         this.showGames = Observable.from<boolean>(this.showGamesSubject);

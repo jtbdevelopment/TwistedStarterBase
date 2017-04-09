@@ -6,13 +6,13 @@ describe('Service: game menu service', () => {
         gameMenuService = new GameMenuService();
     }));
 
-    it('defaults to true', () => {
-        expect(gameMenuService.getShowGames()).toBeTruthy();
+    it('defaults to false', () => {
+        expect(gameMenuService.getShowGames()).toBeFalsy();
         let show: boolean = false;
         gameMenuService.showGames.subscribe(x => {
             show = x;
         });
-        expect(show).toBeTruthy();
+        expect(show).toBeFalsy();
     });
 
     it('propagates changes', () => {
@@ -20,9 +20,9 @@ describe('Service: game menu service', () => {
         gameMenuService.showGames.subscribe(x => {
             show = x;
         });
-        expect(show).toBeTruthy();
-        gameMenuService.setShowGames(false);
         expect(show).toBeFalsy();
-        expect(gameMenuService.getShowGames()).toBeFalsy();
+        gameMenuService.setShowGames(true);
+        expect(show).toBeTruthy();
+        expect(gameMenuService.getShowGames()).toBeTruthy();
     });
 });
