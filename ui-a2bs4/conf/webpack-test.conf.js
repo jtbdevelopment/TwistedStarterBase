@@ -34,6 +34,12 @@ module.exports = {
             ]
         },
         {
+            test: /src\/.+\.ts$/,
+            exclude: /(node_modules|\.spec\.ts$)/,
+            loader: 'sourcemap-istanbul-instrumenter-loader?force-sourcemap=true',
+            enforce: 'post'
+        },
+        {
             test: /\.html$/,
             loaders: [
                 'html-loader'
@@ -58,7 +64,11 @@ module.exports = {
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
       conf.paths.src
     ),
-    new webpack.LoaderOptionsPlugin({
+      new webpack.SourceMapDevToolPlugin({
+          filename: null,
+          test: /\.(ts|js)($|\?)/i
+      }),
+      new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer],
         resolve: {},
