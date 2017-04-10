@@ -4,6 +4,9 @@ import {AtmosphereMessageProcessorService} from './atmospheremessageprocessor.se
 import {Player} from '../player/player.model';
 import {IAtmosphereRequest, AtmosphereRequest} from './atmosphererequest.model';
 import {Subject, BehaviorSubject, Subscription} from 'rxjs';
+import {MultiPlayerGame} from '../games/multiplayergame.model';
+import {Game} from '../games/game.model';
+import {IGameFactory} from '../games/igamefactory.service';
 
 class MockSubscription extends Subscription {
     constructor() {
@@ -11,6 +14,13 @@ class MockSubscription extends Subscription {
         this.unsubscribe = jasmine.createSpy('unsubscribe');
     }
 }
+
+export class MockGameFactory implements IGameFactory {
+    public newGame(original?: MultiPlayerGame): any {
+        return new MultiPlayerGame(original);
+    }
+}
+
 class MockAtmosphereRequest implements IAtmosphereRequest {
     requestConnectionStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     messageSubject: Subject<any> = new Subject<any>();
@@ -28,12 +38,15 @@ describe('Service: atmosphere message handler service', () => {
     let messageBus: MessageBusService;
     let processor: AtmosphereMessageProcessorService;
     let lastPlayer: Player;
+    let lastGame: Game;
     let lastStatus: boolean;
 
     beforeEach(() => {
         lastPlayer = null;
         lastStatus = null;
+        lastGame = null;
         this.injector = ReflectiveInjector.resolveAndCreate([
+            {provide: 'GameFactory', useClass: MockGameFactory},
             MessageBusService,
             AtmosphereMessageProcessorService,
         ]);
@@ -44,6 +57,9 @@ describe('Service: atmosphere message handler service', () => {
         });
         messageBus.connectionStatus.subscribe(s => {
             lastStatus = s;
+        });
+        messageBus.gameUpdates.subscribe(g => {
+            lastGame = g;
         });
     });
 
@@ -69,6 +85,25 @@ describe('Service: atmosphere message handler service', () => {
         expect(lastStatus).toBeTruthy();
         r.requestConnectionStatus.next(false);
         expect(lastStatus).toBeFalsy();
+    });
+
+    it('basic listen publishes game status', () => {
+        let r: AtmosphereRequest = new AtmosphereRequest('', '');
+        processor.listen(r);
+        expect(lastGame).toBeNull();
+        let g1: MultiPlayerGame = new MultiPlayerGame();
+        g1.gamePhase = 'Test';
+        g1.id = 'id';
+        g1 = new MultiPlayerGame(g1);
+        r.messageSubject.next({messageType: 'Game', game: g1, ignoredfield: 32});
+        expect(JSON.stringify(lastGame)).toEqual(JSON.stringify(g1));
+
+        let g2: MultiPlayerGame = new MultiPlayerGame();
+        g2.gamePhase = 'Test2';
+        g2.id = 'id2';
+        g2 = new MultiPlayerGame(g2);
+        r.messageSubject.next({messageType: 'Game', game: g2});
+        expect(JSON.stringify(lastGame)).toEqual(JSON.stringify(g2));
     });
 
     it('basic listen publishes player status', () => {

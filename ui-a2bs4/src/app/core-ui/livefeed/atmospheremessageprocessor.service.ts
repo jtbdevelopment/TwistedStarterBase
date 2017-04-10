@@ -1,15 +1,16 @@
 import {Player} from '../player/player.model';
 import {MessageBusService} from '../messagebus/messagebus.service';
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {IAtmosphereRequest} from './atmosphererequest.model';
+import {IGameFactory} from '../games/igamefactory.service';
 
 @Injectable()
 export class AtmosphereMessageProcessorService {
     private statusSubscription: Subscription;
     private messageSubscription: Subscription;
 
-    constructor(private messageBus: MessageBusService) {
+    constructor(private messageBus: MessageBusService, @Inject('GameFactory') private gameFactory: IGameFactory) {
     }
 
     listen(request: IAtmosphereRequest) {
@@ -34,7 +35,7 @@ export class AtmosphereMessageProcessorService {
         if (message.messageType) {
             switch (message.messageType as string) {
                 case 'Game':
-                    //  TODO - something with message.game
+                    this.messageBus.gameUpdates.next(this.gameFactory.newGame(message.game));
                     break;
                 case 'Player':
                     this.messageBus.playerUpdates.next(new Player(message.player as Player));
