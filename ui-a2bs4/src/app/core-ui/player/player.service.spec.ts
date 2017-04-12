@@ -43,20 +43,15 @@ describe('Service: player service', () => {
     });
 
     it('loads logged in player', fakeAsync(() => {
-        let expectedPlayer: Player = new Player();
-        expectedPlayer.source = 'A Source';
-        expectedPlayer.adminUser = false;
-        expectedPlayer.displayName = 'A Player';
-        expectedPlayer.imageUrl = 'http://image.png';
-        expectedPlayer.profileUrl = null;
         let loadedPlayer = {
-            source: expectedPlayer.source,
-            sourceId: 'X',
-            displayName: expectedPlayer.displayName,
-            adminUser: expectedPlayer.adminUser,
-            imageUrl: expectedPlayer.imageUrl,
-            profileUrl: expectedPlayer.profileUrl
+            source: 'A source',
+            sourceId: 'sidX',
+            displayName: 'A player',
+            adminUser: false,
+            imageUrl: null,
+            profileUrl: 'http://myprofile/1'
         };
+        let expectedPlayer: Player = new Player(loadedPlayer);
         playerService.loadLoggedInPlayer();
         expect(lastConnection.request.url).toEqual('/api/security');
         lastConnection.mockRespond(new Response(new ResponseOptions({
@@ -65,26 +60,24 @@ describe('Service: player service', () => {
         tick();
         expect(currentPlayer).toBeDefined();
         expect(loggedInPlayer).toBeDefined();
+        //noinspection TypeScriptValidateTypes
         expect(currentPlayer).toEqual(loggedInPlayer);
         expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(expectedPlayer));
     }));
 
     describe('after loading logged in player', () => {
-        let initiallyLoadedPlayer: Player = new Player();
+        let initiallyLoadedPlayer: Player;
         beforeEach(fakeAsync(() => {
-            initiallyLoadedPlayer.source = 'A Source';
-            initiallyLoadedPlayer.adminUser = false;
-            initiallyLoadedPlayer.displayName = 'A Player';
-            initiallyLoadedPlayer.imageUrl = 'http://image.png';
-            initiallyLoadedPlayer.profileUrl = null;
             let loadedPlayer = {
-                source: initiallyLoadedPlayer.source,
-                sourceId: 'X',
-                displayName: initiallyLoadedPlayer.displayName,
-                adminUser: initiallyLoadedPlayer.adminUser,
-                imageUrl: initiallyLoadedPlayer.imageUrl,
-                profileUrl: initiallyLoadedPlayer.profileUrl
+                id: 'id',
+                source: 'a source',
+                sourceId: 'sidX',
+                displayName: 'A Player',
+                adminUser: false,
+                imageUrl: 'http://image.png',
+                profileUrl: null
             };
+            initiallyLoadedPlayer = new Player(loadedPlayer);
             playerService.loadLoggedInPlayer();
             expect(lastConnection.request.url).toEqual('/api/security');
             lastConnection.mockRespond(new Response(new ResponseOptions({
@@ -96,6 +89,7 @@ describe('Service: player service', () => {
         it('loads logged in player', () => {
             expect(currentPlayer).toBeDefined();
             expect(loggedInPlayer).toBeDefined();
+            //noinspection TypeScriptValidateTypes
             expect(currentPlayer).toEqual(loggedInPlayer);
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(initiallyLoadedPlayer));
         });
@@ -108,19 +102,23 @@ describe('Service: player service', () => {
             messageBus.playerUpdates.next(update);
             expect(currentPlayer).toBeDefined();
             expect(loggedInPlayer).toBeDefined();
+            //noinspection TypeScriptValidateTypes
             expect(currentPlayer).toEqual(loggedInPlayer);
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(update));
         });
 
         it('ignores update on player when does not match id', () => {
             let update = new Player(initiallyLoadedPlayer);
+            console.warn(initiallyLoadedPlayer.id);
             update.id = update.id + 'X';
+            console.warn(initiallyLoadedPlayer.id);
             update.profileUrl = 'a new profile';
             update.displayName = 'a new name';
 
             messageBus.playerUpdates.next(update);
             expect(currentPlayer).toBeDefined();
             expect(loggedInPlayer).toBeDefined();
+            //noinspection TypeScriptValidateTypes
             expect(currentPlayer).toEqual(loggedInPlayer);
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(initiallyLoadedPlayer));
         });

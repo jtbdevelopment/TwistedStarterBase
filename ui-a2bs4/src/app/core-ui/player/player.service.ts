@@ -33,11 +33,19 @@ export class PlayerService {
     }
 
     public loadLoggedInPlayer(): void {
-        this.http.get('/api/security').subscribe(response => {
-            let value = response.json() as Player;
-            let fixed = new Player(value);
-            this.playerSubject.next(fixed);
-            this.loggedInSubject.next(fixed);
-        });
+        this.http.get('/api/security')
+            .map(response => response.json())
+            .map(json => {
+                let loaded = new Player(json);
+                return loaded;
+            })
+            .subscribe(loaded => {
+                    this.playerSubject.next(loaded);
+                    this.loggedInSubject.next(loaded);
+                },
+                error => {
+                    //  TODO - general error handler
+                    console.log(JSON.stringify(error));
+                });
     }
 }

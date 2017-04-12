@@ -34,6 +34,7 @@ describe('Model: player', () => {
         expect(p.md5).toEqual(source.md5);
         expect(p.imageUrl).toEqual(source.imageUrl);
         expect(p.profileUrl).toEqual(source.profileUrl);
+        //noinspection TypeScriptValidateTypes
         expect(p.adminUser).toEqual(source.adminUser);
         expect(p.displayName).toEqual(source.displayName);
         expect(p.lastVersionNotes).toEqual(source.lastVersionNotes);
