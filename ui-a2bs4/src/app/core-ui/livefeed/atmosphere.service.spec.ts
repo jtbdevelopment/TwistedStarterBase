@@ -40,7 +40,7 @@ describe('Service: atmosphere service', () => {
     });
 
     it('basic listen setup when player changed', () => {
-        playerService.player.next(new Player({id: '1'} as Player));
+        playerService.player.next(new Player({id: '1'}));
         expect(processor.listen).toHaveBeenCalled();
         expect(processor.listen.calls.argsFor(0)[0].url).toEqual('/livefeed/1');
         expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
@@ -48,12 +48,12 @@ describe('Service: atmosphere service', () => {
 
     it('will attempt another subscribe if first attempt failed', () => {
         mockAtmosphere.subscribe.and.throwError('No good!');
-        playerService.player.next(new Player({id: '1'} as Player));
+        playerService.player.next(new Player({id: '1'}));
         expect(processor.listen).toHaveBeenCalled();
         expect(processor.listen.calls.argsFor(0)[0].url).toEqual('/livefeed/1');
         expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
         mockAtmosphere.subscribe.and.returnValue(socket);
-        playerService.player.next(new Player({id: '1'} as Player));
+        playerService.player.next(new Player({id: '1'}));
         expect(processor.listen).toHaveBeenCalledTimes(2);
         expect(processor.listen.calls.argsFor(1)[0].url).toEqual('/livefeed/1');
         expect(mockAtmosphere.subscribe.calls.argsFor(1)[0]).toEqual(processor.listen.calls.argsFor(1)[0]);
@@ -61,28 +61,28 @@ describe('Service: atmosphere service', () => {
 
     it('basic listen setup when player changed with endpoint specified', () => {
         atmosphereService.endPoint = 'http://xyx.com';
-        playerService.player.next(new Player({id: '3'} as Player));
+        playerService.player.next(new Player({id: '3'}));
         expect(processor.listen).toHaveBeenCalled();
         expect(processor.listen.calls.argsFor(0)[0].url).toEqual('http://xyx.com/livefeed/3');
         expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
     });
 
     it('ignores player update if same id', () => {
-        playerService.player.next(new Player({id: '3'} as Player));
+        playerService.player.next(new Player({id: '3'}));
         expect(processor.listen).toHaveBeenCalledTimes(1);
         expect(mockAtmosphere.subscribe).toHaveBeenCalledTimes(1);
-        playerService.player.next(new Player({id: '3', displayName: 'X'} as Player));
+        playerService.player.next(new Player({id: '3', displayName: 'X'}));
         expect(processor.listen).toHaveBeenCalledTimes(1);
         expect(mockAtmosphere.subscribe).toHaveBeenCalledTimes(1);
     });
 
     it('closes socked and resubscribes when player changed', () => {
-        playerService.player.next(new Player({id: '1'} as Player));
+        playerService.player.next(new Player({id: '1'}));
         expect(processor.listen).toHaveBeenCalledTimes(1);
         expect(processor.listen.calls.argsFor(0)[0].url).toEqual('/livefeed/1');
         expect(mockAtmosphere.subscribe).toHaveBeenCalledTimes(1);
         expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
-        playerService.player.next(new Player({id: '3'} as Player));
+        playerService.player.next(new Player({id: '3'}));
         expect(socket.close).toHaveBeenCalledTimes(1);
         expect(processor.listen).toHaveBeenCalledTimes(2);
         expect(processor.listen.calls.argsFor(1)[0].url).toEqual('/livefeed/3');
@@ -92,12 +92,12 @@ describe('Service: atmosphere service', () => {
 
     it('closes socked and resubscribes when player changed even if close throws error', () => {
         socket.close.and.throwError('bad things');
-        playerService.player.next(new Player({id: '1'} as Player));
+        playerService.player.next(new Player({id: '1'}));
         expect(processor.listen).toHaveBeenCalledTimes(1);
         expect(processor.listen.calls.argsFor(0)[0].url).toEqual('/livefeed/1');
         expect(mockAtmosphere.subscribe).toHaveBeenCalledTimes(1);
         expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
-        playerService.player.next(new Player({id: '3'} as Player));
+        playerService.player.next(new Player({id: '3'}));
         expect(socket.close).toHaveBeenCalledTimes(1);
         expect(processor.listen).toHaveBeenCalledTimes(2);
         expect(processor.listen.calls.argsFor(1)[0].url).toEqual('/livefeed/3');
