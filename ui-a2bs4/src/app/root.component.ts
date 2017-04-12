@@ -1,14 +1,15 @@
 import {Component} from '@angular/core';
-import {AtmosphereService} from './core-ui/livefeed/atmosphere.service';
+import {AtmosphereService} from './core-ui/atmosphere/atmosphere.service';
+import {GameCache} from './core-ui/gamecache/gamecache.service';
 
 @Component({
     selector: 'fountain-root',
     template: require('./root.component.html')
 })
 export class RootComponent {
-    constructor(liveFeedService: AtmosphereService) {
-        //  TODO - better than this for liveFeed
-        liveFeedService.endPoint = '';
+    constructor(atmosphere: AtmosphereService, gameCache: GameCache) {
+        //  TODO - better than this for atmosphere
+        atmosphere.endPoint = '';
     }
 }
 

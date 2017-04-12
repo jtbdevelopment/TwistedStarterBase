@@ -35,7 +35,7 @@ module.exports = {
         },
         {
             test: /src\/.+\.ts$/,
-            exclude: /(node_modules|\.spec\.ts$)/,
+            exclude: /(node_modules|\.spec\.ts$|\.module\.ts$)/,
             loader: 'sourcemap-istanbul-instrumenter-loader?force-sourcemap=true',
             enforce: 'post'
         },

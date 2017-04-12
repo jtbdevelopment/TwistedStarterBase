@@ -7,6 +7,9 @@
     <file type="web" url="file://$PROJECT_DIR$/war" />
     <type id="Python" />
   </component>
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
   <component name="JsBowerSettings">
     <exe-path>/usr/local/bin/bower</exe-path>
     <config-path />
