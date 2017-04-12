@@ -17,26 +17,7 @@ export class Game {
 
     public features: string[] = [];
 
-    constructor(original?: Game) {
-        if (original) {
-            this.id = original.id;
-            this.previousId = original.previousId;
-            this.version = original.version;
-            this.round = original.round;
-            this.created = original.created;
-            this.lastUpdate = original.lastUpdate;
-            this.completedTimestamp = original.completedTimestamp;
-            this.gamePhase = original.gamePhase;
-            original.players.forEach((v, k) => {
-                this.players.set(k, v);
-            });
-            original.playerImages.forEach((v, k) => {
-                this.playerImages.set(k, v);
-            });
-            original.playerProfiles.forEach((v, k) => {
-                this.playerProfiles.set(k, v);
-            });
-            Object.assign(this.features, original.features);
-        }
+    constructor(original?: any) {
+        Object.assign(this, original);
     }
 }

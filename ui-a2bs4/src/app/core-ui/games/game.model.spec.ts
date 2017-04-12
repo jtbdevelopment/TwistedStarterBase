@@ -11,6 +11,7 @@ describe('Model: Game', () => {
         expect(g.lastUpdate).toBeUndefined();
         expect(g.completedTimestamp).toBeUndefined();
         expect(g.gamePhase).toBeUndefined();
+        expect(JSON.stringify(g.features)).toEqual(JSON.stringify([]));
         expect(JSON.stringify(g.players)).toEqual(JSON.stringify([]));
         expect(JSON.stringify(g.playerProfiles)).toEqual(JSON.stringify([]));
         expect(JSON.stringify(g.playerImages)).toEqual(JSON.stringify([]));
@@ -32,6 +33,7 @@ describe('Model: Game', () => {
         source.playerImages.set('md51', 'imageurl1');
         source.playerProfiles.set('md52', 'profile2');
         source.playerProfiles.set('md51', 'profile1');
+        source.features = ['F1', 'F3', 'F2'];
         let g: Game = new Game(source);
 
         expect(g.id).toEqual(source.id);
@@ -42,6 +44,7 @@ describe('Model: Game', () => {
         expect(g.lastUpdate).toBeCloseTo(source.lastUpdate);
         expect(g.completedTimestamp).toBeCloseTo(source.completedTimestamp);
         expect(g.gamePhase).toEqual(source.gamePhase);
+        expect(JSON.stringify(g.features)).toEqual(JSON.stringify(source.features));
         expect(JSON.stringify(g.players)).toEqual(JSON.stringify(source.players));
         expect(JSON.stringify(g.playerProfiles)).toEqual(JSON.stringify(source.playerProfiles));
         expect(JSON.stringify(g.playerImages)).toEqual(JSON.stringify(source.playerImages));

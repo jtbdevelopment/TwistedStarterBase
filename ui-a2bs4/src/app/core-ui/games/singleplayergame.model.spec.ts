@@ -1,5 +1,5 @@
 import {SinglePlayerGame} from './singleplayergame.model';
-describe('Model: Game', () => {
+describe('Model: SinglePlayerGame', () => {
     it('defaults to undefined', () => {
         let g: SinglePlayerGame = new SinglePlayerGame();
 
@@ -8,24 +8,6 @@ describe('Model: Game', () => {
         expect(g.version).toBeUndefined();
         expect(g.created).toBeUndefined();
         expect(JSON.stringify(g.players)).toEqual(JSON.stringify([]));
-
-        //  SPG specific checks - none for now
-    });
-
-    it('copies from optional param if provided', () => {
-        let source: SinglePlayerGame = new SinglePlayerGame();
-        source.id = 'id1';
-        source.version = 34;
-        source.created = 123455;
-        source.players.set('md51', 'p1');
-        source.players.set('md52', 'p2');
-        let g: SinglePlayerGame = new SinglePlayerGame(source);
-
-        //  select checks from underlying game class
-        expect(g.id).toEqual(source.id);
-        expect(g.version).toBeCloseTo(source.version);
-        expect(g.created).toBeCloseTo(source.created);
-        expect(JSON.stringify(g.players)).toEqual(JSON.stringify(source.players));
 
         //  SPG specific checks - none for now
     });
