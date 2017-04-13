@@ -59,47 +59,47 @@ module.exports = {
                 loader: "url-loader?limit=50000&name=[path][name].[ext]"
             }
         ]
-  },
-  plugins: [
-      new ChunksPlugin({
-          to: 'vendor',
-          test: /node_modules/ // or an array of regex
-      }),
-      new WatchIgnorePlugin([
-          path.resolve(__dirname, './node_modules/')
-      ]),
-      new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.NoEmitOnErrorsPlugin(),
-      FailPlugin,
-      new HtmlWebpackPlugin({
-          template: conf.path.src('index.html')
-      }),
-      new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/, conf.paths.src),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: () => [autoprefixer],
-        resolve: {},
-        ts: {
-          configFileName: 'tsconfig.json'
-        },
-        tslint: {
-          configuration: require('../tslint.json')
-        }
-      },
-      debug: true
-    })
-  ],
-  devtool: 'source-map',
-  output: {
-    path: path.join(process.cwd(), conf.paths.tmp)
-  },
-  resolve: {
-    extensions: [
-      '.webpack.js',
-      '.web.js',
-      '.js',
-      '.ts'
-    ]
-  },
-  entry: `./${conf.path.src('index')}`
+    },
+    plugins: [
+        new ChunksPlugin({
+            to: 'vendor',
+            test: /node_modules/ // or an array of regex
+        }),
+        new WatchIgnorePlugin([
+            path.resolve(__dirname, './node_modules/')
+        ]),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        FailPlugin,
+        new HtmlWebpackPlugin({
+            template: conf.path.src('index.html')
+        }),
+        new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/, conf.paths.src),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: () => [autoprefixer],
+                resolve: {},
+                ts: {
+                    configFileName: 'tsconfig.json'
+                },
+                tslint: {
+                    configuration: require('../tslint.json')
+                }
+            },
+            debug: true
+        })
+    ],
+    devtool: 'source-map',
+    output: {
+        path: path.join(process.cwd(), conf.paths.tmp)
+    },
+    resolve: {
+        extensions: [
+            '.webpack.js',
+            '.web.js',
+            '.js',
+            '.ts'
+        ]
+    },
+    entry: `./${conf.path.src('index')}`
 };

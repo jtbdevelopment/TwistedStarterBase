@@ -9,14 +9,14 @@ var authenticate = proxyMiddleware('/signin/authenticate', {target: proxyURL});
 var signOut = proxyMiddleware('/signout', {target: proxyURL});
 var liveFeed = proxyMiddleware('/livefeed', {target: proxyURL, ws: true});
 module.exports = function () {
-  return {
-    server: {
-      baseDir: [
-        conf.paths.tmp,
-        conf.paths.src
-      ],
-      middleware: [api, auth, authenticate, signOut, liveFeed]
-    },
-    open: false
-  };
+    return {
+        server: {
+            baseDir: [
+                conf.paths.tmp,
+                conf.paths.src
+            ],
+            middleware: [api, auth, authenticate, signOut, liveFeed]
+        },
+        open: false
+    };
 };
