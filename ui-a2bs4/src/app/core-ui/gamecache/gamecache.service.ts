@@ -28,6 +28,10 @@ export class GameCache {
         this.messageBus.connectionStatus.subscribe(status => {
             this.processConnectionStatus(status);
         });
+
+        this.messageBus.gameUpdates.subscribe(game => {
+            this.processGame(game);
+        });
     }
 
     //  probably never used except for testing?
@@ -44,17 +48,17 @@ export class GameCache {
         return Observable.from(this.gameCategoriesSubject);
     }
 
-    public getGames(category: string): Observable<any[]> {
+    public getGamesForCategory(category: string): Observable<any[]> {
         return Observable.from(this.gamesByClassification.get(category));
     }
 
-    public processGame(game: Game): void {
+    private processGame(game: Game): void {
         let idSubject: BehaviorSubject<Game>;
-        let cachedGame: any;
+        let previouslyCachedGame: any;
         if (this.gamesById.has(game.id)) {
             idSubject = this.gamesById.get(game.id);
-            cachedGame = idSubject.getValue();
-            if (cachedGame.lastUpdate > game.lastUpdate) {
+            previouslyCachedGame = idSubject.getValue();
+            if (previouslyCachedGame.lastUpdate > game.lastUpdate) {
                 return;
             }
         } else {
@@ -62,12 +66,12 @@ export class GameCache {
             this.gamesById.set(game.id, idSubject);
         }
         idSubject.next(game);
-        this.classifyGame(game, cachedGame);
+        this.classifyGame(game, previouslyCachedGame);
     }
 
-    private classifyGame(game: Game, cachedGame?: Game): void {
-        if (cachedGame) {
-            this.removeClassifiedGame(cachedGame);
+    private classifyGame(game: Game, previouslyCachedGame?: Game): void {
+        if (previouslyCachedGame) {
+            this.removeClassifiedGame(previouslyCachedGame);
         }
         this.addClassifiedGame(game);
     }
@@ -89,7 +93,8 @@ export class GameCache {
             let classifiedGames = subject.getValue().slice();
             let indexToClear = classifiedGames.indexOf(game);
             if (indexToClear >= 0) {
-                subject.next(classifiedGames.splice(indexToClear, 1));
+                classifiedGames.splice(indexToClear, 1);
+                subject.next(classifiedGames);
             }
         }
     }
