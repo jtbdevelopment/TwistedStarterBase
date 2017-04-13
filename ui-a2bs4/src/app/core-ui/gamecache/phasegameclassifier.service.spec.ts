@@ -1,7 +1,7 @@
 import {ReflectiveInjector} from '@angular/core';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {Phase} from '../phases/phase.model';
-import {fakeAsync, tick} from '@angular/core/testing';
+import {fakeAsync, tick, async} from '@angular/core/testing';
 import {Game} from '../games/game.model';
 import {PhaseCache} from '../phases/phasecache.service';
 import {PhaseGameClassifier} from './phasegameclassifier.service';
@@ -34,6 +34,18 @@ describe('Service: phase game clasifier service', () => {
 
         expect(classifier.classifyGame(g)).toEqual(g.gamePhase);
         expect(classifications).toEqual([]);
+    }));
+
+    it('can always get icons', async(() => {
+        let icons: Map<string, string>;
+        classifier.getIcons().subscribe(x => icons = x);
+        expect(icons.get('Play')).toEqual('play');
+        expect(icons.get('Challenged')).toEqual('comment');
+        expect(icons.get('Setup')).toEqual('wrench');
+        expect(icons.get('Played')).toEqual('forward');
+        expect(icons.get('Finished')).toEqual('stop');
+        expect(icons.get('Declined')).toEqual('thumbs-down');
+        expect(icons.get('Quit')).toEqual('flag');
     }));
 
     describe('after phases initialized', () => {

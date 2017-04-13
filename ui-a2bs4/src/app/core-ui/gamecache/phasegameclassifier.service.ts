@@ -9,6 +9,18 @@ export class PhaseGameClassifier implements IGameClassifier {
     private phaseToGroup: Map<string, string> = new Map<string, string>();
     private phasesSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
+    private iconsSubject: BehaviorSubject<Map<string, string>> = new BehaviorSubject<Map<string, string>>(
+        new Map<string, string>([
+            ['Play', 'play'],
+            ['Challenged', 'comment'],
+            ['Setup', 'wrench'],
+            ['Played', 'forward'],
+            ['Finished', 'stop'],
+            ['Declined', 'thumbs-down'],
+            ['Quit', 'flag']
+        ] as [string, string][])
+    );
+
     constructor(private phaseCache: PhaseCache) {
         this.phaseCache.phases.subscribe(phases => {
             if (phases && phases.length > 0) {
@@ -25,6 +37,10 @@ export class PhaseGameClassifier implements IGameClassifier {
 
     public getClassifications(): Observable<string[]> {
         return Observable.from(this.phasesSubject);
+    }
+
+    public getIcons(): Observable<Map<string, string>> {
+        return Observable.from(this.iconsSubject);
     }
 
     public classifyGame(game: Game): string {

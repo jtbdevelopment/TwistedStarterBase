@@ -7,6 +7,9 @@ export interface IGameClassifier {
     //  can return [] if not yet initialized
     getClassifications(): Observable<string[]>;
 
+    //  Game buckets to icons - can return empty map if not initialized
+    getIcons(): Observable<Map<string, string>>;
+
     //  Classify game into one of the buckets returned above
     classifyGame(game: Game): string;
 }

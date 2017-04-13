@@ -10,7 +10,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 @Injectable()
 export class GameCache {
     private gamesById: Map<string, BehaviorSubject<Game>> = new Map<string, BehaviorSubject<Game>>();
-    private gameCategoriesSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
     private gamesByClassification: Map<string, BehaviorSubject<Game[]>> = new Map<string, BehaviorSubject< Game[]>>();
 
     private isConnected: boolean = false;
@@ -41,11 +40,6 @@ export class GameCache {
 
     public getGame(id: string): Observable<Game> {
         return Observable.from(this.gamesById.get(id));
-    }
-
-    //  Convenience so other classes dont also need to process classifier
-    public getCategories(): Observable<string[]> {
-        return Observable.from(this.gameCategoriesSubject);
     }
 
     public getGamesForCategory(category: string): Observable<any[]> {
@@ -118,7 +112,6 @@ export class GameCache {
         classifications.forEach(c => {
             this.gamesByClassification.set(c, new BehaviorSubject<Game[]>([]));
         });
-        this.gameCategoriesSubject.next(classifications);
     }
 
     private processConnectionStatus(status: boolean) {

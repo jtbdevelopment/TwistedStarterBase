@@ -19,6 +19,10 @@ class MockClassifier implements IGameClassifier {
         return Observable.from(this.classificationSubject);
     }
 
+    public getIcons(): Observable<Map<string, string>> {
+        return new BehaviorSubject(null);
+    }
+
     //  Classify game into one of the buckets returned above
     public classifyGame(game: Game): string {
         return game.gamePhase;
@@ -37,10 +41,8 @@ describe('Service: game cache service', () => {
     let gameCache: GameCache;
     let messageBus: MessageBusService;
     let classifier: MockClassifier;
-    let classifications: string[];
 
     beforeEach(async(() => {
-        classifications = null;
         lastConnection = null;
         this.injector = ReflectiveInjector.resolveAndCreate([
                 {provide: ConnectionBackend, useClass: MockBackend},
@@ -57,11 +59,9 @@ describe('Service: game cache service', () => {
         classifier = this.injector.get('GameClassifier');
         backend = this.injector.get(ConnectionBackend) as MockBackend;
         backend.connections.subscribe((connection: any) => lastConnection = connection);
-        gameCache.getCategories().subscribe(c => classifications = c);
     }));
 
     it('initial state is no categories', () => {
-        expect(classifications).toEqual([]);
         expect(gameCache.getGamesCount()).toBeCloseTo(0);
         expect(lastConnection).toBeNull();
     });
@@ -97,14 +97,12 @@ describe('Service: game cache service', () => {
 
             it('requests games after connected', () => {
                 expect(gameCache.getGamesCount()).toBeCloseTo(5);
-                expect(classifications).toEqual([]);
             });
 
             describe('state after connected and categories are ready', () => {
                 it('categories are available and empty games initialized', fakeAsync(() => {
                     classifier.classificationSubject.next(classifier.classifications);
                     tick();
-                    expect(classifications).toEqual(classifier.classifications);
                     let games: Game[][] = [];
                     classifier.classifications.forEach((c, i) => {
                         games.push(null);
@@ -133,7 +131,6 @@ describe('Service: game cache service', () => {
             });
 
             it('categories are available and empty games initialized', async(() => {
-                expect(classifications).toEqual(classifier.classifications);
                 games.forEach(gameList => {
                     expect(gameList).toEqual([]);
                 });
