@@ -109,9 +109,7 @@ describe('Service: player service', () => {
 
         it('ignores update on player when does not match id', () => {
             let update = new Player(initiallyLoadedPlayer);
-            console.warn(initiallyLoadedPlayer.id);
             update.id = update.id + 'X';
-            console.warn(initiallyLoadedPlayer.id);
             update.profileUrl = 'a new profile';
             update.displayName = 'a new name';
 

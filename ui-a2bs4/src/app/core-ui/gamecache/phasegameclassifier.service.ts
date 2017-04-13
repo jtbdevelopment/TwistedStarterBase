@@ -7,11 +7,11 @@ import {PhaseCache} from '../phases/phasecache.service';
 @Injectable()
 export class PhaseGameClassifier implements IGameClassifier {
     private phaseToGroup: Map<string, string> = new Map<string, string>();
-    private phasesSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(null);
+    private phasesSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
     constructor(private phaseCache: PhaseCache) {
         this.phaseCache.phases.subscribe(phases => {
-            if (phases) {
+            if (phases && phases.length > 0) {
                 this.phaseToGroup.clear();
                 let groups = [];
                 phases.forEach(phase => {

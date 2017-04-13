@@ -11,12 +11,12 @@ import any = jasmine.any;
 export class PhaseCache {
     public phases: Observable<Phase[]>;
 
-    private phasesSubject: BehaviorSubject<Phase[]> = new BehaviorSubject<Phase[]>(null);
+    private phasesSubject: BehaviorSubject<Phase[]> = new BehaviorSubject<Phase[]>([]);
 
     constructor(private http: Http, private messageBus: MessageBusService) {
         this.phases = Observable.from(this.phasesSubject);
         this.messageBus.connectionStatus.subscribe(connected => {
-            if (connected && !this.phasesSubject.getValue()) {
+            if (connected && this.phasesSubject.getValue().length === 0) {
                 this.initializePhases();
             }
         });

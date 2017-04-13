@@ -41,8 +41,8 @@ describe('Service: phase cache service', () => {
         });
     });
 
-    it('defaults to null phases', () => {
-        expect(currentPhases).toBeNull();
+    it('defaults to empty phases', () => {
+        expect(currentPhases).toEqual([]);
         expect(lastConnection).toBeNull();
     });
 
@@ -98,7 +98,7 @@ describe('Service: phase cache service', () => {
             }));
             tick();
 
-            expect(currentPhases).toBeNull();
+            expect(currentPhases).toEqual([]);
             lastConnection = null;
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);

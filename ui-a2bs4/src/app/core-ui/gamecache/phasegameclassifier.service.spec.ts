@@ -7,7 +7,7 @@ import {PhaseCache} from '../phases/phasecache.service';
 import {PhaseGameClassifier} from './phasegameclassifier.service';
 
 class MockPhaseService {
-    public phasesSubject: BehaviorSubject<Phase[]> = new BehaviorSubject<Phase[]>(null);
+    public phasesSubject: BehaviorSubject<Phase[]> = new BehaviorSubject<Phase[]>([]);
     public phases: Observable<Phase[]> = Observable.from(this.phasesSubject);
 }
 
@@ -33,7 +33,7 @@ describe('Service: phase game clasifier service', () => {
         g.gamePhase = 'phase1';
 
         expect(classifier.classifyGame(g)).toEqual(g.gamePhase);
-        expect(classifications).toBeNull();
+        expect(classifications).toEqual([]);
     }));
 
     describe('after phases initialized', () => {
