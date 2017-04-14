@@ -49,7 +49,7 @@ describe('Model: atmosphererequest', () => {
         });
     });
 
-    it('publishes all parseable messages in a batch', () => {
+    it('publishes all parsable messages in a batch', () => {
         let request: AtmosphereRequest = new AtmosphereRequest('', '');
         let m1: string = JSON.stringify({f1: 3, f2: 'string'});
         let m2: string = 'not json';
@@ -63,5 +63,19 @@ describe('Model: atmosphererequest', () => {
         expect(messages.length).toEqual(2);
         expect(JSON.stringify(messages[0])).toEqual(m1);
         expect(JSON.stringify(messages[1])).toEqual(m3);
+    });
+
+    it('ignores if no messages fields', () => {
+        let request: AtmosphereRequest = new AtmosphereRequest('', '');
+        let m1: string = JSON.stringify({f1: 3, f2: 'string'});
+        let m2: string = 'not json';
+        let m3: string = JSON.stringify({messageType: 'heartbeat', message: 'here i am'});
+
+        let messages: any[] = [];
+        request.messageSubject.subscribe(message => {
+            messages.push(message);
+        });
+        request.onMessage({notMessages: [m1, m2, m3]});
+        expect(messages.length).toEqual(0);
     });
 });
