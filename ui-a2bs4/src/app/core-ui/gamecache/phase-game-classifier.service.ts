@@ -1,11 +1,11 @@
-import {IGameClassifier} from './igameclassifier.service';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {Game} from '../games/game.model';
 import {Injectable} from '@angular/core';
-import {PhaseCache} from '../phases/phasecache.service';
+import {GameClassifier} from './game-classifier.serviceinterface';
+import {PhaseCacheService} from '../phases/phase-cache.service';
 
 @Injectable()
-export class PhaseGameClassifier implements IGameClassifier {
+export class PhaseGameClassifier implements GameClassifier {
     private phaseToGroup: Map<string, string> = new Map<string, string>();
     private phasesSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
@@ -21,7 +21,7 @@ export class PhaseGameClassifier implements IGameClassifier {
         ] as [string, string][])
     );
 
-    constructor(private phaseCache: PhaseCache) {
+    constructor(private phaseCache: PhaseCacheService) {
         this.phaseCache.phases.subscribe(phases => {
             if (phases && phases.length > 0) {
                 this.phaseToGroup.clear();

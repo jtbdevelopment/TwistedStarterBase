@@ -1,4 +1,4 @@
-import {AtmosphereRequest} from './atmosphererequest.model';
+import {AtmosphereRequest} from './atmosphere-request.model';
 describe('Model: atmosphererequest', () => {
     it('initializes variables for connection parameters', () => {
         let request = new AtmosphereRequest('localhost:123', '1234');

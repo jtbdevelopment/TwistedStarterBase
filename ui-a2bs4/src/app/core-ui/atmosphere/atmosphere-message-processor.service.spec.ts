@@ -1,12 +1,12 @@
 import {ReflectiveInjector} from '@angular/core';
-import {MessageBusService} from '../messagebus/messagebus.service';
-import {AtmosphereMessageProcessorService} from './atmospheremessageprocessor.service';
 import {Player} from '../player/player.model';
-import {IAtmosphereRequest, AtmosphereRequest} from './atmosphererequest.model';
 import {Subject, BehaviorSubject, Subscription} from 'rxjs';
-import {MultiPlayerGame} from '../games/multiplayergame.model';
 import {Game} from '../games/game.model';
-import {IGameFactory} from '../games/igamefactory.service';
+import {AtmosphereMessageProcessorService} from './atmosphere-message-processor.service';
+import {AtmosphereRequest} from './atmosphere-request.model';
+import {GameFactory} from '../games/gamefactory.serviceinterface';
+import {MultiPlayerGame} from '../games/multi-player-game.model';
+import {MessageBusService} from '../messagebus/message-bus.service';
 
 class MockSubscription extends Subscription {
     constructor() {
@@ -15,13 +15,13 @@ class MockSubscription extends Subscription {
     }
 }
 
-export class MockGameFactory implements IGameFactory {
+export class MockGameFactory implements GameFactory {
     public newGame(original?: MultiPlayerGame): any {
         return new MultiPlayerGame(original);
     }
 }
 
-class MockAtmosphereRequest implements IAtmosphereRequest {
+class MockAtmosphereRequest extends AtmosphereRequest {
     requestConnectionStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     messageSubject: Subject<any> = new Subject<any>();
 
@@ -29,6 +29,7 @@ class MockAtmosphereRequest implements IAtmosphereRequest {
     messageSubscriptions: MockSubscription[] = [new MockSubscription(), new MockSubscription(), new MockSubscription()];
 
     constructor() {
+        super('', '');
         this.requestConnectionStatus.subscribe = jasmine.createSpy('rcssubscribe', this.requestConnectionStatus.subscribe).and.returnValues(this.connectionSubscriptions);
         this.messageSubject.subscribe = jasmine.createSpy('mssubscribe', this.messageSubject.subscribe).and.returnValue(this.messageSubscriptions);
     }

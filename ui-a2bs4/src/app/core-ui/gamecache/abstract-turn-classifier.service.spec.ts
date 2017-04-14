@@ -1,6 +1,6 @@
 import {ReflectiveInjector} from '@angular/core';
 import {fakeAsync} from '@angular/core/testing';
-import {AbstractTurnClassifier} from './abstractturnclassifier.service';
+import {AbstractTurnClassifier} from './abstract-turn-classifier.service';
 
 class MockClassifier extends AbstractTurnClassifier {
 

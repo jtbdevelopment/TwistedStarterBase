@@ -4,7 +4,7 @@ import {MockBackend} from '@angular/http/testing';
 import {ReflectiveInjector} from '@angular/core';
 import {tick, fakeAsync} from '@angular/core/testing';
 import {Player} from './player.model';
-import {MessageBusService} from '../messagebus/messagebus.service';
+import {MessageBusService} from '../messagebus/message-bus.service';
 
 describe('Service: player service', () => {
     let currentPlayer: Player = null;

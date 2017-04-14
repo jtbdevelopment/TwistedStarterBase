@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {MessageBusService} from '../messagebus/messagebus.service';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {Phase} from './phase.model';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
+import {MessageBusService} from '../messagebus/message-bus.service';
 import any = jasmine.any;
 
 @Injectable()
-export class PhaseCache {
+export class PhaseCacheService {
     public phases: Observable<Phase[]>;
 
     private phasesSubject: BehaviorSubject<Phase[]> = new BehaviorSubject<Phase[]>([]);

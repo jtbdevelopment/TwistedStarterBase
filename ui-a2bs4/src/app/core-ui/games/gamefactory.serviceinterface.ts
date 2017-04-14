@@ -1,4 +1,4 @@
 //  You must implement one of these
-export interface IGameFactory {
+export interface GameFactory {
     newGame(original?: Object): any;
 }

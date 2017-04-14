@@ -1,4 +1,4 @@
-import {MultiPlayerGame} from './multiplayergame.model';
+import {MultiPlayerGame} from './multi-player-game.model';
 describe('Model: MultiPlayerGame', () => {
     it('defaults to undefined', () => {
         let g: MultiPlayerGame = new MultiPlayerGame();

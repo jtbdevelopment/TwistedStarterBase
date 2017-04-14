@@ -2,15 +2,15 @@ import {ReflectiveInjector} from '@angular/core';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {async, fakeAsync, tick} from '@angular/core/testing';
 import {Game} from '../games/game.model';
-import {GameCache} from './gamecache.service';
-import {IGameClassifier} from './igameclassifier.service';
 import {MockBackend} from '@angular/http/testing';
 import {BaseRequestOptions, RequestOptions, ConnectionBackend, Http, ResponseOptions, Response} from '@angular/http';
-import {MessageBusService} from '../messagebus/messagebus.service';
-import {IGameFactory} from '../games/igamefactory.service';
-import {MultiPlayerGame} from '../games/multiplayergame.model';
+import {GameClassifier} from './game-classifier.serviceinterface';
+import {GameCacheService} from './game-cache.service';
+import {GameFactory} from '../games/gamefactory.serviceinterface';
+import {MultiPlayerGame} from '../games/multi-player-game.model';
+import {MessageBusService} from '../messagebus/message-bus.service';
 
-class MockClassifier implements IGameClassifier {
+class MockClassifier implements GameClassifier {
     public classifications = ['A', 'B', 'D'];
 
     public classificationSubject: BehaviorSubject<string[]> = new BehaviorSubject([]);
@@ -29,7 +29,7 @@ class MockClassifier implements IGameClassifier {
     }
 }
 
-class MockGameFactory implements IGameFactory {
+class MockGameFactory implements GameFactory {
     public newGame(original?: Object): any {
         return new MultiPlayerGame(original);
     }
@@ -38,7 +38,7 @@ class MockGameFactory implements IGameFactory {
 describe('Service: game cache service', () => {
     let backend: MockBackend;
     let lastConnection: any;
-    let gameCache: GameCache;
+    let gameCache: GameCacheService;
     let messageBus: MessageBusService;
     let classifier: MockClassifier;
 
@@ -51,10 +51,10 @@ describe('Service: game cache service', () => {
                 {provide: 'GameFactory', useClass: MockGameFactory},
                 Http,
                 MessageBusService,
-                GameCache
+            GameCacheService
             ]
         );
-        gameCache = this.injector.get(GameCache);
+        gameCache = this.injector.get(GameCacheService);
         messageBus = this.injector.get(MessageBusService);
         classifier = this.injector.get('GameClassifier');
         backend = this.injector.get(ConnectionBackend) as MockBackend;

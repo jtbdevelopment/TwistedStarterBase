@@ -1,9 +1,9 @@
 import {ReflectiveInjector} from '@angular/core';
-import {AtmosphereMessageProcessorService} from './atmospheremessageprocessor.service';
 import {Player} from '../player/player.model';
 import {AtmosphereService} from './atmosphere.service';
 import {BehaviorSubject} from 'rxjs';
 import {PlayerService} from '../player/player.service';
+import {AtmosphereMessageProcessorService} from './atmosphere-message-processor.service';
 
 class MockPlayerService {
     player: BehaviorSubject<Player> = new BehaviorSubject(new Player());

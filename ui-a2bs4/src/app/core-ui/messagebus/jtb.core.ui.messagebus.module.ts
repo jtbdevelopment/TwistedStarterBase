@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {MessageBusService} from './messagebus.service';
+import {MessageBusService} from './message-bus.service';
 
 @NgModule({
     providers: [

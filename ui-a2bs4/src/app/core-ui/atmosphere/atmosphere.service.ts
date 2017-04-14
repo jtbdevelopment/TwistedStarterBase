@@ -1,9 +1,9 @@
 import {PlayerService} from '../player/player.service';
 import {Player} from '../player/player.model';
 import {Injectable} from '@angular/core';
-import {AtmosphereRequest} from './atmosphererequest.model';
 import * as atmosphere from 'atmosphere.js';
-import {AtmosphereMessageProcessorService} from './atmospheremessageprocessor.service';
+import {AtmosphereMessageProcessorService} from './atmosphere-message-processor.service';
+import {AtmosphereRequest} from './atmosphere-request.model';
 
 //  TODO - need to force creation of this service
 @Injectable()

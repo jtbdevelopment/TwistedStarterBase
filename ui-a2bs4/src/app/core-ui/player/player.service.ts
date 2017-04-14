@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Player} from './player.model';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {Http} from '@angular/http';
-import {MessageBusService} from '../messagebus/messagebus.service';
+import {MessageBusService} from '../messagebus/message-bus.service';
 
 @Injectable()
 export class PlayerService {

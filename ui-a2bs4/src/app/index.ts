@@ -6,8 +6,8 @@ import {TwistedAppConfig} from './app.config';
 import {NavigationBarModule} from './navbar/navigation-bar.module';
 import {JTBCoreUIBootstrap} from './core-ui-bs/jtb.core.ui.bs.module';
 import {RootComponent} from './root.component';
-import {TSBGameFactory} from './game/tsbgamefactory.server';
-import {PhaseGameClassifier} from './core-ui/gamecache/phasegameclassifier.service';
+import {PhaseGameClassifier} from './core-ui/gamecache/phase-game-classifier.service';
+import {TSBGameFactory} from './game/tsb-game-factory.service';
 
 @NgModule({
     imports: [

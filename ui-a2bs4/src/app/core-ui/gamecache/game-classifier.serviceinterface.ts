@@ -1,7 +1,7 @@
 import {Game} from '../games/game.model';
 import {Observable} from 'rxjs';
 
-export interface IGameClassifier {
+export interface GameClassifier {
     //  Buckets of games - aka ['Your turn', 'Their turn', 'Other']  in order of display
     //  expected to be called once
     //  can return [] if not yet initialized

@@ -9,13 +9,13 @@ import {
 } from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {ReflectiveInjector} from '@angular/core';
-import {MessageBusService} from '../messagebus/messagebus.service';
-import {PhaseCache} from './phasecache.service';
 import {Phase} from './phase.model';
 import {fakeAsync, tick} from '@angular/core/testing';
+import {PhaseCacheService} from './phase-cache.service';
+import {MessageBusService} from '../messagebus/message-bus.service';
 
 describe('Service: phase cache service', () => {
-    let phaseCache: PhaseCache;
+    let phaseCache: PhaseCacheService;
     let messageBus: MessageBusService;
     let backend: MockBackend;
     let lastConnection: any;
@@ -29,10 +29,10 @@ describe('Service: phase cache service', () => {
             {provide: ConnectionBackend, useClass: MockBackend},
             {provide: RequestOptions, useClass: BaseRequestOptions},
             Http,
-            PhaseCache,
+            PhaseCacheService,
             MessageBusService
         ]);
-        phaseCache = this.injector.get(PhaseCache);
+        phaseCache = this.injector.get(PhaseCacheService);
         messageBus = this.injector.get(MessageBusService);
         backend = this.injector.get(ConnectionBackend) as MockBackend;
         backend.connections.subscribe((connection: any) => lastConnection = connection);

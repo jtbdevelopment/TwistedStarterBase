@@ -1,4 +1,4 @@
-import {SinglePlayerGame} from './singleplayergame.model';
+import {SinglePlayerGame} from './single-player-game.model';
 describe('Model: SinglePlayerGame', () => {
     it('defaults to undefined', () => {
         let g: SinglePlayerGame = new SinglePlayerGame();

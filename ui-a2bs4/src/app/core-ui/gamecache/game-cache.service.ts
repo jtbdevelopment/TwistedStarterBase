@@ -1,14 +1,14 @@
-import {MessageBusService} from '../messagebus/messagebus.service';
 import {Inject, Injectable} from '@angular/core';
-import {IGameClassifier} from './igameclassifier.service';
 import {Game} from '../games/game.model';
 import {Http} from '@angular/http';
-import {IGameFactory} from '../games/igamefactory.service';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {GameClassifier} from './game-classifier.serviceinterface';
+import {GameFactory} from '../games/gamefactory.serviceinterface';
+import {MessageBusService} from '../messagebus/message-bus.service';
 
 //  TODO - split up fetcher from cache logic?
 @Injectable()
-export class GameCache {
+export class GameCacheService {
     private gamesById: Map<string, BehaviorSubject<Game>> = new Map<string, BehaviorSubject<Game>>();
     private gamesByClassification: Map<string, BehaviorSubject<Game[]>> = new Map<string, BehaviorSubject< Game[]>>();
 
@@ -16,8 +16,8 @@ export class GameCache {
 
     constructor(private http: Http,
                 private messageBus: MessageBusService,
-                @Inject('GameFactory') private gameFactory: IGameFactory,
-                @Inject('GameClassifier') private gameClassifier: IGameClassifier) {
+                @Inject('GameFactory') private gameFactory: GameFactory,
+                @Inject('GameClassifier') private gameClassifier: GameClassifier) {
         gameClassifier.getClassifications().subscribe(classifications => {
             this.initializeCategoryCaches(classifications);
             //  In case classifier took longer than logging in to setup classifications

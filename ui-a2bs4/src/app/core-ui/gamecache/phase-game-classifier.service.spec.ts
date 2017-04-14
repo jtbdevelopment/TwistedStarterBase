@@ -3,8 +3,8 @@ import {Observable, BehaviorSubject} from 'rxjs';
 import {Phase} from '../phases/phase.model';
 import {fakeAsync, tick, async} from '@angular/core/testing';
 import {Game} from '../games/game.model';
-import {PhaseCache} from '../phases/phasecache.service';
-import {PhaseGameClassifier} from './phasegameclassifier.service';
+import {PhaseGameClassifier} from './phase-game-classifier.service';
+import {PhaseCacheService} from '../phases/phase-cache.service';
 
 class MockPhaseService {
     public phasesSubject: BehaviorSubject<Phase[]> = new BehaviorSubject<Phase[]>([]);
@@ -19,11 +19,11 @@ describe('Service: phase game clasifier service', () => {
     beforeEach(() => {
         classifications = null;
         this.injector = ReflectiveInjector.resolveAndCreate([
-                {provide: PhaseCache, useClass: MockPhaseService},
+            {provide: PhaseCacheService, useClass: MockPhaseService},
                 PhaseGameClassifier
             ]
         );
-        phaseCache = this.injector.get(PhaseCache);
+        phaseCache = this.injector.get(PhaseCacheService);
         classifier = this.injector.get(PhaseGameClassifier);
         classifier.getClassifications().subscribe(c => classifications = c);
     });

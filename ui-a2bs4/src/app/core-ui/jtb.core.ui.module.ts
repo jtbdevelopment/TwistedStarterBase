@@ -6,8 +6,8 @@ import {JTBCoreUIPhases} from './phases/jtb.core.ui.phases.module';
 import {JTBCoreUIPlayer} from './player/jtb.core.ui.player.module';
 
 //  Use of this module presumes:
-//  1.  You will implement IGameFactory and provide as 'GameFactory'
-//  2.  You will create (or re-use PhaseGameClassifier) an IGameClassifier and provide as 'GameClassifier'
+//  1.  You will implement GameFactory and provide as 'GameFactory'
+//  2.  You will create (or re-use PhaseGameClassifier) an GameClassifier and provide as 'GameClassifier'
 @NgModule({
     imports: [JTBCoreUIAtmosphere, JTBCoreUIMessageBus, JTBCoreUIGameCache, JTBCoreUIPhases, JTBCoreUIPlayer],
     exports: [JTBCoreUIAtmosphere, JTBCoreUIMessageBus, JTBCoreUIGameCache, JTBCoreUIPhases, JTBCoreUIPlayer]

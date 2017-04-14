@@ -1,19 +1,19 @@
 import {Player} from '../player/player.model';
-import {MessageBusService} from '../messagebus/messagebus.service';
 import {Injectable, Inject} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {IAtmosphereRequest} from './atmosphererequest.model';
-import {IGameFactory} from '../games/igamefactory.service';
+import {AtmosphereRequest} from './atmosphere-request.model';
+import {GameFactory} from '../games/gamefactory.serviceinterface';
+import {MessageBusService} from '../messagebus/message-bus.service';
 
 @Injectable()
 export class AtmosphereMessageProcessorService {
     private statusSubscription: Subscription;
     private messageSubscription: Subscription;
 
-    constructor(private messageBus: MessageBusService, @Inject('GameFactory') private gameFactory: IGameFactory) {
+    constructor(private messageBus: MessageBusService, @Inject('GameFactory') private gameFactory: GameFactory) {
     }
 
-    listen(request: IAtmosphereRequest) {
+    listen(request: AtmosphereRequest) {
         this.close();
         this.messageSubscription = request.messageSubject.subscribe(message => this.processMessage(message));
         this.statusSubscription = request.requestConnectionStatus.subscribe(status => this.messageBus.connectionStatus.next(status));
