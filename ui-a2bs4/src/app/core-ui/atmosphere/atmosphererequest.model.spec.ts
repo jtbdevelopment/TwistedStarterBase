@@ -60,6 +60,7 @@ describe('Model: atmosphererequest', () => {
             messages.push(message);
         });
         request.onMessage({messages: [m1, m2, m3]});
+        //noinspection TypeScriptValidateTypes
         expect(messages.length).toEqual(2);
         expect(JSON.stringify(messages[0])).toEqual(m1);
         expect(JSON.stringify(messages[1])).toEqual(m3);
@@ -76,6 +77,7 @@ describe('Model: atmosphererequest', () => {
             messages.push(message);
         });
         request.onMessage({notMessages: [m1, m2, m3]});
+        //noinspection TypeScriptValidateTypes
         expect(messages.length).toEqual(0);
     });
 });
