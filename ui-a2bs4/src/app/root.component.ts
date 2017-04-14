@@ -8,9 +8,12 @@ import {GameMenuService} from './game-menu/game-menu.service';
     template: require('./root.component.html')
 })
 export class RootComponent {
+    public showGames: boolean = false;
+
     constructor(atmosphere: AtmosphereService, gameCache: GameCacheService, menuService: GameMenuService) {
         //  TODO - better than this for atmosphere
         atmosphere.endPoint = '';
+        menuService.showGames.subscribe(x => this.showGames = x);
     }
 }
 

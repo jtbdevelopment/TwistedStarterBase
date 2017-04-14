@@ -1,9 +1,9 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2">
+        <div class="col-2" *ngIf="showGames">
 
         </div>
-        <div class="col-10">
+        <div [ngClass]="{'col-10':showGames, 'col-12':(!showGames)}">
             <router-outlet></router-outlet>
         </div>
     </div>

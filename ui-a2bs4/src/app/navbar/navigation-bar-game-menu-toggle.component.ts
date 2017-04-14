@@ -9,20 +9,29 @@ export class NavigationBarGameMenuToggleComponent {
     @Input() playerLoaded: boolean;
 
     private beforeHoverMenuValue: boolean;
+    private hovering: boolean = false;
 
     constructor(private gameMenuService: GameMenuService) {
     }
 
     hoverGameMenu(): void {
         this.beforeHoverMenuValue = this.gameMenuService.getShowGames();
+        console.log('start hover: ' + this.beforeHoverMenuValue);
         this.gameMenuService.setShowGames(true);
+        this.hovering = true;
     }
 
     stopHoverGameMenu(): void {
         this.gameMenuService.setShowGames(this.beforeHoverMenuValue);
+        console.log('stop hover: ' + this.beforeHoverMenuValue);
+        this.hovering = false;
     }
 
     toggleGameMenu(): void {
+        if (this.hovering) {
+            this.stopHoverGameMenu();  // revert
+        }
         this.gameMenuService.setShowGames(!this.gameMenuService.getShowGames());
+        this.beforeHoverMenuValue = this.gameMenuService.getShowGames();
     }
 }
