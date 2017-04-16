@@ -1,0 +1,14 @@
+<div *ngIf="games.length > 0">
+    <button class="list-group-item btn-group btn-group-{{style}}" (click)="toggleCollapse()">
+        <span class="fa fa-{{icon}}"></span>
+        {{category}}
+        <span class="badge">{{games.length}}</span>
+    </button>
+    <div [ngbCollapse]="isCollapsed">
+        <div class="btn-group-vertical btn-group-games">
+            <div *ngFor="let game of games;">
+                <game-menu-game-item [game]="game" [style]="style"></game-menu-game-item>
+            </div>
+        </div>
+    </div>
+</div>
