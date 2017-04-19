@@ -8,7 +8,7 @@ export class MultiPlayerGame extends Game {
     public rematchTimestamp: number;
 
     public initiatingPlayer: string;
-    public playerStates: Map<string, string> = new Map<string, string>();  // md5 to state
+    public playerStates: any = {};  // md5 to state
 
     constructor(original?: any) {
         super(original);

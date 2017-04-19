@@ -11,9 +11,9 @@ export class Game {
 
     public gamePhase: string;
 
-    public players: Map<string, string> = new Map<string, string>();  // md5 to name
-    public playerImages: Map<string, string> = new Map<string, string>(); // md5 to image
-    public playerProfiles: Map<string, string> = new Map<string, string>();  // md5 to profile
+    public players: any = {};  // md5 to name
+    public playerImages: any = {}; // md5 to image
+    public playerProfiles: any = {};  // md5 to profile
 
     public features: string[] = [];
 

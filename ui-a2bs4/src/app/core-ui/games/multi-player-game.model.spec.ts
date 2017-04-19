@@ -7,7 +7,7 @@ describe('Model: MultiPlayerGame', () => {
         expect(g.id).toBeUndefined();
         expect(g.version).toBeUndefined();
         expect(g.created).toBeUndefined();
-        expect(JSON.stringify(g.players)).toEqual(JSON.stringify([]));
+        expect(JSON.stringify(g.players)).toEqual(JSON.stringify({}));
 
         //  MPG specific checks
         expect(g.maskedForPlayerMD5).toBeUndefined();
@@ -15,7 +15,7 @@ describe('Model: MultiPlayerGame', () => {
         expect(g.declinedTimestamp).toBeUndefined();
         expect(g.rematchTimestamp).toBeUndefined();
         expect(g.initiatingPlayer).toBeUndefined();
-        expect(JSON.stringify(g.playerStates)).toEqual(JSON.stringify([]));
+        expect(JSON.stringify(g.playerStates)).toEqual(JSON.stringify({}));
     });
 
     it('copies from optional param if provided', () => {
@@ -23,16 +23,20 @@ describe('Model: MultiPlayerGame', () => {
         source.id = 'id1';
         source.version = 17;
         source.created = 123455;
-        source.players.set('md51', 'p1');
-        source.players.set('md52', 'p2');
+        source.players = {
+            'md51': 'p1',
+            'md52': 'p2'
+        };
 
         source.maskedForPlayerID = 'mid';
         source.maskedForPlayerMD5 = 'mmd5';
         source.declinedTimestamp = 8831;
         source.rematchTimestamp = 10204;
         source.initiatingPlayer = 'imd5';
-        source.playerStates.set('md51', 'Accepted');
-        source.playerStates.set('md52', 'Quit');
+        source.playerStates = {
+            'md51': 'Accepted',
+            'md52': 'Quit'
+        };
         let g: MultiPlayerGame = new MultiPlayerGame(source);
 
         //  select checks from underlying game class

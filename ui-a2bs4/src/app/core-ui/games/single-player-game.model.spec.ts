@@ -7,7 +7,7 @@ describe('Model: SinglePlayerGame', () => {
         expect(g.id).toBeUndefined();
         expect(g.version).toBeUndefined();
         expect(g.created).toBeUndefined();
-        expect(JSON.stringify(g.players)).toEqual(JSON.stringify([]));
+        expect(JSON.stringify(g.players)).toEqual(JSON.stringify({}));
 
         //  SPG specific checks - none for now
     });
