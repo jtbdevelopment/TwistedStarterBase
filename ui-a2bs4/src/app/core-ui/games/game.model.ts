@@ -20,4 +20,8 @@ export class Game {
     constructor(original?: any) {
         Object.assign(this, original);
     }
+
+    public standardLink(): string {
+        return '#/game/' + this.gamePhase.toLowerCase() + '/' + this.id;
+    }
 }

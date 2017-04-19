@@ -49,4 +49,9 @@ describe('Model: Game', () => {
         expect(JSON.stringify(g.playerProfiles)).toEqual(JSON.stringify(source.playerProfiles));
         expect(JSON.stringify(g.playerImages)).toEqual(JSON.stringify(source.playerImages));
     });
+
+    it('computes standard link', function () {
+        let g: Game = new Game({id: 'myid', gamePhase: 'APhase'});
+        expect(g.standardLink()).toEqual('#/game/aphase/myid');
+    });
 });
