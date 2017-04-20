@@ -26,7 +26,6 @@ export class MockGameItemComponent {
 }
 
 describe('Component:  game menu category list component', () => {
-    let cache: MockGameCache;
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
