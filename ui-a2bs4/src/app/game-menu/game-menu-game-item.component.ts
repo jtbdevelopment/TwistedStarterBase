@@ -7,9 +7,9 @@ import {Game} from '../core-ui/games/game.model';
 export class GameMenuGameItemComponent {
     @Input() public game: Game;
     @Input() public style: string;
-    public link: string;
 
-    ngOnInit() {
-        this.link = '#/game/' + this.game.gamePhase.toLowerCase() + '/' + this.game.id;
+    //  TODO - TSB
+    public describeGame(): string {
+        return 'TODO';
     }
 }

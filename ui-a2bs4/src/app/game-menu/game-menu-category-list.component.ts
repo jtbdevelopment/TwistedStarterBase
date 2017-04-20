@@ -19,7 +19,6 @@ export class GameMenuCategoryListComponent {
     ngOnInit() {
         this.gameCache.getGamesForCategory(this.category).subscribe(g => {
             this.games = g;
-            console.warn(this.games)
         });
     }
 

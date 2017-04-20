@@ -1,11 +1,5 @@
-<div class="game-wrapper">
-    <a [routerLink]="[link]"
-       class="btn-group btn btn-secondary btn-group-game btn-group-game-{{style}}">
-        <!--  TODO -->
-        <!--img ng-src="{{game.playerImages[md5]}}" class="player-image"
-             ng-repeat="(md5, name) in game.players"/-->
-
-        <!--  TODO -->
-        <span class="game-description">{{game.id}}</span>
-    </a>
-</div>
+<a [routerLink]="[game.standardLink()]"
+   class="btn-group btn btn-secondary btn-group-game btn-group-game-{{style}}">
+    <img *ngFor="let md5 of game.players | mapKeys" class="player-image" src="{{game.playerImages[md5]}}">
+    <span class="game-description">{{describeGame()}}</span>
+</a>

@@ -1,0 +1,62 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.game-bar {
+  padding-left: 5px;
+
+  .list-group-games {
+    margin: 0;
+    .category-wrapper {
+      width: 100%;
+
+      .fa {
+        margin-right: 5px;
+      }
+
+      .list-group-item {
+        width: 100%;
+        margin-top: 5px;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
+        font-weight: bold;
+        padding: 10px 10px;
+        border: none;
+      }
+
+      .games-collapse {
+        width: 100%;
+        .btn-group-games {
+          width: 100%;
+
+          .game-wrapper {
+            width: 100%;
+
+            .btn-group-game {
+              width: 100%;
+              padding: 4px;
+              alignment: left;
+              text-align: left;
+              -ms-word-wrap: break-word;
+              word-wrap: break-word;
+              white-space: normal;
+              font-weight: bold;
+              .game-description {
+                font-weight: bold;
+              }
+
+              .player-image {
+                margin: 3px 1px;
+                width: 25px;
+                height: 25px;
+                @include media-breakpoint-down(sm) {
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
