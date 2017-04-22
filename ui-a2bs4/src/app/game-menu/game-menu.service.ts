@@ -1,5 +1,6 @@
 import {Observable, BehaviorSubject} from 'rxjs';
 import {Injectable} from '@angular/core';
+import {MessageBusService} from '../core-ui/messagebus/message-bus.service';
 
 @Injectable()
 export class GameMenuService {
@@ -7,8 +8,11 @@ export class GameMenuService {
 
     private showGamesSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-    constructor() {
+    constructor(private messageBus: MessageBusService) {
         this.showGames = Observable.from<boolean>(this.showGamesSubject);
+        this.messageBus.connectionStatus.subscribe(connected => {
+            this.showGamesSubject.next(connected);
+        });
     }
 
     setShowGames(show: boolean): void {
