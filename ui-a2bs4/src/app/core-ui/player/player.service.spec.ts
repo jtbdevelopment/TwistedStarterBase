@@ -5,6 +5,11 @@ import {ReflectiveInjector} from '@angular/core';
 import {tick, fakeAsync} from '@angular/core/testing';
 import {Player} from './player.model';
 import {MessageBusService} from '../messagebus/message-bus.service';
+import {Router} from '@angular/router';
+
+class MockRouter {
+    navigateByUrl = jasmine.createSpy('nbu');
+}
 
 describe('Service: player service', () => {
     let currentPlayer: Player = null;
@@ -13,6 +18,7 @@ describe('Service: player service', () => {
     let messageBus: MessageBusService;
     let backend: MockBackend;
     let lastConnection: any;
+    let router: MockRouter;
 
 
     beforeEach(() => {
@@ -21,6 +27,7 @@ describe('Service: player service', () => {
         this.injector = ReflectiveInjector.resolveAndCreate([
             {provide: ConnectionBackend, useClass: MockBackend},
             {provide: RequestOptions, useClass: BaseRequestOptions},
+            {provide: Router, useClass: MockRouter},
             Http,
             MessageBusService,
             PlayerService,
@@ -28,6 +35,7 @@ describe('Service: player service', () => {
         playerService = this.injector.get(PlayerService);
         messageBus = this.injector.get(MessageBusService);
         backend = this.injector.get(ConnectionBackend) as MockBackend;
+        router = this.injector.get(Router) as MockRouter;
         backend.connections.subscribe((connection: any) => lastConnection = connection);
         playerService.loggedInPlayer.subscribe(p => {
             loggedInPlayer = p;
@@ -120,5 +128,27 @@ describe('Service: player service', () => {
             expect(currentPlayer).toEqual(loggedInPlayer);
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(initiallyLoadedPlayer));
         });
+
+        it('successful logout posts and redirects', fakeAsync(() => {
+            playerService.logout();
+            expect(lastConnection.request.url).toEqual('/signout');
+            lastConnection.mockRespond(new Response(new ResponseOptions({})));
+            tick();
+            expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(new Player()));
+            expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(new Player()));
+            expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
+            expect(router.navigateByUrl).toHaveBeenCalledWith('/signin');
+        }));
+
+        it('even failed logout posts and redirects', fakeAsync(() => {
+            playerService.logout();
+            expect(lastConnection.request.url).toEqual('/signout');
+            lastConnection.mockError(new ResponseOptions({status: 500}));
+            tick();
+            expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(new Player()));
+            expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(new Player()));
+            expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
+            expect(router.navigateByUrl).toHaveBeenCalledWith('/signin');
+        }));
     });
 });

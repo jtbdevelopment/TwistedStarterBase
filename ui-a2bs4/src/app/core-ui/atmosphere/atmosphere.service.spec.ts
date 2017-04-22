@@ -90,6 +90,30 @@ describe('Service: atmosphere service', () => {
         expect(mockAtmosphere.subscribe.calls.argsFor(1)[0]).toEqual(processor.listen.calls.argsFor(1)[0]);
     });
 
+    it('closes socket if player goes to null', () => {
+        playerService.player.next(new Player({id: '1'}));
+        expect(processor.listen).toHaveBeenCalledTimes(1);
+        expect(processor.listen.calls.argsFor(0)[0].url).toEqual('/livefeed/1');
+        expect(mockAtmosphere.subscribe).toHaveBeenCalledTimes(1);
+        expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
+        playerService.player.next(null);
+        expect(socket.close).toHaveBeenCalledTimes(1);
+        expect(processor.listen).toHaveBeenCalledTimes(1);
+        expect(mockAtmosphere.subscribe).toHaveBeenCalledTimes(1);
+    });
+
+    it('closes socket if player.id goes to null', () => {
+        playerService.player.next(new Player({id: '1'}));
+        expect(processor.listen).toHaveBeenCalledTimes(1);
+        expect(processor.listen.calls.argsFor(0)[0].url).toEqual('/livefeed/1');
+        expect(mockAtmosphere.subscribe).toHaveBeenCalledTimes(1);
+        expect(mockAtmosphere.subscribe.calls.argsFor(0)[0]).toEqual(processor.listen.calls.argsFor(0)[0]);
+        playerService.player.next(new Player());
+        expect(socket.close).toHaveBeenCalledTimes(1);
+        expect(processor.listen).toHaveBeenCalledTimes(1);
+        expect(mockAtmosphere.subscribe).toHaveBeenCalledTimes(1);
+    });
+
     it('closes socked and resubscribes when player changed even if close throws error', () => {
         socket.close.and.throwError('bad things');
         playerService.player.next(new Player({id: '1'}));

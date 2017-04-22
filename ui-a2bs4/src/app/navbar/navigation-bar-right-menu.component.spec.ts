@@ -1,16 +1,24 @@
-import {TestBed, async} from '@angular/core/testing';
+import {TestBed, async, inject} from '@angular/core/testing';
 import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.component';
 import {RouterTestingModule} from '@angular/router/testing';
+import {PlayerService} from '../core-ui/player/player.service';
 
+class MockPlayerService {
+    logout = jasmine.createSpy('logout');
+}
 
-describe('Component:  nav bar new game component', () => {
+describe('Component:  nav bar right menu component', () => {
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule
             ],
+            providers: [
+                {provide: PlayerService, useClass: MockPlayerService}
+            ],
             declarations: [
-                NavigationBarRightMenuComponent,
+                NavigationBarRightMenuComponent
             ],
         });
         TestBed.compileComponents();
@@ -32,4 +40,10 @@ describe('Component:  nav bar new game component', () => {
         const toggle = fixture.nativeElement;
         expect(toggle.querySelector('ul').textContent.trim()).toBe('');
     });
+
+    it('test logout propogates to player service', inject([PlayerService], (playerService) => {
+        const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
+        fixture.componentInstance.logout();
+        expect(playerService.logout).toHaveBeenCalledTimes(1);
+    }));
 });

@@ -14,7 +14,7 @@ export class NavigationBarComponent {
     appName: string;
     playerLoaded: boolean = false;
 
-    constructor(@Inject('AppConfig') config: AppConfig, playerService: PlayerService) {
+    constructor(@Inject('AppConfig') private config: AppConfig, private playerService: PlayerService) {
         this.appName = config.appName;
         playerService.loggedInPlayer.subscribe(login => {
             this.showAdmin = login.adminUser;
@@ -24,14 +24,9 @@ export class NavigationBarComponent {
                 login.displayName !== '';
         });
         playerService.player.subscribe(user => {
-            this.showLogout = (user.source === 'Manual');
+            this.showLogout = (user.source === 'MANUAL');
             this.playerName = user.displayName;
         });
-    }
-
-    logout(): void {
-        //  TODO
-        console.log('logout ' + this.playerName);
     }
 }
 

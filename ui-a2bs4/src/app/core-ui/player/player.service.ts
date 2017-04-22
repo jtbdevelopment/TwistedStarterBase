@@ -3,6 +3,7 @@ import {Player} from './player.model';
 import {Observable, BehaviorSubject} from 'rxjs';
 import {Http} from '@angular/http';
 import {MessageBusService} from '../messagebus/message-bus.service';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class PlayerService {
@@ -17,7 +18,9 @@ export class PlayerService {
     private loggedInSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
 
     //  TODO - not currently possible to test message bus updates when logged in != current
-    constructor(private http: Http, private messageBus: MessageBusService) {
+    constructor(private http: Http,
+                private messageBus: MessageBusService,
+                private router: Router) {
         this.player = Observable.from<Player>(this.playerSubject);
         this.loggedInPlayer = Observable.from<Player>(this.loggedInSubject);
         this.messageBus.playerUpdates.subscribe(player => {
@@ -47,5 +50,21 @@ export class PlayerService {
                     //  TODO - general error handler
                     console.log(JSON.stringify(error));
                 });
+    }
+
+    public logout(): void {
+        this.http.post('/signout', null).subscribe(() => {
+            this.resetPlayer();
+        }, error => {
+            console.log(JSON.stringify(error));
+            this.resetPlayer();
+        });
+    }
+
+    private resetPlayer(): void {
+        this.loggedInSubject.next(new Player());
+        this.playerSubject.next(new Player());
+        this.messageBus.playerUpdates.next(new Player());
+        this.router.navigateByUrl('/signin');
     }
 }

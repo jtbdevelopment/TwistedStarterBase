@@ -35,7 +35,7 @@ export class AtmosphereService {
     }
 
     private startSocket(player: Player): void {
-        if (player.id && player.id !== this.currentPlayerId) {
+        if (player && player.id && player.id !== this.currentPlayerId) {
             this.closeSocket();
 
             let currentRequest: AtmosphereRequest = new AtmosphereRequest(this.endPoint, player.id);
@@ -46,6 +46,8 @@ export class AtmosphereService {
             } catch (error) {
                 console.log('error with live feed ' + JSON.stringify(error));
             }
+        } else if (!player || !player.id) {
+            this.closeSocket();
         }
     };
 }

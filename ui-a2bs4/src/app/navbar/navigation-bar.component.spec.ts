@@ -128,7 +128,7 @@ describe('nav bar component', () => {
 
         let p: Player = new Player();
         p.displayName = 'XYZ';
-        p.source = 'Manual';
+        p.source = 'MANUAL';
         p.adminUser = false;
 
         MockPlayerService.loggedInSubject.next(p);
