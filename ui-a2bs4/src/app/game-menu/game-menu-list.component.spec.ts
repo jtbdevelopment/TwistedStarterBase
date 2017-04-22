@@ -23,7 +23,7 @@ class MockGameClassifier {
     selector: 'game-menu-category-list',
     template: '<p>{{category}}</p><p>{{style}}</p><p>{{icon}}</p>'
 })
-export class MockCategoryListComponent {
+class MockCategoryListComponent {
     @Input() public category: string;
     @Input() public icon: string;
     @Input() public style: string;
@@ -43,14 +43,14 @@ describe('Component:  game menu list component', () => {
         TestBed.compileComponents();
     }));
 
-    it('initializes', fakeAsync(() => {
+    it('initializes', () => {
         const fixture = TestBed.createComponent(GameMenuListComponent);
 
         fixture.detectChanges();
         expect(fixture.componentInstance.categories).toEqual([]);
         expect(fixture.componentInstance.styles).toEqual([]);
         expect(JSON.stringify(fixture.componentInstance.icons)).toEqual(JSON.stringify([]));
-    }));
+    });
 
     it('subscribes to game classifier', fakeAsync(() => {
         const fixture = TestBed.createComponent(GameMenuListComponent);

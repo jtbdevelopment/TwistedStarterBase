@@ -6,7 +6,7 @@ import {MultiPlayerGame} from '../core-ui/games/multi-player-game.model';
 import {Game} from '../core-ui/games/game.model';
 import {SinglePlayerGame} from '../core-ui/games/single-player-game.model';
 import {Input, Component} from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 
 class MockGameCache {
     public static games: Map<string, BehaviorSubject<any[]>> = new Map<string, BehaviorSubject<any[]>>();
@@ -20,7 +20,7 @@ class MockGameCache {
     selector: 'game-menu-game-item',
     template: '<p>{{style}}</p><span>{{game.id}}</span>'
 })
-export class MockGameItemComponent {
+class MockGameItemComponent {
     @Input() public game: Game;
     @Input() public style: string;
 }
@@ -29,7 +29,7 @@ describe('Component:  game menu category list component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                NgbModule.forRoot()
+                NgbCollapseModule
             ],
             declarations: [
                 GameMenuCategoryListComponent,
