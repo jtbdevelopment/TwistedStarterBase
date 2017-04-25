@@ -1,4 +1,9 @@
-<div class="game-bar">
+<div class="game-bar"
+     ngbPopover="Here are where your games are/will be.  Click on one to play it."
+     triggers="manual"
+     popoverTitle="Games"
+     placement="bottom"
+     #help="ngbPopover">
     <div *ngFor="let category of categories; let i = index;"
          class="list-group list-group-games list-group-{{styles[i]}}">
         <game-menu-category-list [category]="category"

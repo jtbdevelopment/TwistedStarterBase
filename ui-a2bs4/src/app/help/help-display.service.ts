@@ -14,4 +14,8 @@ export class HelpDisplayService {
     public toggleHelp(): void {
         this.showHelpSubject.next(!this.showHelpSubject.value);
     }
+
+    public isShown(): boolean {
+        return this.showHelpSubject.value;
+    }
 }

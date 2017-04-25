@@ -1,6 +1,11 @@
 <ul class="navbar-nav" *ngIf="playerLoaded">
-    <!--  TODO -->
-    <li class="nav-item">
+    <!--  TODO - placement needs top left - not current in ng bootstrap  -->
+    <li class="nav-item"
+        ngbPopover="Show/hide your game list for more room on the screen."
+        triggers="manual"
+        popoverTitle="Games"
+        placement="top"
+        #help="ngbPopover">
         <!--  TODO TSB - determine if hover is annoying for this game -->
         <a href="javascript:void(0)"
            (click)="toggleGameMenu()"

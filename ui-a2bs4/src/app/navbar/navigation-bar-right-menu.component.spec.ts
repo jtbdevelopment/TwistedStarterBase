@@ -1,7 +1,9 @@
-import {TestBed, async, inject} from '@angular/core/testing';
+import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {PlayerService} from '../core-ui/player/player.service';
+import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
+import {HelpDisplayService} from '../help/help-display.service';
 
 class MockPlayerService {
     logout = jasmine.createSpy('logout');
@@ -12,10 +14,13 @@ describe('Component:  nav bar right menu component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                RouterTestingModule
+                RouterTestingModule,
+                NgbModule
             ],
             providers: [
-                {provide: PlayerService, useClass: MockPlayerService}
+                {provide: PlayerService, useClass: MockPlayerService},
+                HelpDisplayService,
+                NgbPopoverConfig
             ],
             declarations: [
                 NavigationBarRightMenuComponent
@@ -37,9 +42,24 @@ describe('Component:  nav bar right menu component', () => {
         const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
         fixture.componentInstance.playerLoaded = true;
         fixture.detectChanges();
-        const toggle = fixture.nativeElement;
-        expect(toggle.querySelector('ul').textContent.trim()).toBe('');
+        expect(fixture.nativeElement.querySelector('ul').textContent.trim()).toBe('');
     });
+
+    it('toggling help on/off shows/hides popover', fakeAsync(inject([HelpDisplayService], (helpService) => {
+        const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
+        fixture.componentInstance.playerLoaded = true;
+        fixture.detectChanges();
+        fixture.componentInstance.toggleHelp();
+        expect(helpService.isShown()).toBeTruthy();
+        tick();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(1);
+        fixture.componentInstance.toggleHelp();
+        expect(helpService.isShown()).toBeFalsy();
+        tick();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(0);
+    })));
 
     it('test logout propogates to player service', inject([PlayerService], (playerService) => {
         const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);

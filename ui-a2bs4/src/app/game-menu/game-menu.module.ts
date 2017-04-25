@@ -11,8 +11,8 @@ import {RouterModule} from '@angular/router';
 @NgModule({
     imports: [
         BrowserModule,
-        NgbModule.forRoot(),
         RouterModule,
+        NgbModule,
         JTBCoreUI
     ],
     exports: [

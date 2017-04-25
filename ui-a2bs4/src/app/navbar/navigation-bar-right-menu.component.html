@@ -1,22 +1,29 @@
 <ul class="navbar-nav" *ngIf="playerLoaded">
     <li>
         <!--  TODO -->
-        <a [routerLink]="['/profile']" class="nav-link">
+        <a [routerLink]="['/profile']"
+           ngbPopover="Show your profile and stats"
+           triggers="manual"
+           popoverTitle="Profile"
+           placement="top"
+           #help="ngbPopover"
+           class="nav-link">
             <span class="fa fa-user"></span>
         </a>
     </li>
     <li>
-        <!--  TODO -->
-        <a [routerLink]="['/help']" class="nav-link">
+        <a href="javascript:void(0)" (click)="toggleHelp()" class="nav-link">
             <span class="fa fa-question"></span>
         </a>
     </li>
     <li>
         <!--  TODO -->
-        <a [routerLink]="['/admin']" *ngIf="showAdmin" class="nav-link">
+        <a [routerLink]="['/admin']"
+           *ngIf="showAdmin"
+           class="nav-link">
             <span class="fa fa-eye"></span>
         </a>
+        <!--  TODO -->
     </li>
-    <!--  TODO -->
     <li><a href="javascript:void(0)" (click)="logout()" *ngIf="showLogout" class="nav-link">Logout</a></li>
 </ul>

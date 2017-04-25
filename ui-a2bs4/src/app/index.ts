@@ -9,6 +9,7 @@ import {RootComponent} from './root.component';
 import {PhaseGameClassifier} from './core-ui/gamecache/phase-game-classifier.service';
 import {TSBGameFactory} from './game/tsb-game-factory.service';
 import {GameMenuModule} from './game-menu/game-menu.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import {GameMenuModule} from './game-menu/game-menu.module';
         routing,
         NavigationBarModule,
         JTBCoreUIBootstrap,
-        GameMenuModule
+        GameMenuModule,
+        NgbModule.forRoot()
     ],
     declarations: [
         RootComponent,

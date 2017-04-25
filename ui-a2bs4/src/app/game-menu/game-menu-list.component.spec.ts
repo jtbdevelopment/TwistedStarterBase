@@ -1,8 +1,10 @@
-import {TestBed, async, fakeAsync, tick} from '@angular/core/testing';
-import {Observable, BehaviorSubject} from 'rxjs';
-import {Input, Component} from '@angular/core';
+import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Component, Input} from '@angular/core';
 import {GameMenuListComponent} from './game-menu-list.component';
 import {GameClassifier} from '../core-ui/gamecache/game-classifier.serviceinterface';
+import {HelpDisplayService} from '../help/help-display.service';
+import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 
 class MockGameClassifier {
     public static classifications: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
@@ -32,12 +34,17 @@ class MockCategoryListComponent {
 describe('Component:  game menu list component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [
+                NgbModule
+            ],
             declarations: [
                 GameMenuListComponent,
                 MockCategoryListComponent
             ],
             providers: [
-                {provide: 'GameClassifier', useClass: MockGameClassifier}
+                {provide: 'GameClassifier', useClass: MockGameClassifier},
+                HelpDisplayService,
+                NgbPopoverConfig
             ]
         });
         TestBed.compileComponents();
@@ -77,4 +84,17 @@ describe('Component:  game menu list component', () => {
         expect(querySelectorAll[2].textContent).toEqual(categories[2] + expectedStyles[2] + 'icon3');
 
     }));
+
+    it('toggling help on/off shows/hides popover', fakeAsync(inject([HelpDisplayService], (helpService) => {
+        const fixture = TestBed.createComponent(GameMenuListComponent);
+        fixture.detectChanges();
+        helpService.toggleHelp();
+        tick();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(1);
+        helpService.toggleHelp();
+        tick();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(0);
+    })));
 });

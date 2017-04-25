@@ -18,11 +18,15 @@ describe('Service: help display service', () => {
 
     it('changes when toggled', fakeAsync(() => {
         expect(show).toBeFalsy();
+        expect(help.isShown()).toBeFalsy();
         help.toggleHelp();
         expect(show).toBeTruthy();
+        expect(help.isShown()).toBeTruthy();
         help.toggleHelp();
         expect(show).toBeFalsy();
+        expect(help.isShown()).toBeFalsy();
         help.toggleHelp();
         expect(show).toBeTruthy();
+        expect(help.isShown()).toBeTruthy();
     }));
 });

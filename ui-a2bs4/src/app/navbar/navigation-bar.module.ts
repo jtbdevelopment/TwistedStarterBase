@@ -7,13 +7,17 @@ import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.compo
 import {NavigationBarComponent} from './navigation-bar.component';
 import {GameMenuModule} from '../game-menu/game-menu.module';
 import {RouterModule} from '@angular/router';
+import {HelpModule} from '../help/help.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
         BrowserModule,
         JTBCoreUI,
         GameMenuModule,
-        RouterModule
+        RouterModule,
+        HelpModule,
+        NgbModule
     ],
     exports: [
         NavigationBarComponent,

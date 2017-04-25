@@ -1,7 +1,9 @@
-import {TestBed, async} from '@angular/core/testing';
-import {Observable, BehaviorSubject} from 'rxjs';
+import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-toggle.component';
 import {GameMenuService} from '../game-menu/game-menu.service';
+import {HelpDisplayService} from '../help/help-display.service';
+import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 
 
 export class MockGameMenuService {
@@ -24,11 +26,16 @@ export class MockGameMenuService {
 describe('Component:  nav bar game menu toggle component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [
+                NgbModule
+            ],
             declarations: [
                 NavigationBarGameMenuToggleComponent,
             ],
             providers: [
-                {provide: GameMenuService, useClass: MockGameMenuService}
+                {provide: GameMenuService, useClass: MockGameMenuService},
+                HelpDisplayService,
+                NgbPopoverConfig
             ],
         });
         TestBed.compileComponents();
@@ -119,4 +126,19 @@ describe('Component:  nav bar game menu toggle component', () => {
         fixture.componentInstance.stopHoverGameMenu();
         expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
     });
+
+    it('toggling help on/off shows/hides popover', fakeAsync(inject([HelpDisplayService], (helpService) => {
+        const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+        fixture.componentInstance.playerLoaded = true;
+        fixture.detectChanges();
+        helpService.toggleHelp();
+        tick();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(1);
+        helpService.toggleHelp();
+        tick();
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(0);
+    })));
+
 });
