@@ -4,6 +4,7 @@ import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-t
 import {GameMenuService} from '../game-menu/game-menu.service';
 import {HelpDisplayService} from '../help/help-display.service';
 import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
+import {AppConfig} from '../app.config';
 
 
 export class MockGameMenuService {
@@ -23,6 +24,11 @@ export class MockGameMenuService {
     }
 }
 
+export class MockAppConfig implements AppConfig {
+    appName: string = 'Twisted Starter Base';
+    hoverMenu: boolean = true;
+}
+
 describe('Component:  nav bar game menu toggle component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -34,6 +40,7 @@ describe('Component:  nav bar game menu toggle component', () => {
             ],
             providers: [
                 {provide: GameMenuService, useClass: MockGameMenuService},
+                {provide: 'AppConfig', useClass: MockAppConfig},
                 HelpDisplayService,
                 NgbPopoverConfig
             ],
@@ -70,63 +77,6 @@ describe('Component:  nav bar game menu toggle component', () => {
         expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
     });
 
-    it('hovering on forces show games to true', () => {
-        const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
-        fixture.detectChanges();
-        MockGameMenuService.showGamesSubject.next(false);
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
-        fixture.componentInstance.hoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-    });
-
-    it('stopping hovering on restores show games to true if started true', () => {
-        const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
-        fixture.detectChanges();
-        MockGameMenuService.showGamesSubject.next(true);
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-        fixture.componentInstance.hoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-        fixture.componentInstance.stopHoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-    });
-
-    it('stopping hovering on restores show games to false if started false', () => {
-        const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
-        fixture.detectChanges();
-        MockGameMenuService.showGamesSubject.next(false);
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
-        fixture.componentInstance.hoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-        fixture.componentInstance.stopHoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
-    });
-
-    it('toggling while hovering finalizes state - assume starting with hide menu', () => {
-        const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
-        fixture.detectChanges();
-        MockGameMenuService.showGamesSubject.next(false);
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
-        fixture.componentInstance.hoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-        fixture.componentInstance.toggleGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-        fixture.componentInstance.stopHoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-    });
-
-    it('toggling while hovering finalizes state - assume starting with showing menu', () => {
-        const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
-        fixture.detectChanges();
-        MockGameMenuService.showGamesSubject.next(true);
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-        fixture.componentInstance.hoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
-        fixture.componentInstance.toggleGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
-        fixture.componentInstance.stopHoverGameMenu();
-        expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
-    });
-
     it('toggling help on/off shows/hides popover', fakeAsync(inject([HelpDisplayService], (helpService) => {
         const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
         fixture.componentInstance.playerLoaded = true;
@@ -141,4 +91,127 @@ describe('Component:  nav bar game menu toggle component', () => {
         expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(0);
     })));
 
+    describe('when enableHover is true', () => {
+        beforeEach(inject(['AppConfig'], (config) => {
+            config.hoverMenu = true;
+        }));
+        it('hovering on forces show games to true', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(false);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+        });
+
+        it('stopping hovering on restores show games to true if started true', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(true);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.stopHoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+        });
+
+        it('stopping hovering on restores show games to false if started false', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(false);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.stopHoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+        });
+
+        it('toggling while hovering finalizes state - assume starting with hide menu', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(false);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.toggleGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.stopHoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+        });
+
+        it('toggling while hovering finalizes state - assume starting with showing menu', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(true);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.toggleGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.stopHoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+        });
+    });
+
+    describe('when enableHover is false', () => {
+        beforeEach(inject(['AppConfig'], (config) => {
+            config.hoverMenu = false;
+        }));
+        it('hovering on forces does not enable show games', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(false);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+        });
+
+        it('stopping hovering on restores show games to true if started true', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(true);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.stopHoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+        });
+
+        it('stopping hovering on restores show games to false if started false', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(false);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.stopHoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+        });
+
+        it('toggling while hovering finalizes state - assume starting with hide menu', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(false);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.toggleGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.stopHoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+        });
+
+        it('toggling while hovering finalizes state - assume starting with showing menu', () => {
+            const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
+            fixture.detectChanges();
+            MockGameMenuService.showGamesSubject.next(true);
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.hoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeTruthy();
+            fixture.componentInstance.toggleGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+            fixture.componentInstance.stopHoverGameMenu();
+            expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
+        });
+    });
 });
