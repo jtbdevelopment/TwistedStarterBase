@@ -1,11 +1,11 @@
-import {Observable, BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Game} from '../games/game.model';
 import {Injectable} from '@angular/core';
 import {GameClassifier} from './game-classifier.serviceinterface';
 import {PhaseCacheService} from '../phases/phase-cache.service';
 
 @Injectable()
-export class PhaseGameClassifier implements GameClassifier {
+export class PhaseGameClassifier implements GameClassifier<Game> {
     private phaseToGroup: Map<string, string> = new Map<string, string>();
     private phasesSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 

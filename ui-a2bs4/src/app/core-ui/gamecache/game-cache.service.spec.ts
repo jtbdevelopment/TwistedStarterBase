@@ -1,16 +1,16 @@
 import {ReflectiveInjector} from '@angular/core';
-import {Observable, BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {async, fakeAsync, tick} from '@angular/core/testing';
 import {Game} from '../games/game.model';
 import {MockBackend} from '@angular/http/testing';
-import {BaseRequestOptions, RequestOptions, ConnectionBackend, Http, ResponseOptions, Response} from '@angular/http';
+import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions} from '@angular/http';
 import {GameClassifier} from './game-classifier.serviceinterface';
 import {GameCacheService} from './game-cache.service';
 import {GameFactory} from '../games/gamefactory.serviceinterface';
 import {MultiPlayerGame} from '../games/multi-player-game.model';
 import {MessageBusService} from '../messagebus/message-bus.service';
 
-class MockClassifier implements GameClassifier {
+class MockClassifier implements GameClassifier<Game> {
     public classifications = ['A', 'B', 'D'];
 
     public classificationSubject: BehaviorSubject<string[]> = new BehaviorSubject([]);

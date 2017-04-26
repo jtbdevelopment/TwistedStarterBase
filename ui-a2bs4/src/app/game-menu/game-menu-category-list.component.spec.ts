@@ -1,12 +1,12 @@
-import {TestBed, async, fakeAsync, tick} from '@angular/core/testing';
+import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {GameMenuCategoryListComponent} from './game-menu-category-list.component';
 import {GameCacheService} from '../core-ui/gamecache/game-cache.service';
-import {Observable, BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {MultiPlayerGame} from '../core-ui/games/multi-player-game.model';
 import {Game} from '../core-ui/games/game.model';
 import {SinglePlayerGame} from '../core-ui/games/single-player-game.model';
-import {Input, Component} from '@angular/core';
-import {NgbModule, NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import {Component, Input} from '@angular/core';
+import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 
 class MockGameCache {
     public static games: Map<string, BehaviorSubject<any[]>> = new Map<string, BehaviorSubject<any[]>>();
@@ -44,7 +44,11 @@ describe('Component:  game menu category list component', () => {
 
     it('initializes and subscribes to category from game cache', fakeAsync(() => {
         const fixture = TestBed.createComponent(GameMenuCategoryListComponent);
-        let expectedGames = [new Game({id: '1'}), new MultiPlayerGame({id: '2'}), new SinglePlayerGame({id: '3'})];
+        let expectedGames = [
+            new Game({id: '1', lastUpdate: 10}),
+            new MultiPlayerGame({id: '2', lastUpdate: 1}),
+            new SinglePlayerGame({id: '3', lastUpdate: 5})
+        ];
         let category = 'cat';
         let style = 's';
         MockGameCache.games.set(category, new BehaviorSubject([]));
@@ -55,14 +59,14 @@ describe('Component:  game menu category list component', () => {
         expect(fixture.componentInstance.isCollapsed).toBeFalsy();
         MockGameCache.games.get(category).next(expectedGames);
         tick();
-        expect(fixture.componentInstance.games).toEqual(expectedGames);
+        expect(fixture.componentInstance.games).toEqual([expectedGames[1], expectedGames[2], expectedGames[0]]);
         fixture.detectChanges();
 
         let querySelectorAll = fixture.nativeElement.querySelectorAll('game-menu-game-item');
         expect(querySelectorAll.length).toEqual(3);
-        expect(querySelectorAll[0].textContent).toEqual(style + expectedGames[0].id);
-        expect(querySelectorAll[1].textContent).toEqual(style + expectedGames[1].id);
-        expect(querySelectorAll[2].textContent).toEqual(style + expectedGames[2].id);
+        expect(querySelectorAll[0].textContent).toEqual(style + expectedGames[1].id);
+        expect(querySelectorAll[1].textContent).toEqual(style + expectedGames[2].id);
+        expect(querySelectorAll[2].textContent).toEqual(style + expectedGames[0].id);
     }));
 
     it('test toggle collapse', () => {

@@ -6,10 +6,10 @@ import {TwistedAppConfig} from './app.config';
 import {NavigationBarModule} from './navbar/navigation-bar.module';
 import {JTBCoreUIBootstrap} from './core-ui-bs/jtb.core.ui.bs.module';
 import {RootComponent} from './root.component';
-import {PhaseGameClassifier} from './core-ui/gamecache/phase-game-classifier.service';
 import {TSBGameFactory} from './game/tsb-game-factory.service';
 import {GameMenuModule} from './game-menu/game-menu.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {TSBGameClassifier} from './game/tsb-game-classifier.service';
 
 @NgModule({
     imports: [
@@ -28,7 +28,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     providers: [
         {provide: 'AppConfig', useClass: TwistedAppConfig},
         {provide: 'GameFactory', useClass: TSBGameFactory},
-        {provide: 'GameClassifier', useClass: PhaseGameClassifier}
+        {provide: 'GameClassifier', useClass: TSBGameClassifier}
     ]
 })
 export class AppModule {

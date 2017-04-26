@@ -12,7 +12,7 @@ export class GameMenuListComponent extends AbstractHelpDisplayingComponent {
     public styles: string[] = [];
     public icons: Map<string, string> = new Map<string, string>();
 
-    constructor(@Inject('GameClassifier') private gameClassifier: GameClassifier,
+    constructor(@Inject('GameClassifier') private gameClassifier: GameClassifier<any>,
                 protected helpDisplay: HelpDisplayService) {
         super(helpDisplay);
         gameClassifier.getIcons().subscribe(i => this.icons = i);

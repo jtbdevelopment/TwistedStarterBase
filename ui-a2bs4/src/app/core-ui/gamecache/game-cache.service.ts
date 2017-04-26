@@ -17,7 +17,7 @@ export class GameCacheService {
     constructor(private http: Http,
                 private messageBus: MessageBusService,
                 @Inject('GameFactory') private gameFactory: GameFactory,
-                @Inject('GameClassifier') private gameClassifier: GameClassifier) {
+                @Inject('GameClassifier') private gameClassifier: GameClassifier<any>) {
         gameClassifier.getClassifications().subscribe(classifications => {
             this.initializeCategoryCaches(classifications);
             //  In case classifier took longer than logging in to setup classifications

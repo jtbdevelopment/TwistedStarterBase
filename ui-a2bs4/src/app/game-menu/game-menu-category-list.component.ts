@@ -17,7 +17,16 @@ export class GameMenuCategoryListComponent implements OnInit {
 
     ngOnInit() {
         this.gameCache.getGamesForCategory(this.category).subscribe(g => {
-            this.games = g;
+            this.games = Object.assign([], g);
+            this.games.sort((a, b) => {
+                if (a.lastUpdate > b.lastUpdate) {
+                    return 1;
+                }
+                if (a.lastUpdate === b.lastUpdate) {
+                    return 0;
+                }
+                return -1;
+            });
         });
     }
 

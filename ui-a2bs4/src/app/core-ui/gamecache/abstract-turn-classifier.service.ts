@@ -1,8 +1,12 @@
-import {Observable, BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 
 @Injectable()
 export abstract class AbstractTurnClassifier {
+    protected static YOUR_TURN: string = 'Your Turn';
+    protected static THEIR_TURN: string = 'Their Turn';
+    protected static OLDER_GAMES: string = 'Older Games';
+
     //noinspection JSMethodCanBeStatic
     public getClassifications(): Observable<string[]> {
         return new BehaviorSubject(['Your Turn', 'Their Turn', 'Older Games']);
@@ -14,9 +18,9 @@ export abstract class AbstractTurnClassifier {
         return new BehaviorSubject(
             new Map<string, string>(
                 [
-                    ['Your Turn', 'play'],
-                    ['Their Turn', 'pause'],
-                    ['Older Games', 'stop']
+                    [AbstractTurnClassifier.YOUR_TURN, 'play'],
+                    [AbstractTurnClassifier.THEIR_TURN, 'pause'],
+                    [AbstractTurnClassifier.OLDER_GAMES, 'stop']
                 ] as [string, string][]
             )
         );
