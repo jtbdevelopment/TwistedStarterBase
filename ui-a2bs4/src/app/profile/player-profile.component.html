@@ -1,0 +1,35 @@
+<div class="player-profile">
+    <h2>Your profile:</h2>
+    <table class="table table-hover table-sm text-right">
+        <tr>
+            <th>Name</th>
+            <td>{{player.displayName}}</td>
+        </tr>
+        <tr>
+            <th>Logged In From</th>
+            <td>{{player.source}}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{player.payLevel}}</td>
+        </tr>
+        <tr>
+            <th>Daily Free Games</th>
+            <td>{{player.gameSpecificPlayerAttributes.maxDailyFreeGames}}</td>
+        </tr>
+        <tr>
+            <th>Free Games Used Today</th>
+            <td>{{player.gameSpecificPlayerAttributes.freeGamesUsedToday}}</td>
+        </tr>
+        <tr>
+            <th>Free Games Remaining Today</th>
+            <td>{{player.gameSpecificPlayerAttributes.maxDailyFreeGames -
+                player.gameSpecificPlayerAttributes.freeGamesUsedToday}}
+            </td>
+        </tr>
+        <tr>
+            <th>Profile Image</th>
+            <td><img src="{{player.imageUrl}}"/></td>
+        </tr>
+    </table>
+</div>

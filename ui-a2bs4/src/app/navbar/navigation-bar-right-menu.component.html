@@ -1,6 +1,5 @@
 <ul class="navbar-nav" *ngIf="playerLoaded">
     <li>
-        <!--  TODO -->
         <a [routerLink]="['/profile']"
            ngbPopover="Show your profile and stats"
            triggers="manual"
@@ -23,7 +22,6 @@
            class="nav-link">
             <span class="fa fa-eye"></span>
         </a>
-        <!--  TODO -->
     </li>
     <li><a href="javascript:void(0)" (click)="logout()" *ngIf="showLogout" class="nav-link">Logout</a></li>
 </ul>

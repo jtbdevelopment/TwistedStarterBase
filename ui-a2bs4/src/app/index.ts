@@ -10,6 +10,7 @@ import {TSBGameFactory} from './game/tsb-game-factory.service';
 import {GameMenuModule} from './game-menu/game-menu.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TSBGameClassifier} from './game/tsb-game-classifier.service';
+import {PlayerProfileModule} from './profile/player-profile.module';
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import {TSBGameClassifier} from './game/tsb-game-classifier.service';
         NavigationBarModule,
         JTBCoreUIBootstrap,
         GameMenuModule,
+        PlayerProfileModule,
         NgbModule.forRoot()
     ],
     declarations: [
