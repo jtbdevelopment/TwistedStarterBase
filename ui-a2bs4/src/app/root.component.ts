@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {AtmosphereService} from './core-ui/atmosphere/atmosphere.service';
-import {GameCacheService} from './core-ui/gamecache/game-cache.service';
 import {GameMenuService} from './game-menu/game-menu.service';
 
 @Component({
@@ -10,8 +9,7 @@ import {GameMenuService} from './game-menu/game-menu.service';
 export class RootComponent {
     public showGames: boolean = false;
 
-    constructor(atmosphere: AtmosphereService, gameCache: GameCacheService, menuService: GameMenuService) {
-        //  TODO - better than this for atmosphere
+    constructor(atmosphere: AtmosphereService, menuService: GameMenuService) {
         atmosphere.endPoint = '';
         menuService.showGames.subscribe(x => this.showGames = x);
     }
