@@ -3,6 +3,7 @@ import {MainComponent} from './main';
 import {SignInComponent} from './core-ui-bs/sign-in/sign-in.component';
 import {SignedInComponent} from './core-ui-bs/signed-in/signed-in.component';
 import {PlayerProfileComponent} from './profile/player-profile.component';
+import {AdminComponent} from './core-ui-bs/admin/admin.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,10 @@ export const routes: Routes = [
     {
         path: 'signedin',
         component: SignedInComponent
+    },
+    {
+        path: 'admin',
+        component: AdminComponent
     }
 ];
 
