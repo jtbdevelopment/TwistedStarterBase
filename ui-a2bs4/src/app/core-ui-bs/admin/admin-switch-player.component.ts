@@ -1,21 +1,32 @@
 import {Component} from '@angular/core';
+import {Player} from '../../core-ui/player/player.model';
 @Component({
     selector: 'admin-switch-player',
     template: require('./admin-switch-player.component.html'),
 })
 export class AdminSwitchPlayerComponent {
-    private static dayInSeconds: number = 86400;
+    public revertText: string = '';
+    public revertEnabled: boolean = false;
+    public searchText: string = '';
+    public players: Player[] = [];
 
-    public playerCount: number = 0;
-    public gameCount: number = 0;
-    public gamesCreated: number[] = [0, 0, 0];
-    public playersCreated: number[] = [0, 0, 0];
-    public playerLogins: number[] = [0, 0, 0];
+    public pageSize: number = 20;
+    public totalPlayers: number = 0;
+    public currentPage: number = 0;
 
-    private time: number = Math.floor((new Date()).getTime() / 1000);
-    private times: number[] = [
-        (this.time - AdminSwitchPlayerComponent.dayInSeconds),
-        (this.time - (AdminSwitchPlayerComponent.dayInSeconds * 7)),
-        (this.time - (AdminSwitchPlayerComponent.dayInSeconds * 30))
-    ];
+    public revertToNormal(): void {
+
+    }
+
+    public refreshUsers(): void {
+
+    }
+
+    public switchToPlayer(id: string): void {
+
+    }
+
+    public changePage(): void {
+
+    }
 }
