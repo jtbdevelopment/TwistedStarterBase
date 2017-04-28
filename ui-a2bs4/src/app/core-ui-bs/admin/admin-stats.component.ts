@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Http} from '@angular/http';
 @Component({
     selector: 'admin-stats',
     template: require('./admin-stats.component.html'),
@@ -18,4 +19,59 @@ export class AdminStatsComponent {
         (this.time - (AdminStatsComponent.dayInSeconds * 7)),
         (this.time - (AdminStatsComponent.dayInSeconds * 30))
     ];
+
+    constructor(private http: Http) {
+        this.times.forEach((time, index) => {
+            this.http.get('/api/player/admin/playersCreated/' + time)
+                .map(response => response.text())
+                .subscribe(text => {
+                        this.playersCreated[index] = Number(text);
+                    },
+                    error => {
+                        //  TODO - general error handler
+                        console.log(JSON.stringify(error));
+                    }
+                );
+            this.http.get('/api/player/admin/playersLoggedIn/' + time)
+                .map(response => response.text())
+                .subscribe(text => {
+                        this.playerLogins[index] = Number(text);
+                    },
+                    error => {
+                        //  TODO - general error handler
+                        console.log(JSON.stringify(error));
+                    }
+                );
+            this.http.get('/api/player/admin/gamesSince/' + time)
+                .map(response => response.text())
+                .subscribe(text => {
+                        this.gamesCreated[index] = Number(text);
+                    },
+                    error => {
+                        //  TODO - general error handler
+                        console.log(JSON.stringify(error));
+                    }
+                );
+            this.http.get('/api/player/admin/gameCount')
+                .map(response => response.text())
+                .subscribe(text => {
+                        this.gameCount = Number(text);
+                    },
+                    error => {
+                        //  TODO - general error handler
+                        console.log(JSON.stringify(error));
+                    }
+                );
+            this.http.get('/api/player/admin/playerCount')
+                .map(response => response.text())
+                .subscribe(text => {
+                        this.playerCount = Number(text);
+                    },
+                    error => {
+                        //  TODO - general error handler
+                        console.log(JSON.stringify(error));
+                    }
+                );
+        });
+    }
 }
