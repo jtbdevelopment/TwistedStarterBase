@@ -20,7 +20,7 @@ export class MockAdminSwitchPlayerComponent {
 }
 
 
-describe('nav bar component', () => {
+describe('admin component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
