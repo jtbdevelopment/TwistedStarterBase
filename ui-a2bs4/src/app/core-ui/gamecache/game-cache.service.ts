@@ -124,6 +124,9 @@ export class GameCacheService {
 
     private updatesStopped(): void {
         this.gamesById.clear();
+        this.gamesByClassification.forEach((v) => {
+            v.next([]);
+        });
         this.isConnected = false;
     }
 

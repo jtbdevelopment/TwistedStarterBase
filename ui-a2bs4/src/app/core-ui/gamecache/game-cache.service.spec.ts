@@ -122,7 +122,7 @@ describe('Service: game cache service', () => {
 
         describe('state after categories are ready, but not connected initially', () => {
             let games: Game[][] = [];
-            beforeEach(async() => {
+            beforeEach(async () => {
                 classifier.classificationSubject.next(classifier.classifications);
                 classifier.classifications.forEach((c, i) => {
                     games.push(null);
@@ -183,6 +183,15 @@ describe('Service: game cache service', () => {
                 gameCache.getGamesForCategory(c).subscribe(x => games.set(c, x));
             });
             tick();
+        }));
+
+        it('clears games on stop', fakeAsync(() => {
+            messageBus.connectionStatus.next(false);
+            tick();
+            expect(gameCache.getGamesCount()).toBeCloseTo(0);
+            games.forEach((v, k) => {
+                expect(v).toEqual([]);
+            });
         }));
 
         it('new game adding to list', fakeAsync(() => {
