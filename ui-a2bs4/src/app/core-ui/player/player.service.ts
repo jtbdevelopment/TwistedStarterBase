@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Player} from './player.model';
-import {Observable, BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Http} from '@angular/http';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {Router} from '@angular/router';
@@ -17,7 +17,6 @@ export class PlayerService {
     private playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
     private loggedInSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
 
-    //  TODO - not currently possible to test message bus updates when logged in != current
     constructor(private http: Http,
                 private messageBus: MessageBusService,
                 private router: Router) {
@@ -50,6 +49,17 @@ export class PlayerService {
                     //  TODO - general error handler
                     console.log(JSON.stringify(error));
                 });
+    }
+
+    public simulateUser(id: string): void {
+        this.http.put('/api/player/admin/' + id, {})
+            .map(response => response.json())
+            .subscribe(json => {
+                this.playerSubject.next(new Player(json));
+            }, error => {
+                //  TODO - general error handler
+                console.log(JSON.stringify(error));
+            });
     }
 
     public logout(): void {

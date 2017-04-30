@@ -1,8 +1,8 @@
 import {PlayerService} from './player.service';
-import {ConnectionBackend, BaseRequestOptions, Http, RequestOptions, Response, ResponseOptions} from '@angular/http';
+import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {ReflectiveInjector} from '@angular/core';
-import {tick, fakeAsync} from '@angular/core/testing';
+import {fakeAsync, tick} from '@angular/core/testing';
 import {Player} from './player.model';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {Router} from '@angular/router';
@@ -149,6 +149,21 @@ describe('Service: player service', () => {
             expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(new Player()));
             expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
             expect(router.navigateByUrl).toHaveBeenCalledWith('/signin');
+        }));
+
+        it('switching to another user', fakeAsync(() => {
+            playerService.simulateUser('newid');
+            expect(lastConnection.request.url).toEqual('/api/player/admin/newid');
+            let simulatedPlayer = new Player({id: 'newid', displayName: 'sim', source: 'MANUAL'});
+            lastConnection.mockRespond(new Response(new ResponseOptions({
+                body: JSON.stringify(simulatedPlayer)
+            })));
+            tick();
+            expect(currentPlayer).toBeDefined();
+            expect(loggedInPlayer).toBeDefined();
+            //noinspection TypeScriptValidateTypes
+            expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(initiallyLoadedPlayer));
+            expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(simulatedPlayer));
         }));
     });
 });
