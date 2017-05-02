@@ -30,7 +30,6 @@ describe('admin stats component', () => {
         backend = connectBackEnd;
         backend.connections.subscribe((connection: any) => {
             connections.push(connection);
-            console.error(connection.request.url);
         });
     }));
 

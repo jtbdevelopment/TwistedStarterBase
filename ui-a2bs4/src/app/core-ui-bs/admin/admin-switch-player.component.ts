@@ -39,6 +39,10 @@ export class AdminSwitchPlayerComponent {
         this.playerService.simulateUser(this.loggedInPlayer.id);
     }
 
+    public changePage(): void {
+        this.refreshUsers();
+    }
+
     public refreshUsers(): void {
         let pageParams = '?pageSize=' + this.pageSize +
             '&page=' + (this.currentPage - 1) +
@@ -47,20 +51,21 @@ export class AdminSwitchPlayerComponent {
         this.http.get('/api/player/admin/playersLike/' + pageParams)
             .map(response => response.json())
             .subscribe(json => {
-                    this.totalPlayers = json.totalElements;
-                    // controller.numberOfPages = response.totalPages;
-                    let newPlayers = [];
-                    json.content.forEach(p => {
-                        newPlayers.push(new Player(p));
-                    });
-                    this.players = newPlayers;
-                    this.currentPage = json.number + 1;
+                    this.processUsers(json);
                 }
             );
     }
 
-    public changePage(): void {
-        this.refreshUsers();
+    private processUsers(json): void {
+//noinspection TypeScriptUnresolvedVariable
+        this.totalPlayers = json.totalElements;
+        // controller.numberOfPages = response.totalPages;
+        let newPlayers = [];
+        json.content.forEach(p => {
+            newPlayers.push(new Player(p));
+        });
+        this.players = newPlayers;
+        this.currentPage = json.number + 1;
     }
 
     private computeRevert(): void {
