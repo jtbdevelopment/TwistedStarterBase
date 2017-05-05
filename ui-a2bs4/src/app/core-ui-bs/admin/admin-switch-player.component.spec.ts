@@ -92,7 +92,7 @@ describe('admin switch player component', () => {
             expect(JSON.stringify(fixture.componentInstance.players)).toEqual(JSON.stringify(players));
 
             players.forEach(p => {
-                expect(fixture.nativeElement.querySelector("#" + p.id)).not.toBeNull();
+                expect(fixture.nativeElement.querySelector('#' + p.id)).not.toBeNull();
             });
         }));
 
@@ -122,10 +122,10 @@ describe('admin switch player component', () => {
             expect(JSON.stringify(fixture.componentInstance.players)).toEqual(JSON.stringify(newPlayers));
 
             players.forEach(p => {
-                expect(fixture.nativeElement.querySelector("#" + p.id)).toBeNull();
+                expect(fixture.nativeElement.querySelector('#' + p.id)).toBeNull();
             });
             newPlayers.forEach(p => {
-                expect(fixture.nativeElement.querySelector("#" + p.id)).not.toBeNull();
+                expect(fixture.nativeElement.querySelector('#' + p.id)).not.toBeNull();
             });
             tick();
         }));
@@ -153,10 +153,10 @@ describe('admin switch player component', () => {
             expect(JSON.stringify(fixture.componentInstance.players)).toEqual(JSON.stringify(newPlayers));
 
             players.forEach(p => {
-                expect(fixture.nativeElement.querySelector("#" + p.id)).toBeNull();
+                expect(fixture.nativeElement.querySelector('#' + p.id)).toBeNull();
             });
             newPlayers.forEach(p => {
-                expect(fixture.nativeElement.querySelector("#" + p.id)).not.toBeNull();
+                expect(fixture.nativeElement.querySelector('#' + p.id)).not.toBeNull();
             });
             tick();
         }));

@@ -56,7 +56,7 @@ export class AdminSwitchPlayerComponent {
             );
     }
 
-    private processUsers(json): void {
+    private processUsers(json: any): void {
 //noinspection TypeScriptUnresolvedVariable
         this.totalPlayers = json.totalElements;
         // controller.numberOfPages = response.totalPages;
