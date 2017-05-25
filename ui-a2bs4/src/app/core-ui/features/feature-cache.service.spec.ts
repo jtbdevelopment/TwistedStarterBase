@@ -14,6 +14,7 @@ import {MessageBusService} from '../messagebus/message-bus.service';
 import {FeatureCacheService} from './feature-cache.service';
 import {Feature} from './feature.model';
 import {FeatureOption} from './feature-option.model';
+import {FeatureGroup} from './feature-group.model';
 
 describe('Service: feature cache service', () => {
     let featureService: FeatureCacheService;
@@ -21,7 +22,7 @@ describe('Service: feature cache service', () => {
     let backend: MockBackend;
     let lastConnection: any;
 
-    let currentFeatures: Feature[];
+    let currentFeatures: FeatureGroup[];
 
     beforeEach(() => {
         currentFeatures = null;
@@ -141,26 +142,32 @@ describe('Service: feature cache service', () => {
         ];
 
         afterEach(() => {
-            let expectedFeatures = [
-                new Feature('Option1', 'Difficulty', 'Option 1', 'Some sort of option.'),
-                new Feature('Option2', 'Difficulty', 'Option 2', 'Some sort of option.'),
-                new Feature('Option3', 'MultiPlayer', 'Multiplayer Option', 'Some sort of multi-player option.')
+            let expectedGroups = [
+                new FeatureGroup('Difficulty'),
+                new FeatureGroup('MultiPlayer')
             ];
-            expectedFeatures[0].options = [
+            expectedGroups[0].features = [
+                new Feature('Option1', 'Option 1', 'Some sort of option.'),
+                new Feature('Option2', 'Option 2', 'Some sort of option.'),
+            ];
+            expectedGroups[1].features = [
+                new Feature('Option3', 'Multiplayer Option', 'Some sort of multi-player option.')
+            ];
+            expectedGroups[0].features[0].options = [
                 new FeatureOption('Choice1', 'Choice1', 'Tada!'),
                 new FeatureOption('Choice2', 'Two', 'Super info!'),
                 new FeatureOption('Choice3', 'Choice3', 'Don\'t pick me.'),
             ];
-            expectedFeatures[1].options = [
+            expectedGroups[0].features[1].options = [
                 new FeatureOption('Option2Yes', 'Yes', 'Turns on cool feature!'),
                 new FeatureOption('Option2No', 'No', 'Game will suck!'),
             ];
-            expectedFeatures[2].options = [
+            expectedGroups[1].features[0].options = [
                 new FeatureOption('Solo', 'Solo', 'Make more friends!'),
                 new FeatureOption('Collaborate', 'Friends', 'Play together'),
                 new FeatureOption('Compete', 'Enemies', 'Play head to head.'),
             ];
-            expect(JSON.stringify(currentFeatures)).toEqual(JSON.stringify(expectedFeatures));
+            expect(JSON.stringify(currentFeatures)).toEqual(JSON.stringify(expectedGroups));
         });
 
         it('it requests features on first request', fakeAsync(() => {

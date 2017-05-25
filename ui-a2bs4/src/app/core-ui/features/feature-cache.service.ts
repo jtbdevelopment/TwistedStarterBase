@@ -6,13 +6,14 @@ import 'rxjs/add/operator/map';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {Feature} from './feature.model';
 import {FeatureOption} from './feature-option.model';
+import {FeatureGroup} from './feature-group.model';
 import any = jasmine.any;
 
 @Injectable()
 export class FeatureCacheService {
-    public features: Observable<Feature[]>;
+    public features: Observable<FeatureGroup[]>;
 
-    private featuresSubject: BehaviorSubject<Feature[]> = new BehaviorSubject<Feature[]>([]);
+    private featuresSubject: BehaviorSubject<FeatureGroup[]> = new BehaviorSubject<FeatureGroup[]>([]);
 
     constructor(private http: Http, private messageBus: MessageBusService) {
         this.features = Observable.from(this.featuresSubject);
@@ -27,20 +28,33 @@ export class FeatureCacheService {
         this.http.get('/api/features')
             .map(response => response.json())
             .map(json => {
-                let features = [];
+                let groups = [];
+                let groupMap = new Map<string, number>();
                 json.forEach(feature => {
-                    let newFeature = new Feature(feature.feature.feature, feature.feature.groupType, feature.feature.label, feature.feature.description);
+                    let groupType = feature.feature.groupType;
+                    if (groupMap.has(groupType) === false) {
+                        let group = new FeatureGroup(groupType);
+                        groups.push(group);
+                        groupMap.set(groupType, groups.length - 1);
+                    }
+                });
+                return {groups: groups, groupMap: groupMap, features: json};
+            })
+            .map(groupsAndFeatures => {
+                groupsAndFeatures.features.forEach(feature => {
+                    let groupType = feature.feature.groupType;
+                    let newFeature = new Feature(feature.feature.feature, feature.feature.label, feature.feature.description);
                     feature.options.forEach(option => {
                         //noinspection TypeScriptUnresolvedVariable
                         let newOption = new FeatureOption(option.feature, option.label, option.description);
                         newFeature.options.push(newOption);
                     });
-                    features.push(newFeature);
+                    groupsAndFeatures.groups[groupsAndFeatures.groupMap.get(groupType)].features.push(newFeature);
                 });
-                return features;
+                return groupsAndFeatures.groups;
             })
-            .subscribe(features => {
-                this.featuresSubject.next(features);
+            .subscribe(featureGroups => {
+                this.featuresSubject.next(featureGroups);
             }, error => {
                 //  TODO - general error handler
                 console.log(JSON.stringify(error));
