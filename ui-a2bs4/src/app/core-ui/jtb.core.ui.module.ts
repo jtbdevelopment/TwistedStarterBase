@@ -5,6 +5,7 @@ import {JTBCoreUIGameCache} from './gamecache/jtb.core.ui.gamecache.module';
 import {JTBCoreUIPhases} from './phases/jtb.core.ui.phases.module';
 import {JTBCoreUIPlayer} from './player/jtb.core.ui.player.module';
 import {JTBCoreUIUtils} from './utils/jtb.core.ui.utils.module';
+import {JTBCoreUIFeatures} from './features/jtb.core.ui.features.module';
 
 //  Use of this module presumes:
 //  1.  You will implement GameFactory and provide as 'GameFactory'
@@ -14,6 +15,7 @@ import {JTBCoreUIUtils} from './utils/jtb.core.ui.utils.module';
         JTBCoreUIAtmosphere,
         JTBCoreUIMessageBus,
         JTBCoreUIGameCache,
+        JTBCoreUIFeatures,
         JTBCoreUIPhases,
         JTBCoreUIPlayer,
         JTBCoreUIUtils
@@ -22,6 +24,7 @@ import {JTBCoreUIUtils} from './utils/jtb.core.ui.utils.module';
         JTBCoreUIAtmosphere,
         JTBCoreUIMessageBus,
         JTBCoreUIGameCache,
+        JTBCoreUIFeatures,
         JTBCoreUIPhases,
         JTBCoreUIPlayer,
         JTBCoreUIUtils

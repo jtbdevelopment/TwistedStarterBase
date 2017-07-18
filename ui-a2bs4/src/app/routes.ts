@@ -4,6 +4,7 @@ import {SignInComponent} from './core-ui-bs/sign-in/sign-in.component';
 import {SignedInComponent} from './core-ui-bs/signed-in/signed-in.component';
 import {PlayerProfileComponent} from './profile/player-profile.component';
 import {AdminComponent} from './core-ui-bs/admin/admin.component';
+import {CreateGameComponent} from './create/create-game.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,10 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent
+    },
+    {
+        path: 'create',
+        component: CreateGameComponent
     }
 ];
 

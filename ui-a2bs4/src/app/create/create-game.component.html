@@ -1,0 +1,42 @@
+<div class="create-game">
+    <form #f="ngForm">
+        <ngb-tabset type="pills">
+            <ngb-tab *ngFor="let group of groups" title="{{group.groupType}}" id="{{group.groupType}}">
+                <ng-template ngbTabContent>
+                    <div class="form-group" *ngFor="let feature of group.features">
+                        <!--  TODO - justified -->
+                        <label ngbTooltip="{{feature.description}}">{{feature.label}}</label>
+                        <div [(ngModel)]="choices[feature.feature]" name="{{feature.feature}}" ngbRadioGroup>
+                            <label class="btn btn-primary" *ngFor="let option of feature.options"
+                                   ngbTooltip="{{option.description}}">
+                                <input type="radio" value="{{option.option}}">
+                                {{option.label}}
+                            </label>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+        <!--
+        <div class="form-group friend-select">
+            <label uib-tooltip="Select up to 0-4 friends to help.">
+                Add up to 4 friends who play {{main.appName}}
+            </label>
+            <ui-select multiple limit="4" ng-model="create.chosenFriends" theme="bootstrap" reset-search-input="true">
+                <ui-select-match placeholder="Select friends...">{{$item.displayName}}</ui-select-match>
+                <ui-select-choices
+                        repeat="friend in create.friends | propsFilter: {displayName: $select.search}">
+                    <div ng-bind-html="friend.displayName | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <button class="btn btn-primary create-game-button" ng-click="create.createGame()"
+                ng-disabled="create.disableCreate">
+            {{create.createGameButtonText}}
+        </button>
+        <button class="btn btn-info invite-friends-button" ng-click="create.inviteFriends()">
+            Invite friends to play {{main.appName}}
+        </button>
+        -->
+    </form>
+</div>
