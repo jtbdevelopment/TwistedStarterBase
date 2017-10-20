@@ -1,17 +1,19 @@
 <div class="create-game">
     <form #f="ngForm">
+        <!--  TODO - justify pills -->
         <ngb-tabset type="pills">
             <ngb-tab *ngFor="let group of groups" title="{{group.groupType}}" id="{{group.groupType}}">
                 <ng-template ngbTabContent>
                     <div class="form-group row" *ngFor="let feature of group.features">
                         <label class="col-md-2" ngbTooltip="{{feature.description}}">{{feature.label}}</label>
                         <div class="col-md-10">
-                            <div class="btn-group d-flex" [(ngModel)]="choices[feature.feature]"
+                            <div class="btn-group d-flex" ngbRadioGroup [(ngModel)]="choices[feature.feature]"
                                  name="{{feature.feature}}"
                                  ngbRadioGroup>
-                                <label class="btn btn-primary w-100" *ngFor="let option of feature.options"
+                                <label ngbButtonLabel class="btn btn-primary w-100"
+                                       *ngFor="let option of feature.options"
                                        ngbTooltip="{{option.description}}">
-                                    <input type="radio" value="{{option.option}}">
+                                    <input ngbButton type="radio" value="{{option.option}}">
                                     {{option.label}}
                                 </label>
                             </div>
