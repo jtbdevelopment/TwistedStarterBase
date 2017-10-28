@@ -6,6 +6,7 @@ import {JTBCoreUIPhases} from './phases/jtb.core.ui.phases.module';
 import {JTBCoreUIPlayer} from './player/jtb.core.ui.player.module';
 import {JTBCoreUIUtils} from './utils/jtb.core.ui.utils.module';
 import {JTBCoreUIFeatures} from './features/jtb.core.ui.features.module';
+import {JTBCoreUIFriends} from './friends/jtb.core.ui.friends.module';
 
 //  Use of this module presumes:
 //  1.  You will implement GameFactory and provide as 'GameFactory'
@@ -18,6 +19,7 @@ import {JTBCoreUIFeatures} from './features/jtb.core.ui.features.module';
         JTBCoreUIFeatures,
         JTBCoreUIPhases,
         JTBCoreUIPlayer,
+        JTBCoreUIFriends,
         JTBCoreUIUtils
     ],
     exports: [
@@ -27,6 +29,7 @@ import {JTBCoreUIFeatures} from './features/jtb.core.ui.features.module';
         JTBCoreUIFeatures,
         JTBCoreUIPhases,
         JTBCoreUIPlayer,
+        JTBCoreUIFriends,
         JTBCoreUIUtils
     ]
 })
