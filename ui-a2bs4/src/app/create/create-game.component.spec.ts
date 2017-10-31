@@ -7,13 +7,25 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {FeatureCacheService} from '../core-ui/features/feature-cache.service';
 import {Feature} from '../core-ui/features/feature.model';
 import {FeatureOption} from '../core-ui/features/feature-option.model';
+import {Friend} from '../core-ui/friends/friend.model';
+import {Invitable} from '../core-ui/friends/invitable.model';
+import {FriendsService} from '../core-ui/friends/friends.service';
 
 class MockFeatureService {
     public features: BehaviorSubject<FeatureGroup[]> = new BehaviorSubject<FeatureGroup[]>([]);
 }
 
+class MockFriendService {
+    public friends: BehaviorSubject<Friend[]> = new BehaviorSubject<Friend[]>([]);
+    public invitableFriends: BehaviorSubject<Invitable[]> = new BehaviorSubject<Invitable[]>([]);
+
+    refreshFriends = jasmine.createSpy('rf');
+}
+
 describe('Component:  create game component', () => {
-    var featureService: MockFeatureService;
+    let featureService: MockFeatureService;
+    let friendService: MockFriendService;
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
@@ -25,12 +37,14 @@ describe('Component:  create game component', () => {
             ],
             providers: [
                 {provide: FeatureCacheService, useClass: MockFeatureService},
+                {provide: FriendsService, useClass: MockFriendService},
                 NgbTabsetConfig,
                 NgbTooltipConfig
             ]
         });
         TestBed.compileComponents();
         featureService = TestBed.get(FeatureCacheService);
+        friendService = TestBed.get(FriendsService);
 
     }));
 
@@ -41,6 +55,8 @@ describe('Component:  create game component', () => {
         let empty = {};
         expect(fixture.componentInstance.choices).toEqual(empty);
         expect(fixture.componentInstance.groups).toEqual([]);
+        expect(fixture.componentInstance.friends).toEqual([]);
+        expect(fixture.componentInstance.invitable).toEqual([]);
     });
 
     it('subscribes to game features', fakeAsync(() => {
@@ -92,4 +108,15 @@ describe('Component:  create game component', () => {
         });
     }));
 
+    it('subscribes to friends', fakeAsync(() => {
+        const fixture = TestBed.createComponent(CreateGameComponent);
+        expect(friendService.refreshFriends).toHaveBeenCalledTimes(1);
+        let newFriend: Friend[] = [new Friend('md5', 'dn1'), new Friend('md', 'dn')];
+        let newInt: Invitable[] = [new Invitable('id1', '1')];
+        friendService.friends.next(newFriend);
+        friendService.invitableFriends.next(newInt);
+        tick();
+        expect(fixture.componentInstance.friends).toEqual(newFriend);
+        expect(fixture.componentInstance.invitable).toEqual(newInt);
+    }));
 });
