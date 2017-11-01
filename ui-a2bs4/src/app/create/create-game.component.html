@@ -36,13 +36,13 @@
                 </ui-select-choices>
             </ui-select>
         </div>
-        <button class="btn btn-primary create-game-button" ng-click="create.createGame()"
-                ng-disabled="create.disableCreate">
-            {{create.createGameButtonText}}
-        </button>
         <button class="btn btn-info invite-friends-button" ng-click="create.inviteFriends()">
             Invite friends to play {{main.appName}}
         </button>
         -->
+        <button class="btn btn-primary create-game-button" (click)="createGame()"
+                [disabled]="disableCreate">
+            {{createGameText}}
+        </button>
     </form>
 </div>

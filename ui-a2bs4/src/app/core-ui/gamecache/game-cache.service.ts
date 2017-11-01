@@ -46,6 +46,10 @@ export class GameCacheService {
         return Observable.from(this.gamesByClassification.get(category));
     }
 
+    public putGame(game: Game): void {
+        this.processGame(game);
+    }
+
     private processGame(game: Game): void {
         let idSubject: BehaviorSubject<Game>;
         let previouslyCachedGame: any;

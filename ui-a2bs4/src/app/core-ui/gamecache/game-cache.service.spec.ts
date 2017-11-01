@@ -194,105 +194,109 @@ describe('Service: game cache service', () => {
             });
         }));
 
-        it('new game adding to list', fakeAsync(() => {
-            let newGame = new MultiPlayerGame({id: '6', gamePhase: 'A', lastUpdate: 1});
-            messageBus.gameUpdates.next(newGame);
+        let methods = [(game: Game) => {
+            messageBus.gameUpdates.next(game);
             tick();
+        }, (game: Game) => {
+            gameCache.putGame(game);
+        }];
 
-            let subscribed: Game;
-            gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
-            tick();
+        methods.forEach(method => {
+            it('new game adding to list', fakeAsync(() => {
+                let newGame = new MultiPlayerGame({id: '6', gamePhase: 'A', lastUpdate: 1});
+                method(newGame);
 
-            expect(gameCache.getGamesCount()).toBeCloseTo(6);
-            expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
-            expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1], newGame]));
-        }));
+                let subscribed: Game;
+                gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
+                tick();
 
-        it('updating newer version of game in list, keeping classification', fakeAsync(() => {
-            let newGame = new MultiPlayerGame({id: '4', gamePhase: 'D', lastUpdate: 1});
-            messageBus.gameUpdates.next(newGame);
-            tick();
-            let subscribed: Game;
-            gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
-            tick();
+                expect(gameCache.getGamesCount()).toBeCloseTo(6);
+                expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
+                expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1], newGame]));
+            }));
 
-            expect(gameCache.getGamesCount()).toBeCloseTo(5);
-            expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
-            expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([newGame]));
-        }));
+            it('updating newer version of game in list, keeping classification', fakeAsync(() => {
+                let newGame = new MultiPlayerGame({id: '4', gamePhase: 'D', lastUpdate: 1});
+                method(newGame);
+                let subscribed: Game;
+                gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
+                tick();
 
-        it('ignores older version of game in list', fakeAsync(() => {
-            let newGame = new MultiPlayerGame({id: '4', gamePhase: 'D', lastUpdate: -1});
-            messageBus.gameUpdates.next(newGame);
-            tick();
-            let subscribed: Game;
-            gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
-            tick();
+                expect(gameCache.getGamesCount()).toBeCloseTo(5);
+                expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
+                expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([newGame]));
+            }));
 
-            expect(gameCache.getGamesCount()).toBeCloseTo(5);
-            expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(expectedGames[3]));
-            expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([expectedGames[3]]));
-        }));
+            it('ignores older version of game in list', fakeAsync(() => {
+                let newGame = new MultiPlayerGame({id: '4', gamePhase: 'D', lastUpdate: -1});
+                method(newGame);
+                let subscribed: Game;
+                gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
+                tick();
 
-        it('updating newer version of game in list, changing classification', fakeAsync(() => {
-            let newGame = new MultiPlayerGame({id: '4', gamePhase: 'A', lastUpdate: 1});
-            messageBus.gameUpdates.next(newGame);
-            tick();
-            let subscribed: Game;
-            gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
-            tick();
+                expect(gameCache.getGamesCount()).toBeCloseTo(5);
+                expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(expectedGames[3]));
+                expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([expectedGames[3]]));
+            }));
 
-            expect(gameCache.getGamesCount()).toBeCloseTo(5);
-            expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
-            expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([]));
-            expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1], newGame]));
-        }));
+            it('updating newer version of game in list, changing classification', fakeAsync(() => {
+                let newGame = new MultiPlayerGame({id: '4', gamePhase: 'A', lastUpdate: 1});
+                method(newGame);
+                let subscribed: Game;
+                gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
+                tick();
 
-        it('deals with non classifiable games on existing classified', fakeAsync(() => {
-            let newGame = new MultiPlayerGame({id: '4', gamePhase: 'AD', lastUpdate: 1});
-            messageBus.gameUpdates.next(newGame);
-            tick();
+                expect(gameCache.getGamesCount()).toBeCloseTo(5);
+                expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
+                expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([]));
+                expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1], newGame]));
+            }));
 
-            let subscribed: Game;
-            gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
-            tick();
+            it('deals with non classifiable games on existing classified', fakeAsync(() => {
+                let newGame = new MultiPlayerGame({id: '4', gamePhase: 'AD', lastUpdate: 1});
+                method(newGame);
 
-            expect(gameCache.getGamesCount()).toBeCloseTo(5);
-            expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
-            expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1]]));
-            expect(JSON.stringify(games.get('B'))).toEqual(JSON.stringify([expectedGames[0], expectedGames[2], expectedGames[4]]));
-            expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([]));
-            expect(games.get('AD')).toBeUndefined();
-        }));
+                let subscribed: Game;
+                gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
+                tick();
 
-        it('deals with non classifiable games on existing classified moving to classified', fakeAsync(() => {
-            let newGame = new MultiPlayerGame({id: '6', gamePhase: 'AD', lastUpdate: 1});
-            messageBus.gameUpdates.next(newGame);
-            tick();
+                expect(gameCache.getGamesCount()).toBeCloseTo(5);
+                expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
+                expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1]]));
+                expect(JSON.stringify(games.get('B'))).toEqual(JSON.stringify([expectedGames[0], expectedGames[2], expectedGames[4]]));
+                expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([]));
+                expect(games.get('AD')).toBeUndefined();
+            }));
 
-            let subscribed: Game;
-            gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
-            tick();
+            it('deals with non classifiable games on existing classified moving to classified', fakeAsync(() => {
+                let newGame = new MultiPlayerGame({id: '6', gamePhase: 'AD', lastUpdate: 1});
+                method(newGame);
 
-            expect(gameCache.getGamesCount()).toBeCloseTo(6);
-            expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
+                let subscribed: Game;
+                gameCache.getGame(newGame.id).subscribe(x => subscribed = x);
+                tick();
 
-            expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1]]));
-            expect(JSON.stringify(games.get('B'))).toEqual(JSON.stringify([expectedGames[0], expectedGames[2], expectedGames[4]]));
-            expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([expectedGames[3]]));
-            expect(games.get('AD')).toBeUndefined();
+                expect(gameCache.getGamesCount()).toBeCloseTo(6);
+                expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(newGame));
 
-            let updateToGame = new MultiPlayerGame({id: '6', gamePhase: 'D', lastUpdate: 2});
-            messageBus.gameUpdates.next(updateToGame);
-            tick();
+                expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1]]));
+                expect(JSON.stringify(games.get('B'))).toEqual(JSON.stringify([expectedGames[0], expectedGames[2], expectedGames[4]]));
+                expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([expectedGames[3]]));
+                expect(games.get('AD')).toBeUndefined();
 
-            expect(gameCache.getGamesCount()).toBeCloseTo(6);
-            expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(updateToGame));
+                let updateToGame = new MultiPlayerGame({id: '6', gamePhase: 'D', lastUpdate: 2});
+                messageBus.gameUpdates.next(updateToGame);
+                tick();
 
-            expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1]]));
-            expect(JSON.stringify(games.get('B'))).toEqual(JSON.stringify([expectedGames[0], expectedGames[2], expectedGames[4]]));
-            expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([expectedGames[3], updateToGame]));
-            expect(games.get('AD')).toBeUndefined();
-        }));
+                expect(gameCache.getGamesCount()).toBeCloseTo(6);
+                expect(JSON.stringify(subscribed)).toEqual(JSON.stringify(updateToGame));
+
+                expect(JSON.stringify(games.get('A'))).toEqual(JSON.stringify([expectedGames[1]]));
+                expect(JSON.stringify(games.get('B'))).toEqual(JSON.stringify([expectedGames[0], expectedGames[2], expectedGames[4]]));
+                expect(JSON.stringify(games.get('D'))).toEqual(JSON.stringify([expectedGames[3], updateToGame]));
+                expect(games.get('AD')).toBeUndefined();
+            }));
+
+        });
     });
 });
