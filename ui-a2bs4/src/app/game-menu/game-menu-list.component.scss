@@ -10,6 +10,7 @@
 
       .fa {
         margin-right: 5px;
+        margin-top: 4px;
       }
 
       .list-group-item {
@@ -21,6 +22,10 @@
         font-weight: bold;
         padding: 10px 10px;
         border: none;
+        color: gray;
+        .badge {
+          margin-top: 4px;
+        }
       }
 
       .games-collapse {
@@ -40,6 +45,7 @@
               word-wrap: break-word;
               white-space: normal;
               font-weight: bold;
+              border: 1px solid;
               .game-description {
                 font-weight: bold;
               }

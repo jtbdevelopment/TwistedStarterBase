@@ -8,6 +8,7 @@ import {GameCacheService} from '../../core-ui/gamecache/game-cache.service';
 import {Subject} from 'rxjs/Subject';
 import {DefaultActionErrorComponent} from './default-action-error.component';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class BootstrapActionsService {
@@ -17,6 +18,7 @@ export class BootstrapActionsService {
     private confirmModal: any;
 
     constructor(private http: Http,
+                private router: Router,
                 @Inject('GameFactory') private gameFactory: GameFactory,
                 private modalService: NgbModal,
                 private gameCache: GameCacheService) {
@@ -43,7 +45,6 @@ export class BootstrapActionsService {
                 observable.next(game);
             }, error => {
                 console.log(JSON.stringify(error));
-                //  TODO
                 let ngbModalRef = this.modalService.open(this.errorModal);
                 ngbModalRef.componentInstance.errorMessage = error.text();
                 observable.complete();
@@ -70,42 +71,40 @@ export class BootstrapActionsService {
     public newGame(options: any): void {
         //  TODO - ad
         this.wrapAction(this.http.post('/api/player/new', options)).subscribe((game: Game) => {
-            //  TODO
-            alert('New game ' + game.id);
+            this.router.navigateByUrl(game.standardLink());
         })
     }
 
     public accept(game: Game): void {
         //  TODO - ad
-        this.wrapAction(this.httpRequest(game, 'accept'));
+        this.wrapAction(this.gameAction(game, 'accept'));
     }
 
     public reject(game: Game): void {
-        this.wrapActionWithConfirm('Reject this game!', this.httpRequest(game, 'reject'));
+        this.wrapActionWithConfirm('Reject this game!', this.gameAction(game, 'reject'));
     }
 
     public quit(game: Game): void {
-        this.wrapActionWithConfirm('Quit this game!', this.httpRequest(game, 'reject'));
+        this.wrapActionWithConfirm('Quit this game!', this.gameAction(game, 'reject'));
     }
 
     public rematch(game: Game): void {
         //  TODO - ad
-        this.wrapAction(this.httpRequest(game, 'rematch')).subscribe((game: Game) => {
-            //  TODO
-            alert('Rematch game ' + game.id);
+        this.wrapAction(this.gameAction(game, 'rematch')).subscribe((game: Game) => {
+            this.router.navigateByUrl(game.standardLink());
         });
     }
 
     public declineRematch(game: Game): void {
         //  TODO - ad
-        this.wrapAction(this.httpRequest(game, 'rematch'));
+        this.wrapAction(this.gameAction(game, 'rematch'));
     }
 
-    private httpRequest(game: Game, action: string): Observable<Response> {
-        return this.http.put(this.gameURL(game) + action, "");
+    public gameAction(game: Game, action: string, body?: string): Observable<Response> {
+        return this.http.put(this.gameURL(game) + action, body);
     }
 
-    private gameURL(game: Game): string {
+    public gameURL(game: Game): string {
         return '/api/player/game/' + game.id + '/';
     }
 }

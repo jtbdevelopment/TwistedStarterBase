@@ -22,6 +22,6 @@ export class Game {
     }
 
     public standardLink(): string {
-        return '#/game/' + this.gamePhase.toLowerCase() + '/' + this.id;
+        return '/game/' + this.gamePhase.toLowerCase() + '/' + this.id;
     }
 }
