@@ -1,0 +1,53 @@
+<div class="player-list">
+    <!--  TODO TSB - describe game here?  -->
+    <!--  TODO TSB - show part of game here? -->
+    <!--  TODO TSB - show scores  here? -->
+    <div class="player-actions">
+        <button class="btn btn-accept-game"
+                (click)="actions.accept(game)"
+                *ngIf="showAccept">
+            Accept Challenge
+        </button>
+        <button class="btn btn-decline-game"
+                (click)="actions.reject(game)"
+                *ngIf="showReject">
+            Decline Challenge
+        </button>
+        <button class="btn btn-quit-game"
+                (click)="actions.quit(game)"
+                *ngIf="showQuit">
+            Quit Game
+        </button>
+        <button class="btn btn-rematch-game"
+                (click)="actions.rematch(game)"
+                *ngIf="showRematch">
+            Rematch!
+        </button>
+        <button class="btn btn-end-rematch-game"
+                (click)="actions.declineRematch(game)"
+                *ngIf="showRematch">
+            No More Rematches
+        </button>
+    </div>
+    <div *ngFor="let group of groups">
+        <div class="list-group list-group-players-group list-players-group-{{group}}"
+             *ngIf="groupPlayers[group].length > 0">
+            <button class="list-group-item btn-players-group-{{group}}"
+                    (click)="groupCollapsed[group] = ! groupCollapsed[group]">
+                <span class="fa fa-{{groupIcons[group]}}"></span>
+                {{group}}
+                <span class="badge">{{groupPlayers[group].length}}</span>
+            </button>
+        </div>
+        <div class="{{groupPlayers[group].length == 0 ? 'list-group-hidden' : ''}}"
+             [ngbCollapse]="groupCollapsed[group]">
+            <div class="list-group list-group-players list-group-players-{{group}}">
+                <li *ngFor="let player of groupPlayers[group]"
+                    class="list-group-item list-group-item-player list-group-item-player-{{group}}">
+                    <img class="player-image" src="{{player.playerImage}}">
+                    <span class="player-name">{{player.displayName}}</span>
+                </li>
+            </div>
+        </div>
+    </div>
+</div>

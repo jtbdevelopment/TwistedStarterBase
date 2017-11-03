@@ -5,6 +5,7 @@ import {SignedInComponent} from './core-ui-bs/signed-in/signed-in.component';
 import {PlayerProfileComponent} from './profile/player-profile.component';
 import {AdminComponent} from './core-ui-bs/admin/admin.component';
 import {CreateGameComponent} from './create/create-game.component';
+import {PlayersAndStatesComponent} from './game-display/players-and-states.component';
 
 export const routes: Routes = [
     {
@@ -35,7 +36,38 @@ export const routes: Routes = [
     {
         path: 'create',
         component: CreateGameComponent
+    },
+    //  TODO - TSB - customize?
+    {
+        path: 'game/challenged/:gameID',
+        component: PlayersAndStatesComponent
+    },
+    {
+        path: 'game/declined/:gameID',
+        component: PlayersAndStatesComponent
+    },
+    {
+        path: 'game/quit/:gameID',
+        component: PlayersAndStatesComponent
+    },
+    {
+        path: 'game/roundover/:gameID',
+        component: PlayersAndStatesComponent
+    },
+    {
+        path: 'game/nextroundstarted/:gameID',
+        component: PlayersAndStatesComponent
+    },
+    /*  TODO - TSB
+    {
+        path: 'game/playing/:gameID',
+        component: PlayersAndStatesComponent
+    },
+    {
+        path: 'game/setup/:gameID',
+        component: PlayersAndStatesComponent
     }
+    */
 ];
 
 export const routing = RouterModule.forRoot(routes, {useHash: true});

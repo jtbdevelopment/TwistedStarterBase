@@ -12,6 +12,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TSBGameClassifier} from './game/tsb-game-classifier.service';
 import {PlayerProfileModule} from './profile/player-profile.module';
 import {CreateGameModule} from './create/create-game.module';
+import {GameDisplayModule} from './game-display/game-display.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import {CreateGameModule} from './create/create-game.module';
         GameMenuModule,
         CreateGameModule,
         PlayerProfileModule,
+        GameDisplayModule,
         NgbModule.forRoot()
     ],
     declarations: [

@@ -14,6 +14,7 @@ export class Game {
     public players: any = {};  // md5 to name
     public playerImages: any = {}; // md5 to image
     public playerProfiles: any = {};  // md5 to profile
+    public playerStates: any = {};  // md5 to profile
 
     public features: string[] = [];
 
