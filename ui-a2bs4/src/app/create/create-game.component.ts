@@ -18,17 +18,19 @@ export class CreateGameComponent {
     public invitable: Invitable[] = [];
     public chosenFriends: Friend[] = [];
     //  TODO - TSB - customize when create is enabled
-    public disableCreate: boolean = false;
+    public disableCreate: boolean = true;
     public createGameText: String = 'Create Game!';
 
     constructor(private featureCache: FeatureCacheService, private friendService: FriendsService, private gameActions: BootstrapActionsService) {
         featureCache.features.subscribe(g => {
+            this.disableCreate = true;
             this.groups = g;
             this.groups.forEach(group => {
                 group.features.forEach(feature => {
                     this.choices[feature.feature] = feature.options[0].option;
                 });
             });
+            this.disableCreate = this.groups.length === 0;
         });
         friendService.invitableFriends.subscribe(i => {
             this.invitable = i;
@@ -51,7 +53,6 @@ export class CreateGameComponent {
             return player.md5;
         });
         let playersAndFeatures = {'players': players, 'features': featureSet};
-        console.log(JSON.stringify(playersAndFeatures));
         this.gameActions.newGame(playersAndFeatures);
     }
 }

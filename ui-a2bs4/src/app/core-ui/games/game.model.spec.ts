@@ -1,4 +1,5 @@
 import {Game} from './game.model';
+
 describe('Model: Game', () => {
     it('defaults to undefined', () => {
         let g: Game = new Game();
@@ -98,6 +99,6 @@ describe('Model: Game', () => {
 
     it('computes standard link', function () {
         let g: Game = new Game({id: 'myid', gamePhase: 'APhase'});
-        expect(g.standardLink()).toEqual('#/game/aphase/myid');
+        expect(g.standardLink()).toEqual('/game/aphase/myid');
     });
 });

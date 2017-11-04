@@ -58,7 +58,7 @@ export class PlayersAndStatesComponent implements OnInit {
                             playerProfile: this.game.playerProfiles[md5],
                             state: this.game.playerStates[md5]
                         };
-                        this.groupPlayers[player.state].push(player)
+                        this.groupPlayers[player.state].push(player);
                     }
 
                     this.showAccept = this.game.gamePhase === 'Challenged' && this.game.playerStates[this.player.md5] === 'Pending';

@@ -23,7 +23,7 @@ export class BootstrapActionsService {
                 private modalService: NgbModal,
                 private gameCache: GameCacheService) {
         this.errorModal = DefaultActionErrorComponent;
-        this.confirmModal = DefaultActionConfirmComponent
+        this.confirmModal = DefaultActionConfirmComponent;
     }
 
     public setCofirmComponent(modal: any) {
@@ -72,7 +72,7 @@ export class BootstrapActionsService {
         //  TODO - ad
         this.wrapAction(this.http.post('/api/player/new', options)).subscribe((game: Game) => {
             this.router.navigateByUrl(game.standardLink());
-        })
+        });
     }
 
     public accept(game: Game): void {
@@ -108,4 +108,3 @@ export class BootstrapActionsService {
         return '/api/player/game/' + game.id + '/';
     }
 }
-

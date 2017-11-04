@@ -10,6 +10,7 @@ import {FeatureOption} from '../core-ui/features/feature-option.model';
 import {Friend} from '../core-ui/friends/friend.model';
 import {Invitable} from '../core-ui/friends/invitable.model';
 import {FriendsService} from '../core-ui/friends/friends.service';
+import {BootstrapActionsService} from '../core-ui-bs/actions/bootstrap-actions.service';
 
 class MockFeatureService {
     public features: BehaviorSubject<FeatureGroup[]> = new BehaviorSubject<FeatureGroup[]>([]);
@@ -22,9 +23,41 @@ class MockFriendService {
     refreshFriends = jasmine.createSpy('rf');
 }
 
+class MockBoostrapActions {
+    newGame = jasmine.createSpy('newGame');
+}
+
+let groups: FeatureGroup[] = [
+    new FeatureGroup('Group1'),
+    new FeatureGroup('Group2')
+];
+groups[0].features = [
+    new Feature('feature1', 'feature 1', 'feature 1 desc'),
+    new Feature('feature2', 'feature 2', 'feature 2 desc'),
+];
+groups[1].features = [
+    new Feature('feature3', 'feature 3', 'feature 3 desc'),
+];
+groups[0].features[0].options = [
+    new FeatureOption('option1-1', 'option 1-1', 'option 1-1 desc'),
+    new FeatureOption('option1-2', 'option 1-2', 'option 1-2 desc'),
+    new FeatureOption('option1-3', 'option 1-3', 'option 1-3 desc'),
+];
+groups[0].features[1].options = [
+    new FeatureOption('option2-1', 'option 2-1', 'option 2-1 desc'),
+    new FeatureOption('option2-2', 'option 2-2', 'option 2-2 desc'),
+];
+groups[1].features[0].options = [
+    new FeatureOption('option3-1', 'option 3-1', 'option 3-1 desc'),
+    new FeatureOption('option3-2', 'option 3-2', 'option 3-2 desc'),
+    new FeatureOption('option3-3', 'option 3-3', 'option 3-3 desc'),
+    new FeatureOption('option4-3', 'option 4-3', 'option 4-3 desc'),
+];
+
 describe('Component:  create game component', () => {
     let featureService: MockFeatureService;
     let friendService: MockFriendService;
+    let actionService: MockBoostrapActions;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -38,6 +71,7 @@ describe('Component:  create game component', () => {
             providers: [
                 {provide: FeatureCacheService, useClass: MockFeatureService},
                 {provide: FriendsService, useClass: MockFriendService},
+                {provide: BootstrapActionsService, useClass: MockBoostrapActions},
                 NgbTabsetConfig,
                 NgbTooltipConfig
             ]
@@ -45,6 +79,7 @@ describe('Component:  create game component', () => {
         TestBed.compileComponents();
         featureService = TestBed.get(FeatureCacheService);
         friendService = TestBed.get(FriendsService);
+        actionService = TestBed.get(BootstrapActionsService) as MockBoostrapActions;
 
     }));
 
@@ -57,41 +92,18 @@ describe('Component:  create game component', () => {
         expect(fixture.componentInstance.groups).toEqual([]);
         expect(fixture.componentInstance.friends).toEqual([]);
         expect(fixture.componentInstance.invitable).toEqual([]);
+        expect(fixture.componentInstance.disableCreate).toEqual(true);
     });
 
     it('subscribes to game features', fakeAsync(() => {
         const fixture = TestBed.createComponent(CreateGameComponent);
 
-        let groups: FeatureGroup[] = [
-            new FeatureGroup('Group1'),
-            new FeatureGroup('Group2')
-        ];
-        groups[0].features = [
-            new Feature('feature1', 'feature 1', 'feature 1 desc'),
-            new Feature('feature2', 'feature 2', 'feature 2 desc'),
-        ];
-        groups[1].features = [
-            new Feature('feature3', 'feature 3', 'feature 3 desc'),
-        ];
-        groups[0].features[0].options = [
-            new FeatureOption('option1-1', 'option 1-1', 'option 1-1 desc'),
-            new FeatureOption('option1-2', 'option 1-2', 'option 1-2 desc'),
-            new FeatureOption('option1-3', 'option 1-3', 'option 1-3 desc'),
-        ];
-        groups[0].features[1].options = [
-            new FeatureOption('option2-1', 'option 2-1', 'option 2-1 desc'),
-            new FeatureOption('option2-2', 'option 2-2', 'option 2-2 desc'),
-        ];
-        groups[1].features[0].options = [
-            new FeatureOption('option3-1', 'option 3-1', 'option 3-1 desc'),
-            new FeatureOption('option3-2', 'option 3-2', 'option 3-2 desc'),
-            new FeatureOption('option3-3', 'option 3-3', 'option 3-3 desc'),
-            new FeatureOption('option4-3', 'option 4-3', 'option 4-3 desc'),
-        ];
+        expect(fixture.componentInstance.disableCreate).toEqual(true);
         featureService.features.next(groups);
         tick();
         fixture.detectChanges();
 
+        expect(fixture.componentInstance.disableCreate).toEqual(false);
         expect(fixture.componentInstance.groups).toEqual(groups);
         expect(JSON.stringify(fixture.componentInstance.choices)).toEqual(JSON.stringify(
             {
@@ -119,4 +131,34 @@ describe('Component:  create game component', () => {
         expect(fixture.componentInstance.friends).toEqual(newFriend);
         expect(fixture.componentInstance.invitable).toEqual(newInt);
     }));
+
+    describe('after initialized', () => {
+        let fixture;
+        beforeEach(fakeAsync(() => {
+            fixture = TestBed.createComponent(CreateGameComponent);
+            featureService.features.next(groups);
+            tick();
+            fixture.detectChanges();
+        }));
+
+        it('submits a solo game', fakeAsync(() => {
+            fixture.nativeElement.querySelector('#option2-2').click();
+            fixture.nativeElement.querySelector('#option1-3').click();
+            fixture.detectChanges();
+
+            expect(JSON.stringify(fixture.componentInstance.choices)).toEqual(JSON.stringify(
+                {
+                    feature1: 'option1-3',
+                    feature2: 'option2-2',
+                    feature3: 'option3-1',
+                }
+            ));
+
+            fixture.nativeElement.querySelector('.create-game-button').click();
+            expect(actionService.newGame).toHaveBeenCalledWith({
+                players: [],
+                features: ['option1-3', 'option2-2', 'option3-1']
+            });
+        }));
+    });
 });

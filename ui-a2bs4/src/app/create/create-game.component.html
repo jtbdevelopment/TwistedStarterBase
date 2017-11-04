@@ -14,7 +14,8 @@
                                 <label ngbButtonLabel class="btn btn-primary w-100"
                                        *ngFor="let option of feature.options"
                                        ngbTooltip="{{option.description}}">
-                                    <input ngbButton type="radio" value="{{option.option}}">
+                                    <input ngbButton type="radio" class="test" value="{{option.option}}"
+                                           id="{{option.option}}">
                                     {{option.label}}
                                 </label>
                             </div>
