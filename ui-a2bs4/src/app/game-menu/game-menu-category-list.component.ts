@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GameCacheService} from '../core-ui/gamecache/game-cache.service';
-import {Game} from '../core-ui/games/game.model';
+import {GameCacheService} from '../core-games-ui/gamecache/game-cache.service';
+import {Game} from '../core-games-ui/games/game.model';
+
 @Component({
     selector: 'game-menu-category-list',
     template: require('./game-menu-category-list.component.html')

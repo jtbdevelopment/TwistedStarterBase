@@ -1,7 +1,7 @@
 import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {PlayerService} from '../core-ui/player/player.service';
+import {PlayerService} from '../core-games-ui/player/player.service';
 import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 import {HelpDisplayService} from '../help/help-display.service';
 

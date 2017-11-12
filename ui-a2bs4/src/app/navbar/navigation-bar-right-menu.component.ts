@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PlayerService} from '../core-ui/player/player.service';
+import {PlayerService} from '../core-games-ui/player/player.service';
 import {HelpDisplayService} from '../help/help-display.service';
 import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
 

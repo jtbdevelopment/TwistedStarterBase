@@ -1,6 +1,6 @@
-import {Observable, BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {MessageBusService} from '../core-ui/messagebus/message-bus.service';
+import {MessageBusService} from '../core-games-ui/messagebus/message-bus.service';
 
 @Injectable()
 export class GameMenuService {

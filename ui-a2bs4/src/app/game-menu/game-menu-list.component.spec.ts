@@ -2,7 +2,7 @@ import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Component, Input} from '@angular/core';
 import {GameMenuListComponent} from './game-menu-list.component';
-import {GameClassifier} from '../core-ui/gamecache/game-classifier.serviceinterface';
+import {GameClassifier} from '../core-games-ui/gamecache/game-classifier.serviceinterface';
 import {HelpDisplayService} from '../help/help-display.service';
 import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 

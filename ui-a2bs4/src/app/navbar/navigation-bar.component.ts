@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {AppConfig} from '../app.config';
-import {PlayerService} from '../core-ui/player/player.service';
+import {PlayerService} from '../core-games-ui/player/player.service';
 
 @Component({
     selector: 'navigation-bar',

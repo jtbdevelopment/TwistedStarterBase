@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {FeatureCacheService} from '../core-ui/features/feature-cache.service';
-import {FeatureGroup} from '../core-ui/features/feature-group.model';
-import {FriendsService} from '../core-ui/friends/friends.service';
-import {Friend} from '../core-ui/friends/friend.model';
-import {Invitable} from '../core-ui/friends/invitable.model';
-import {BootstrapActionsService} from '../core-ui-bs/actions/bootstrap-actions.service';
+import {FeatureCacheService} from '../core-games-ui/features/feature-cache.service';
+import {FeatureGroup} from '../core-games-ui/features/feature-group.model';
+import {FriendsService} from '../core-games-ui/friends/friends.service';
+import {Friend} from '../core-games-ui/friends/friend.model';
+import {Invitable} from '../core-games-ui/friends/invitable.model';
+import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
 
 @Component({
     selector: 'create-game',

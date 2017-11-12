@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GameFactory} from '../core-ui/games/gamefactory.serviceinterface';
+import {GameFactory} from '../core-games-ui/games/gamefactory.serviceinterface';
 import {TSBGame} from './tsb-game.model';
 
 @Injectable()

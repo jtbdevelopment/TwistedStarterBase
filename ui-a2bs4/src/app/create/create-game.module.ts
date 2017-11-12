@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {JTBCoreUI} from '../core-ui/jtb.core.ui.module';
+import {JTBCoreGamesUI} from '../core-games-ui/jtb.core.games.ui.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
@@ -12,7 +12,7 @@ import {CreateGameComponent} from './create-game.component';
         RouterModule,
         FormsModule,
         NgbModule,
-        JTBCoreUI
+        JTBCoreGamesUI
     ],
     exports: [
         CreateGameComponent

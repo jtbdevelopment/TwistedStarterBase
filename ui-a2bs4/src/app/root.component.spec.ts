@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {RootComponent} from './root.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {AtmosphereService} from './core-ui/atmosphere/atmosphere.service';
+import {AtmosphereService} from './core-games-ui/atmosphere/atmosphere.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {GameMenuService} from './game-menu/game-menu.service';
 

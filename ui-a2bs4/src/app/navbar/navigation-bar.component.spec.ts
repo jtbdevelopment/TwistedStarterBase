@@ -2,8 +2,8 @@ import {async, TestBed} from '@angular/core/testing';
 import {AppConfig} from '../app.config';
 import {NavigationBarComponent} from './navigation-bar.component';
 import {Component, Input} from '@angular/core';
-import {PlayerService} from '../core-ui/player/player.service';
-import {Player} from '../core-ui/player/player.model';
+import {PlayerService} from '../core-games-ui/player/player.service';
+import {Player} from '../core-games-ui/player/player.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({

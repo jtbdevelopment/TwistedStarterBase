@@ -1,10 +1,10 @@
 import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {GameMenuCategoryListComponent} from './game-menu-category-list.component';
-import {GameCacheService} from '../core-ui/gamecache/game-cache.service';
+import {GameCacheService} from '../core-games-ui/gamecache/game-cache.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {MultiPlayerGame} from '../core-ui/games/multi-player-game.model';
-import {Game} from '../core-ui/games/game.model';
-import {SinglePlayerGame} from '../core-ui/games/single-player-game.model';
+import {MultiPlayerGame} from '../core-games-ui/games/multi-player-game.model';
+import {Game} from '../core-games-ui/games/game.model';
+import {SinglePlayerGame} from '../core-games-ui/games/single-player-game.model';
 import {Component, Input} from '@angular/core';
 import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 

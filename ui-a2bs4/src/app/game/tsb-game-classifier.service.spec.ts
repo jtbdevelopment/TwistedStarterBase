@@ -2,8 +2,8 @@ import {ReflectiveInjector} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {async, fakeAsync, tick} from '@angular/core/testing';
 import {TSBGameClassifier} from './tsb-game-classifier.service';
-import {Player} from '../core-ui/player/player.model';
-import {PlayerService} from '../core-ui/player/player.service';
+import {Player} from '../core-games-ui/player/player.model';
+import {PlayerService} from '../core-games-ui/player/player.service';
 import {TSBGame} from './tsb-game.model';
 
 class MockPlayerService {

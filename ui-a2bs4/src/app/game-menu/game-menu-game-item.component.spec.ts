@@ -1,8 +1,8 @@
-import {TestBed, async} from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {GameMenuGameItemComponent} from './game-menu-game-item.component';
-import {MapKeysPipe} from '../core-ui/utils/map-keys.pipe';
-import {Game} from '../core-ui/games/game.model';
+import {MapKeysPipe} from '../core-games-ui/utils/map-keys.pipe';
+import {Game} from '../core-games-ui/games/game.model';
 
 
 describe('Component:  game menu game item component', () => {

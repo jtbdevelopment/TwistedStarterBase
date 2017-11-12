@@ -1,9 +1,9 @@
-import {AbstractTurnClassifier} from '../core-ui/gamecache/abstract-turn-classifier.service';
+import {AbstractTurnClassifier} from '../core-games-ui/gamecache/abstract-turn-classifier.service';
 import {Injectable} from '@angular/core';
-import {GameClassifier} from '../core-ui/gamecache/game-classifier.serviceinterface';
-import {PlayerService} from '../core-ui/player/player.service';
-import {MultiPlayerGame} from '../core-ui/games/multi-player-game.model';
-import {StandardPhases} from '../core-ui/phases/standard-phases.model';
+import {GameClassifier} from '../core-games-ui/gamecache/game-classifier.serviceinterface';
+import {PlayerService} from '../core-games-ui/player/player.service';
+import {MultiPlayerGame} from '../core-games-ui/games/multi-player-game.model';
+import {StandardPhases} from '../core-games-ui/phases/standard-phases.model';
 
 @Injectable()
 export class TSBGameClassifier extends AbstractTurnClassifier implements GameClassifier<MultiPlayerGame> {

@@ -2,15 +2,15 @@ import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {NgbModule, NgbTabsetConfig, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {CreateGameComponent} from './create-game.component';
 import {FormsModule} from '@angular/forms';
-import {FeatureGroup} from '../core-ui/features/feature-group.model';
+import {FeatureGroup} from '../core-games-ui/features/feature-group.model';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {FeatureCacheService} from '../core-ui/features/feature-cache.service';
-import {Feature} from '../core-ui/features/feature.model';
-import {FeatureOption} from '../core-ui/features/feature-option.model';
-import {Friend} from '../core-ui/friends/friend.model';
-import {Invitable} from '../core-ui/friends/invitable.model';
-import {FriendsService} from '../core-ui/friends/friends.service';
-import {BootstrapActionsService} from '../core-ui-bs/actions/bootstrap-actions.service';
+import {FeatureCacheService} from '../core-games-ui/features/feature-cache.service';
+import {Feature} from '../core-games-ui/features/feature.model';
+import {FeatureOption} from '../core-games-ui/features/feature-option.model';
+import {Friend} from '../core-games-ui/friends/friend.model';
+import {Invitable} from '../core-games-ui/friends/invitable.model';
+import {FriendsService} from '../core-games-ui/friends/friends.service';
+import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
 
 class MockFeatureService {
     public features: BehaviorSubject<FeatureGroup[]> = new BehaviorSubject<FeatureGroup[]>([]);

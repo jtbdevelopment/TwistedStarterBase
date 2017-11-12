@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AtmosphereService} from './core-ui/atmosphere/atmosphere.service';
+import {AtmosphereService} from './core-games-ui/atmosphere/atmosphere.service';
 import {GameMenuService} from './game-menu/game-menu.service';
 
 @Component({

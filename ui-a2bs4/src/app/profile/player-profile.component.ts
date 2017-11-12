@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {PlayerService} from '../core-ui/player/player.service';
-import {Player} from '../core-ui/player/player.model';
+import {PlayerService} from '../core-games-ui/player/player.service';
+import {Player} from '../core-games-ui/player/player.model';
 
 @Component({
     selector: 'player-profile',

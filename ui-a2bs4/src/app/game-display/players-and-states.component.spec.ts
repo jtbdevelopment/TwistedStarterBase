@@ -2,16 +2,16 @@ import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {BootstrapActionsService} from '../core-ui-bs/actions/bootstrap-actions.service';
+import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
 import {ActivatedRoute, ParamMap, RouterModule} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {TSBGame} from '../game/tsb-game.model';
-import {Game} from '../core-ui/games/game.model';
-import {GameCacheService} from '../core-ui/gamecache/game-cache.service';
-import {Player} from '../core-ui/player/player.model';
-import {PlayerService} from '../core-ui/player/player.service';
+import {Game} from '../core-games-ui/games/game.model';
+import {GameCacheService} from '../core-games-ui/gamecache/game-cache.service';
+import {Player} from '../core-games-ui/player/player.model';
+import {PlayerService} from '../core-games-ui/player/player.service';
 import {PlayersAndStatesComponent} from './players-and-states.component';
-import {StandardPhases} from '../core-ui/phases/standard-phases.model';
+import {StandardPhases} from '../core-games-ui/phases/standard-phases.model';
 
 class MockBoostrapActions {
     accept = jasmine.createSpy('accept');

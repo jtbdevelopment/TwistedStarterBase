@@ -1,5 +1,5 @@
 //  TODO - TSB - rename and add specific details
-import {MultiPlayerGame} from '../core-ui/games/multi-player-game.model';
+import {MultiPlayerGame} from '../core-games-ui/games/multi-player-game.model';
 
 export class TSBGame extends MultiPlayerGame {
     constructor(original?: any) {

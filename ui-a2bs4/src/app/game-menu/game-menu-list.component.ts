@@ -1,7 +1,8 @@
 import {Component, Inject} from '@angular/core';
-import {GameClassifier} from '../core-ui/gamecache/game-classifier.serviceinterface';
+import {GameClassifier} from '../core-games-ui/gamecache/game-classifier.serviceinterface';
 import {HelpDisplayService} from '../help/help-display.service';
 import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
+
 @Component({
     selector: 'game-menu-list',
     template: require('./game-menu-list.component.html'),

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {JTBCoreUI} from '../core-ui/jtb.core.ui.module';
+import {JTBCoreGamesUI} from '../core-games-ui/jtb.core.games.ui.module';
 import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-toggle.component';
 import {NavigationBarNewGameComponent} from './navigation-bar-new-game.component';
 import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.component';
@@ -13,7 +13,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     imports: [
         BrowserModule,
-        JTBCoreUI,
+        JTBCoreGamesUI,
         GameMenuModule,
         RouterModule,
         HelpModule,

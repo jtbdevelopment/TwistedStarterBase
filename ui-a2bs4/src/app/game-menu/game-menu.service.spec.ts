@@ -1,6 +1,6 @@
 import {async, fakeAsync} from '@angular/core/testing';
 import {GameMenuService} from './game-menu.service';
-import {MessageBusService} from '../core-ui/messagebus/message-bus.service';
+import {MessageBusService} from '../core-games-ui/messagebus/message-bus.service';
 
 describe('Service: game menu service', () => {
     let gameMenuService: GameMenuService;
