@@ -5,6 +5,8 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Player} from '../core-ui/player/player.model';
 import {PlayerService} from '../core-ui/player/player.service';
 import {Game} from '../core-ui/games/game.model';
+import {StandardPhases} from '../core-ui/phases/standard-phases.model';
+import {StandardPlayerStates} from '../core-ui/games/player-states.model';
 
 @Component({
     selector: 'players-and-states',
@@ -12,7 +14,7 @@ import {Game} from '../core-ui/games/game.model';
     styles: [require('./players-and-states.component.scss').toString()]
 })
 export class PlayersAndStatesComponent implements OnInit {
-    public groups: string[] = ['Pending', 'Accepted', 'Rejected', 'Quit'];
+    public groups: string[] = [StandardPlayerStates.Pending, StandardPlayerStates.Accepted, StandardPlayerStates.Rejected, StandardPlayerStates.Quit];
     public groupIcons: Object = {
         Pending: 'question',
         Accepted: 'thumbs-up',
@@ -41,6 +43,7 @@ export class PlayersAndStatesComponent implements OnInit {
         });
     }
 
+
     ngOnInit() {
         this.route.paramMap
             .subscribe((params: ParamMap) => {
@@ -51,8 +54,6 @@ export class PlayersAndStatesComponent implements OnInit {
                     });
                     for (let md5 in this.game.players) {
                         let player = {
-                            current: this.player.md5 === md5,
-                            id: md5,
                             displayName: this.game.players[md5],
                             playerImage: this.game.playerImages[md5],
                             playerProfile: this.game.playerProfiles[md5],
@@ -61,10 +62,10 @@ export class PlayersAndStatesComponent implements OnInit {
                         this.groupPlayers[player.state].push(player);
                     }
 
-                    this.showAccept = this.game.gamePhase === 'Challenged' && this.game.playerStates[this.player.md5] === 'Pending';
-                    this.showReject = this.game.gamePhase === 'Challenged';
-                    this.showQuit = this.game.gamePhase === 'Setup' || this.game.gamePhase === 'Playing';
-                    this.showRematch = this.game.gamePhase === 'RoundOver';
+                    this.showAccept = this.game.gamePhase === StandardPhases.Challenged && this.game.playerStates[this.player.md5] === StandardPlayerStates.Pending;
+                    this.showReject = this.game.gamePhase === StandardPhases.Challenged;
+                    this.showQuit = this.game.gamePhase === StandardPhases.Setup || this.game.gamePhase === StandardPhases.Playing;
+                    this.showRematch = this.game.gamePhase === StandardPhases.RoundOver;
                 });
             });
     }

@@ -17,6 +17,7 @@ module.exports = function (config) {
             'jasmine'
         ],
         files: [
+            {pattern: 'src/**/*.png', watched: false, included: false, served: true},
             'node_modules/es6-shim/es6-shim.js',
             conf.path.src('index.spec.ts')
         ],
@@ -52,5 +53,6 @@ module.exports = function (config) {
         ]
     };
 
+    console.log(configuration.files);
     config.set(configuration);
 };

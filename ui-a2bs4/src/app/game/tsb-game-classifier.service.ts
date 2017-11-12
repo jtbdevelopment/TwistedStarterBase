@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {GameClassifier} from '../core-ui/gamecache/game-classifier.serviceinterface';
 import {PlayerService} from '../core-ui/player/player.service';
 import {MultiPlayerGame} from '../core-ui/games/multi-player-game.model';
+import {StandardPhases} from '../core-ui/phases/standard-phases.model';
 
 @Injectable()
 export class TSBGameClassifier extends AbstractTurnClassifier implements GameClassifier<MultiPlayerGame> {
@@ -19,15 +20,15 @@ export class TSBGameClassifier extends AbstractTurnClassifier implements GameCla
     public classifyGame(game: MultiPlayerGame): string {
         //  TODO - TSB - if this game has a setup phase
         //  TODO - TSB - other nuances in phases
-        let action = game.gamePhase === 'Playing' || game.gamePhase === 'RoundOver';
-        if (game.gamePhase === 'Challenged' && game.playerStates[this.md5]) {
+        let action = game.gamePhase === StandardPhases.Playing || game.gamePhase === StandardPhases.RoundOver;
+        if (game.gamePhase === StandardPhases.Challenged && game.playerStates[this.md5]) {
             action = game.playerStates[this.md5] === 'Pending';
         }
         if (action) {
             return AbstractTurnClassifier.YOUR_TURN;
         }
 
-        if (game.gamePhase === 'Declined' || game.gamePhase === 'Quit' || game.gamePhase === 'NextRoundStarted') {
+        if (game.gamePhase === StandardPhases.Declined || game.gamePhase === StandardPhases.Quit || game.gamePhase === StandardPhases.NextRoundStarted) {
             return AbstractTurnClassifier.OLDER_GAMES;
         }
 
