@@ -8,6 +8,8 @@ import {JTBCoreGamesUIUtils} from './utils/jtb.core.games.ui.utils.module';
 import {JTBCoreGamesUIFeatures} from './features/jtb.core.games.ui.features.module';
 import {JTBCoreGamesUIFriends} from './friends/jtb.core.games.ui.friends.module';
 
+export {AppConfig} from './appconfig.interface';
+
 //  Use of this module presumes:
 //  1.  You will implement GameFactory and provide as 'GameFactory'
 //  2.  You will create (or re-use PhaseGameClassifier) an GameClassifier and provide as 'GameClassifier'

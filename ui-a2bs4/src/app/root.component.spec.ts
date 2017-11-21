@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {async, inject, TestBed} from '@angular/core/testing';
 import {RootComponent} from './root.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {AtmosphereService} from './core-games-ui/atmosphere/atmosphere.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {GameMenuService} from './game-menu/game-menu.service';
 
@@ -18,10 +17,6 @@ class MockGameMenuComponent {
 class MockRouterOutlet {
 }
 
-class MockAtmosphere {
-    public endPoint: string;
-}
-
 class MockGameMenuService {
     public showGames: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 }
@@ -32,7 +27,6 @@ describe('Root Component', () => {
         TestBed.configureTestingModule({
             imports: [RouterTestingModule],
             providers: [
-                {provide: AtmosphereService, useClass: MockAtmosphere},
                 {provide: GameMenuService, useClass: MockGameMenuService}
             ],
             declarations: [
@@ -45,7 +39,7 @@ describe('Root Component', () => {
         TestBed.compileComponents();
     }));
 
-    it('should render the shell when no show games', inject([AtmosphereService], (atmosphere) => {
+    it('should render the shell when no show games', () => {
         const fixture = TestBed.createComponent(RootComponent);
         fixture.detectChanges();
         const main = fixture.nativeElement;
@@ -54,8 +48,7 @@ describe('Root Component', () => {
         expect(main.querySelector('.ro')).not.toBeNull();
         expect(main.querySelector('.col-12')).not.toBeNull();
         expect(main.querySelector('.col-10')).toBeNull();
-        expect(atmosphere.endPoint).toEqual('');
-    }));
+    });
 
     it('should render the shell when show games', inject([GameMenuService], (gameMenuService) => {
         const fixture = TestBed.createComponent(RootComponent);

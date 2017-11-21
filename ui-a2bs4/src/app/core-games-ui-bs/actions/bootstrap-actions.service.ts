@@ -26,10 +26,18 @@ export class BootstrapActionsService {
         this.confirmModal = DefaultActionConfirmComponent;
     }
 
+    /**
+     * Modal must take error message public confirmMessage string in inner model
+     * @param modal
+     */
     public setCofirmComponent(modal: any) {
         this.confirmModal = modal;
     }
 
+    /**
+     * Modal must take error message public errorMessage string in inner model
+     * @param modal
+     */
     public setErrorComponent(modal: any) {
         this.errorModal = modal;
     }

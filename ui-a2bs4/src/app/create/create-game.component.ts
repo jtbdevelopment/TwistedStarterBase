@@ -49,7 +49,7 @@ export class CreateGameComponent {
         for (let choice in this.choices) {
             featureSet.push(this.choices[choice]);
         }
-        let players = this.chosenFriends.map(function (player) {
+        let players = this.chosenFriends.map(function (player: Friend) {
             return player.md5;
         });
         let playersAndFeatures = {'players': players, 'features': featureSet};

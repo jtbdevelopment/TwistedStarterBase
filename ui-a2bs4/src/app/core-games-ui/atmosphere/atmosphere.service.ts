@@ -5,7 +5,6 @@ import * as atmosphere from 'atmosphere.js';
 import {AtmosphereMessageProcessorService} from './atmosphere-message-processor.service';
 import {AtmosphereRequest} from './atmosphere-request.model';
 
-//  TODO - need to force creation of this service
 @Injectable()
 export class AtmosphereService {
     endPoint: string = '';

@@ -28,5 +28,7 @@ import {RouterModule} from '@angular/router';
     ]
 })
 export class GameMenuModule {
+    constructor(private gameMenuService: GameMenuService) {
+    }
 }
 

@@ -12,4 +12,7 @@ import {AtmosphereMessageProcessorService} from './atmosphere-message-processor.
     ]
 })
 export class JTBCoreGamesUIAtmosphere {
+    // noinspection JSUnusedLocalSymbols
+    constructor(private atmosphereService: AtmosphereService) {
+    }
 }

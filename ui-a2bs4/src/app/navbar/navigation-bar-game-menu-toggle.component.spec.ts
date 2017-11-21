@@ -4,7 +4,7 @@ import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-t
 import {GameMenuService} from '../game-menu/game-menu.service';
 import {HelpDisplayService} from '../help/help-display.service';
 import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
-import {AppConfig} from '../app.config';
+import {AppConfig} from '../core-games-ui/appconfig.interface';
 
 
 export class MockGameMenuService {
@@ -27,6 +27,8 @@ export class MockGameMenuService {
 export class MockAppConfig implements AppConfig {
     appName: string = 'Twisted Starter Base';
     hoverMenu: boolean = true;
+    version: string = '';
+    releaseNotes: string = '';
 }
 
 describe('Component:  nav bar game menu toggle component', () => {

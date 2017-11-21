@@ -1,5 +1,13 @@
 import {PlayerService} from './player.service';
-import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions} from '@angular/http';
+import {
+    BaseRequestOptions,
+    ConnectionBackend,
+    Http,
+    RequestMethod,
+    RequestOptions,
+    Response,
+    ResponseOptions
+} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {ReflectiveInjector} from '@angular/core';
 import {fakeAsync, tick} from '@angular/core/testing';
@@ -132,6 +140,7 @@ describe('Service: player service', () => {
         it('successful logout posts and redirects', fakeAsync(() => {
             playerService.logout();
             expect(lastConnection.request.url).toEqual('/signout');
+            expect(lastConnection.request.method).toEqual(RequestMethod.Post);
             lastConnection.mockRespond(new Response(new ResponseOptions({})));
             tick();
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(new Player()));
@@ -143,6 +152,7 @@ describe('Service: player service', () => {
         it('even failed logout posts and redirects', fakeAsync(() => {
             playerService.logout();
             expect(lastConnection.request.url).toEqual('/signout');
+            expect(lastConnection.request.method).toEqual(RequestMethod.Post);
             lastConnection.mockError(new ResponseOptions({status: 500}));
             tick();
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(new Player()));
@@ -154,6 +164,7 @@ describe('Service: player service', () => {
         it('switching to another user', fakeAsync(() => {
             playerService.simulateUser('newid');
             expect(lastConnection.request.url).toEqual('/api/player/admin/newid');
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
             let simulatedPlayer = new Player({id: 'newid', displayName: 'sim', source: 'MANUAL'});
             lastConnection.mockRespond(new Response(new ResponseOptions({
                 body: JSON.stringify(simulatedPlayer)

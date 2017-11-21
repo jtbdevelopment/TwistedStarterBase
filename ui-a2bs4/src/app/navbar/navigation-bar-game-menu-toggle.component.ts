@@ -2,7 +2,7 @@ import {Component, Inject, Input} from '@angular/core';
 import {GameMenuService} from '../game-menu/game-menu.service';
 import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
 import {HelpDisplayService} from '../help/help-display.service';
-import {AppConfig} from '../app.config';
+import {AppConfig} from '../core-games-ui/appconfig.interface';
 
 @Component({
     selector: 'navigation-bar-game-menu-toggle',

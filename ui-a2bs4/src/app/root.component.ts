@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {AtmosphereService} from './core-games-ui/atmosphere/atmosphere.service';
 import {GameMenuService} from './game-menu/game-menu.service';
 
 @Component({
@@ -9,8 +8,7 @@ import {GameMenuService} from './game-menu/game-menu.service';
 export class RootComponent {
     public showGames: boolean = false;
 
-    constructor(atmosphere: AtmosphereService, menuService: GameMenuService) {
-        atmosphere.endPoint = '';
+    constructor(menuService: GameMenuService) {
         menuService.showGames.subscribe(x => this.showGames = x);
     }
 }

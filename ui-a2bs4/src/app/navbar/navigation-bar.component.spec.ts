@@ -1,10 +1,10 @@
 import {async, TestBed} from '@angular/core/testing';
-import {AppConfig} from '../app.config';
 import {NavigationBarComponent} from './navigation-bar.component';
 import {Component, Input} from '@angular/core';
 import {PlayerService} from '../core-games-ui/player/player.service';
 import {Player} from '../core-games-ui/player/player.model';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {AppConfig} from '../core-games-ui/appconfig.interface';
 
 @Component({
     selector: 'navigation-bar-game-menu-toggle',
@@ -35,6 +35,8 @@ export class MockRightBarMenuComponent {
 export class MockAppConfig implements AppConfig {
     appName: string = 'Test';
     hoverMenu: boolean;
+    version: string = '';
+    releaseNotes: string = '';
 }
 
 export class MockPlayerService {
