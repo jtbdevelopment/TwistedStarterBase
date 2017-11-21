@@ -23,7 +23,7 @@ export class VersionService {
      * @param modalComponent
      */
     public setVersionNotesComponent(modalComponent: any) {
-        this.modalComponent = this.modalComponent;
+        this.modalComponent = modalComponent;
     }
 
     private displayVersionNotes(lastVersionForPlayer: string): void {

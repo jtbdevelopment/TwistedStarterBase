@@ -8,7 +8,7 @@ import {
     ResponseOptions
 } from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
-import {ReflectiveInjector} from '@angular/core';
+import {Component, ReflectiveInjector} from '@angular/core';
 import {fakeAsync, tick} from '@angular/core/testing';
 import {AppConfig} from '../../core-games-ui/appconfig.interface';
 import {Subject} from 'rxjs/Subject';
@@ -23,6 +23,15 @@ class MockConfig implements AppConfig {
     hoverMenu: boolean = false;
     appName: string = '';
     version: string = '1.3.1';
+}
+
+@Component({
+    selector: 'ngbd-modal-content',
+    template: require('./default-version-notes.component.html')
+})
+export class MockReplacementComponent {
+    constructor() {
+    }
 }
 
 class MockPlayerService {
@@ -109,4 +118,18 @@ describe('Service: version service', () => {
             playerService.loggedInPlayer.next(p);
         }));
     });
+
+    it('does display when version is minor patch', fakeAsync(() => {
+        versionService.setVersionNotesComponent(MockReplacementComponent);
+        let p = new Player();
+        p.lastVersionNotes = '1.3.0';
+        expect(modalService.open).not.toHaveBeenCalled();
+        playerService.loggedInPlayer.next(p);
+        tick();
+        expect(modalService.open).toHaveBeenCalledWith(MockReplacementComponent);
+        expect(lastConnection.request.url).toEqual('/api/player/lastVersionNotes/1.3.1');
+        expect(lastConnection.request.method).toEqual(RequestMethod.Post);
+        expect(lastConnection.request._body).toEqual('');
+        lastConnection.mockRespond(new Response(new ResponseOptions()));
+    }));
 });
