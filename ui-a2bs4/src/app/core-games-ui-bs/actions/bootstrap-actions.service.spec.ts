@@ -1,4 +1,4 @@
-import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions} from '@angular/http';
+import {BaseRequestOptions, ConnectionBackend, Http, RequestMethod, RequestOptions} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {Component, ReflectiveInjector} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 
 @Component({
     selector: 'ngbd-modal-content',
-    template: require('./default-version-notes.component.html')
+    template: require('./default-action-confirm.component.html')
 })
 export class MockReplacementComponent {
     constructor() {
@@ -66,4 +66,26 @@ describe('Service: bootstrap actions service', () => {
         backend.connections.subscribe((connection: any) => lastConnection = connection);
     });
 
+    it('game url', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({id: 'myId'});
+        expect(actionService.gameURL(game)).toEqual('/api/player/game/myId');
+    });
+
+    it('game action with no body', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'noBody'});
+        let put = actionService.gameAction(game, 'test');
+        expect(lastConnection.request.url).toEqual('/api/player/game/noBody');
+        expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+        expect(lastConnection.request._body).toEqual('');
+    });
+    
+    describe('simple actions with success', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
+        let action: string;
+
+        it('accepts game', () => {
+            action = 'accept';
+            actionService.accept(game);
+        });
+    });
 });

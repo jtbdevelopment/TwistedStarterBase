@@ -5,6 +5,8 @@ module.exports = function (config) {
         basePath: '../',
         singleRun: true,
         autoWatch: false,
+        browserDisconnectTolerance: 2,
+        browserNoActivityTimeout: 50000,
         logLevel: 'INFO',
         junitReporter: {
             outputDir: 'test-reports'

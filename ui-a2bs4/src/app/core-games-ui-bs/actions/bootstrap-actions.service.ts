@@ -105,7 +105,7 @@ export class BootstrapActionsService {
 
     public declineRematch(game: Game): void {
         //  TODO - ad
-        this.wrapAction(this.gameAction(game, 'rematch'));
+        this.wrapActionWithConfirm('End this series?', this.gameAction(game, 'rematch'));
     }
 
     public gameAction(game: Game, action: string, body?: string): Observable<Response> {
