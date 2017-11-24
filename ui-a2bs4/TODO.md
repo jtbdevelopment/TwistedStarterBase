@@ -1,6 +1,8 @@
 Facebook login
 Facebook invite friends (core + BS)
 
+Friend multi-select 
+
 CSRF Token Service?  Necessary anymore?
 
 General Error Interceptor?            
