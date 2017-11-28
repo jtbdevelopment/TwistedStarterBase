@@ -93,7 +93,7 @@ export class BootstrapActionsService {
     }
 
     public quit(game: Game): void {
-        this.wrapActionWithConfirm('Quit this game!', this.gameAction(game, 'reject'));
+        this.wrapActionWithConfirm('Quit this game!', this.gameAction(game, 'quit'));
     }
 
     public rematch(game: Game): void {
@@ -105,7 +105,7 @@ export class BootstrapActionsService {
 
     public declineRematch(game: Game): void {
         //  TODO - ad
-        this.wrapActionWithConfirm('End this series?', this.gameAction(game, 'rematch'));
+        this.wrapActionWithConfirm('End this series?', this.gameAction(game, 'endRematch'));
     }
 
     public gameAction(game: Game, action: string, body?: string): Observable<Response> {

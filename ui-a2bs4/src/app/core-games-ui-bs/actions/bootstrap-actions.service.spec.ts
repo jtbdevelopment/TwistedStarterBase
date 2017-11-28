@@ -17,6 +17,7 @@ import {GameCacheService} from '../../core-games-ui/gamecache/game-cache.service
 import {Router} from '@angular/router';
 import {fakeAsync, tick} from '@angular/core/testing';
 import {DefaultActionErrorComponent} from './default-action-error.component';
+import {DefaultActionConfirmComponent} from './default-action-confirm.component';
 
 
 @Component({
@@ -157,6 +158,95 @@ describe('Service: bootstrap actions service', () => {
         });
     });
 
+    describe('confirming actions with success', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
+        let action: string;
+        let confirmMessage: string;
+
+        afterEach(fakeAsync(() => {
+            expect(modalService.lastStub).toBeDefined();
+            expect(modalService.lastStub.component).toEqual(DefaultActionConfirmComponent);
+            expect(modalService.lastStub.componentInstance['confirmMessage']).toEqual(confirmMessage);
+
+            modalService.lastStub.close();
+            tick();
+
+            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            expect(lastConnection.request._body).toBeNull();
+            let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
+            lastConnection.mockRespond(new Response(new ResponseOptions({
+                body: JSON.stringify(gameResponse)
+            })));
+            tick();
+            expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
+        }));
+
+        it('reject game', () => {
+            action = 'reject';
+            confirmMessage = 'Reject this game!';
+            actionService.reject(game);
+        });
+
+        it('quit game', () => {
+            action = 'quit';
+            confirmMessage = 'Quit this game!';
+            actionService.quit(game);
+        });
+
+        it('end series game', () => {
+            action = 'endRematch';
+            confirmMessage = 'End this series?';
+            actionService.declineRematch(game);
+        });
+    });
+
+    describe('confirming actions with error', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
+        let action: string;
+        let confirmMessage: string;
+
+        afterEach(fakeAsync(() => {
+            expect(modalService.lastStub).toBeDefined();
+            expect(modalService.lastStub.component).toEqual(DefaultActionConfirmComponent);
+            expect(modalService.lastStub.componentInstance['confirmMessage']).toEqual(confirmMessage);
+
+            modalService.lastStub.close();
+            tick();
+
+            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            expect(lastConnection.request._body).toBeNull();
+            lastConnection.mockError(new Response(new ResponseOptions({
+                status: 402,
+                body: 'something is not right'
+            })));
+            tick();
+            expect(modalService.lastStub).toBeDefined();
+            expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
+            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(gameCache.putGame).not.toHaveBeenCalled();
+        }));
+
+        it('reject game', () => {
+            action = 'reject';
+            confirmMessage = 'Reject this game!';
+            actionService.reject(game);
+        });
+
+        it('quit game', () => {
+            action = 'quit';
+            confirmMessage = 'Quit this game!';
+            actionService.quit(game);
+        });
+
+        it('end series game', () => {
+            action = 'endRematch';
+            confirmMessage = 'End this series?';
+            actionService.declineRematch(game);
+        });
+    });
+
     describe('simple actions with failure', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failureGame'});
         let action: string;
@@ -173,6 +263,7 @@ describe('Service: bootstrap actions service', () => {
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
             expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(gameCache.putGame).not.toHaveBeenCalled();
         }));
 
         it('accepts game', () => {
@@ -180,4 +271,43 @@ describe('Service: bootstrap actions service', () => {
             actionService.accept(game);
         });
     });
+
+    describe('cancelling actions with success', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
+        let action: string;
+        let confirmMessage: string;
+
+        afterEach(fakeAsync(() => {
+            expect(modalService.lastStub).toBeDefined();
+            expect(modalService.lastStub.component).toEqual(DefaultActionConfirmComponent);
+            expect(modalService.lastStub.componentInstance['confirmMessage']).toEqual(confirmMessage);
+
+            modalService.lastStub.dismiss();
+            tick();
+
+            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            expect(lastConnection.request._body).toBeNull();
+            expect(gameCache.putGame).not.toHaveBeenCalled();
+        }));
+
+        it('reject game', () => {
+            action = 'reject';
+            confirmMessage = 'Reject this game!';
+            actionService.reject(game);
+        });
+
+        it('quit game', () => {
+            action = 'quit';
+            confirmMessage = 'Quit this game!';
+            actionService.quit(game);
+        });
+
+        it('end series game', () => {
+            action = 'endRematch';
+            confirmMessage = 'End this series?';
+            actionService.declineRematch(game);
+        });
+    });
+
 });
