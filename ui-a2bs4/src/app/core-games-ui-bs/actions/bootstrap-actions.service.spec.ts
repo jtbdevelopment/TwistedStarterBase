@@ -158,6 +158,60 @@ describe('Service: bootstrap actions service', () => {
         });
     });
 
+    describe('simple actions with failure', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failureGame'});
+        let action: string;
+
+        afterEach(fakeAsync(() => {
+            expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            expect(lastConnection.request._body).toBeNull();
+            lastConnection.mockError(new Response(new ResponseOptions({
+                status: 402,
+                body: 'something is not right'
+            })));
+            tick();
+            expect(modalService.lastStub).toBeDefined();
+            expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
+            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(gameCache.putGame).not.toHaveBeenCalled();
+        }));
+
+        it('accepts game', () => {
+            action = 'accept';
+            actionService.accept(game);
+        });
+    });
+
+    describe('simple actions with failure and custom error', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failureGame'});
+        let action: string;
+
+        beforeEach(() => {
+            actionService.setErrorComponent(MockReplacementComponent);
+        });
+
+        afterEach(fakeAsync(() => {
+            expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            expect(lastConnection.request._body).toBeNull();
+            lastConnection.mockError(new Response(new ResponseOptions({
+                status: 402,
+                body: 'something is not right'
+            })));
+            tick();
+            expect(modalService.lastStub).toBeDefined();
+            expect(modalService.lastStub.component).toEqual(MockReplacementComponent);
+            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(gameCache.putGame).not.toHaveBeenCalled();
+        }));
+
+        it('accepts game', () => {
+            action = 'accept';
+            actionService.accept(game);
+        });
+    });
+
     describe('confirming actions with success', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
         let action: string;
@@ -247,31 +301,6 @@ describe('Service: bootstrap actions service', () => {
         });
     });
 
-    describe('simple actions with failure', () => {
-        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failureGame'});
-        let action: string;
-
-        afterEach(fakeAsync(() => {
-            expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
-            lastConnection.mockError(new Response(new ResponseOptions({
-                status: 402,
-                body: 'something is not right'
-            })));
-            tick();
-            expect(modalService.lastStub).toBeDefined();
-            expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
-            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
-            expect(gameCache.putGame).not.toHaveBeenCalled();
-        }));
-
-        it('accepts game', () => {
-            action = 'accept';
-            actionService.accept(game);
-        });
-    });
-
     describe('cancelling actions with success', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
         let action: string;
@@ -310,4 +339,38 @@ describe('Service: bootstrap actions service', () => {
         });
     });
 
+    describe('confirming actions with custom confirm', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
+        let action: string;
+        let confirmMessage: string;
+
+        beforeEach(() => {
+            actionService.setCofirmComponent(MockReplacementComponent);
+        });
+
+        afterEach(fakeAsync(() => {
+            expect(modalService.lastStub).toBeDefined();
+            expect(modalService.lastStub.component).toEqual(MockReplacementComponent);
+            expect(modalService.lastStub.componentInstance['confirmMessage']).toEqual(confirmMessage);
+
+            modalService.lastStub.close();
+            tick();
+
+            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            expect(lastConnection.request._body).toBeNull();
+            let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
+            lastConnection.mockRespond(new Response(new ResponseOptions({
+                body: JSON.stringify(gameResponse)
+            })));
+            tick();
+            expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
+        }));
+
+        it('reject game', () => {
+            action = 'reject';
+            confirmMessage = 'Reject this game!';
+            actionService.reject(game);
+        });
+    });
 });
