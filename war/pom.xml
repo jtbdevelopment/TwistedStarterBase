@@ -20,7 +20,7 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>../ui/dist</directory>
+                            <directory>../ui-a2bs4/dist</directory>
                         </resource>
                     </webResources>
                     <failOnMissingWebXml>false</failOnMissingWebXml>

@@ -10,6 +10,7 @@
     <modules>
         <module>game</module>
         <module>ui</module>
+        <module>ui-a2bs4</module>
         <module>war</module>
     </modules>
     <packaging>pom</packaging>

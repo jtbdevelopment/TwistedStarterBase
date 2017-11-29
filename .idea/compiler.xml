@@ -19,6 +19,7 @@
         <module name="example-war" />
         <module name="game" />
         <module name="ui" />
+        <module name="ui-a2bs4" />
         <module name="war" />
       </profile>
     </annotationProcessing>
@@ -28,6 +29,7 @@
       <module name="TwistedStarterBase" target="1.5" />
       <module name="TwistedWordSearch" target="1.5" />
       <module name="ui" target="1.5" />
+      <module name="ui-a2bs4" target="1.5" />
       <module name="war" target="1.5" />
     </bytecodeTargetLevel>
   </component>
