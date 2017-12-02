@@ -30,8 +30,6 @@ class MockConfig implements AppConfig {
     template: require('./default-version-notes.component.html')
 })
 export class MockReplacementComponent {
-    constructor() {
-    }
 }
 
 class MockPlayerService {

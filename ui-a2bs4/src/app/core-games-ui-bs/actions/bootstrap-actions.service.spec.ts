@@ -18,6 +18,7 @@ import {Router} from '@angular/router';
 import {fakeAsync, tick} from '@angular/core/testing';
 import {DefaultActionErrorComponent} from './default-action-error.component';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
+import {BootstrapAdsService} from '../ads/bootstrap-ads.service';
 
 
 @Component({
@@ -27,13 +28,26 @@ import {DefaultActionConfirmComponent} from './default-action-confirm.component'
 export class MockReplacementComponent {
     @Input() errorMessage: string = '';
     @Input() confirmMessage: string = '';
-
-    constructor() {
-    }
 }
 
 class MockGameCacheService {
     putGame = jasmine.createSpy('putGame');
+}
+
+class MockAdService {
+    public resolve: (reason?: any) => void;
+    public reject: (reason?: any) => void;
+    public lastPromise: Promise<any>;
+
+    public showAdPopup(): Promise<any> {
+        this.lastPromise = new Promise((resolve, reject) => {
+            this.reject = reject;
+            this.resolve = resolve;
+        });
+
+        return this.lastPromise;
+    }
+
 }
 
 class MockModalRef {
@@ -48,8 +62,6 @@ class MockModalRef {
         this.result = new Promise((resolve, reject) => {
             this._resolve = resolve;
             this._reject = reject;
-        });
-        this.result.then(null, () => {
         });
     }
 
@@ -94,6 +106,7 @@ describe('Service: bootstrap actions service', () => {
     let actionService: BootstrapActionsService;
     let router: MockRouter;
     let gameCache: MockGameCacheService;
+    let ads: MockAdService;
 
     beforeEach(() => {
         this.injector = ReflectiveInjector.resolveAndCreate([
@@ -103,6 +116,7 @@ describe('Service: bootstrap actions service', () => {
             {provide: 'GameFactory', useClass: MockGameFactory},
             {provide: GameCacheService, useClass: MockGameCacheService},
             {provide: Router, useClass: MockRouter},
+            {provide: BootstrapAdsService, useClass: MockAdService},
             Http,
             BootstrapActionsService
         ]);
@@ -111,7 +125,9 @@ describe('Service: bootstrap actions service', () => {
         gameCache = this.injector.get(GameCacheService);
         router = this.injector.get(Router);
         backend = this.injector.get(ConnectionBackend) as MockBackend;
+        ads = this.injector.get(BootstrapAdsService) as MockAdService;
         backend.connections.subscribe((connection: any) => lastConnection = connection);
+        lastConnection = undefined;
     });
 
     it('game url', () => {
@@ -136,11 +152,15 @@ describe('Service: bootstrap actions service', () => {
         expect(lastConnection.request._body).toEqual(body);
     });
 
-    describe('simple actions with success', () => {
+    describe('simple accept actions with ads with success', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
         let action: string;
 
         afterEach(fakeAsync(() => {
+            expect(ads.lastPromise).toBeDefined();
+            expect(lastConnection).toBeUndefined();
+            ads.resolve();
+            tick();
             expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
             expect(lastConnection.request.method).toEqual(RequestMethod.Put);
             expect(lastConnection.request._body).toBeNull();
@@ -154,15 +174,76 @@ describe('Service: bootstrap actions service', () => {
 
         it('accepts game', () => {
             action = 'accept';
+            expect(ads.lastPromise).toBeUndefined();
             actionService.accept(game);
         });
     });
 
-    describe('simple actions with failure', () => {
+    describe('rematch game with ads with success', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
+        let action: string;
+
+        afterEach(fakeAsync(() => {
+            expect(ads.lastPromise).toBeDefined();
+            expect(lastConnection).toBeUndefined();
+            ads.resolve();
+            tick();
+            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            expect(lastConnection.request._body).toBeNull();
+            let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
+            lastConnection.mockRespond(new Response(new ResponseOptions({
+                body: JSON.stringify(gameResponse)
+            })));
+            tick();
+            expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
+            expect(router.navigateByUrl).toHaveBeenCalledWith(gameResponse.standardLink());
+        }));
+
+        it('rematch game', () => {
+            action = 'rematch';
+            expect(ads.lastPromise).toBeUndefined();
+            actionService.rematch(game);
+        });
+    });
+
+    describe('new game with ads with success', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
+        let options: Object;
+
+        afterEach(fakeAsync(() => {
+            expect(ads.lastPromise).toBeDefined();
+            expect(lastConnection).toBeUndefined();
+            ads.resolve();
+            tick();
+            expect(lastConnection.request.url).toEqual('/api/player/new');
+            expect(lastConnection.request.method).toEqual(RequestMethod.Post);
+            expect(lastConnection.request._body).toEqual(options);
+            let gameResponse = new MultiPlayerGame({id: 'newGame', gamePhase: 'newPhase'});
+            lastConnection.mockRespond(new Response(new ResponseOptions({
+                body: JSON.stringify(gameResponse)
+            })));
+            tick();
+            expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
+            expect(router.navigateByUrl).toHaveBeenCalledWith(gameResponse.standardLink());
+        }));
+
+        it('rematch game', () => {
+            expect(ads.lastPromise).toBeUndefined();
+            options = {a: 1, b: '32', c: ['something', 'somethin']};
+            actionService.newGame(options);
+        });
+    });
+
+    describe('simple accept actions with failure', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failureGame'});
         let action: string;
 
         afterEach(fakeAsync(() => {
+            expect(ads.lastPromise).toBeDefined();
+            expect(lastConnection).toBeUndefined();
+            ads.resolve();
+            tick();
             expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
             expect(lastConnection.request.method).toEqual(RequestMethod.Put);
             expect(lastConnection.request._body).toBeNull();
@@ -183,7 +264,38 @@ describe('Service: bootstrap actions service', () => {
         });
     });
 
-    describe('simple actions with failure and custom error', () => {
+    describe('rematch game with failure', () => {
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failureGame'});
+        let action: string;
+
+        afterEach(fakeAsync(() => {
+            expect(ads.lastPromise).toBeDefined();
+            expect(lastConnection).toBeUndefined();
+            ads.resolve();
+            tick();
+            expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
+            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            expect(lastConnection.request._body).toBeNull();
+            lastConnection.mockError(new Response(new ResponseOptions({
+                status: 402,
+                body: 'something is not right'
+            })));
+            tick();
+            expect(modalService.lastStub).toBeDefined();
+            expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
+            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(gameCache.putGame).not.toHaveBeenCalled();
+            expect(router.navigateByUrl).not.toHaveBeenCalled();
+        }));
+
+        it('rematch game', () => {
+            action = 'rematch';
+            expect(ads.lastPromise).toBeUndefined();
+            actionService.rematch(game);
+        });
+    });
+
+    describe('simple accept with failure and custom error', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failureGame'});
         let action: string;
 
@@ -192,6 +304,10 @@ describe('Service: bootstrap actions service', () => {
         });
 
         afterEach(fakeAsync(() => {
+            expect(ads.lastPromise).toBeDefined();
+            expect(lastConnection).toBeUndefined();
+            ads.resolve();
+            tick();
             expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
             expect(lastConnection.request.method).toEqual(RequestMethod.Put);
             expect(lastConnection.request._body).toBeNull();
@@ -317,6 +433,13 @@ describe('Service: bootstrap actions service', () => {
             expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
             expect(lastConnection.request.method).toEqual(RequestMethod.Put);
             expect(lastConnection.request._body).toBeNull();
+
+            //  Shouldn't be called but confirming it wouldnt be processed even if it was
+            let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
+            lastConnection.mockRespond(new Response(new ResponseOptions({
+                body: JSON.stringify(gameResponse)
+            })));
+            tick();
             expect(gameCache.putGame).not.toHaveBeenCalled();
         }));
 

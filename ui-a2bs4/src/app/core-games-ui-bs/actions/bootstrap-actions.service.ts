@@ -9,6 +9,7 @@ import {Subject} from 'rxjs/Subject';
 import {DefaultActionErrorComponent} from './default-action-error.component';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
 import {Router} from '@angular/router';
+import {BootstrapAdsService} from '../ads/bootstrap-ads.service';
 
 @Injectable()
 export class BootstrapActionsService {
@@ -21,6 +22,7 @@ export class BootstrapActionsService {
                 private router: Router,
                 @Inject('GameFactory') private gameFactory: GameFactory,
                 private modalService: NgbModal,
+                private ads: BootstrapAdsService,
                 private gameCache: GameCacheService) {
         this.errorModal = DefaultActionErrorComponent;
         this.confirmModal = DefaultActionConfirmComponent;
@@ -77,15 +79,17 @@ export class BootstrapActionsService {
     }
 
     public newGame(options: any): void {
-        //  TODO - ad
-        this.wrapAction(this.http.post('/api/player/new', options)).subscribe((game: Game) => {
-            this.router.navigateByUrl(game.standardLink());
+        this.ads.showAdPopup().then(() => {
+            this.wrapAction(this.http.post('/api/player/new', options)).subscribe((game: Game) => {
+                this.router.navigateByUrl(game.standardLink());
+            });
         });
     }
 
     public accept(game: Game): void {
-        //  TODO - ad
-        this.wrapAction(this.gameAction(game, 'accept'));
+        this.ads.showAdPopup().then(() => {
+            this.wrapAction(this.gameAction(game, 'accept'));
+        });
     }
 
     public reject(game: Game): void {
@@ -97,14 +101,14 @@ export class BootstrapActionsService {
     }
 
     public rematch(game: Game): void {
-        //  TODO - ad
-        this.wrapAction(this.gameAction(game, 'rematch')).subscribe((game: Game) => {
-            this.router.navigateByUrl(game.standardLink());
+        this.ads.showAdPopup().then(() => {
+            this.wrapAction(this.gameAction(game, 'rematch')).subscribe((game: Game) => {
+                this.router.navigateByUrl(game.standardLink());
+            });
         });
     }
 
     public declineRematch(game: Game): void {
-        //  TODO - ad
         this.wrapActionWithConfirm('End this series?', this.gameAction(game, 'endRematch'));
     }
 

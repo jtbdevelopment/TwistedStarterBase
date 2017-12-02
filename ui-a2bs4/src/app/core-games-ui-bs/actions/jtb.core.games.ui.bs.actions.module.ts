@@ -7,6 +7,7 @@ import {BootstrapActionsService} from './bootstrap-actions.service';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
 import {DefaultActionErrorComponent} from './default-action-error.component';
 import {HttpModule} from '@angular/http';
+import {JTBCoreGamesUIBSAdsModule} from '../ads/jtb.core.games.ui.bs.ads.module';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import {HttpModule} from '@angular/http';
         BrowserModule,
         NgbModule,
         FormsModule,
-        JTBCoreGamesUI
+        JTBCoreGamesUI,
+        JTBCoreGamesUIBSAdsModule
     ],
     providers: [
         BootstrapActionsService
