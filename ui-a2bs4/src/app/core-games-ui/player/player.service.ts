@@ -24,11 +24,9 @@ export class PlayerService {
         this.loggedInPlayer = Observable.from<Player>(this.loggedInSubject);
         this.messageBus.playerUpdates.subscribe(player => {
             if (player.id === this.playerSubject.getValue().id) {
-                console.log('player update ' + JSON.stringify(player));
                 this.playerSubject.next(player);
             }
             if (player.id === this.loggedInSubject.getValue().id) {
-                console.log('logged in update ' + JSON.stringify(player));
                 this.loggedInSubject.next(player);
             }
         });

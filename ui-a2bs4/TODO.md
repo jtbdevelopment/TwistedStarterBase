@@ -9,6 +9,5 @@ Invalid Session Handler (BS)
 
 Listen for phase change and change route if current game
 
-Backdrop Manager
 Ads
 

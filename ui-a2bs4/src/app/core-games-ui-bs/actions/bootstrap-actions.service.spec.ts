@@ -19,6 +19,7 @@ import {fakeAsync, tick} from '@angular/core/testing';
 import {DefaultActionErrorComponent} from './default-action-error.component';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
 import {BootstrapAdsService} from '../ads/bootstrap-ads.service';
+import {BootstrapBackdropService} from '../backdrop/bootstrap-backdrop.service';
 
 
 @Component({
@@ -99,6 +100,11 @@ class MockRouter {
     navigateByUrl = jasmine.createSpy('nbu');
 }
 
+class MockBackdrop {
+    addBackdrop = jasmine.createSpy('addbd');
+    removeBackdrop = jasmine.createSpy('removebd');
+}
+
 describe('Service: bootstrap actions service', () => {
     let backend: MockBackend;
     let lastConnection: any;
@@ -107,6 +113,7 @@ describe('Service: bootstrap actions service', () => {
     let router: MockRouter;
     let gameCache: MockGameCacheService;
     let ads: MockAdService;
+    let backdrop: MockBackdrop;
 
     beforeEach(() => {
         this.injector = ReflectiveInjector.resolveAndCreate([
@@ -117,6 +124,7 @@ describe('Service: bootstrap actions service', () => {
             {provide: GameCacheService, useClass: MockGameCacheService},
             {provide: Router, useClass: MockRouter},
             {provide: BootstrapAdsService, useClass: MockAdService},
+            {provide: BootstrapBackdropService, useClass: MockBackdrop},
             Http,
             BootstrapActionsService
         ]);
@@ -126,6 +134,7 @@ describe('Service: bootstrap actions service', () => {
         router = this.injector.get(Router);
         backend = this.injector.get(ConnectionBackend) as MockBackend;
         ads = this.injector.get(BootstrapAdsService) as MockAdService;
+        backdrop = this.injector.get(BootstrapBackdropService) as MockBackdrop;
         backend.connections.subscribe((connection: any) => lastConnection = connection);
         lastConnection = undefined;
     });

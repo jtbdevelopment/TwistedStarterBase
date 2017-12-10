@@ -10,6 +10,7 @@ import {DefaultActionErrorComponent} from './default-action-error.component';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
 import {Router} from '@angular/router';
 import {BootstrapAdsService} from '../ads/bootstrap-ads.service';
+import {BootstrapBackdropService} from '../backdrop/bootstrap-backdrop.service';
 
 @Injectable()
 export class BootstrapActionsService {
@@ -23,6 +24,7 @@ export class BootstrapActionsService {
                 @Inject('GameFactory') private gameFactory: GameFactory,
                 private modalService: NgbModal,
                 private ads: BootstrapAdsService,
+                private backdrop: BootstrapBackdropService,
                 private gameCache: GameCacheService) {
         this.errorModal = DefaultActionErrorComponent;
         this.confirmModal = DefaultActionConfirmComponent;
@@ -44,30 +46,32 @@ export class BootstrapActionsService {
         this.errorModal = modal;
     }
 
-    public wrapAction(httpObservable: Observable<Response>): Observable<Game> {
+    public takeAction(httpObservable: Observable<Response>): Observable<Game> {
         let observable: Subject<Game> = new Subject<Game>();
-        //  TODO - disable screen
+        this.backdrop.addBackdrop();
         httpObservable
             .map(response => response.json())
             .map(json => this.gameFactory.newGame(json))
             .subscribe(game => {
                 this.gameCache.putGame(game);
                 observable.next(game);
+                this.backdrop.removeBackdrop();
             }, error => {
                 console.log(JSON.stringify(error));
                 let ngbModalRef = this.modalService.open(this.errorModal);
                 ngbModalRef.componentInstance.errorMessage = error.text();
                 observable.complete();
+                this.backdrop.removeBackdrop();
             });
         return observable;
     }
 
-    public wrapActionWithConfirm(message: string, httpObservable: Observable<Response>): Observable<Game> {
+    public takeActionWithConfirm(message: string, httpObservable: Observable<Response>): Observable<Game> {
         let observable: Subject<Game> = new Subject<Game>();
         let ngbModalRef = this.modalService.open(this.confirmModal);
         ngbModalRef.componentInstance.confirmMessage = message;
         ngbModalRef.result.then(() => {
-            this.wrapAction(httpObservable).subscribe((game: Game) => {
+            this.takeAction(httpObservable).subscribe((game: Game) => {
                 observable.next(game);
             }, () => {
                 observable.complete();
@@ -80,7 +84,7 @@ export class BootstrapActionsService {
 
     public newGame(options: any): void {
         this.ads.showAdPopup().then(() => {
-            this.wrapAction(this.http.post('/api/player/new', options)).subscribe((game: Game) => {
+            this.takeAction(this.http.post('/api/player/new', options)).subscribe((game: Game) => {
                 this.router.navigateByUrl(game.standardLink());
             });
         });
@@ -88,28 +92,28 @@ export class BootstrapActionsService {
 
     public accept(game: Game): void {
         this.ads.showAdPopup().then(() => {
-            this.wrapAction(this.gameAction(game, 'accept'));
+            this.takeAction(this.gameAction(game, 'accept'));
         });
     }
 
     public reject(game: Game): void {
-        this.wrapActionWithConfirm('Reject this game!', this.gameAction(game, 'reject'));
+        this.takeActionWithConfirm('Reject this game!', this.gameAction(game, 'reject'));
     }
 
     public quit(game: Game): void {
-        this.wrapActionWithConfirm('Quit this game!', this.gameAction(game, 'quit'));
+        this.takeActionWithConfirm('Quit this game!', this.gameAction(game, 'quit'));
     }
 
     public rematch(game: Game): void {
         this.ads.showAdPopup().then(() => {
-            this.wrapAction(this.gameAction(game, 'rematch')).subscribe((game: Game) => {
+            this.takeAction(this.gameAction(game, 'rematch')).subscribe((game: Game) => {
                 this.router.navigateByUrl(game.standardLink());
             });
         });
     }
 
     public declineRematch(game: Game): void {
-        this.wrapActionWithConfirm('End this series?', this.gameAction(game, 'endRematch'));
+        this.takeActionWithConfirm('End this series?', this.gameAction(game, 'endRematch'));
     }
 
     public gameAction(game: Game, action: string, body?: string): Observable<Response> {

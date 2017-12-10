@@ -58,16 +58,16 @@ export const routes: Routes = [
         path: 'game/nextroundstarted/:gameID',
         component: PlayersAndStatesComponent
     },
-    /*  TODO - TSB
     {
-        path: 'game/playing/:gameID',
+        //  TODO - TSB
+        path: 'game/setup/:gameID',
         component: PlayersAndStatesComponent
     },
     {
-        path: 'game/setup/:gameID',
+        //  TODO - TSB
+        path: 'game/playing/:gameID',
         component: PlayersAndStatesComponent
-    }
-    */
+    },
 ];
 
 export const routing = RouterModule.forRoot(routes, {useHash: true});
