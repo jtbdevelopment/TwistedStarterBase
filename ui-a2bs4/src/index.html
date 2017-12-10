@@ -17,21 +17,18 @@
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!--  TODO TSB -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-61544215-1"></script>
     <script>
-        !function (A, n, g, u, l, a, r) {
-            A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
-                    (A[l].q = A[l].q || []).push(arguments)
-                }, A[l].l = +new Date, a = n.createElement(g),
-                r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-        }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        window.dataLayer = window.dataLayer || [];
 
-        ga('create', 'UA-XXXXX-X');
-        ga('send', 'pageview');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-XXX-X');
     </script>
-
-    <!--  TODO TSB - verify app wants applixir  -->
-    <!--  Applixir  -->
-    <script type="text/javascript" src="//developer.appprizes.com/applixir_richmedia.js"></script>
-
   </body>
 </html>

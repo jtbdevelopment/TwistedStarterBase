@@ -1,4 +1,8 @@
 import {Injectable} from '@angular/core';
+import {BootstrapBackdropService} from '../backdrop/bootstrap-backdrop.service';
+
+
+declare function invokeApplixirVideoUnit(options: any);
 
 @Injectable()
 export class BootstrapAdsService {
@@ -6,7 +10,7 @@ export class BootstrapAdsService {
     public timeBetweenAds: number = BootstrapAdsService.DEFAULT_TIME_BETWEEN_ADS;
     private lastAdShown: Date = new Date(0);
 
-    constructor() {
+    constructor(private backdrop: BootstrapBackdropService) {
 
     }
 
