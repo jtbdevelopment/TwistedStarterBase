@@ -25,43 +25,23 @@ export class BootstrapAdsService {
         });
 
         if (((new Date()).valueOf() - this.lastAdShown.valueOf()) >= this.timeBetweenAds) {
-            //  TODO - actually show ad
-            setTimeout(() => {
-                console.log('resolving');
-                _resolve();
-            }, 1000);
-            console.log('showing ad');
+            try {
+                this.backdrop.addBackdrop();
+                //  TODO - actually show ad
+                setTimeout(() => {
+                    this.backdrop.removeBackdrop();
+                    console.log('resolving');
+                    _resolve();
+                }, 1000);
+                console.log('showing ad');
+            } catch (ex) {
+                console.error(ex);
+                this.backdrop.removeBackdrop();
+            }
         } else {
             console.log('no ad');
             _resolve();
         }
         return promise;
     }
-
-    /*
-                return {
-                    showAdPopup: function () {
-                        var adPromise = $q.defer();
-                        if (((new Date()) - lastAd ) >= timeBetweenAds) {
-                            try {
-                                jtbBootstrapBackdropManager.addBackdrop();
-                                invokeApplixirVideoUnitExtended(false, 'middle', function () {
-                                    jtbBootstrapBackdropManager.removeBackdrop();
-                                    adPromise.resolve();
-                                    lastAd = new Date();
-                                });
-                            } catch (ex) {
-                                jtbBootstrapBackdropManager.removeBackdrop();
-                                console.log(JSON.stringify(ex));
-                                adPromise.resolve();
-                            }
-                        } else {
-                            adPromise.resolve();
-                        }
-                        return adPromise.promise;
-                    }
-                };
-            }
-
-     */
 }
