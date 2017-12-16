@@ -8,6 +8,7 @@ import {DefaultActionConfirmComponent} from './default-action-confirm.component'
 import {DefaultActionErrorComponent} from './default-action-error.component';
 import {HttpModule} from '@angular/http';
 import {JTBCoreGamesUIBSAdsModule} from '../ads/jtb.core.games.ui.bs.ads.module';
+import {BootstrapRerouteService} from './bootstrap-reroute.service';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import {JTBCoreGamesUIBSAdsModule} from '../ads/jtb.core.games.ui.bs.ads.module'
         JTBCoreGamesUIBSAdsModule
     ],
     providers: [
-        BootstrapActionsService
+        BootstrapActionsService,
+        BootstrapRerouteService
     ],
     entryComponents: [
         DefaultActionConfirmComponent,
@@ -31,4 +33,7 @@ import {JTBCoreGamesUIBSAdsModule} from '../ads/jtb.core.games.ui.bs.ads.module'
     ]
 })
 export class JTBCoreGamesUIBSActionsModule {
+    constructor(private reroute: BootstrapRerouteService) {
+
+    }
 }
