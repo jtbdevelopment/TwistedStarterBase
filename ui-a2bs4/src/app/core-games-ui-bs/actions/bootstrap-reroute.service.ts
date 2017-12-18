@@ -21,8 +21,8 @@ export class BootstrapRerouteService {
         });
     }
 
-    private handleNavigation(event) {
-        this.getUrlFromEvent(event);
+    private handleNavigation(event: NavigationEnd): void {
+        this.updateCurrentURLFromEvent(event);
         if (this.currentLocation.indexOf('/game') === 0) {
             let id = this.getGameIdFromURL();
             if (id !== this.currentGameID) {
@@ -34,7 +34,7 @@ export class BootstrapRerouteService {
         }
     }
 
-    private getUrlFromEvent(event) {
+    private updateCurrentURLFromEvent(event: NavigationEnd): void {
         if (event.url !== undefined && event.url !== null) {
             this.currentLocation = event.url;
         } else {

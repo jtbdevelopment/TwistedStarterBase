@@ -1,43 +1,29 @@
-import {
-    BaseRequestOptions,
-    ConnectionBackend,
-    Http,
-    RequestOptions,
-    Response,
-    ResponseOptions,
-    ResponseType
-} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
-import {ReflectiveInjector} from '@angular/core';
-import {fakeAsync, tick} from '@angular/core/testing';
+import {ResponseType} from '@angular/http';
+import {fakeAsync, TestBed} from '@angular/core/testing';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {FeatureCacheService} from './feature-cache.service';
 import {Feature} from './feature.model';
 import {FeatureOption} from './feature-option.model';
 import {FeatureGroup} from './feature-group.model';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('Service: feature cache service', () => {
     let featureService: FeatureCacheService;
     let messageBus: MessageBusService;
-    let backend: MockBackend;
     let lastConnection: any;
 
     let currentFeatures: FeatureGroup[];
+    let httpMock: HttpTestingController;
 
     beforeEach(() => {
-        currentFeatures = null;
-        lastConnection = null;
-        this.injector = ReflectiveInjector.resolveAndCreate([
-            {provide: ConnectionBackend, useClass: MockBackend},
-            {provide: RequestOptions, useClass: BaseRequestOptions},
-            Http,
-            FeatureCacheService,
-            MessageBusService
-        ]);
-        featureService = this.injector.get(FeatureCacheService);
-        messageBus = this.injector.get(MessageBusService);
-        backend = this.injector.get(ConnectionBackend) as MockBackend;
-        backend.connections.subscribe((connection: any) => lastConnection = connection);
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [FeatureCacheService, MessageBusService]
+        });
+        featureService = TestBed.get(FeatureCacheService);
+        messageBus = TestBed.get(MessageBusService);
+        httpMock = TestBed.get(HttpTestingController);
+
         featureService.features.subscribe((f) => {
             currentFeatures = f;
         });
@@ -45,7 +31,7 @@ describe('Service: feature cache service', () => {
 
     it('defaults to empty features', () => {
         expect(currentFeatures).toEqual([]);
-        expect(lastConnection).toBeNull();
+        httpMock.verify();
     });
 
     describe('loading features', () => {
@@ -168,52 +154,42 @@ describe('Service: feature cache service', () => {
                 new FeatureOption('Compete', 'Enemies', 'Play head to head.'),
             ];
             expect(JSON.stringify(currentFeatures)).toEqual(JSON.stringify(expectedGroups));
+            httpMock.verify();
         });
 
-        it('it requests features on first request', fakeAsync(() => {
-            expect(lastConnection).toBeNull();
+        it('it requests features on first request', () => {
             messageBus.connectionStatus.next(true);
-            expect(lastConnection.request.url).toEqual('/api/features');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(results)
-            })));
-            tick();
-        }));
+            let request = httpMock.expectOne('/api/features');
+            expect(request.request.method).toEqual('GET');
+            request.flush(results);
+        });
 
         it('it does not re-request after first call', fakeAsync(() => {
-            expect(lastConnection).toBeNull();
             messageBus.connectionStatus.next(true);
-            expect(lastConnection.request.url).toEqual('/api/features');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(results)
-            })));
-            tick();
+            let request = httpMock.expectOne('/api/features');
+            expect(request.request.method).toEqual('GET');
+            request.flush(results);
 
-            lastConnection = null;
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);
-            expect(lastConnection).toBeNull();
         }));
 
-        it('it does re-request after first call if first fails', fakeAsync(() => {
-            expect(lastConnection).toBeNull();
+        it('it does re-request after first call if first fails', () => {
             messageBus.connectionStatus.next(true);
-            expect(lastConnection.request.url).toEqual('/api/features');
-            lastConnection.mockError(new ResponseOptions({
+            let request = httpMock.expectOne('/api/features');
+            expect(request.request.method).toEqual('GET');
+            request.flush({
                 type: ResponseType.Error,
                 status: 404
-            }));
-            tick();
-
+            });
             expect(currentFeatures).toEqual([]);
-            lastConnection = null;
+
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);
-            expect(lastConnection.request.url).toEqual('/api/features');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(results)
-            })));
-            tick();
-        }));
+
+            request = httpMock.expectOne('/api/features');
+            expect(request.request.method).toEqual('GET');
+            request.flush(results);
+        });
     });
 });

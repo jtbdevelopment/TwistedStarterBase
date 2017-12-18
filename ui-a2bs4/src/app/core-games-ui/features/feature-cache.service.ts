@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
@@ -7,6 +6,7 @@ import {MessageBusService} from '../messagebus/message-bus.service';
 import {Feature} from './feature.model';
 import {FeatureOption} from './feature-option.model';
 import {FeatureGroup} from './feature-group.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class FeatureCacheService {
@@ -14,7 +14,7 @@ export class FeatureCacheService {
 
     private featuresSubject: BehaviorSubject<FeatureGroup[]> = new BehaviorSubject<FeatureGroup[]>([]);
 
-    constructor(private http: Http, private messageBus: MessageBusService) {
+    constructor(private http: HttpClient, private messageBus: MessageBusService) {
         this.features = Observable.from(this.featuresSubject);
         this.messageBus.connectionStatus.subscribe(connected => {
             if (connected && this.featuresSubject.getValue().length === 0) {
@@ -25,7 +25,6 @@ export class FeatureCacheService {
 
     private initialize(): void {
         this.http.get('/api/features')
-            .map(response => response.json())
             .map(json => {
                 let groups = [];
                 let groupMap = new Map<string, number>();

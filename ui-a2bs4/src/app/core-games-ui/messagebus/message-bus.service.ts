@@ -14,4 +14,10 @@ export class MessageBusService {
     // In general, for internal use
     // Use the feed off game cache which handles race conditions on updates
     gameUpdates: Subject<Game> = new Subject<Game>();
+
+    //  Ticks when invalid sessions occurs
+    invalidSessionError: Subject<any> = new Subject<any>();
+
+    //  Ticks when general error occurs
+    generalError: Subject<any> = new Subject<any>();
 }
