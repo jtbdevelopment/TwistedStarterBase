@@ -1,19 +1,9 @@
 import {PlayerService} from './player.service';
-import {
-    BaseRequestOptions,
-    ConnectionBackend,
-    Http,
-    RequestMethod,
-    RequestOptions,
-    Response,
-    ResponseOptions
-} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
-import {ReflectiveInjector} from '@angular/core';
-import {fakeAsync, tick} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {Player} from './player.model';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {Router} from '@angular/router';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 class MockRouter {
     navigateByUrl = jasmine.createSpy('nbu');
@@ -24,33 +14,35 @@ describe('Service: player service', () => {
     let loggedInPlayer: Player = null;
     let playerService: PlayerService;
     let messageBus: MessageBusService;
-    let backend: MockBackend;
-    let lastConnection: any;
     let router: MockRouter;
+    let httpMock: HttpTestingController;
 
 
     beforeEach(() => {
         currentPlayer = null;
         loggedInPlayer = null;
-        this.injector = ReflectiveInjector.resolveAndCreate([
-            {provide: ConnectionBackend, useClass: MockBackend},
-            {provide: RequestOptions, useClass: BaseRequestOptions},
-            {provide: Router, useClass: MockRouter},
-            Http,
-            MessageBusService,
-            PlayerService,
-        ]);
-        playerService = this.injector.get(PlayerService);
-        messageBus = this.injector.get(MessageBusService);
-        backend = this.injector.get(ConnectionBackend) as MockBackend;
-        router = this.injector.get(Router) as MockRouter;
-        backend.connections.subscribe((connection: any) => lastConnection = connection);
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [
+                MessageBusService,
+                PlayerService,
+                {provide: Router, useClass: MockRouter},
+            ]
+        });
+        playerService = TestBed.get(PlayerService);
+        messageBus = TestBed.get(MessageBusService);
+        router = TestBed.get(Router) as MockRouter;
+        httpMock = TestBed.get(HttpTestingController);
         playerService.loggedInPlayer.subscribe(p => {
             loggedInPlayer = p;
         });
         playerService.player.subscribe(p => {
             currentPlayer = p;
         });
+    });
+
+    afterEach(() => {
+        httpMock.verify();
     });
 
     it('defaults to empty logged in and current player', () => {
@@ -69,11 +61,10 @@ describe('Service: player service', () => {
         };
         let expectedPlayer: Player = new Player(loadedPlayer);
         playerService.loadLoggedInPlayer();
-        expect(lastConnection.request.url).toEqual('/api/security');
-        lastConnection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(loadedPlayer)
-        })));
-        tick();
+        let request = httpMock.expectOne('/api/security');
+        expect(request.request.method).toEqual('GET');
+        expect(request.request.body).toBeNull();
+        request.flush(loadedPlayer);
         expect(currentPlayer).toBeDefined();
         expect(loggedInPlayer).toBeDefined();
         //noinspection TypeScriptValidateTypes
@@ -95,10 +86,10 @@ describe('Service: player service', () => {
             };
             initiallyLoadedPlayer = new Player(loadedPlayer);
             playerService.loadLoggedInPlayer();
-            expect(lastConnection.request.url).toEqual('/api/security');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(loadedPlayer)
-            })));
+            let request = httpMock.expectOne('/api/security');
+            expect(request.request.method).toEqual('GET');
+            expect(request.request.body).toBeNull();
+            request.flush(loadedPlayer);
             tick();
         }));
 
@@ -139,10 +130,11 @@ describe('Service: player service', () => {
 
         it('successful logout posts and redirects', fakeAsync(() => {
             playerService.logout();
-            expect(lastConnection.request.url).toEqual('/signout');
-            expect(lastConnection.request.method).toEqual(RequestMethod.Post);
-            lastConnection.mockRespond(new Response(new ResponseOptions({})));
-            tick();
+
+            let request = httpMock.expectOne('/signout');
+            expect(request.request.method).toEqual('POST');
+            expect(request.request.body).toBeNull();
+            request.flush('');
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(new Player()));
             expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(new Player()));
             expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
@@ -151,10 +143,10 @@ describe('Service: player service', () => {
 
         it('even failed logout posts and redirects', fakeAsync(() => {
             playerService.logout();
-            expect(lastConnection.request.url).toEqual('/signout');
-            expect(lastConnection.request.method).toEqual(RequestMethod.Post);
-            lastConnection.mockError(new ResponseOptions({status: 500}));
-            tick();
+            let request = httpMock.expectOne('/signout');
+            expect(request.request.method).toEqual('POST');
+            expect(request.request.body).toBeNull();
+            request.flush('');
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(new Player()));
             expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(new Player()));
             expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
@@ -163,13 +155,12 @@ describe('Service: player service', () => {
 
         it('switching to another user', fakeAsync(() => {
             playerService.simulateUser('newid');
-            expect(lastConnection.request.url).toEqual('/api/player/admin/newid');
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
+            let request = httpMock.expectOne('/api/player/admin/newid');
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toEqual({});
             let simulatedPlayer = new Player({id: 'newid', displayName: 'sim', source: 'MANUAL'});
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(simulatedPlayer)
-            })));
-            tick();
+            request.flush(simulatedPlayer);
+
             expect(currentPlayer).toBeDefined();
             expect(loggedInPlayer).toBeDefined();
             //noinspection TypeScriptValidateTypes

@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
 import {JTBCoreGamesUIMessageBus} from '../messagebus/jtb.core.games.ui.messagebus.module';
 import {PlayerService} from './player.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
-    imports: [HttpModule, JTBCoreGamesUIMessageBus],
+    imports: [HttpClientModule, JTBCoreGamesUIMessageBus],
     exports: [JTBCoreGamesUIMessageBus],
     providers: [
         PlayerService

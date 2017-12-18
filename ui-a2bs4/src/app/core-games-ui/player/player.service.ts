@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Player} from './player.model';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Http} from '@angular/http';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class PlayerService {
@@ -17,7 +17,7 @@ export class PlayerService {
     private playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
     private loggedInSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
 
-    constructor(private http: Http,
+    constructor(private http: HttpClient,
                 private messageBus: MessageBusService,
                 private router: Router) {
         this.player = Observable.from<Player>(this.playerSubject);
@@ -34,7 +34,6 @@ export class PlayerService {
 
     public loadLoggedInPlayer(): void {
         this.http.get('/api/security')
-            .map(response => response.json())
             .map(json => {
                 let loaded = new Player(json);
                 return loaded;
@@ -51,7 +50,6 @@ export class PlayerService {
 
     public simulateUser(id: string): void {
         this.http.put('/api/player/admin/' + id, {})
-            .map(response => response.json())
             .subscribe(json => {
                 this.playerSubject.next(new Player(json));
             }, error => {
