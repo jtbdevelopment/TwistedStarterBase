@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Response} from '@angular/http';
 import {GameFactory} from '../../core-games-ui/games/gamefactory.serviceinterface';
 import {Game} from '../../core-games-ui/games/game.model';
 import {Observable} from 'rxjs/Observable';
@@ -11,6 +11,7 @@ import {DefaultActionConfirmComponent} from './default-action-confirm.component'
 import {Router} from '@angular/router';
 import {BootstrapAdsService} from '../ads/bootstrap-ads.service';
 import {BootstrapBackdropService} from '../backdrop/bootstrap-backdrop.service';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class BootstrapActionsService {
@@ -19,7 +20,7 @@ export class BootstrapActionsService {
 
     private confirmModal: any;
 
-    constructor(private http: Http,
+    constructor(private http: HttpClient,
                 private router: Router,
                 @Inject('GameFactory') private gameFactory: GameFactory,
                 private modalService: NgbModal,
@@ -50,16 +51,15 @@ export class BootstrapActionsService {
         let observable: Subject<Game> = new Subject<Game>();
         this.backdrop.addBackdrop();
         httpObservable
-            .map(response => response.json())
-            .map(json => this.gameFactory.newGame(json))
-            .subscribe(game => {
+            .subscribe(json => {
+                let game = this.gameFactory.newGame(json);
                 this.gameCache.putGame(game);
                 observable.next(game);
                 this.backdrop.removeBackdrop();
             }, error => {
                 console.log(JSON.stringify(error));
                 let ngbModalRef = this.modalService.open(this.errorModal);
-                ngbModalRef.componentInstance.errorMessage = error.text();
+                ngbModalRef.componentInstance.errorMessage = error.error;
                 observable.complete();
                 this.backdrop.removeBackdrop();
             });
@@ -116,7 +116,7 @@ export class BootstrapActionsService {
         this.takeActionWithConfirm('End this series?', this.gameAction(game, 'endRematch'));
     }
 
-    public gameAction(game: Game, action: string, body?: string): Observable<Response> {
+    public gameAction(game: Game, action: string, body?: any): Observable<Response> {
         return this.http.put(this.gameURL(game) + action, body);
     }
 

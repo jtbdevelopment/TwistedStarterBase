@@ -1,4 +1,3 @@
-import {ResponseType} from '@angular/http';
 import {fakeAsync, TestBed} from '@angular/core/testing';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {FeatureCacheService} from './feature-cache.service';
@@ -10,7 +9,6 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 describe('Service: feature cache service', () => {
     let featureService: FeatureCacheService;
     let messageBus: MessageBusService;
-    let lastConnection: any;
 
     let currentFeatures: FeatureGroup[];
     let httpMock: HttpTestingController;
@@ -178,9 +176,9 @@ describe('Service: feature cache service', () => {
             messageBus.connectionStatus.next(true);
             let request = httpMock.expectOne('/api/features');
             expect(request.request.method).toEqual('GET');
-            request.flush({
-                type: ResponseType.Error,
-                status: 404
+            request.flush(null, {
+                status: 404,
+                statusText: 'error'
             });
             expect(currentFeatures).toEqual([]);
 

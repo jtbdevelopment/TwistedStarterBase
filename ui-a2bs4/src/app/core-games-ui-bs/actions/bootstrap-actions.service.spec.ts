@@ -1,25 +1,16 @@
-import {
-    BaseRequestOptions,
-    ConnectionBackend,
-    Http,
-    RequestMethod,
-    RequestOptions,
-    Response,
-    ResponseOptions
-} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
-import {Component, Input, ReflectiveInjector} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BootstrapActionsService} from './bootstrap-actions.service';
 import {GameFactory} from '../../core-games-ui/games/gamefactory.serviceinterface';
 import {MultiPlayerGame} from '../../core-games-ui/games/multi-player-game.model';
 import {GameCacheService} from '../../core-games-ui/gamecache/game-cache.service';
 import {Router} from '@angular/router';
-import {fakeAsync, tick} from '@angular/core/testing';
-import {DefaultActionErrorComponent} from './default-action-error.component';
-import {DefaultActionConfirmComponent} from './default-action-confirm.component';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {BootstrapAdsService} from '../ads/bootstrap-ads.service';
 import {BootstrapBackdropService} from '../backdrop/bootstrap-backdrop.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {DefaultActionErrorComponent} from './default-action-error.component';
+import {DefaultActionConfirmComponent} from './default-action-confirm.component';
 
 
 @Component({
@@ -106,37 +97,36 @@ class MockBackdrop {
 }
 
 describe('Service: bootstrap actions service', () => {
-    let backend: MockBackend;
-    let lastConnection: any;
     let modalService: MockModalService;
     let actionService: BootstrapActionsService;
     let router: MockRouter;
     let gameCache: MockGameCacheService;
     let ads: MockAdService;
     let backdrop: MockBackdrop;
+    let httpMock: HttpTestingController;
 
     beforeEach(() => {
-        this.injector = ReflectiveInjector.resolveAndCreate([
-            {provide: ConnectionBackend, useClass: MockBackend},
-            {provide: RequestOptions, useClass: BaseRequestOptions},
-            {provide: NgbModal, useClass: MockModalService},
-            {provide: 'GameFactory', useClass: MockGameFactory},
-            {provide: GameCacheService, useClass: MockGameCacheService},
-            {provide: Router, useClass: MockRouter},
-            {provide: BootstrapAdsService, useClass: MockAdService},
-            {provide: BootstrapBackdropService, useClass: MockBackdrop},
-            Http,
-            BootstrapActionsService
-        ]);
-        modalService = this.injector.get(NgbModal);
-        actionService = this.injector.get(BootstrapActionsService);
-        gameCache = this.injector.get(GameCacheService);
-        router = this.injector.get(Router);
-        backend = this.injector.get(ConnectionBackend) as MockBackend;
-        ads = this.injector.get(BootstrapAdsService) as MockAdService;
-        backdrop = this.injector.get(BootstrapBackdropService) as MockBackdrop;
-        backend.connections.subscribe((connection: any) => lastConnection = connection);
-        lastConnection = undefined;
+        TestBed.configureTestingModule({
+            imports: [
+                HttpClientTestingModule
+            ],
+            providers: [
+                {provide: NgbModal, useClass: MockModalService},
+                {provide: 'GameFactory', useClass: MockGameFactory},
+                {provide: GameCacheService, useClass: MockGameCacheService},
+                {provide: Router, useClass: MockRouter},
+                {provide: BootstrapAdsService, useClass: MockAdService},
+                {provide: BootstrapBackdropService, useClass: MockBackdrop},
+                BootstrapActionsService
+            ]
+        });
+        modalService = TestBed.get(NgbModal);
+        actionService = TestBed.get(BootstrapActionsService);
+        gameCache = TestBed.get(GameCacheService);
+        router = TestBed.get(Router);
+        ads = TestBed.get(BootstrapAdsService) as MockAdService;
+        backdrop = TestBed.get(BootstrapBackdropService) as MockBackdrop;
+        httpMock = TestBed.get(HttpTestingController);
     });
 
     it('game url', () => {
@@ -147,18 +137,24 @@ describe('Service: bootstrap actions service', () => {
     it('game action with no body', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'noBody'});
         let put = actionService.gameAction(game, 'test');
-        expect(lastConnection.request.url).toEqual('/api/player/game/noBody/test');
-        expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-        expect(lastConnection.request._body).toBeNull();
+        put.subscribe(() => {
+        });
+
+        let request = httpMock.expectOne('/api/player/game/noBody/test');
+        expect(request.request.method).toEqual('PUT');
+        expect(request.request.body).toBeNull();
     });
 
     it('game action with body', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'body'});
-        let body = JSON.stringify({flag: false, otherOption: 'value'});
+        let body = {flag: false, otherOption: 'value'};
         let put = actionService.gameAction(game, 'testBody', body);
-        expect(lastConnection.request.url).toEqual('/api/player/game/body/testBody');
-        expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-        expect(lastConnection.request._body).toEqual(body);
+        put.subscribe(() => {
+        });
+
+        let request = httpMock.expectOne('/api/player/game/body/testBody');
+        expect(request.request.method).toEqual('PUT');
+        expect(request.request.body).toEqual(body);
     });
 
     describe('simple accept actions with ads with success', () => {
@@ -167,18 +163,17 @@ describe('Service: bootstrap actions service', () => {
 
         afterEach(fakeAsync(() => {
             expect(ads.lastPromise).toBeDefined();
-            expect(lastConnection).toBeUndefined();
             ads.resolve();
             tick();
-            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
+
+            let request = httpMock.expectOne('/api/player/game/successGame/' + action);
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toBeNull();
+
             let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(gameResponse)
-            })));
-            tick();
+            request.flush(gameResponse);
             expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
+            httpMock.verify();
         }));
 
         it('accepts game', () => {
@@ -194,19 +189,19 @@ describe('Service: bootstrap actions service', () => {
 
         afterEach(fakeAsync(() => {
             expect(ads.lastPromise).toBeDefined();
-            expect(lastConnection).toBeUndefined();
             ads.resolve();
             tick();
-            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
+
+            let request = httpMock.expectOne('/api/player/game/successGame/' + action);
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toBeNull();
+
             let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(gameResponse)
-            })));
-            tick();
+            request.flush(gameResponse);
+
             expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
             expect(router.navigateByUrl).toHaveBeenCalledWith(gameResponse.standardLink());
+            httpMock.verify();
         }));
 
         it('rematch game', () => {
@@ -217,27 +212,25 @@ describe('Service: bootstrap actions service', () => {
     });
 
     describe('new game with ads with success', () => {
-        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
         let options: Object;
 
         afterEach(fakeAsync(() => {
             expect(ads.lastPromise).toBeDefined();
-            expect(lastConnection).toBeUndefined();
             ads.resolve();
             tick();
-            expect(lastConnection.request.url).toEqual('/api/player/new');
-            expect(lastConnection.request.method).toEqual(RequestMethod.Post);
-            expect(lastConnection.request._body).toEqual(options);
+
+            let request = httpMock.expectOne('/api/player/new');
+            expect(request.request.method).toEqual('POST');
+            expect(request.request.body).toEqual(options);
+
             let gameResponse = new MultiPlayerGame({id: 'newGame', gamePhase: 'newPhase'});
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(gameResponse)
-            })));
-            tick();
+            request.flush(gameResponse);
+
             expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
             expect(router.navigateByUrl).toHaveBeenCalledWith(gameResponse.standardLink());
         }));
 
-        it('rematch game', () => {
+        it('new game', () => {
             expect(ads.lastPromise).toBeUndefined();
             options = {a: 1, b: '32', c: ['something', 'somethin']};
             actionService.newGame(options);
@@ -250,17 +243,18 @@ describe('Service: bootstrap actions service', () => {
 
         afterEach(fakeAsync(() => {
             expect(ads.lastPromise).toBeDefined();
-            expect(lastConnection).toBeUndefined();
             ads.resolve();
             tick();
-            expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
-            lastConnection.mockError(new Response(new ResponseOptions({
+
+            let request = httpMock.expectOne('/api/player/game/failureGame/' + action);
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toBeNull();
+
+            request.flush('something is not right', {
                 status: 402,
-                body: 'something is not right'
-            })));
-            tick();
+                statusText: 'x'
+            });
+
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
             expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
@@ -279,22 +273,24 @@ describe('Service: bootstrap actions service', () => {
 
         afterEach(fakeAsync(() => {
             expect(ads.lastPromise).toBeDefined();
-            expect(lastConnection).toBeUndefined();
             ads.resolve();
             tick();
-            expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
-            lastConnection.mockError(new Response(new ResponseOptions({
+
+            let request = httpMock.expectOne('/api/player/game/failureGame/' + action);
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toBeNull();
+
+            request.flush('something is not right', {
                 status: 402,
-                body: 'something is not right'
-            })));
-            tick();
+                statusText: 'something is not right'
+            });
+
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
             expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
             expect(gameCache.putGame).not.toHaveBeenCalled();
             expect(router.navigateByUrl).not.toHaveBeenCalled();
+            httpMock.verify();
         }));
 
         it('rematch game', () => {
@@ -303,7 +299,6 @@ describe('Service: bootstrap actions service', () => {
             actionService.rematch(game);
         });
     });
-
     describe('simple accept with failure and custom error', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failureGame'});
         let action: string;
@@ -314,21 +309,22 @@ describe('Service: bootstrap actions service', () => {
 
         afterEach(fakeAsync(() => {
             expect(ads.lastPromise).toBeDefined();
-            expect(lastConnection).toBeUndefined();
             ads.resolve();
             tick();
-            expect(lastConnection.request.url).toEqual('/api/player/game/failureGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
-            lastConnection.mockError(new Response(new ResponseOptions({
+            let request = httpMock.expectOne('/api/player/game/failureGame/' + action);
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toBeNull();
+
+            request.flush('something is not right', {
                 status: 402,
-                body: 'something is not right'
-            })));
-            tick();
+                statusText: 'something is not right'
+            });
+
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(MockReplacementComponent);
             expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
             expect(gameCache.putGame).not.toHaveBeenCalled();
+            httpMock.verify();
         }));
 
         it('accepts game', () => {
@@ -350,15 +346,15 @@ describe('Service: bootstrap actions service', () => {
             modalService.lastStub.close();
             tick();
 
-            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
             let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(gameResponse)
-            })));
-            tick();
+            let request = httpMock.expectOne('/api/player/game/successGame/' + action);
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toBeNull();
+
+            request.flush(gameResponse);
+
             expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
+            httpMock.verify();
         }));
 
         it('reject game', () => {
@@ -381,7 +377,7 @@ describe('Service: bootstrap actions service', () => {
     });
 
     describe('confirming actions with error', () => {
-        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'successGame'});
+        let game: MultiPlayerGame = new MultiPlayerGame({'id': 'failGame'});
         let action: string;
         let confirmMessage: string;
 
@@ -393,18 +389,20 @@ describe('Service: bootstrap actions service', () => {
             modalService.lastStub.close();
             tick();
 
-            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
-            lastConnection.mockError(new Response(new ResponseOptions({
+            let request = httpMock.expectOne('/api/player/game/failGame/' + action);
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toBeNull();
+
+            request.flush('something is not right', {
                 status: 402,
-                body: 'something is not right'
-            })));
-            tick();
+                statusText: 'something is not right'
+            });
+
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
             expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
             expect(gameCache.putGame).not.toHaveBeenCalled();
+            httpMock.verify();
         }));
 
         it('reject game', () => {
@@ -439,16 +437,7 @@ describe('Service: bootstrap actions service', () => {
             modalService.lastStub.dismiss();
             tick();
 
-            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
-
-            //  Shouldn't be called but confirming it wouldnt be processed even if it was
-            let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(gameResponse)
-            })));
-            tick();
+            httpMock.verify();
             expect(gameCache.putGame).not.toHaveBeenCalled();
         }));
 
@@ -488,15 +477,14 @@ describe('Service: bootstrap actions service', () => {
             modalService.lastStub.close();
             tick();
 
-            expect(lastConnection.request.url).toEqual('/api/player/game/successGame/' + action);
-            expect(lastConnection.request.method).toEqual(RequestMethod.Put);
-            expect(lastConnection.request._body).toBeNull();
             let gameResponse = new MultiPlayerGame({id: 'successGame2', gamePhase: 'aPhase'});
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(gameResponse)
-            })));
-            tick();
+            let request = httpMock.expectOne('/api/player/game/successGame/' + action);
+            expect(request.request.method).toEqual('PUT');
+            expect(request.request.body).toBeNull();
+
+            request.flush(gameResponse);
             expect(gameCache.putGame).toHaveBeenCalledWith(gameResponse);
+            httpMock.verify();
         }));
 
         it('reject game', () => {
