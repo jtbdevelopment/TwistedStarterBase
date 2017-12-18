@@ -1,49 +1,50 @@
-import {MockBackend} from '@angular/http/testing';
 import {FriendsService} from './friends.service';
-import {ReflectiveInjector} from '@angular/core';
-import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions} from '@angular/http';
-import {async, fakeAsync, tick} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {Friend} from './friend.model';
 import {Invitable} from './invitable.model';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {Player} from '../player/player.model';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 
 describe('Service: friends service', () => {
-    let backend: MockBackend;
-    let lastConnection: any;
     let friendService: FriendsService;
     let friends: Friend[];
     let invitables: Invitable[];
     let messageBus: MessageBusService;
+    let httpMock: HttpTestingController;
 
-    beforeEach(async(() => {
-        lastConnection = null;
-        this.injector = ReflectiveInjector.resolveAndCreate([
-                {provide: ConnectionBackend, useClass: MockBackend},
-                {provide: RequestOptions, useClass: BaseRequestOptions},
-                Http,
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [
                 MessageBusService,
                 FriendsService
             ]
-        );
-        friendService = this.injector.get(FriendsService);
-        messageBus = this.injector.get(MessageBusService);
-        backend = this.injector.get(ConnectionBackend) as MockBackend;
-        backend.connections.subscribe((connection: any) => lastConnection = connection);
+        });
+        httpMock = TestBed.get(HttpTestingController);
+        friendService = TestBed.get(FriendsService);
+        messageBus = TestBed.get(MessageBusService);
         friendService.friends.subscribe(x => friends = x);
         friendService.invitableFriends.subscribe(x => invitables = x);
-    }));
+    });
+
+    afterEach(() => {
+        httpMock.verify();
+    });
 
     it('initial state is no friends', () => {
         expect(friends).toEqual([]);
         expect(invitables).toEqual([]);
-        expect(lastConnection).toBeNull();
     });
 
     it('refresh friends, only invitables', fakeAsync(() => {
         friendService.refreshFriends();
-        expect(lastConnection.request.url).toEqual('/api/player/friendsV2');
+
+        let request = httpMock.expectOne('/api/player/friendsV2');
+        expect(request.request.method).toEqual('GET');
+        expect(request.request.body).toBeNull();
+
         let friendsResponse = {
             invitableFriends: [
                 {
@@ -60,10 +61,7 @@ describe('Service: friends service', () => {
                 },
             ]
         };
-        lastConnection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(friendsResponse)
-        })));
-        tick();
+        request.flush(friendsResponse);
 
         expect(friends).toEqual([]);
         expect(invitables.length).toEqual(3);
@@ -72,7 +70,9 @@ describe('Service: friends service', () => {
 
     it('refresh friends, only friends', fakeAsync(() => {
         friendService.refreshFriends();
-        expect(lastConnection.request.url).toEqual('/api/player/friendsV2');
+        let request = httpMock.expectOne('/api/player/friendsV2');
+        expect(request.request.method).toEqual('GET');
+        expect(request.request.body).toBeNull();
         let friendsResponse = {
             maskedFriends: [
                 {
@@ -85,10 +85,7 @@ describe('Service: friends service', () => {
                 }
             ]
         };
-        lastConnection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(friendsResponse)
-        })));
-        tick();
+        request.flush(friendsResponse);
 
         expect(invitables).toEqual([]);
         expect(friends.length).toEqual(2);
@@ -97,7 +94,9 @@ describe('Service: friends service', () => {
 
     it('refresh friends', fakeAsync(() => {
         friendService.refreshFriends();
-        expect(lastConnection.request.url).toEqual('/api/player/friendsV2');
+        let request = httpMock.expectOne('/api/player/friendsV2');
+        expect(request.request.method).toEqual('GET');
+        expect(request.request.body).toBeNull();
         let friendsResponse = {
             invitableFriends: [
                 {
@@ -124,10 +123,7 @@ describe('Service: friends service', () => {
                 }
             ]
         };
-        lastConnection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(friendsResponse)
-        })));
-        tick();
+        request.flush(friendsResponse);
 
         expect(friends.length).toEqual(2);
         expect(JSON.stringify(friends)).toEqual('[{"md5":"x1","displayName":"dname1"},{"md5":"1fx","displayName":"dname3"}]');
@@ -140,7 +136,9 @@ describe('Service: friends service', () => {
         messageBus.playerUpdates.next(new Player({id: 'thisId'}));
         tick();
         friendService.refreshFriends();
-        expect(lastConnection.request.url).toEqual('/api/player/friendsV2');
+        let request = httpMock.expectOne('/api/player/friendsV2');
+        expect(request.request.method).toEqual('GET');
+        expect(request.request.body).toBeNull();
         let friendsResponse = {
             invitableFriends: [
                 {
@@ -155,10 +153,7 @@ describe('Service: friends service', () => {
                 }
             ]
         };
-        lastConnection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(friendsResponse)
-        })));
-        tick();
+        request.flush(friendsResponse);
 
         expect(friends.length).toEqual(1);
         expect(invitables.length).toEqual(1);
@@ -175,7 +170,9 @@ describe('Service: friends service', () => {
         messageBus.playerUpdates.next(new Player({id: 'thisId', imageUrl: 'x'}));
         tick();
         friendService.refreshFriends();
-        expect(lastConnection.request.url).toEqual('/api/player/friendsV2');
+        let request = httpMock.expectOne('/api/player/friendsV2');
+        expect(request.request.method).toEqual('GET');
+        expect(request.request.body).toBeNull();
         let friendsResponse = {
             invitableFriends: [
                 {
@@ -190,10 +187,7 @@ describe('Service: friends service', () => {
                 }
             ]
         };
-        lastConnection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(friendsResponse)
-        })));
-        tick();
+        request.flush(friendsResponse);
 
         expect(friends.length).toEqual(1);
         expect(invitables.length).toEqual(1);

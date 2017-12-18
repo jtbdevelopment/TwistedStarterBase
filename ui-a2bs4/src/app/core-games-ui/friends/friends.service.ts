@@ -3,9 +3,9 @@ import {Observable} from 'rxjs/Observable';
 import {Friend} from './friend.model';
 import {Invitable} from './invitable.model';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Http} from '@angular/http';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {Player} from '../player/player.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class FriendsService {
@@ -16,7 +16,7 @@ export class FriendsService {
     private friendsSubject: BehaviorSubject<Friend[]> = new BehaviorSubject([]);
     private invitableFriendsSubject: BehaviorSubject<Invitable[]> = new BehaviorSubject([]);
 
-    constructor(private http: Http, private messageBus: MessageBusService) {
+    constructor(private http: HttpClient, private messageBus: MessageBusService) {
         this.friends = Observable.from<Friend[]>(this.friendsSubject);
         this.invitableFriends = Observable.from<Invitable[]>(this.invitableFriendsSubject);
         this.messageBus.playerUpdates.subscribe(p => {
@@ -30,7 +30,6 @@ export class FriendsService {
 
     public refreshFriends(): void {
         this.http.get('/api/player/friendsV2')
-            .map(response => response.json())
             .map(obj => {
                 let container = new Map<string, Object[]>();
                 let newFriends = [];
