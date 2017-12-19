@@ -1,14 +1,12 @@
-import {ReflectiveInjector} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {async, fakeAsync, tick} from '@angular/core/testing';
+import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {Game} from '../games/game.model';
-import {MockBackend} from '@angular/http/testing';
-import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions} from '@angular/http';
 import {GameClassifier} from './game-classifier.serviceinterface';
 import {GameCacheService} from './game-cache.service';
 import {GameFactory} from '../games/gamefactory.serviceinterface';
 import {MultiPlayerGame} from '../games/multi-player-game.model';
 import {MessageBusService} from '../messagebus/message-bus.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 class MockClassifier implements GameClassifier<Game> {
     public classifications = ['A', 'B', 'D'];
@@ -36,34 +34,33 @@ class MockGameFactory implements GameFactory {
 }
 
 describe('Service: game cache service', () => {
-    let backend: MockBackend;
-    let lastConnection: any;
     let gameCache: GameCacheService;
     let messageBus: MessageBusService;
     let classifier: MockClassifier;
+    let httpMock: HttpTestingController;
 
     beforeEach(async(() => {
-        lastConnection = null;
-        this.injector = ReflectiveInjector.resolveAndCreate([
-                {provide: ConnectionBackend, useClass: MockBackend},
-                {provide: RequestOptions, useClass: BaseRequestOptions},
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [
                 {provide: 'GameClassifier', useClass: MockClassifier},
                 {provide: 'GameFactory', useClass: MockGameFactory},
-                Http,
                 MessageBusService,
-            GameCacheService
+                GameCacheService,
             ]
-        );
-        gameCache = this.injector.get(GameCacheService);
-        messageBus = this.injector.get(MessageBusService);
-        classifier = this.injector.get('GameClassifier');
-        backend = this.injector.get(ConnectionBackend) as MockBackend;
-        backend.connections.subscribe((connection: any) => lastConnection = connection);
+        });
+        gameCache = TestBed.get(GameCacheService);
+        messageBus = TestBed.get(MessageBusService);
+        classifier = TestBed.get('GameClassifier');
+        httpMock = TestBed.get(HttpTestingController);
     }));
+
+    afterEach(() => {
+        httpMock.verify();
+    });
 
     it('initial state is no categories', () => {
         expect(gameCache.getGamesCount()).toBeCloseTo(0);
-        expect(lastConnection).toBeNull();
     });
 
     describe('initialization', () => {
@@ -79,11 +76,10 @@ describe('Service: game cache service', () => {
             beforeEach(fakeAsync(() => {
                 messageBus.connectionStatus.next(true);
                 tick();
-                expect(lastConnection.request.url).toEqual('/api/player/games');
-                lastConnection.mockRespond(new Response(new ResponseOptions({
-                    body: JSON.stringify(expectedGames)
-                })));
-                tick();
+                let request = httpMock.expectOne('/api/player/games');
+                expect(request.request.method).toEqual('GET');
+                expect(request.request.body).toBeNull();
+                request.flush(expectedGames);
             }));
 
             afterEach(fakeAsync(() => {
@@ -135,7 +131,6 @@ describe('Service: game cache service', () => {
                     expect(gameList).toEqual([]);
                 });
                 expect(gameCache.getGamesCount()).toBeCloseTo(0);
-                expect(lastConnection).toBeNull();
             }));
 
             describe('state after categories are ready and server connected', () => {
@@ -144,11 +139,10 @@ describe('Service: game cache service', () => {
                 }));
 
                 it('requests games after connected', fakeAsync(() => {
-                    expect(lastConnection.request.url).toEqual('/api/player/games');
-                    lastConnection.mockRespond(new Response(new ResponseOptions({
-                        body: JSON.stringify(expectedGames)
-                    })));
-                    tick();
+                    let request = httpMock.expectOne('/api/player/games');
+                    expect(request.request.method).toEqual('GET');
+                    expect(request.request.body).toBeNull();
+                    request.flush(expectedGames);
 
                     expect(gameCache.getGamesCount()).toBeCloseTo(5);
                     expect(JSON.stringify(games[0])).toEqual(JSON.stringify([expectedGames[1]]));
@@ -172,10 +166,10 @@ describe('Service: game cache service', () => {
         beforeEach(fakeAsync(() => {
             messageBus.connectionStatus.next(true);
             tick();
-            expect(lastConnection.request.url).toEqual('/api/player/games');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(expectedGames)
-            })));
+            let request = httpMock.expectOne('/api/player/games');
+            expect(request.request.method).toEqual('GET');
+            expect(request.request.body).toBeNull();
+            request.flush(expectedGames);
             classifier.classificationSubject.next(classifier.classifications);
             tick();
             classifier.classifications.forEach((c) => {

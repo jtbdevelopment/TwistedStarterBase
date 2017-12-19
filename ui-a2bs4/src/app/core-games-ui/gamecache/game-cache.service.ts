@@ -1,10 +1,10 @@
 import {Inject, Injectable} from '@angular/core';
 import {Game} from '../games/game.model';
-import {Http} from '@angular/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {GameClassifier} from './game-classifier.serviceinterface';
 import {GameFactory} from '../games/gamefactory.serviceinterface';
 import {MessageBusService} from '../messagebus/message-bus.service';
+import {HttpClient} from '@angular/common/http';
 
 //  TODO - split up fetcher from cache logic?
 @Injectable()
@@ -14,7 +14,7 @@ export class GameCacheService {
 
     private isConnected: boolean = false;
 
-    constructor(private http: Http,
+    constructor(private http: HttpClient,
                 private messageBus: MessageBusService,
                 @Inject('GameFactory') private gameFactory: GameFactory,
                 @Inject('GameClassifier') private gameClassifier: GameClassifier<any>) {
@@ -137,7 +137,6 @@ export class GameCacheService {
     private updatesStarted(): void {
         this.isConnected = true;
         this.http.get('/api/player/games')
-            .map(response => response.json() as Object[])
             .map(gameObjects => {
                 let games = [];
                 gameObjects.forEach(gameObject => {
