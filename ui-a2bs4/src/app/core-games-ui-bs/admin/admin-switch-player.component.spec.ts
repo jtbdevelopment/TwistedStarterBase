@@ -1,6 +1,6 @@
-import {fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {NgbModule, NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
-import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions} from '@angular/http';
+import {BaseRequestOptions, ConnectionBackend, RequestOptions} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {AdminSwitchPlayerComponent} from './admin-switch-player.component';
 import {FormsModule} from '@angular/forms';
@@ -8,6 +8,8 @@ import {PlayerService} from '../../core-games-ui/player/player.service';
 import {Player} from '../../core-games-ui/player/player.model';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {HttpRequest} from '@angular/common/http';
 
 class MockPlayerService {
     static playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
@@ -20,17 +22,19 @@ class MockPlayerService {
 }
 
 describe('admin switch player component', () => {
-    let backend: MockBackend;
-    let lastConnection: any;
+    let httpMock: HttpTestingController;
 
     let initialPlayer = new Player({id: 'loggedin'});
     let simUser = new Player({id: 'sim'});
 
-    beforeEach(fakeAsync(() => {
+    let fixture: ComponentFixture<AdminSwitchPlayerComponent>;
+
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 NgbModule,
-                FormsModule
+                FormsModule,
+                HttpClientTestingModule
             ],
             declarations: [
                 AdminSwitchPlayerComponent
@@ -39,30 +43,22 @@ describe('admin switch player component', () => {
                 {provide: ConnectionBackend, useClass: MockBackend},
                 {provide: RequestOptions, useClass: BaseRequestOptions},
                 {provide: PlayerService, useClass: MockPlayerService},
-                Http,
                 NgbPaginationConfig
             ],
         });
         TestBed.compileComponents();
+        httpMock = TestBed.get(HttpTestingController);
+        fixture = TestBed.createComponent(AdminSwitchPlayerComponent);
+        fixture.detectChanges();
         MockPlayerService.playerSubject.next(initialPlayer);
         MockPlayerService.loggedInSubject.next(initialPlayer);
-        tick();
-    }));
+    });
 
-    beforeEach(inject([ConnectionBackend], (connectBackEnd) => {
-        backend = connectBackEnd;
-        backend.connections.subscribe((connection: any) => {
-            lastConnection = connection;
-        });
-    }));
-
-    it('should render results from http', fakeAsync(() => {
-        const fixture = TestBed.createComponent(AdminSwitchPlayerComponent);
-        fixture.detectChanges();
+    it('should render results from http', () => {
         expect(fixture.componentInstance.revertEnabled).toBeFalsy();
         expect(fixture.componentInstance.revertText).toEqual('You are yourself.');
         expect(fixture.componentInstance.searchText).toEqual('');
-    }));
+    });
 
     describe('it after initial page of users loaded', () => {
         let players = [
@@ -71,24 +67,28 @@ describe('admin switch player component', () => {
             new Player({id: 'id3', displayName: 'dn4'}),
             new Player({id: 'id4', displayName: 'dn4'}),
         ];
-        let fixture: any;
-        beforeEach(fakeAsync(() => {
-            fixture = TestBed.createComponent(AdminSwitchPlayerComponent);
-            expect(lastConnection.request.url).toEqual('/api/player/admin/playersLike/?pageSize=20&page=0&like=');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: {
-                    totalElements: 20,
-                    number: 0,
-                    content: players
-                }
-            })));
-            tick();
-        }));
+        beforeEach(() => {
+            let request = httpMock.expectOne(
+                (req: HttpRequest) => req.url === '/api/player/admin/playersLike' &&
+                    req.params.get('pageSize') == 20 &&
+                    req.params.get('page') == 0 &&
+                    req.params.get('like') == ''
+            );
+            request.flush({
+                totalElements: 40,
+                number: 0,
+                content: players
+            });
+            fixture.detectChanges();
+        });
+
+        afterEach(() => {
+            httpMock.verify();
+        });
 
         it('does render of players', fakeAsync(() => {
-            fixture.detectChanges();
             expect(fixture.componentInstance.currentPage).toBeCloseTo(1);
-            expect(fixture.componentInstance.totalPlayers).toBeCloseTo(20);
+            expect(fixture.componentInstance.totalPlayers).toBeCloseTo(40);
             expect(JSON.stringify(fixture.componentInstance.players)).toEqual(JSON.stringify(players));
 
             players.forEach(p => {
@@ -105,32 +105,34 @@ describe('admin switch player component', () => {
             ];
 
             fixture.componentInstance.currentPage = 2;
-            fixture.componentInstance.changePage();
             fixture.detectChanges();
+            tick();
+            fixture.componentInstance.changePage();
 
-            expect(lastConnection.request.url).toEqual('/api/player/admin/playersLike/?pageSize=20&page=1&like=');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: {
-                    totalElements: 20,
-                    number: 1,
-                    content: newPlayers
-                }
-            })));
+            let request = httpMock.expectOne(
+                (req: HttpRequest) => req.url === '/api/player/admin/playersLike' &&
+                    req.params.get('pageSize') == 20 &&
+                    req.params.get('page') == 1 &&
+                    req.params.get('like') == ''
+            );
+            request.flush({
+                totalElements: 45,
+                number: 1,
+                content: newPlayers
+            });
             fixture.detectChanges();
             expect(fixture.componentInstance.currentPage).toEqual(2);
-            expect(fixture.componentInstance.totalPlayers).toBeCloseTo(20);
+            expect(fixture.componentInstance.totalPlayers).toBeCloseTo(45);
             expect(JSON.stringify(fixture.componentInstance.players)).toEqual(JSON.stringify(newPlayers));
-
             players.forEach(p => {
                 expect(fixture.nativeElement.querySelector('#' + p.id)).toBeNull();
             });
             newPlayers.forEach(p => {
                 expect(fixture.nativeElement.querySelector('#' + p.id)).not.toBeNull();
             });
-            tick();
         }));
 
-        it('can change search text', fakeAsync(() => {
+        it('can change search text', () => {
             let newPlayers = [
                 new Player({id: 'id7', displayName: 'dn7'})
             ];
@@ -139,14 +141,17 @@ describe('admin switch player component', () => {
             fixture.detectChanges();
             fixture.componentInstance.refreshUsers();
 
-            expect(lastConnection.request.url).toEqual('/api/player/admin/playersLike/?pageSize=20&page=0&like=dn7');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: {
-                    totalElements: 1,
-                    number: 0,
-                    content: newPlayers
-                }
-            })));
+            let request = httpMock.expectOne(
+                (req: HttpRequest) => req.url === '/api/player/admin/playersLike' &&
+                    req.params.get('pageSize') == 20 &&
+                    req.params.get('page') == 0 &&
+                    req.params.get('like') == 'dn7'
+            );
+            request.flush({
+                totalElements: 1,
+                number: 0,
+                content: newPlayers
+            });
             fixture.detectChanges();
             expect(fixture.componentInstance.currentPage).toEqual(1);
             expect(fixture.componentInstance.totalPlayers).toBeCloseTo(1);
@@ -158,32 +163,29 @@ describe('admin switch player component', () => {
             newPlayers.forEach(p => {
                 expect(fixture.nativeElement.querySelector('#' + p.id)).not.toBeNull();
             });
-            tick();
-        }));
+        });
 
-        it('switching players', fakeAsync(inject([PlayerService], (playerService) => {
+        it('switching players', inject([PlayerService], (playerService) => {
             fixture.componentInstance.switchToPlayer(simUser.id);
             expect(playerService.simulateUser).toHaveBeenCalledWith(simUser.id);
             MockPlayerService.playerSubject.next(simUser);
-            tick();
             fixture.detectChanges();
 
             expect(fixture.componentInstance.revertEnabled).toBeTruthy();
             expect(fixture.componentInstance.revertText).toEqual('You are simulating another player.');
-        })));
+        }));
 
-        it('reverting', fakeAsync(inject([PlayerService], (playerService) => {
+        it('reverting', inject([PlayerService], (playerService) => {
             fixture.componentInstance.revertEnabled = true;
             fixture.componentInstance.revertText = '';
             fixture.componentInstance.revertToNormal();
             expect(playerService.simulateUser).toHaveBeenCalledWith(initialPlayer.id);
             MockPlayerService.playerSubject.next(initialPlayer);
-            tick();
             fixture.detectChanges();
 
             expect(fixture.componentInstance.revertEnabled).toBeFalsy();
             expect(fixture.componentInstance.revertText).toEqual('You are yourself.');
-        })));
+        }));
     });
 
 });

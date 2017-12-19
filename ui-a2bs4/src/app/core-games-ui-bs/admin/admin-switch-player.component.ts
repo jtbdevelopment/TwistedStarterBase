@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Player} from '../../core-games-ui/player/player.model';
 import {PlayerService} from '../../core-games-ui/player/player.service';
-import {Http} from '@angular/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Component({
     selector: 'admin-switch-player',
@@ -20,7 +20,7 @@ export class AdminSwitchPlayerComponent {
     private player: Player;
     private loggedInPlayer: Player;
 
-    constructor(private playerService: PlayerService, private http: Http) {
+    constructor(private playerService: PlayerService, private http: HttpClient) {
         this.playerService.player.subscribe(p => {
             this.player = p;
             this.computeRevert();
@@ -45,16 +45,16 @@ export class AdminSwitchPlayerComponent {
     }
 
     public refreshUsers(): void {
-        let pageParams = '?pageSize=' + this.pageSize +
-            '&page=' + (this.currentPage - 1) +
-            //  TODO - encode
-            '&like=' + this.searchText;
-        this.http.get('/api/player/admin/playersLike/' + pageParams)
-            .map(response => response.json())
-            .subscribe(json => {
-                    this.processUsers(json);
-                }
-            );
+        this.http.get(
+            '/api/player/admin/playersLike',
+            {
+                params:
+                    new HttpParams().set('page', String(this.currentPage - 1)).set('like', this.searchText).set('pageSize', String(this.pageSize))
+            }
+        ).subscribe(json => {
+                this.processUsers(json);
+            }
+        );
     }
 
     private processUsers(json: any): void {

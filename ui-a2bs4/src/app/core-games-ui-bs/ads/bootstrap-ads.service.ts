@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {BootstrapBackdropService} from '../backdrop/bootstrap-backdrop.service';
 
 
-declare function invokeApplixirVideoUnit(options: any);
-
 @Injectable()
 export class BootstrapAdsService {
     private static DEFAULT_TIME_BETWEEN_ADS: number = 2 * 60 * 100; //  2 minutes in millis
