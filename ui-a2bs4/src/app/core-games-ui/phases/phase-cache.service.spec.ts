@@ -1,49 +1,35 @@
-import {
-    BaseRequestOptions,
-    ConnectionBackend,
-    Http,
-    RequestOptions,
-    Response,
-    ResponseOptions,
-    ResponseType
-} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
-import {ReflectiveInjector} from '@angular/core';
 import {Phase} from './phase.model';
-import {fakeAsync, tick} from '@angular/core/testing';
+import {fakeAsync, TestBed} from '@angular/core/testing';
 import {PhaseCacheService} from './phase-cache.service';
 import {MessageBusService} from '../messagebus/message-bus.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('Service: phase cache service', () => {
     let phaseCache: PhaseCacheService;
     let messageBus: MessageBusService;
-    let backend: MockBackend;
-    let lastConnection: any;
-
+    let httpMock: HttpTestingController;
     let currentPhases: Phase[];
 
     beforeEach(() => {
         currentPhases = null;
-        lastConnection = null;
-        this.injector = ReflectiveInjector.resolveAndCreate([
-            {provide: ConnectionBackend, useClass: MockBackend},
-            {provide: RequestOptions, useClass: BaseRequestOptions},
-            Http,
-            PhaseCacheService,
-            MessageBusService
-        ]);
-        phaseCache = this.injector.get(PhaseCacheService);
-        messageBus = this.injector.get(MessageBusService);
-        backend = this.injector.get(ConnectionBackend) as MockBackend;
-        backend.connections.subscribe((connection: any) => lastConnection = connection);
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [PhaseCacheService, MessageBusService]
+        });
+        phaseCache = TestBed.get(PhaseCacheService);
+        messageBus = TestBed.get(MessageBusService);
+        httpMock = TestBed.get(HttpTestingController);
         phaseCache.phases.subscribe((p) => {
             currentPhases = p;
         });
     });
 
+    afterEach(() => {
+        httpMock.verify();
+    });
+
     it('defaults to empty phases', () => {
         expect(currentPhases).toEqual([]);
-        expect(lastConnection).toBeNull();
     });
 
     describe('loading phases', () => {
@@ -64,49 +50,41 @@ describe('Service: phase cache service', () => {
         });
 
         it('it requests phases on first request', fakeAsync(() => {
-            expect(lastConnection).toBeNull();
             messageBus.connectionStatus.next(true);
-            expect(lastConnection.request.url).toEqual('/api/phases');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(results)
-            })));
-            tick();
+            let request = httpMock.expectOne('/api/phases');
+            expect(request.request.method).toEqual('GET');
+            expect(request.request.body).toBeNull();
+            request.flush(results);
         }));
 
         it('it does not re-request after first call', fakeAsync(() => {
-            expect(lastConnection).toBeNull();
             messageBus.connectionStatus.next(true);
-            expect(lastConnection.request.url).toEqual('/api/phases');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(results)
-            })));
-            tick();
+            let request = httpMock.expectOne('/api/phases');
+            expect(request.request.method).toEqual('GET');
+            expect(request.request.body).toBeNull();
+            request.flush(results);
 
-            lastConnection = null;
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);
-            expect(lastConnection).toBeNull();
         }));
 
         it('it does re-request after first call if first fails', fakeAsync(() => {
-            expect(lastConnection).toBeNull();
             messageBus.connectionStatus.next(true);
-            expect(lastConnection.request.url).toEqual('/api/phases');
-            lastConnection.mockError(new ResponseOptions({
-                type: ResponseType.Error,
-                status: 404
-            }));
-            tick();
+            let request = httpMock.expectOne('/api/phases');
+            expect(request.request.method).toEqual('GET');
+            expect(request.request.body).toBeNull();
+            request.flush('error', {
+                status: 402,
+                statusText: 'error'
+            });
 
             expect(currentPhases).toEqual([]);
-            lastConnection = null;
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);
-            expect(lastConnection.request.url).toEqual('/api/phases');
-            lastConnection.mockRespond(new Response(new ResponseOptions({
-                body: JSON.stringify(results)
-            })));
-            tick();
+            let request = httpMock.expectOne('/api/phases');
+            expect(request.request.method).toEqual('GET');
+            expect(request.request.body).toBeNull();
+            request.flush(results);
         }));
     });
 });

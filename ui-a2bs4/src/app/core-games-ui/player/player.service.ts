@@ -35,8 +35,7 @@ export class PlayerService {
     public loadLoggedInPlayer(): void {
         this.http.get('/api/security')
             .map(json => {
-                let loaded = new Player(json);
-                return loaded;
+                return new Player(json);
             })
             .subscribe(loaded => {
                     this.playerSubject.next(loaded);
