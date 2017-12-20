@@ -1,16 +1,16 @@
 import {Inject, Injectable} from '@angular/core';
-import {Http} from '@angular/http';
 import {PlayerService} from '../../core-games-ui/player/player.service';
 import {AppConfig} from '../../core-games-ui/appconfig.interface';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DefaultVersionNotesComponent} from './default-version-notes.component';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class VersionService {
     private modalComponent: any = DefaultVersionNotesComponent;
 
     constructor(@Inject('AppConfig') private config: AppConfig,
-                private http: Http,
+                private http: HttpClient,
                 private playerService: PlayerService,
                 private modalService: NgbModal) {
         this.playerService.loggedInPlayer.subscribe(p => {
@@ -32,7 +32,7 @@ export class VersionService {
             this.modalService.open(this.modalComponent);
             this.http.post('/api/player/lastVersionNotes/' + this.config.version, '')
                 .subscribe(response => {
-                    console.log('updated player version. ' + response.status);
+                    console.log('updated player version.');
                 }, error => {
                     console.log('error updating player version' + JSON.stringify(error));
                 });
