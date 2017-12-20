@@ -1,7 +1,7 @@
 import {ReflectiveInjector} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Phase} from '../phases/phase.model';
-import {async, fakeAsync, tick} from '@angular/core/testing';
+import {async, fakeAsync} from '@angular/core/testing';
 import {Game} from '../games/game.model';
 import {PhaseGameClassifier} from './phase-game-classifier.service';
 import {PhaseCacheService} from '../phases/phase-cache.service';
@@ -53,7 +53,6 @@ describe('Service: phase game clasifier service', () => {
         let p2 = new Phase('phase2', 'Phase 2', 'Phase 2 Desc');
         beforeEach(fakeAsync(() => {
             phaseCache.phasesSubject.next([p1, p2]);
-            tick();
         }));
 
         it('classifications are initialized', () => {

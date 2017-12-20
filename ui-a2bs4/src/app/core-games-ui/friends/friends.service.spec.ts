@@ -1,5 +1,5 @@
 import {FriendsService} from './friends.service';
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {Friend} from './friend.model';
 import {Invitable} from './invitable.model';
 import {MessageBusService} from '../messagebus/message-bus.service';
@@ -38,7 +38,7 @@ describe('Service: friends service', () => {
         expect(invitables).toEqual([]);
     });
 
-    it('refresh friends, only invitables', fakeAsync(() => {
+    it('refresh friends, only invitables', () => {
         friendService.refreshFriends();
 
         let request = httpMock.expectOne('/api/player/friendsV2');
@@ -66,9 +66,9 @@ describe('Service: friends service', () => {
         expect(friends).toEqual([]);
         expect(invitables.length).toEqual(3);
         expect(JSON.stringify(invitables)).toEqual('[{"id":"id1","displayName":"name1"},{"id":"id3","displayName":"name3"},{"id":"id2","displayName":"name2"}]');
-    }));
+    });
 
-    it('refresh friends, only friends', fakeAsync(() => {
+    it('refresh friends, only friends', () => {
         friendService.refreshFriends();
         let request = httpMock.expectOne('/api/player/friendsV2');
         expect(request.request.method).toEqual('GET');
@@ -90,9 +90,9 @@ describe('Service: friends service', () => {
         expect(invitables).toEqual([]);
         expect(friends.length).toEqual(2);
         expect(JSON.stringify(friends)).toEqual('[{"md5":"x1","displayName":"dname1"},{"md5":"1fx","displayName":"dname3"}]');
-    }));
+    });
 
-    it('refresh friends', fakeAsync(() => {
+    it('refresh friends', () => {
         friendService.refreshFriends();
         let request = httpMock.expectOne('/api/player/friendsV2');
         expect(request.request.method).toEqual('GET');
@@ -129,12 +129,11 @@ describe('Service: friends service', () => {
         expect(JSON.stringify(friends)).toEqual('[{"md5":"x1","displayName":"dname1"},{"md5":"1fx","displayName":"dname3"}]');
         expect(invitables.length).toEqual(3);
         expect(JSON.stringify(invitables)).toEqual('[{"id":"id1","displayName":"name1"},{"id":"id3","displayName":"name3"},{"id":"id2","displayName":"name2"}]');
-    }));
+    });
 
-    it('update to player does not clear friends', fakeAsync(() => {
+    it('update to player does not clear friends', () => {
 
         messageBus.playerUpdates.next(new Player({id: 'thisId'}));
-        tick();
         friendService.refreshFriends();
         let request = httpMock.expectOne('/api/player/friendsV2');
         expect(request.request.method).toEqual('GET');
@@ -159,16 +158,14 @@ describe('Service: friends service', () => {
         expect(invitables.length).toEqual(1);
 
         messageBus.playerUpdates.next(new Player({id: 'thisId', imageUrl: 'y'}));
-        tick();
 
         expect(friends.length).toEqual(1);
         expect(invitables.length).toEqual(1);
 
-    }));
+    });
 
-    it('update to new player does clear friends', fakeAsync(() => {
+    it('update to new player does clear friends', () => {
         messageBus.playerUpdates.next(new Player({id: 'thisId', imageUrl: 'x'}));
-        tick();
         friendService.refreshFriends();
         let request = httpMock.expectOne('/api/player/friendsV2');
         expect(request.request.method).toEqual('GET');
@@ -193,10 +190,9 @@ describe('Service: friends service', () => {
         expect(invitables.length).toEqual(1);
 
         messageBus.playerUpdates.next(new Player({id: 'newId', imageUrl: 'y'}));
-        tick();
 
         expect(friends.length).toEqual(0);
         expect(invitables.length).toEqual(0);
 
-    }));
+    });
 });

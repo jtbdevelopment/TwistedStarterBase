@@ -1,6 +1,5 @@
 import {ReflectiveInjector} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {async, fakeAsync, tick} from '@angular/core/testing';
 import {TSBGameClassifier} from './tsb-game-classifier.service';
 import {Player} from '../core-games-ui/player/player.model';
 import {PlayerService} from '../core-games-ui/player/player.service';
@@ -30,13 +29,13 @@ describe('Service: tsb game clasifier service', () => {
         expect(classifications).toEqual(['Your Turn', 'Their Turn', 'Older Games']);
     });
 
-    it('can get icons', async(() => {
+    it('can get icons', () => {
         let icons: Map<string, string>;
         classifier.getIcons().subscribe(x => icons = x);
         expect(icons.get('Your Turn')).toEqual('play');
         expect(icons.get('Their Turn')).toEqual('pause');
         expect(icons.get('Older Games')).toEqual('stop');
-    }));
+    });
 
     it('Playing comes out your turn', () => {
         let g = new TSBGame({gamePhase: 'Playing'});
@@ -48,46 +47,42 @@ describe('Service: tsb game clasifier service', () => {
         expect(classifier.classifyGame(g)).toEqual('Your Turn');
     });
 
-    it('Challenged when player md5 is defined and playerState is pending comes out your turn', fakeAsync(() => {
+    it('Challenged when player md5 is defined and playerState is pending comes out your turn', () => {
         let md5 = 'mymd5';
         let p = new Player({md5: md5});
         playerService.player.next(p);
-        tick();
         let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5: 'Pending'}});
         expect(classifier.classifyGame(g)).toEqual('Your Turn');
-    }));
+    });
 
-    it('Challenged when player md5 is defined and playerState is not pending comes out their turn', fakeAsync(() => {
+    it('Challenged when player md5 is defined and playerState is not pending comes out their turn', () => {
         let md5 = 'mymd5';
         let p = new Player({md5: md5});
         playerService.player.next(p);
-        tick();
         let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5: 'Accepted'}});
         expect(classifier.classifyGame(g)).toEqual('Their Turn');
         g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5: 'Quit'}});
         expect(classifier.classifyGame(g)).toEqual('Their Turn');
         g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5: 'Rejected'}});
         expect(classifier.classifyGame(g)).toEqual('Their Turn');
-    }));
+    });
 
-    it('Challenged when player md5 is defined and playerState is not available comes out their turn', fakeAsync(() => {
+    it('Challenged when player md5 is defined and playerState is not available comes out their turn', () => {
         let md5 = 'mymd5';
         let p = new Player({md5: md5});
         playerService.player.next(p);
-        tick();
         let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5other: 'Pending'}});
         expect(classifier.classifyGame(g)).toEqual('Their Turn');
         g = new TSBGame({gamePhase: 'Challenged'});
         expect(classifier.classifyGame(g)).toEqual('Their Turn');
-    }));
+    });
 
-    it('Challenged when player md5 is not defined comes out their turn', fakeAsync(() => {
+    it('Challenged when player md5 is not defined comes out their turn', () => {
         let p = new Player();
         playerService.player.next(p);
-        tick();
         let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5other: 'Pending'}});
         expect(classifier.classifyGame(g)).toEqual('Their Turn');
-    }));
+    });
 
     it('Challenged when player is not defined comes out their turn', () => {
         let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5other: 'Pending'}});

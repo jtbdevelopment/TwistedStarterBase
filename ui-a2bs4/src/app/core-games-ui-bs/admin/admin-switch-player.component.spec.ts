@@ -1,7 +1,5 @@
 import {ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {NgbModule, NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
-import {BaseRequestOptions, ConnectionBackend, RequestOptions} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
 import {AdminSwitchPlayerComponent} from './admin-switch-player.component';
 import {FormsModule} from '@angular/forms';
 import {PlayerService} from '../../core-games-ui/player/player.service';
@@ -40,8 +38,6 @@ describe('admin switch player component', () => {
                 AdminSwitchPlayerComponent
             ],
             providers: [
-                {provide: ConnectionBackend, useClass: MockBackend},
-                {provide: RequestOptions, useClass: BaseRequestOptions},
                 {provide: PlayerService, useClass: MockPlayerService},
                 NgbPaginationConfig
             ],

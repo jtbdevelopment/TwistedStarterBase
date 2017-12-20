@@ -1,5 +1,5 @@
 import {PlayerService} from './player.service';
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {Player} from './player.model';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {Router} from '@angular/router';
@@ -50,7 +50,7 @@ describe('Service: player service', () => {
         expect(loggedInPlayer).toBeDefined();
     });
 
-    it('loads logged in player', fakeAsync(() => {
+    it('loads logged in player', () => {
         let loadedPlayer = {
             source: 'A source',
             sourceId: 'sidX',
@@ -70,11 +70,11 @@ describe('Service: player service', () => {
         //noinspection TypeScriptValidateTypes
         expect(currentPlayer).toEqual(loggedInPlayer);
         expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(expectedPlayer));
-    }));
+    });
 
     describe('after loading logged in player', () => {
         let initiallyLoadedPlayer: Player;
-        beforeEach(fakeAsync(() => {
+        beforeEach(() => {
             let loadedPlayer = {
                 id: 'id',
                 source: 'a source',
@@ -90,8 +90,7 @@ describe('Service: player service', () => {
             expect(request.request.method).toEqual('GET');
             expect(request.request.body).toBeNull();
             request.flush(loadedPlayer);
-            tick();
-        }));
+        });
 
         it('loads logged in player', () => {
             expect(currentPlayer).toBeDefined();
@@ -128,7 +127,7 @@ describe('Service: player service', () => {
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(initiallyLoadedPlayer));
         });
 
-        it('successful logout posts and redirects', fakeAsync(() => {
+        it('successful logout posts and redirects', () => {
             playerService.logout();
 
             let request = httpMock.expectOne('/signout');
@@ -139,9 +138,9 @@ describe('Service: player service', () => {
             expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(new Player()));
             expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
             expect(router.navigateByUrl).toHaveBeenCalledWith('/signin');
-        }));
+        });
 
-        it('even failed logout posts and redirects', fakeAsync(() => {
+        it('even failed logout posts and redirects', () => {
             playerService.logout();
             let request = httpMock.expectOne('/signout');
             expect(request.request.method).toEqual('POST');
@@ -151,9 +150,9 @@ describe('Service: player service', () => {
             expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(new Player()));
             expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
             expect(router.navigateByUrl).toHaveBeenCalledWith('/signin');
-        }));
+        });
 
-        it('switching to another user', fakeAsync(() => {
+        it('switching to another user', () => {
             playerService.simulateUser('newid');
             let request = httpMock.expectOne('/api/player/admin/newid');
             expect(request.request.method).toEqual('PUT');
@@ -166,6 +165,6 @@ describe('Service: player service', () => {
             //noinspection TypeScriptValidateTypes
             expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(initiallyLoadedPlayer));
             expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(simulatedPlayer));
-        }));
+        });
     });
 });
