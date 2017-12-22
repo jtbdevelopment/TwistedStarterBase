@@ -81,7 +81,7 @@ describe('Service: phase cache service', () => {
             expect(currentPhases).toEqual([]);
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);
-            let request = httpMock.expectOne('/api/phases');
+            request = httpMock.expectOne('/api/phases');
             expect(request.request.method).toEqual('GET');
             expect(request.request.body).toBeNull();
             request.flush(results);

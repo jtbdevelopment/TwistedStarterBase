@@ -65,10 +65,10 @@ describe('admin switch player component', () => {
         ];
         beforeEach(() => {
             let request = httpMock.expectOne(
-                (req: HttpRequest) => req.url === '/api/player/admin/playersLike' &&
-                    req.params.get('pageSize') == 20 &&
-                    req.params.get('page') == 0 &&
-                    req.params.get('like') == ''
+                (req: HttpRequest<any>) => req.url === '/api/player/admin/playersLike' &&
+                    req.params.get('pageSize') === '20' &&
+                    req.params.get('page') === '0' &&
+                    req.params.get('like') === ''
             );
             request.flush({
                 totalElements: 40,
@@ -106,10 +106,10 @@ describe('admin switch player component', () => {
             fixture.componentInstance.changePage();
 
             let request = httpMock.expectOne(
-                (req: HttpRequest) => req.url === '/api/player/admin/playersLike' &&
-                    req.params.get('pageSize') == 20 &&
-                    req.params.get('page') == 1 &&
-                    req.params.get('like') == ''
+                (req: HttpRequest<any>) => req.url === '/api/player/admin/playersLike' &&
+                    req.params.get('pageSize') === '20' &&
+                    req.params.get('page') === '1' &&
+                    req.params.get('like') === ''
             );
             request.flush({
                 totalElements: 45,
@@ -138,10 +138,10 @@ describe('admin switch player component', () => {
             fixture.componentInstance.refreshUsers();
 
             let request = httpMock.expectOne(
-                (req: HttpRequest) => req.url === '/api/player/admin/playersLike' &&
-                    req.params.get('pageSize') == 20 &&
-                    req.params.get('page') == 0 &&
-                    req.params.get('like') == 'dn7'
+                (req: HttpRequest<any>) => req.url === '/api/player/admin/playersLike' &&
+                    req.params.get('pageSize') === '20' &&
+                    req.params.get('page') === '0' &&
+                    req.params.get('like') === 'dn7'
             );
             request.flush({
                 totalElements: 1,

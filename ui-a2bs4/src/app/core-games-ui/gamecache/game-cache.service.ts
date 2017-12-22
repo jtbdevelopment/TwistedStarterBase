@@ -136,7 +136,7 @@ export class GameCacheService {
 
     private updatesStarted(): void {
         this.isConnected = true;
-        this.http.get('/api/player/games')
+        this.http.get<any[]>('/api/player/games')
             .map(gameObjects => {
                 let games = [];
                 gameObjects.forEach(gameObject => {

@@ -29,7 +29,7 @@ export class FriendsService {
     }
 
     public refreshFriends(): void {
-        this.http.get('/api/player/friendsV2')
+        this.http.get<any>('/api/player/friendsV2')
             .map(obj => {
                 let container = new Map<string, Object[]>();
                 let newFriends = [];

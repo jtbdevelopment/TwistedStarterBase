@@ -24,7 +24,7 @@ export class FeatureCacheService {
     }
 
     private initialize(): void {
-        this.http.get('/api/features')
+        this.http.get<any[]>('/api/features')
             .map(json => {
                 let groups = [];
                 let groupMap = new Map<string, number>();
