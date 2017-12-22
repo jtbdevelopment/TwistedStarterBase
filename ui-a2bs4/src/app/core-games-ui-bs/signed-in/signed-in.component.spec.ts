@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {PlayerService} from '../../core-games-ui/player/player.service';
 import {SignedInComponent} from './signed-in.component';
 import {Router} from '@angular/router';
@@ -12,7 +12,7 @@ class MockRouter {
 }
 
 describe('Component:  signed in component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 SignedInComponent,
@@ -23,7 +23,7 @@ describe('Component:  signed in component', () => {
             ],
         });
         TestBed.compileComponents();
-    }));
+    });
 
     it('tells player service to load and navigates', () => {
         const fixture = TestBed.createComponent(SignedInComponent);

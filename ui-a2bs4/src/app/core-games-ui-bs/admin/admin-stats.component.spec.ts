@@ -1,4 +1,4 @@
-import {async, fakeAsync, inject, TestBed} from '@angular/core/testing';
+import {fakeAsync, inject, TestBed} from '@angular/core/testing';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminStatsComponent} from './admin-stats.component';
 import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions, Response, ResponseOptions} from '@angular/http';
@@ -8,7 +8,7 @@ describe('admin stats component', () => {
     let backend: MockBackend;
     let connections: any[];
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         connections = [];
         TestBed.configureTestingModule({
             imports: [
@@ -24,7 +24,7 @@ describe('admin stats component', () => {
             ],
         });
         TestBed.compileComponents();
-    }));
+    });
 
     beforeEach(inject([ConnectionBackend], (connectBackEnd) => {
         backend = connectBackEnd;

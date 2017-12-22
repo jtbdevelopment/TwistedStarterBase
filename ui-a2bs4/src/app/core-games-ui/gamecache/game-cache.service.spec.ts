@@ -1,5 +1,5 @@
 import {BehaviorSubject, Observable} from 'rxjs';
-import {async, fakeAsync, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {Game} from '../games/game.model';
 import {GameClassifier} from './game-classifier.serviceinterface';
 import {GameCacheService} from './game-cache.service';
@@ -39,7 +39,7 @@ describe('Service: game cache service', () => {
     let classifier: MockClassifier;
     let httpMock: HttpTestingController;
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
             providers: [
@@ -53,7 +53,7 @@ describe('Service: game cache service', () => {
         messageBus = TestBed.get(MessageBusService);
         classifier = TestBed.get('GameClassifier');
         httpMock = TestBed.get(HttpTestingController);
-    }));
+    });
 
     afterEach(() => {
         httpMock.verify();
@@ -122,17 +122,17 @@ describe('Service: game cache service', () => {
                 });
             });
 
-            it('categories are available and empty games initialized', async(() => {
+            it('categories are available and empty games initialized', () => {
                 games.forEach(gameList => {
                     expect(gameList).toEqual([]);
                 });
                 expect(gameCache.getGamesCount()).toBeCloseTo(0);
-            }));
+            });
 
             describe('state after categories are ready and server connected', () => {
-                beforeEach(async(() => {
+                beforeEach(() => {
                     messageBus.connectionStatus.next(true);
-                }));
+                });
 
                 it('requests games after connected', () => {
                     let request = httpMock.expectOne('/api/player/games');
@@ -159,7 +159,7 @@ describe('Service: game cache service', () => {
         ];
 
         let games: Map<string, Game[]> = new Map<string, Game[]>();
-        beforeEach(fakeAsync(() => {
+        beforeEach(() => {
             messageBus.connectionStatus.next(true);
             let request = httpMock.expectOne('/api/player/games');
             expect(request.request.method).toEqual('GET');
@@ -170,7 +170,7 @@ describe('Service: game cache service', () => {
                 games.set(c, null);
                 gameCache.getGamesForCategory(c).subscribe(x => games.set(c, x));
             });
-        }));
+        });
 
         it('clears games on stop', () => {
             messageBus.connectionStatus.next(false);

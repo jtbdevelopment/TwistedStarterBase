@@ -1,4 +1,4 @@
-import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-toggle.component';
 import {GameMenuService} from '../game-menu/game-menu.service';
@@ -32,7 +32,7 @@ export class MockAppConfig implements AppConfig {
 }
 
 describe('Component:  nav bar game menu toggle component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 NgbModule
@@ -48,7 +48,7 @@ describe('Component:  nav bar game menu toggle component', () => {
             ],
         });
         TestBed.compileComponents();
-    }));
+    });
 
     it('displays no toggle when player loaded', () => {
         const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
@@ -79,19 +79,17 @@ describe('Component:  nav bar game menu toggle component', () => {
         expect(MockGameMenuService.showGamesSubject.getValue()).toBeFalsy();
     });
 
-    it('toggling help on/off shows/hides popover', fakeAsync(inject([HelpDisplayService], (helpService) => {
+    it('toggling help on/off shows/hides popover', inject([HelpDisplayService], (helpService) => {
         const fixture = TestBed.createComponent(NavigationBarGameMenuToggleComponent);
         fixture.componentInstance.playerLoaded = true;
         fixture.detectChanges();
         helpService.toggleHelp();
-        tick();
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(1);
         helpService.toggleHelp();
-        tick();
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(0);
-    })));
+    }));
 
     describe('when enableHover is true', () => {
         beforeEach(inject(['AppConfig'], (config) => {

@@ -82,7 +82,7 @@ describe('admin switch player component', () => {
             httpMock.verify();
         });
 
-        it('does render of players', fakeAsync(() => {
+        it('does render of players', () => {
             expect(fixture.componentInstance.currentPage).toBeCloseTo(1);
             expect(fixture.componentInstance.totalPlayers).toBeCloseTo(40);
             expect(JSON.stringify(fixture.componentInstance.players)).toEqual(JSON.stringify(players));
@@ -90,7 +90,7 @@ describe('admin switch player component', () => {
             players.forEach(p => {
                 expect(fixture.nativeElement.querySelector('#' + p.id)).not.toBeNull();
             });
-        }));
+        });
 
         it('can change pages', fakeAsync(() => {
             let newPlayers = [

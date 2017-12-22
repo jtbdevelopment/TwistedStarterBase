@@ -1,4 +1,4 @@
-import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Component, Input} from '@angular/core';
 import {GameMenuListComponent} from './game-menu-list.component';
@@ -32,7 +32,7 @@ class MockCategoryListComponent {
 }
 
 describe('Component:  game menu list component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 NgbModule
@@ -48,7 +48,7 @@ describe('Component:  game menu list component', () => {
             ]
         });
         TestBed.compileComponents();
-    }));
+    });
 
     it('initializes', () => {
         const fixture = TestBed.createComponent(GameMenuListComponent);
@@ -59,7 +59,7 @@ describe('Component:  game menu list component', () => {
         expect(JSON.stringify(fixture.componentInstance.icons)).toEqual(JSON.stringify([]));
     });
 
-    it('subscribes to game classifier', fakeAsync(() => {
+    it('subscribes to game classifier', () => {
         const fixture = TestBed.createComponent(GameMenuListComponent);
 
         let icons = new Map<string, string>();
@@ -69,7 +69,6 @@ describe('Component:  game menu list component', () => {
         let categories = ['C1', 'Category 2', 'Category Number.3'];
         MockGameClassifier.classifications.next(categories);
         MockGameClassifier.icons.next(icons);
-        tick();
         fixture.detectChanges();
 
         expect(fixture.componentInstance.categories).toEqual(categories);
@@ -83,7 +82,7 @@ describe('Component:  game menu list component', () => {
         expect(querySelectorAll[1].textContent).toEqual(categories[1] + expectedStyles[1] + 'icon2');
         expect(querySelectorAll[2].textContent).toEqual(categories[2] + expectedStyles[2] + 'icon3');
 
-    }));
+    });
 
     it('toggling help on/off shows/hides popover', fakeAsync(inject([HelpDisplayService], (helpService) => {
         const fixture = TestBed.createComponent(GameMenuListComponent);

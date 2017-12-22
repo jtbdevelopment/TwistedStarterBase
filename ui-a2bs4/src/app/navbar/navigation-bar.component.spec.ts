@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {NavigationBarComponent} from './navigation-bar.component';
 import {Component, Input} from '@angular/core';
 import {PlayerService} from '../core-games-ui/player/player.service';
@@ -48,7 +48,7 @@ export class MockPlayerService {
 }
 
 describe('nav bar component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 NavigationBarComponent,
@@ -64,7 +64,7 @@ describe('nav bar component', () => {
         TestBed.compileComponents();
         MockPlayerService.loggedInSubject.next(new Player());
         MockPlayerService.playerSubject.next(new Player());
-    }));
+    });
 
     it('should render basics when no player logged in', () => {
         const fixture = TestBed.createComponent(NavigationBarComponent);

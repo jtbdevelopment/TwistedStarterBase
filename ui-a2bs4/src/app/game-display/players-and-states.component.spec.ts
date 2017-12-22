@@ -1,4 +1,4 @@
-import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -97,7 +97,7 @@ describe('Component:  players and states component', () => {
         baseGame.playerProfiles[playerMD5] = 'myprofile.pl';
     });
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 NgbModule,
@@ -119,9 +119,9 @@ describe('Component:  players and states component', () => {
         gameService = TestBed.get(GameCacheService) as MockGameCacheService;
         fixture = TestBed.createComponent(PlayersAndStatesComponent);
         fixture.detectChanges();
-    }));
+    });
 
-    it('initializes', fakeAsync(() => {
+    it('initializes', () => {
         expect(fixture.componentInstance.groups).toEqual(['Pending', 'Accepted', 'Rejected', 'Quit']);
         expect(fixture.componentInstance.groupCollapsed).toEqual({
             'Pending': false,
@@ -159,12 +159,11 @@ describe('Component:  players and states component', () => {
         expect(fixture.nativeElement.querySelectorAll('.list-players-group-Pending').length).toEqual(0);
         expect(fixture.nativeElement.querySelectorAll('.btn-players-group-Pending').length).toEqual(0);
 
-    }));
+    });
 
-    it('pending accept from player', fakeAsync(() => {
+    it('pending accept from player', () => {
         let newGame = new TSBGame(baseGame);
         gameService.testGameSubject.next(newGame);
-        tick();
         fixture.detectChanges();
         expect(JSON.stringify(fixture.componentInstance.groupPlayers)).toEqual(JSON.stringify({
             'Pending': [
@@ -226,13 +225,12 @@ describe('Component:  players and states component', () => {
         fixture.nativeElement.querySelector('.btn-decline-game').click();
         expect(actionService.reject).toHaveBeenCalledWith(newGame);
 
-    }));
+    });
 
-    it('pending accept from other player', fakeAsync(() => {
+    it('pending accept from other player', () => {
         let newGame = new TSBGame(baseGame);
         newGame.playerStates[playerMD5] = 'Accepted';
         gameService.testGameSubject.next(newGame);
-        tick();
         fixture.detectChanges();
 
         expect(fixture.componentInstance.showAccept).toBeFalsy();
@@ -257,13 +255,12 @@ describe('Component:  players and states component', () => {
         fixture.nativeElement.querySelector('.btn-decline-game').click();
         expect(actionService.reject).toHaveBeenCalledWith(newGame);
 
-    }));
+    });
 
-    it('pending accept from player not in phase to accept', fakeAsync(() => {
+    it('pending accept from player not in phase to accept', () => {
         let newGame = new TSBGame(baseGame);
         newGame.gamePhase = 'Nope';
         gameService.testGameSubject.next(newGame);
-        tick();
         fixture.detectChanges();
 
         expect(fixture.componentInstance.showAccept).toBeFalsy();
@@ -283,13 +280,12 @@ describe('Component:  players and states component', () => {
         expect(fixture.nativeElement.querySelectorAll('.list-group-item-player-Rejected').length).toEqual(1);
         expect(fixture.nativeElement.querySelectorAll('.list-players-group-Pending').length).toEqual(1);
         expect(fixture.nativeElement.querySelectorAll('.list-group-item-player-Pending').length).toEqual(2);
-    }));
+    });
 
-    it('can quit in setup phase', fakeAsync(() => {
+    it('can quit in setup phase', () => {
         let newGame = new TSBGame(baseGame);
         newGame.gamePhase = 'Setup';
         gameService.testGameSubject.next(newGame);
-        tick();
         fixture.detectChanges();
 
         expect(fixture.componentInstance.showAccept).toBeFalsy();
@@ -313,13 +309,12 @@ describe('Component:  players and states component', () => {
         expect(actionService.reject).not.toHaveBeenCalledWith(newGame);
         fixture.nativeElement.querySelector('.btn-quit-game').click();
         expect(actionService.quit).toHaveBeenCalledWith(newGame);
-    }));
+    });
 
-    it('can quit in playing phase', fakeAsync(() => {
+    it('can quit in playing phase', () => {
         let newGame = new TSBGame(baseGame);
         newGame.gamePhase = StandardPhases.Playing;
         gameService.testGameSubject.next(newGame);
-        tick();
         fixture.detectChanges();
 
         expect(fixture.componentInstance.showAccept).toBeFalsy();
@@ -343,13 +338,12 @@ describe('Component:  players and states component', () => {
         expect(actionService.reject).not.toHaveBeenCalledWith(newGame);
         fixture.nativeElement.querySelector('.btn-quit-game').click();
         expect(actionService.quit).toHaveBeenCalledWith(newGame);
-    }));
+    });
 
-    it('can rematch or declined rematch in round over phase', fakeAsync(() => {
+    it('can rematch or declined rematch in round over phase', () => {
         let newGame = new TSBGame(baseGame);
         newGame.gamePhase = StandardPhases.RoundOver;
         gameService.testGameSubject.next(newGame);
-        tick();
         fixture.detectChanges();
 
         expect(fixture.componentInstance.showAccept).toBeFalsy();
@@ -376,5 +370,5 @@ describe('Component:  players and states component', () => {
         expect(actionService.rematch).not.toHaveBeenCalledWith(newGame);
         fixture.nativeElement.querySelector('.btn-rematch-game').click();
         expect(actionService.rematch).toHaveBeenCalledWith(newGame);
-    }));
+    });
 });

@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
 
@@ -11,7 +11,7 @@ class MockModal {
 describe('Component:  default action confirm component', () => {
     let fixture;
     let modal;
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 DefaultActionConfirmComponent,
@@ -24,7 +24,7 @@ describe('Component:  default action confirm component', () => {
         fixture = TestBed.createComponent(DefaultActionConfirmComponent);
         modal = TestBed.get(NgbActiveModal);
         fixture.detectChanges();
-    }));
+    });
 
     it('displays confirm message', () => {
         fixture.componentInstance.confirmMessage = 'This will be very bad!';

@@ -1,9 +1,9 @@
 import {MainComponent} from './main';
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 
 describe('Main Component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [RouterTestingModule],
             declarations: [
@@ -11,7 +11,7 @@ describe('Main Component', () => {
             ]
         });
         TestBed.compileComponents();
-    }));
+    });
 
     it('should render the header, title, techs and footer', () => {
         const fixture = TestBed.createComponent(MainComponent);

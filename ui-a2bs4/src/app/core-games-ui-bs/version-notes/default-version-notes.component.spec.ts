@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {AppConfig} from '../../core-games-ui/appconfig.interface';
 import {DefaultVersionNotesComponent} from './default-version-notes.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +20,7 @@ class MockModal {
 describe('Component:  default version notes component', () => {
     let fixture;
     let modal;
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 DefaultVersionNotesComponent,
@@ -34,7 +34,7 @@ describe('Component:  default version notes component', () => {
         fixture = TestBed.createComponent(DefaultVersionNotesComponent);
         modal = TestBed.get(NgbActiveModal);
         fixture.detectChanges();
-    }));
+    });
 
     it('displays release notes', () => {
         expect(fixture.nativeElement.querySelector('.version-message').textContent.trim()).toEqual(releaseNotes);

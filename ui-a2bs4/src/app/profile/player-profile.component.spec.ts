@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {PlayerService} from '../core-games-ui/player/player.service';
 import {Player} from '../core-games-ui/player/player.model';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -17,7 +17,7 @@ describe('player profile component', () => {
         imageUrl: '',
         gameSpecificPlayerAttributes: {freeGamesUsedToday: 20}
     });
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 PlayerProfileComponent
@@ -28,7 +28,7 @@ describe('player profile component', () => {
         });
         TestBed.compileComponents();
         MockPlayerService.playerSubject.next(player);
-    }));
+    });
 
     it('should render basics', () => {
         const fixture = TestBed.createComponent(PlayerProfileComponent);

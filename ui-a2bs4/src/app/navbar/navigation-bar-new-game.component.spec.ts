@@ -1,4 +1,4 @@
-import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {NavigationBarNewGameComponent} from './navigation-bar-new-game.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -6,7 +6,7 @@ import {HelpDisplayService} from '../help/help-display.service';
 
 
 describe('Component:  nav bar new game component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
@@ -21,7 +21,7 @@ describe('Component:  nav bar new game component', () => {
             ]
         });
         TestBed.compileComponents();
-    }));
+    });
 
     it('display disabled when player not loaded', () => {
         const fixture = TestBed.createComponent(NavigationBarNewGameComponent);
@@ -40,18 +40,16 @@ describe('Component:  nav bar new game component', () => {
         expect(toggle.querySelector('ul').textContent.trim()).toBe('');
     });
 
-    it('toggling help on/off shows/hides popover', fakeAsync(inject([HelpDisplayService], (helpService) => {
+    it('toggling help on/off shows/hides popover', inject([HelpDisplayService], (helpService) => {
         const fixture = TestBed.createComponent(NavigationBarNewGameComponent);
         fixture.componentInstance.playerLoaded = true;
         fixture.detectChanges();
         helpService.toggleHelp();
-        tick();
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(1);
         helpService.toggleHelp();
-        tick();
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(0);
-    })));
+    }));
 
 });

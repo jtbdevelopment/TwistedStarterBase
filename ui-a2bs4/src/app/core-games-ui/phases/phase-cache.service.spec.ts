@@ -1,5 +1,5 @@
 import {Phase} from './phase.model';
-import {fakeAsync, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {PhaseCacheService} from './phase-cache.service';
 import {MessageBusService} from '../messagebus/message-bus.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
@@ -49,15 +49,15 @@ describe('Service: phase cache service', () => {
             ]));
         });
 
-        it('it requests phases on first request', fakeAsync(() => {
+        it('it requests phases on first request', () => {
             messageBus.connectionStatus.next(true);
             let request = httpMock.expectOne('/api/phases');
             expect(request.request.method).toEqual('GET');
             expect(request.request.body).toBeNull();
             request.flush(results);
-        }));
+        });
 
-        it('it does not re-request after first call', fakeAsync(() => {
+        it('it does not re-request after first call', () => {
             messageBus.connectionStatus.next(true);
             let request = httpMock.expectOne('/api/phases');
             expect(request.request.method).toEqual('GET');
@@ -66,9 +66,9 @@ describe('Service: phase cache service', () => {
 
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);
-        }));
+        });
 
-        it('it does re-request after first call if first fails', fakeAsync(() => {
+        it('it does re-request after first call if first fails', () => {
             messageBus.connectionStatus.next(true);
             let request = httpMock.expectOne('/api/phases');
             expect(request.request.method).toEqual('GET');
@@ -85,6 +85,6 @@ describe('Service: phase cache service', () => {
             expect(request.request.method).toEqual('GET');
             expect(request.request.body).toBeNull();
             request.flush(results);
-        }));
+        });
     });
 });

@@ -1,4 +1,4 @@
-import {async, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {PlayerService} from '../core-games-ui/player/player.service';
@@ -11,7 +11,7 @@ class MockPlayerService {
 
 describe('Component:  nav bar right menu component', () => {
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
@@ -27,7 +27,7 @@ describe('Component:  nav bar right menu component', () => {
             ],
         });
         TestBed.compileComponents();
-    }));
+    });
 
     it('display disabled when player not loaded', () => {
         const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
@@ -45,21 +45,19 @@ describe('Component:  nav bar right menu component', () => {
         expect(fixture.nativeElement.querySelector('ul').textContent.trim()).toBe('');
     });
 
-    it('toggling help on/off shows/hides popover', fakeAsync(inject([HelpDisplayService], (helpService) => {
+    it('toggling help on/off shows/hides popover', inject([HelpDisplayService], (helpService) => {
         const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
         fixture.componentInstance.playerLoaded = true;
         fixture.detectChanges();
         fixture.componentInstance.toggleHelp();
         expect(helpService.isShown()).toBeTruthy();
-        tick();
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(1);
         fixture.componentInstance.toggleHelp();
         expect(helpService.isShown()).toBeFalsy();
-        tick();
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(0);
-    })));
+    }));
 
     it('test logout propogates to player service', inject([PlayerService], (playerService) => {
         const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);

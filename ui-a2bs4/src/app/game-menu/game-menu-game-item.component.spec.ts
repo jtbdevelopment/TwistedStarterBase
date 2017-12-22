@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {GameMenuGameItemComponent} from './game-menu-game-item.component';
 import {MapKeysPipe} from '../core-games-ui/utils/map-keys.pipe';
@@ -6,7 +6,7 @@ import {Game} from '../core-games-ui/games/game.model';
 
 
 describe('Component:  game menu game item component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule
@@ -17,7 +17,7 @@ describe('Component:  game menu game item component', () => {
             ],
         });
         TestBed.compileComponents();
-    }));
+    });
 
     it('displays game', () => {
         const fixture = TestBed.createComponent(GameMenuGameItemComponent);

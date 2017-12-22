@@ -1,4 +1,4 @@
-import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {GameMenuCategoryListComponent} from './game-menu-category-list.component';
 import {GameCacheService} from '../core-games-ui/gamecache/game-cache.service';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -26,7 +26,7 @@ class MockGameItemComponent {
 }
 
 describe('Component:  game menu category list component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 NgbCollapseModule
@@ -40,9 +40,9 @@ describe('Component:  game menu category list component', () => {
             ]
         });
         TestBed.compileComponents();
-    }));
+    });
 
-    it('initializes and subscribes to category from game cache', fakeAsync(() => {
+    it('initializes and subscribes to category from game cache', () => {
         const fixture = TestBed.createComponent(GameMenuCategoryListComponent);
         let expectedGames = [
             new Game({id: '1', lastUpdate: 10}),
@@ -58,7 +58,6 @@ describe('Component:  game menu category list component', () => {
         expect(fixture.componentInstance.games).toEqual([]);
         expect(fixture.componentInstance.isCollapsed).toBeFalsy();
         MockGameCache.games.get(category).next(expectedGames);
-        tick();
         expect(fixture.componentInstance.games).toEqual([expectedGames[1], expectedGames[2], expectedGames[0]]);
         fixture.detectChanges();
 
@@ -67,7 +66,7 @@ describe('Component:  game menu category list component', () => {
         expect(querySelectorAll[0].textContent).toEqual(style + expectedGames[1].id);
         expect(querySelectorAll[1].textContent).toEqual(style + expectedGames[2].id);
         expect(querySelectorAll[2].textContent).toEqual(style + expectedGames[0].id);
-    }));
+    });
 
     it('test toggle collapse', () => {
         const fixture = TestBed.createComponent(GameMenuCategoryListComponent);

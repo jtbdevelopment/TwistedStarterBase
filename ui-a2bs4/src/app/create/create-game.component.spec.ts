@@ -1,4 +1,4 @@
-import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {NgbModule, NgbTabsetConfig, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {CreateGameComponent} from './create-game.component';
 import {FormsModule} from '@angular/forms';
@@ -59,7 +59,7 @@ describe('Component:  create game component', () => {
     let friendService: MockFriendService;
     let actionService: MockBoostrapActions;
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 NgbModule,
@@ -81,7 +81,7 @@ describe('Component:  create game component', () => {
         friendService = TestBed.get(FriendsService);
         actionService = TestBed.get(BootstrapActionsService) as MockBoostrapActions;
 
-    }));
+    });
 
     it('initializes', () => {
         const fixture = TestBed.createComponent(CreateGameComponent);
@@ -95,12 +95,11 @@ describe('Component:  create game component', () => {
         expect(fixture.componentInstance.disableCreate).toEqual(true);
     });
 
-    it('subscribes to game features', fakeAsync(() => {
+    it('subscribes to game features', () => {
         const fixture = TestBed.createComponent(CreateGameComponent);
 
         expect(fixture.componentInstance.disableCreate).toEqual(true);
         featureService.features.next(groups);
-        tick();
         fixture.detectChanges();
 
         expect(fixture.componentInstance.disableCreate).toEqual(false);
@@ -118,19 +117,18 @@ describe('Component:  create game component', () => {
             let tab = fixture.nativeElement.querySelector('#' + group.groupType);
             expect(tab).toBeDefined();
         });
-    }));
+    });
 
-    it('subscribes to friends', fakeAsync(() => {
+    it('subscribes to friends', () => {
         const fixture = TestBed.createComponent(CreateGameComponent);
         expect(friendService.refreshFriends).toHaveBeenCalledTimes(1);
         let newFriend: Friend[] = [new Friend('md5', 'dn1'), new Friend('md', 'dn')];
         let newInt: Invitable[] = [new Invitable('id1', '1')];
         friendService.friends.next(newFriend);
         friendService.invitableFriends.next(newInt);
-        tick();
         expect(fixture.componentInstance.friends).toEqual(newFriend);
         expect(fixture.componentInstance.invitable).toEqual(newInt);
-    }));
+    });
 
     describe('after initialized', () => {
         let fixture;
@@ -141,7 +139,7 @@ describe('Component:  create game component', () => {
             fixture.detectChanges();
         }));
 
-        it('submits a solo game', fakeAsync(() => {
+        it('submits a solo game', () => {
             fixture.nativeElement.querySelector('#option2-2').click();
             fixture.nativeElement.querySelector('#option1-3').click();
             fixture.detectChanges();
@@ -159,6 +157,6 @@ describe('Component:  create game component', () => {
                 players: [],
                 features: ['option1-3', 'option2-2', 'option3-1']
             });
-        }));
+        });
     });
 });

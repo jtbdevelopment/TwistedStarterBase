@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {Component, Input} from '@angular/core';
 import {AdminComponent} from './admin.component';
 import {NgbModule, NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +21,7 @@ export class MockAdminSwitchPlayerComponent {
 
 
 describe('admin component', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 NgbModule
@@ -36,7 +36,7 @@ describe('admin component', () => {
             ],
         });
         TestBed.compileComponents();
-    }));
+    });
 
     it('should render basics, switch hidden by tabs', () => {
         const fixture = TestBed.createComponent(AdminComponent);

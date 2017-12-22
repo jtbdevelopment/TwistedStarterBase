@@ -1,4 +1,4 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {DefaultActionErrorComponent} from './default-action-error.component';
 
@@ -10,7 +10,7 @@ class MockModal {
 describe('Component:  default action error component', () => {
     let fixture;
     let modal;
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
                 DefaultActionErrorComponent,
@@ -23,7 +23,7 @@ describe('Component:  default action error component', () => {
         fixture = TestBed.createComponent(DefaultActionErrorComponent);
         modal = TestBed.get(NgbActiveModal);
         fixture.detectChanges();
-    }));
+    });
 
     it('displays error message', () => {
         fixture.componentInstance.errorMessage = 'Something went wrong!';
