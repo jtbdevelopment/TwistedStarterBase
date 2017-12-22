@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
     selector: 'admin-stats',
@@ -21,10 +21,9 @@ export class AdminStatsComponent {
         (this.time - (AdminStatsComponent.dayInSeconds * 30))
     ];
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
         this.times.forEach((time, index) => {
-            this.http.get('/api/player/admin/playersCreated/' + time)
-                .map(response => response.text())
+            this.http.get('/api/player/admin/playersCreated/' + time, {responseType: 'text'})
                 .subscribe(text => {
                         this.playersCreated[index] = Number(text);
                     },
@@ -33,8 +32,7 @@ export class AdminStatsComponent {
                         console.log(JSON.stringify(error));
                     }
                 );
-            this.http.get('/api/player/admin/playersLoggedIn/' + time)
-                .map(response => response.text())
+            this.http.get('/api/player/admin/playersLoggedIn/' + time, {responseType: 'text'})
                 .subscribe(text => {
                         this.playerLogins[index] = Number(text);
                     },
@@ -43,8 +41,7 @@ export class AdminStatsComponent {
                         console.log(JSON.stringify(error));
                     }
                 );
-            this.http.get('/api/player/admin/gamesSince/' + time)
-                .map(response => response.text())
+            this.http.get('/api/player/admin/gamesSince/' + time, {responseType: 'text'})
                 .subscribe(text => {
                         this.gamesCreated[index] = Number(text);
                     },
@@ -53,26 +50,24 @@ export class AdminStatsComponent {
                         console.log(JSON.stringify(error));
                     }
                 );
-            this.http.get('/api/player/admin/gameCount')
-                .map(response => response.text())
-                .subscribe(text => {
-                        this.gameCount = Number(text);
-                    },
-                    error => {
-                        //  TODO - general error handler
-                        console.log(JSON.stringify(error));
-                    }
-                );
-            this.http.get('/api/player/admin/playerCount')
-                .map(response => response.text())
-                .subscribe(text => {
-                        this.playerCount = Number(text);
-                    },
-                    error => {
-                        //  TODO - general error handler
-                        console.log(JSON.stringify(error));
-                    }
-                );
         });
+        this.http.get('/api/player/admin/gameCount', {responseType: 'text'})
+            .subscribe(text => {
+                    this.gameCount = Number(text);
+                },
+                error => {
+                    //  TODO - general error handler
+                    console.log(JSON.stringify(error));
+                }
+            );
+        this.http.get('/api/player/admin/playerCount', {responseType: 'text'})
+            .subscribe(text => {
+                    this.playerCount = Number(text);
+                },
+                error => {
+                    //  TODO - general error handler
+                    console.log(JSON.stringify(error));
+                }
+            );
     }
 }
