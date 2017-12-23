@@ -19,8 +19,6 @@ export class BootstrapAdsService {
             _reject = reject;
             _resolve = resolve;
         });
-        promise.then(null, () => {
-        });
 
         if (((new Date()).valueOf() - this.lastAdShown.valueOf()) >= this.timeBetweenAds) {
             try {

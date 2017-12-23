@@ -1,9 +1,18 @@
 import {TestBed} from '@angular/core/testing';
 import {SignInComponent} from './sign-in.component';
+import {FacebookLoginService} from '../../core-games-ui/facebook/facebook-login.service';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
+class MockFacebookLogin {
+    public canAutoLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+}
 describe('Component:  sign in component', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
+            providers: [
+                {provide: FacebookLoginService, useClass: MockFacebookLogin}
+            ],
             declarations: [
                 SignInComponent,
             ]
