@@ -9,11 +9,12 @@
     <div id="sign-in-facebook" class="container-fluid" *ngIf="showFacebook">
         <div class="row text-center">
             <div class="col">
-                <a href="javascript:void(0)" (click)="fbLogin()"><img src="../../../images/sign-in-with-facebook.png"/></a>
+                <a href="javascript:void(0)" id="fb-login" (click)="fbLogin()"><img
+                        src="../../../images/sign-in-with-facebook.png"/></a>
             </div>
         </div>
     </div>
-    <div id="sign-in-manul" class="container-fluid" *ngIf="showManual">
+    <div id="sign-in-manual" class="container-fluid" *ngIf="showManual">
         <div class="row text-center">
             <div class="col">
                 <p>Don't want to login with Facebook?</p>

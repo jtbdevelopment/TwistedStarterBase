@@ -1,4 +1,3 @@
-Facebook login
 Facebook invite friends (core + BS)
 
 Friend multi-select 

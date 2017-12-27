@@ -10,6 +10,9 @@ import {SignInComponent} from './sign-in.component';
         NgbModule,
         JTBCoreGamesUI
     ],
+    providers: [
+        {provide: 'Window', useValue: window}
+    ],
     exports: [
         SignInComponent
     ],

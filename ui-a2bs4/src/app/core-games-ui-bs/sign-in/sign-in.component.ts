@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {FacebookLoginService} from '../../core-games-ui/facebook/facebook-login.service';
-import {DOCUMENT} from '@angular/common';
+import {FacebookInitializerService} from '../../core-games-ui/facebook/facebook-initializer.service';
 
 @Component({
     selector: 'sign-in',
@@ -11,10 +11,15 @@ export class SignInComponent {
     public showManual: boolean = false;
     public showFacebook: boolean = false;
 
-    constructor(private facebook: FacebookLoginService, @Inject(DOCUMENT) private document: any) {
-        this.showFacebook = true;
+    constructor(private facebookLogin: FacebookLoginService,
+                private facebookInit: FacebookInitializerService,
+                @Inject('Window') private window: Window) {
         this.showManual = true;
-        this.facebook.canAutoLogin.subscribe((can: boolean) => {
+        this.showFacebook = false;
+        this.facebookInit.fbReady.then(() => {
+            this.showFacebook = true;
+        });
+        this.facebookLogin.canAutoLogin.subscribe((can: boolean) => {
             if (can) {
                 this.autoLogin();
             }
@@ -22,7 +27,7 @@ export class SignInComponent {
     }
 
     public fbLogin(): void {
-        this.facebook.initiateLogin();
+        this.facebookLogin.initiateLogin();
     }
 
     private autoLogin(): void {
@@ -30,6 +35,6 @@ export class SignInComponent {
         this.showFacebook = false;
         this.showManual = false;
         this.message = 'Logging in via Facebook';
-        this.document.location.href = '/auth/facebook';
+        this.window.location.href = '/auth/facebook';
     }
 }
