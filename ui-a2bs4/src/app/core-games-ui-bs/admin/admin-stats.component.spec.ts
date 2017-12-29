@@ -43,51 +43,51 @@ describe('admin stats component', () => {
         fixture.detectChanges();
 
         let request = httpMock.expectOne((req: HttpRequest<any>) => req.url === '/api/player/admin/playerCount' &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(1.2);
 
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url === '/api/player/admin/gameCount' &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(3.4);
 
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/playersCreated/' + approxTimes[0]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(2.3);
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/playersCreated/' + approxTimes[1]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(4.5);
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/playersCreated/' + approxTimes[2]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(5.6);
 
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/gamesSince/' + approxTimes[0]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(10.2);
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/gamesSince/' + approxTimes[1]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(10.3);
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/gamesSince/' + approxTimes[2]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(10.4);
 
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/playersLoggedIn/' + approxTimes[0]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(6.7);
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/playersLoggedIn/' + approxTimes[1]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(7.8);
         request = httpMock.expectOne((req: HttpRequest<any>) => req.url.startsWith('/api/player/admin/playersLoggedIn/' + approxTimes[2]) &&
-            req.responseType == 'text'
+            req.responseType === 'text'
         );
         request.flush(8.9);
 

@@ -44,7 +44,7 @@ class MockAdService {
 
 class MockModalRef {
     public component: any;
-    public componentInstance: Object = {};
+    public componentInstance: any = {};
     public result: Promise<any>;
 
     private _resolve: (result?: any) => void;
@@ -138,6 +138,7 @@ describe('Service: bootstrap actions service', () => {
         let game: MultiPlayerGame = new MultiPlayerGame({'id': 'noBody'});
         let put = actionService.gameAction(game, 'test');
         put.subscribe(() => {
+            //
         });
 
         let request = httpMock.expectOne('/api/player/game/noBody/test');
@@ -150,6 +151,7 @@ describe('Service: bootstrap actions service', () => {
         let body = {flag: false, otherOption: 'value'};
         let put = actionService.gameAction(game, 'testBody', body);
         put.subscribe(() => {
+            //
         });
 
         let request = httpMock.expectOne('/api/player/game/body/testBody');
@@ -257,7 +259,7 @@ describe('Service: bootstrap actions service', () => {
 
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
-            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(modalService.lastStub.componentInstance.errorMessage).toEqual('something is not right');
             expect(gameCache.putGame).not.toHaveBeenCalled();
         }));
 
@@ -287,7 +289,7 @@ describe('Service: bootstrap actions service', () => {
 
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
-            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(modalService.lastStub.componentInstance.errorMessage).toEqual('something is not right');
             expect(gameCache.putGame).not.toHaveBeenCalled();
             expect(router.navigateByUrl).not.toHaveBeenCalled();
             httpMock.verify();
@@ -322,7 +324,7 @@ describe('Service: bootstrap actions service', () => {
 
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(MockReplacementComponent);
-            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(modalService.lastStub.componentInstance.errorMessage).toEqual('something is not right');
             expect(gameCache.putGame).not.toHaveBeenCalled();
             httpMock.verify();
         }));
@@ -341,7 +343,7 @@ describe('Service: bootstrap actions service', () => {
         afterEach(fakeAsync(() => {
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionConfirmComponent);
-            expect(modalService.lastStub.componentInstance['confirmMessage']).toEqual(confirmMessage);
+            expect(modalService.lastStub.componentInstance.confirmMessage).toEqual(confirmMessage);
 
             modalService.lastStub.close();
             tick();
@@ -384,7 +386,7 @@ describe('Service: bootstrap actions service', () => {
         afterEach(fakeAsync(() => {
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionConfirmComponent);
-            expect(modalService.lastStub.componentInstance['confirmMessage']).toEqual(confirmMessage);
+            expect(modalService.lastStub.componentInstance.confirmMessage).toEqual(confirmMessage);
 
             modalService.lastStub.close();
             tick();
@@ -400,7 +402,7 @@ describe('Service: bootstrap actions service', () => {
 
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionErrorComponent);
-            expect(modalService.lastStub.componentInstance['errorMessage']).toEqual('something is not right');
+            expect(modalService.lastStub.componentInstance.errorMessage).toEqual('something is not right');
             expect(gameCache.putGame).not.toHaveBeenCalled();
             httpMock.verify();
         }));
@@ -432,7 +434,7 @@ describe('Service: bootstrap actions service', () => {
         afterEach(fakeAsync(() => {
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(DefaultActionConfirmComponent);
-            expect(modalService.lastStub.componentInstance['confirmMessage']).toEqual(confirmMessage);
+            expect(modalService.lastStub.componentInstance.confirmMessage).toEqual(confirmMessage);
 
             modalService.lastStub.dismiss();
             tick();
@@ -472,7 +474,7 @@ describe('Service: bootstrap actions service', () => {
         afterEach(fakeAsync(() => {
             expect(modalService.lastStub).toBeDefined();
             expect(modalService.lastStub.component).toEqual(MockReplacementComponent);
-            expect(modalService.lastStub.componentInstance['confirmMessage']).toEqual(confirmMessage);
+            expect(modalService.lastStub.componentInstance.confirmMessage).toEqual(confirmMessage);
 
             modalService.lastStub.close();
             tick();

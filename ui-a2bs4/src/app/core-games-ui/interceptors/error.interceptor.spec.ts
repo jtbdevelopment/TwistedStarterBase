@@ -51,7 +51,6 @@ describe('Interceptor: error interceptor', () => {
     });
 
     it('passes on non error response', () => {
-        //HttpSentEvent | HttpHeaderResponse | HttpResponse<T> | HttpProgressEvent | HttpUserEvent<T>
         let passedOn: HttpEvent<any>;
 
 
@@ -59,7 +58,7 @@ describe('Interceptor: error interceptor', () => {
             passedOn = x;
         });
         expect(passedOn).toBeUndefined();
-        let response = new HttpHeaderResponse();
+        let response: any = new HttpHeaderResponse();
         next.events.next(response);
         expect(passedOn).toEqual(response);
         expect(error).toBeFalsy();
@@ -73,7 +72,6 @@ describe('Interceptor: error interceptor', () => {
     });
 
     it('passes on 409 error response', () => {
-        //HttpSentEvent | HttpHeaderResponse | HttpResponse<T> | HttpProgressEvent | HttpUserEvent<T>
         let passedOn: HttpEvent<any>;
 
 
@@ -81,7 +79,7 @@ describe('Interceptor: error interceptor', () => {
             passedOn = x;
         });
         expect(passedOn).toBeUndefined();
-        let response = new HttpErrorResponse({status: 409});
+        let response: any = new HttpErrorResponse({status: 409});
         next.events.next(response);
         expect(passedOn).toEqual(response);
         expect(error).toBeFalsy();
@@ -89,7 +87,6 @@ describe('Interceptor: error interceptor', () => {
     });
 
     it('captures invalid session 401', () => {
-        //HttpSentEvent | HttpHeaderResponse | HttpResponse<T> | HttpProgressEvent | HttpUserEvent<T>
         let passedOn: HttpEvent<any>;
 
 
@@ -97,7 +94,7 @@ describe('Interceptor: error interceptor', () => {
             passedOn = x;
         });
         expect(passedOn).toBeUndefined();
-        let response = new HttpErrorResponse({status: 401});
+        let response: any = new HttpErrorResponse({status: 401});
         next.events.next(response);
         expect(passedOn).toBeUndefined();
         expect(error).toBeFalsy();
@@ -105,7 +102,6 @@ describe('Interceptor: error interceptor', () => {
     });
 
     it('captures general error', () => {
-        //HttpSentEvent | HttpHeaderResponse | HttpResponse<T> | HttpProgressEvent | HttpUserEvent<T>
         let passedOn: HttpEvent<any>;
 
 
@@ -113,7 +109,7 @@ describe('Interceptor: error interceptor', () => {
             passedOn = x;
         });
         expect(passedOn).toBeUndefined();
-        let response = new HttpErrorResponse({status: 404});
+        let response: any = new HttpErrorResponse({status: 404});
         next.events.next(response);
         expect(passedOn).toBeUndefined();
         expect(error).toEqual(response);

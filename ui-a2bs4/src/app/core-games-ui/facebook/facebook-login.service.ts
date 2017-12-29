@@ -6,7 +6,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 declare let FB: any;
 
 //  TODO - cordova support
-
 @Injectable()
 export class FacebookLoginService {
     public currentAuthorization: Observable<any>;
@@ -29,7 +28,6 @@ export class FacebookLoginService {
     };
 
     private checkLoginStatus(): void {
-        console.log('checking login status');
         FB.getLoginStatus((response: any) => {
             if ('connected' === response.status) {
                 this.currentAuthorizationSubject.next(response.authResponse);
@@ -39,7 +37,6 @@ export class FacebookLoginService {
     }
 
     private verifyPermissions(): void {
-        console.log('checking permissions');
         FB.api('/me/permissions', (response: any) => {
             let found: Map<string, boolean> = new Map<string, boolean>();
             this.fbInitializer.fbRequiredPermissions.forEach((permission) => {
@@ -63,7 +60,6 @@ export class FacebookLoginService {
                     console.log('Missing perrmission ' + key);
                 }
             });
-            console.log('auto login = ' + allFound);
             this.canAutoLoginSubject.next(allFound);
         });
     }
