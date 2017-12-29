@@ -9,7 +9,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private messageBus: MessageBusService) {
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         let subject = new Subject<HttpEvent<any>>();
         next.handle(req).subscribe((event) => {
