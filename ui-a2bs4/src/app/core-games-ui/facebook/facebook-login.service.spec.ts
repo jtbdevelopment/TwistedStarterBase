@@ -2,8 +2,7 @@ import {FacebookLoginService} from './facebook-login.service';
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {FacebookInitializerService} from './facebook-initializer.service';
 
-declare var window: any;
-var FB: any;
+declare let window: any;
 
 class MockInitService {
     public fbReady: Promise<any>;
@@ -146,7 +145,7 @@ describe('Service: facebook login service', () => {
             expect(api).toEqual('/me/permissions');
             callback({
                     data: [
-                        {permission: 'perm2', status: 'granted'},
+                        {permission: 'perm1', status: 'granted'},
                         {permission: 'perm3', status: 'declined'},
                         {permission: 'other', status: 'granted'}]
                 }
