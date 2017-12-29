@@ -67,24 +67,5 @@ describe('Service: phase cache service', () => {
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);
         });
-
-        it('it does re-request after first call if first fails', () => {
-            messageBus.connectionStatus.next(true);
-            let request = httpMock.expectOne('/api/phases');
-            expect(request.request.method).toEqual('GET');
-            expect(request.request.body).toBeNull();
-            request.flush('error', {
-                status: 402,
-                statusText: 'error'
-            });
-
-            expect(currentPhases).toEqual([]);
-            messageBus.connectionStatus.next(false);
-            messageBus.connectionStatus.next(true);
-            request = httpMock.expectOne('/api/phases');
-            expect(request.request.method).toEqual('GET');
-            expect(request.request.body).toBeNull();
-            request.flush(results);
-        });
     });
 });

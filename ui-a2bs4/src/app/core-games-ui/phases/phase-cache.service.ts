@@ -32,9 +32,6 @@ export class PhaseCacheService {
             })
             .subscribe(phases => {
                 this.phasesSubject.next(phases);
-            }, error => {
-                //  TODO - general error handler
-                console.log(JSON.stringify(error));
             });
     }
 }

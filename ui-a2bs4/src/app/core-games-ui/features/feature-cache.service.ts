@@ -53,9 +53,6 @@ export class FeatureCacheService {
             })
             .subscribe(featureGroups => {
                 this.featuresSubject.next(featureGroups);
-            }, error => {
-                //  TODO - general error handler
-                console.log(JSON.stringify(error));
             });
     }
 }

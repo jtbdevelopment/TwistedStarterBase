@@ -171,23 +171,5 @@ describe('Service: feature cache service', () => {
             messageBus.connectionStatus.next(false);
             messageBus.connectionStatus.next(true);
         });
-
-        it('it does re-request after first call if first fails', () => {
-            messageBus.connectionStatus.next(true);
-            let request = httpMock.expectOne('/api/features');
-            expect(request.request.method).toEqual('GET');
-            request.flush(null, {
-                status: 404,
-                statusText: 'error'
-            });
-            expect(currentFeatures).toEqual([]);
-
-            messageBus.connectionStatus.next(false);
-            messageBus.connectionStatus.next(true);
-
-            request = httpMock.expectOne('/api/features');
-            expect(request.request.method).toEqual('GET');
-            request.flush(results);
-        });
     });
 });

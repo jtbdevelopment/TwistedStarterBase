@@ -25,49 +25,24 @@ export class AdminStatsComponent {
         this.times.forEach((time, index) => {
             this.http.get('/api/player/admin/playersCreated/' + time, {responseType: 'text'})
                 .subscribe(text => {
-                        this.playersCreated[index] = Number(text);
-                    },
-                    error => {
-                        //  TODO - general error handler
-                        console.log(JSON.stringify(error));
-                    }
-                );
+                    this.playersCreated[index] = Number(text);
+                });
             this.http.get('/api/player/admin/playersLoggedIn/' + time, {responseType: 'text'})
                 .subscribe(text => {
-                        this.playerLogins[index] = Number(text);
-                    },
-                    error => {
-                        //  TODO - general error handler
-                        console.log(JSON.stringify(error));
-                    }
-                );
+                    this.playerLogins[index] = Number(text);
+                });
             this.http.get('/api/player/admin/gamesSince/' + time, {responseType: 'text'})
                 .subscribe(text => {
-                        this.gamesCreated[index] = Number(text);
-                    },
-                    error => {
-                        //  TODO - general error handler
-                        console.log(JSON.stringify(error));
-                    }
-                );
+                    this.gamesCreated[index] = Number(text);
+                });
         });
         this.http.get('/api/player/admin/gameCount', {responseType: 'text'})
             .subscribe(text => {
-                    this.gameCount = Number(text);
-                },
-                error => {
-                    //  TODO - general error handler
-                    console.log(JSON.stringify(error));
-                }
-            );
+                this.gameCount = Number(text);
+            });
         this.http.get('/api/player/admin/playerCount', {responseType: 'text'})
             .subscribe(text => {
-                    this.playerCount = Number(text);
-                },
-                error => {
-                    //  TODO - general error handler
-                    console.log(JSON.stringify(error));
-                }
-            );
+                this.playerCount = Number(text);
+            });
     }
 }

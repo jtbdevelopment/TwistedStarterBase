@@ -147,9 +147,6 @@ export class GameCacheService {
             .subscribe(games => {
                 games.forEach(game => {
                     this.processGame(game);
-                }, error => {
-                    //  TODO - general error handler
-                    console.log(JSON.stringify(error));
                 });
             });
     }

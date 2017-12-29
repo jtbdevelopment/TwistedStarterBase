@@ -40,10 +40,6 @@ export class PlayerService {
             .subscribe(loaded => {
                     this.playerSubject.next(loaded);
                     this.loggedInSubject.next(loaded);
-                },
-                error => {
-                    //  TODO - general error handler
-                    console.log(JSON.stringify(error));
                 });
     }
 
@@ -51,17 +47,11 @@ export class PlayerService {
         this.http.put('/api/player/admin/' + id, {})
             .subscribe(json => {
                 this.playerSubject.next(new Player(json));
-            }, error => {
-                //  TODO - general error handler
-                console.log(JSON.stringify(error));
             });
     }
 
     public logout(): void {
         this.http.post('/signout', null).subscribe(() => {
-            this.resetPlayer();
-        }, error => {
-            console.log(JSON.stringify(error));
             this.resetPlayer();
         });
     }

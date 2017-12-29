@@ -33,8 +33,6 @@ export class VersionService {
             this.http.post('/api/player/lastVersionNotes/' + this.config.version, '')
                 .subscribe(response => {
                     console.log('updated player version.');
-                }, error => {
-                    console.log('error updating player version' + JSON.stringify(error));
                 });
         }
     }
