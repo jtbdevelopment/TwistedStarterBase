@@ -143,8 +143,8 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.6" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.jtbdevelopment.core-games:games-web-std-multiplayer:1.7-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: com.jtbdevelopment.core-common:core-spring-web-mongo:1.9-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: com.jtbdevelopment.core-common:core-spring-mongo:1.9-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.jtbdevelopment.core-common:core-spring-web-mongo:1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.jtbdevelopment.core-common:core-spring-mongo:1.9" level="project" />
     <orderEntry type="library" name="Maven: com.jtbdevelopment.core-games:games-websocket:1.7-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.atmosphere:atmosphere-runtime:2.4.9" level="project" />
     <orderEntry type="library" name="Maven: com.jtbdevelopment.core-games:games-std-tracker:1.7-SNAPSHOT" level="project" />
