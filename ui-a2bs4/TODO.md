@@ -1,7 +1,5 @@
 Facebook invite friends (core + BS)
 
-Friend multi-select 
-
 General Error Handler (BS)
 Invalid Session Handler (BS)
 

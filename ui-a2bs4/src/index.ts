@@ -7,6 +7,8 @@ import 'rxjs';
 import './index.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import 'primeng/resources/themes/bootstrap/theme.css';
+import 'primeng/resources/primeng.css';
 import {enableProdMode} from '@angular/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {AppModule} from './app';

@@ -5,6 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {CreateGameComponent} from './create-game.component';
+import {MultiSelectModule} from 'primeng/primeng';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import {CreateGameComponent} from './create-game.component';
         RouterModule,
         FormsModule,
         NgbModule,
+        MultiSelectModule,
         JTBCoreGamesUI
     ],
     exports: [

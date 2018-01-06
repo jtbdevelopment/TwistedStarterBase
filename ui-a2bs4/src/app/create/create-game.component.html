@@ -24,27 +24,29 @@
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>
+        <div class="row">
+            <label class="option-label col-md-2">Opponents</label>
+            <div class="col-md-10">
+                <p-multiSelect [options]="friends"
+                               dataKey="md5"
+                               optionLabel="displayName"
+                               maxSelectedLabels="10"
+                               [(ngModel)]="chosenFriends"
+                               [ngModelOptions]="{standalone: true}">
+                </p-multiSelect>
+            </div>
+        </div>
         <!-- TODO - ui-select replacement/upgrade, friends picker/invite friends  -->
         <!--
-        <div class="form-group friend-select">
-            <label uib-tooltip="Select up to 0-4 friends to help.">
-                Add up to 4 friends who play {{main.appName}}
-            </label>
-            <ui-select multiple limit="4" ng-model="create.chosenFriends" theme="bootstrap" reset-search-input="true">
-                <ui-select-match placeholder="Select friends...">{{$item.displayName}}</ui-select-match>
-                <ui-select-choices
-                        repeat="friend in create.friends | propsFilter: {displayName: $select.search}">
-                    <div ng-bind-html="friend.displayName | highlight: $select.search"></div>
-                </ui-select-choices>
-            </ui-select>
-        </div>
         <button class="btn btn-info invite-friends-button" ng-click="create.inviteFriends()">
             Invite friends to play {{main.appName}}
         </button>
         -->
-        <button class="btn btn-primary create-game-button" (click)="createGame()"
-                [disabled]="disableCreate">
-            {{createGameText}}
-        </button>
+        <div class="row">
+            <button class="btn btn-primary create-game-button" (click)="createGame()"
+                    [disabled]="disableCreate">
+                {{createGameText}}
+            </button>
+        </div>
     </form>
 </div>

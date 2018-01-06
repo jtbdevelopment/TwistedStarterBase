@@ -37,6 +37,7 @@ export class CreateGameComponent {
         });
         friendService.friends.subscribe(f => {
             this.friends = f;
+            console.log(this.friends);
         });
         friendService.refreshFriends();
     }
