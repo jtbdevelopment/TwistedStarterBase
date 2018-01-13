@@ -11,6 +11,7 @@ import {Friend} from '../core-games-ui/friends/friend.model';
 import {Invitable} from '../core-games-ui/friends/invitable.model';
 import {FriendsService} from '../core-games-ui/friends/friends.service';
 import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
+import {MultiSelectModule} from 'primeng/primeng';
 
 class MockFeatureService {
     public features: BehaviorSubject<FeatureGroup[]> = new BehaviorSubject<FeatureGroup[]>([]);
@@ -63,7 +64,8 @@ describe('Component:  create game component', () => {
         TestBed.configureTestingModule({
             imports: [
                 NgbModule,
-                FormsModule
+                FormsModule,
+                MultiSelectModule
             ],
             declarations: [
                 CreateGameComponent
@@ -155,6 +157,29 @@ describe('Component:  create game component', () => {
             fixture.nativeElement.querySelector('.create-game-button').click();
             expect(actionService.newGame).toHaveBeenCalledWith({
                 players: [],
+                features: ['option1-3', 'option2-2', 'option3-1']
+            });
+        });
+
+        it('submits a multi-player game', () => {
+            //  Not testing clicking via prime-ng component - assume it works
+            fixture.nativeElement.querySelector('#option2-2').click();
+            fixture.nativeElement.querySelector('#option1-3').click();
+            fixture.detectChanges();
+            fixture.componentInstance.chosenFriends = [new Friend('md51', 'dn1'), new Friend('md52', 'dn2')];
+
+
+            expect(JSON.stringify(fixture.componentInstance.choices)).toEqual(JSON.stringify(
+                {
+                    feature1: 'option1-3',
+                    feature2: 'option2-2',
+                    feature3: 'option3-1',
+                }
+            ));
+
+            fixture.nativeElement.querySelector('.create-game-button').click();
+            expect(actionService.newGame).toHaveBeenCalledWith({
+                players: ['md51', 'md52'],
                 features: ['option1-3', 'option2-2', 'option3-1']
             });
         });

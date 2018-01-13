@@ -3,6 +3,7 @@ export class Player {
     id: string;
     md5: string;
     source: string;
+    sourceId: string;
     displayName: string;
     imageUrl: string;
     profileUrl: string;
