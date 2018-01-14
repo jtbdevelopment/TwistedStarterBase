@@ -106,4 +106,25 @@ describe('Service: version service', () => {
             playerService.loggedInPlayer.next(p);
         });
     });
+
+    describe('uses overridden component', () => {
+        beforeEach(() => {
+            versionService.setVersionNotesComponent(MockReplacementComponent);
+        });
+
+        afterEach(() => {
+            expect(modalService.open).toHaveBeenCalledWith(MockReplacementComponent);
+            let request = httpMock.expectOne('/api/player/lastVersionNotes/1.3.1');
+            expect(request.request.method).toEqual('POST');
+            expect(request.request.body).toBeNull();
+            request.flush('');
+        });
+
+        it('does display when version is minor patch', () => {
+            let p = new Player();
+            p.lastVersionNotes = '1.3.0';
+            expect(modalService.open).not.toHaveBeenCalled();
+            playerService.loggedInPlayer.next(p);
+        });
+    });
 });
