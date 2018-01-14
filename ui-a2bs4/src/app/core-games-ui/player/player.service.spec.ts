@@ -140,6 +140,15 @@ describe('Service: player service', () => {
             expect(router.navigateByUrl).toHaveBeenCalledWith('/signin');
         });
 
+        it('force logout redirects', () => {
+            playerService.forceLogout();
+
+            expect(JSON.stringify(currentPlayer)).toEqual(JSON.stringify(new Player()));
+            expect(JSON.stringify(loggedInPlayer)).toEqual(JSON.stringify(new Player()));
+            expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
+            expect(router.navigateByUrl).toHaveBeenCalledWith('/signin');
+        });
+
         it('even failed logout posts and redirects', () => {
             playerService.logout();
             let request = httpMock.expectOne('/signout');

@@ -56,6 +56,10 @@ export class PlayerService {
         });
     }
 
+    public forceLogout(): void {
+        this.resetPlayer();
+    }
+
     private resetPlayer(): void {
         this.loggedInSubject.next(new Player());
         this.playerSubject.next(new Player());
