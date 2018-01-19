@@ -7,6 +7,8 @@ export class TwistedAppConfig implements AppConfig {
     appName: string = 'Twisted Starter Base';
     //  TODO - TSB decide if annoying
     hoverMenu: boolean = true;
+    //  TODO - TSB make a better message
+    inviteFriendsMessage = 'Come play TSB with me!';
 
     version: string = '1.3';
     releaseNotes: string = 'Made some exciting changes.';

@@ -7,6 +7,8 @@ import {MessageBusService} from '../messagebus/message-bus.service';
 import {Player} from '../player/player.model';
 import {HttpClient} from '@angular/common/http';
 
+//  TODO - if we ever support multiple social networks - this might be where
+//  to move overall invite functionality
 @Injectable()
 export class FriendsService {
     friends: Observable<Friend[]>;

@@ -3,4 +3,5 @@ export interface AppConfig {
     hoverMenu: boolean;
     version: string;
     releaseNotes: string;
+    inviteFriendsMessage: string;
 }

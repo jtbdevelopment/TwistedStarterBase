@@ -26,16 +26,13 @@ export class BootstrapAdsService {
                 //  TODO - actually show ad
                 setTimeout(() => {
                     this.backdrop.removeBackdrop();
-                    console.log('resolving');
                     _resolve();
                 }, 1000);
-                console.log('showing ad');
             } catch (ex) {
                 console.error(ex);
                 this.backdrop.removeBackdrop();
             }
         } else {
-            console.log('no ad');
             _resolve();
         }
         return promise;

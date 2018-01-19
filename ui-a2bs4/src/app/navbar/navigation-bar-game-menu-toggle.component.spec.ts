@@ -29,6 +29,7 @@ export class MockAppConfig implements AppConfig {
     hoverMenu: boolean = true;
     version: string = '';
     releaseNotes: string = '';
+    inviteFriendsMessage: string = '';
 }
 
 describe('Component:  nav bar game menu toggle component', () => {

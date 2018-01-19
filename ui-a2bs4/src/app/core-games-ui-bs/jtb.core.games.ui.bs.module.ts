@@ -7,6 +7,7 @@ import {JTBCoreGamesUIBSVersionNotesModule} from './version-notes/jtb.core.games
 import {JTBCoreGamesUIBSAdsModule} from './ads/jtb.core.games.ui.bs.ads.module';
 import {JTBCoreGamesUIBSBackdropModule} from './backdrop/jtb.core.games.ui.bs.backdrop.module';
 import {JTBCoreGamesUIBSErrorsModule} from './errors/jtb.core.games.ui.bs.errors.module';
+import {JTBCoreGamesUIBInviteModule} from './invite/jtb.core.games.ui.bs.invite.module';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import {JTBCoreGamesUIBSErrorsModule} from './errors/jtb.core.games.ui.bs.errors
         JTBCoreGamesUIBSVersionNotesModule,
         JTBCoreGamesUIBSAdsModule,
         JTBCoreGamesUIBSBackdropModule,
-        JTBCoreGamesUIBSErrorsModule
+        JTBCoreGamesUIBSErrorsModule,
+        JTBCoreGamesUIBInviteModule
     ],
     exports: [
         JTBCoreGamesUIBSAdminModule,
@@ -27,7 +29,8 @@ import {JTBCoreGamesUIBSErrorsModule} from './errors/jtb.core.games.ui.bs.errors
         JTBCoreGamesUIBSVersionNotesModule,
         JTBCoreGamesUIBSAdsModule,
         JTBCoreGamesUIBSBackdropModule,
-        JTBCoreGamesUIBSErrorsModule
+        JTBCoreGamesUIBSErrorsModule,
+        JTBCoreGamesUIBInviteModule
     ]
 })
 export class JTBCoreGamesUIBootstrap {

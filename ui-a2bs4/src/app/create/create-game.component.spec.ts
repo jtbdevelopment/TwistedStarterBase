@@ -1,5 +1,5 @@
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {NgbModule, NgbTabsetConfig, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModule, NgbTabsetConfig, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {CreateGameComponent} from './create-game.component';
 import {FormsModule} from '@angular/forms';
 import {FeatureGroup} from '../core-games-ui/features/feature-group.model';
@@ -12,6 +12,7 @@ import {Invitable} from '../core-games-ui/friends/invitable.model';
 import {FriendsService} from '../core-games-ui/friends/friends.service';
 import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
 import {MultiSelectModule} from 'primeng/primeng';
+import {InviteComponent} from '../core-games-ui-bs/invite/invite.component';
 
 class MockFeatureService {
     public features: BehaviorSubject<FeatureGroup[]> = new BehaviorSubject<FeatureGroup[]>([]);
@@ -55,10 +56,14 @@ groups[1].features[0].options = [
     new FeatureOption('option4-3', 'option 4-3', 'option 4-3 desc'),
 ];
 
+class MockModal {
+    public open = jasmine.createSpy('open');
+}
 describe('Component:  create game component', () => {
     let featureService: MockFeatureService;
     let friendService: MockFriendService;
     let actionService: MockBoostrapActions;
+    let modalService: MockModal;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -74,6 +79,7 @@ describe('Component:  create game component', () => {
                 {provide: FeatureCacheService, useClass: MockFeatureService},
                 {provide: FriendsService, useClass: MockFriendService},
                 {provide: BootstrapActionsService, useClass: MockBoostrapActions},
+                {provide: NgbModal, useClass: MockModal},
                 NgbTabsetConfig,
                 NgbTooltipConfig
             ]
@@ -82,7 +88,7 @@ describe('Component:  create game component', () => {
         featureService = TestBed.get(FeatureCacheService);
         friendService = TestBed.get(FriendsService);
         actionService = TestBed.get(BootstrapActionsService) as MockBoostrapActions;
-
+        modalService = TestBed.get(NgbModal);
     });
 
     it('initializes', () => {
@@ -93,7 +99,6 @@ describe('Component:  create game component', () => {
         expect(fixture.componentInstance.choices).toEqual(empty);
         expect(fixture.componentInstance.groups).toEqual([]);
         expect(fixture.componentInstance.friends).toEqual([]);
-        expect(fixture.componentInstance.invitable).toEqual([]);
         expect(fixture.componentInstance.disableCreate).toEqual(true);
     });
 
@@ -129,7 +134,6 @@ describe('Component:  create game component', () => {
         friendService.friends.next(newFriend);
         friendService.invitableFriends.next(newInt);
         expect(fixture.componentInstance.friends).toEqual(newFriend);
-        expect(fixture.componentInstance.invitable).toEqual(newInt);
     });
 
     describe('after initialized', () => {
@@ -141,6 +145,11 @@ describe('Component:  create game component', () => {
             fixture.detectChanges();
         }));
 
+        it('invite friends opens dialog', () => {
+            fixture.nativeElement.querySelector('.invite-friends-button').click();
+            expect(modalService.open).toHaveBeenCalledWith(InviteComponent);
+        });
+        
         it('submits a solo game', () => {
             fixture.nativeElement.querySelector('#option2-2').click();
             fixture.nativeElement.querySelector('#option1-3').click();

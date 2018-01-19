@@ -3,8 +3,9 @@ import {FeatureCacheService} from '../core-games-ui/features/feature-cache.servi
 import {FeatureGroup} from '../core-games-ui/features/feature-group.model';
 import {FriendsService} from '../core-games-ui/friends/friends.service';
 import {Friend} from '../core-games-ui/friends/friend.model';
-import {Invitable} from '../core-games-ui/friends/invitable.model';
 import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {InviteComponent} from '../core-games-ui-bs/invite/invite.component';
 
 @Component({
     selector: 'create-game',
@@ -15,13 +16,15 @@ export class CreateGameComponent {
     public choices = {};
     public groups: FeatureGroup[] = [];
     public friends: Friend[] = [];
-    public invitable: Invitable[] = [];
     public chosenFriends: Friend[] = [];
     //  TODO - TSB - customize when create is enabled
     public disableCreate: boolean = true;
     public createGameText: String = 'Create Game!';
 
-    constructor(private featureCache: FeatureCacheService, private friendService: FriendsService, private gameActions: BootstrapActionsService) {
+    constructor(private featureCache: FeatureCacheService,
+                private friendService: FriendsService,
+                private ngbModal: NgbModal,
+                private gameActions: BootstrapActionsService) {
         featureCache.features.subscribe(g => {
             this.disableCreate = true;
             this.groups = g;
@@ -32,14 +35,14 @@ export class CreateGameComponent {
             });
             this.disableCreate = this.groups.length === 0;
         });
-        friendService.invitableFriends.subscribe(i => {
-            this.invitable = i;
-        });
         friendService.friends.subscribe(f => {
             this.friends = f;
-            console.log(this.friends);
         });
         friendService.refreshFriends();
+    }
+
+    public inviteFriends(): void {
+        this.ngbModal.open(InviteComponent);
     }
 
     public createGame(): void {

@@ -14,6 +14,7 @@ class MockConfig implements AppConfig {
     hoverMenu: boolean = false;
     appName: string = '';
     version: string = '1.3.1';
+    inviteFriendsMessage: string = '';
 }
 
 @Component({

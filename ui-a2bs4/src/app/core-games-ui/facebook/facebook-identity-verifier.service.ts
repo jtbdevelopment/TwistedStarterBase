@@ -17,14 +17,11 @@ export class FacebookIdentifyVerifierService {
         if (player.source === 'facebook') {
             this.fbInitializer.fbReady.then(() => {
                 FB.getLoginStatus((response: any) => {
-                    console.error('status');
                     if (response.status !== 'connected' ||
                         response.authResponse === undefined ||
                         response.authResponse === null ||
                         response.authResponse.userID !== player.sourceId) {
-                        console.log('facebook verification failed');
                         this.playerService.logout();
-                        console.log('facebook verification logged out');
                     }
                 });
             });

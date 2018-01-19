@@ -36,17 +36,18 @@
                 </p-multiSelect>
             </div>
         </div>
-        <!-- TODO - ui-select replacement/upgrade, friends picker/invite friends  -->
-        <!--
-        <button class="btn btn-info invite-friends-button" ng-click="create.inviteFriends()">
-            Invite friends to play {{main.appName}}
-        </button>
-        -->
         <div class="row">
-            <button class="btn btn-primary create-game-button" (click)="createGame()"
-                    [disabled]="disableCreate">
-                {{createGameText}}
-            </button>
+            <div class="col-md-6">
+                <button class="btn btn-primary create-game-button w-100" (click)="createGame()"
+                        [disabled]="disableCreate">
+                    {{createGameText}}
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-info invite-friends-button w-100" (click)="inviteFriends()">
+                    Invite friends to play
+                </button>
+            </div>
         </div>
     </form>
 </div>

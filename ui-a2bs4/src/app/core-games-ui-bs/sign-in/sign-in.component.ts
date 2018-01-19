@@ -31,7 +31,6 @@ export class SignInComponent {
     }
 
     private autoLogin(): void {
-        console.log('redirecting');
         this.showFacebook = false;
         this.showManual = false;
         this.message = 'Logging in via Facebook';

@@ -11,6 +11,7 @@ class MockAppConfig implements AppConfig {
     hoverMenu: boolean = false;
     releaseNotes: string = releaseNotes;
     version: string = '';
+    inviteFriendsMessage: string = '';
 }
 
 class MockModal {

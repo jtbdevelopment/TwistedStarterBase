@@ -37,6 +37,7 @@ export class MockAppConfig implements AppConfig {
     hoverMenu: boolean;
     version: string = '';
     releaseNotes: string = '';
+    inviteFriendsMessage: string = '';
 }
 
 export class MockPlayerService {
