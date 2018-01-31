@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppConfig} from './core-games-ui/appconfig.interface';
+import {AppConfig} from 'jtb-core-games-ui';
 
 @Injectable()
 export class TwistedAppConfig implements AppConfig {

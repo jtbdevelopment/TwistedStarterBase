@@ -1,8 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BootstrapErrorListenerService} from './bootstrap-error-listener.service';
-import {MessageBusService} from '../../core-games-ui/messagebus/message-bus.service';
 import {DefaultErrorComponent} from './default-error.component';
+import {MessageBusService} from 'jtb-core-games-ui';
 
 class MockModalService {
     open = jasmine.createSpy('open');

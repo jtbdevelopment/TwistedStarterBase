@@ -2,12 +2,11 @@ import {ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/
 import {NgbModule, NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AdminSwitchPlayerComponent} from './admin-switch-player.component';
 import {FormsModule} from '@angular/forms';
-import {PlayerService} from '../../core-games-ui/player/player.service';
-import {Player} from '../../core-games-ui/player/player.model';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {HttpRequest} from '@angular/common/http';
+import {Player, PlayerService} from 'jtb-core-games-ui';
 
 class MockPlayerService {
     static playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());

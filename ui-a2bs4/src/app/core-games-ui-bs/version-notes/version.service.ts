@@ -1,9 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
-import {PlayerService} from '../../core-games-ui/player/player.service';
-import {AppConfig} from '../../core-games-ui/appconfig.interface';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DefaultVersionNotesComponent} from './default-version-notes.component';
 import {HttpClient} from '@angular/common/http';
+import {AppConfig, PlayerService} from 'jtb-core-games-ui';
 
 @Injectable()
 export class VersionService {
@@ -31,7 +30,7 @@ export class VersionService {
         if (display) {
             this.modalService.open(this.modalComponent);
             this.http.post('/api/player/lastVersionNotes/' + this.config.version, '')
-                .subscribe(response => {
+                .subscribe(function () {
                     console.log('updated player version.');
                 });
         }

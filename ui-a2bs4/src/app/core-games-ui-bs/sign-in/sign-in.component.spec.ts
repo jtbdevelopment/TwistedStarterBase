@@ -1,8 +1,7 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {SignInComponent} from './sign-in.component';
-import {FacebookLoginService} from '../../core-games-ui/facebook/facebook-login.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {FacebookInitializerService} from '../../core-games-ui/facebook/facebook-initializer.service';
+import {FacebookInitializerService, FacebookLoginService} from 'jtb-core-games-ui';
 
 class MockFacebookLogin {
     public canAutoLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

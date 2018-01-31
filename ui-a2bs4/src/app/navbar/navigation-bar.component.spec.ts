@@ -1,10 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 import {NavigationBarComponent} from './navigation-bar.component';
 import {Component, Input} from '@angular/core';
-import {PlayerService} from '../core-games-ui/player/player.service';
-import {Player} from '../core-games-ui/player/player.model';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AppConfig} from '../core-games-ui/appconfig.interface';
+import {AppConfig, Player, PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'navigation-bar-game-menu-toggle',

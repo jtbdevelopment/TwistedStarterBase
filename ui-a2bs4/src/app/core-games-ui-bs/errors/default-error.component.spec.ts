@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {DefaultErrorComponent} from './default-error.component';
-import {PlayerService} from '../../core-games-ui/player/player.service';
+import {PlayerService} from 'jtb-core-games-ui';
 
 class MockModal {
     dismiss = jasmine.createSpy('dismiss');

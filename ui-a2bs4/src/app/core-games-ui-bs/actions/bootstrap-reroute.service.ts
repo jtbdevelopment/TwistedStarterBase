@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {GameCacheService} from '../../core-games-ui/gamecache/game-cache.service';
 import {Observable} from 'rxjs/Observable';
-import {Game} from '../../core-games-ui/games/game.model';
+import {Game, GameCacheService} from 'jtb-core-games-ui';
 
 //  Auto navigates on phase changes
 @Injectable()

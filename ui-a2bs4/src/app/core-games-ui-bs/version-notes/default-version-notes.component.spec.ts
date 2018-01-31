@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
-import {AppConfig} from '../../core-games-ui/appconfig.interface';
 import {DefaultVersionNotesComponent} from './default-version-notes.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {AppConfig} from 'jtb-core-games-ui';
 
 
 let releaseNotes: string = 'We made some changes!';

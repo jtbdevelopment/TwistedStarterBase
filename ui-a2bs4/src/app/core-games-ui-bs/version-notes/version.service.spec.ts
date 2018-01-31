@@ -1,13 +1,11 @@
 import {Component} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
-import {AppConfig} from '../../core-games-ui/appconfig.interface';
 import {Subject} from 'rxjs/Subject';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {VersionService} from './version.service';
-import {Player} from '../../core-games-ui/player/player.model';
-import {PlayerService} from '../../core-games-ui/player/player.service';
 import {DefaultVersionNotesComponent} from './default-version-notes.component';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {AppConfig, Player, PlayerService} from 'jtb-core-games-ui';
 
 class MockConfig implements AppConfig {
     releaseNotes: string = '';
@@ -75,7 +73,7 @@ describe('Service: version service', () => {
             expect(modalService.open).toHaveBeenCalledWith(DefaultVersionNotesComponent);
             let request = httpMock.expectOne('/api/player/lastVersionNotes/1.3.1');
             expect(request.request.method).toEqual('POST');
-            expect(request.request.body).toBeNull();
+            expect(request.request.body).toEqual('');
             request.flush('');
         });
 
@@ -117,7 +115,7 @@ describe('Service: version service', () => {
             expect(modalService.open).toHaveBeenCalledWith(MockReplacementComponent);
             let request = httpMock.expectOne('/api/player/lastVersionNotes/1.3.1');
             expect(request.request.method).toEqual('POST');
-            expect(request.request.body).toBeNull();
+            expect(request.request.body).toEqual('');
             request.flush('');
         });
 

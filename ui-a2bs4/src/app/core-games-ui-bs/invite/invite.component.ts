@@ -1,9 +1,6 @@
 import {Component, Inject} from '@angular/core';
-import {FacebookInviteService} from '../../core-games-ui/facebook/facebook-invite.service';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {AppConfig} from '../../core-games-ui/appconfig.interface';
-import {FriendsService} from '../../core-games-ui/friends/friends.service';
-import {Invitable} from '../../core-games-ui/friends/invitable.model';
+import {AppConfig, FacebookInviteService, FriendsService, Invitable} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'invite-friends',

@@ -6,12 +6,8 @@ import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-act
 import {ActivatedRoute, ParamMap, RouterModule} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {TSBGame} from '../game/tsb-game.model';
-import {Game} from '../core-games-ui/games/game.model';
-import {GameCacheService} from '../core-games-ui/gamecache/game-cache.service';
-import {Player} from '../core-games-ui/player/player.model';
-import {PlayerService} from '../core-games-ui/player/player.service';
 import {PlayersAndStatesComponent} from './players-and-states.component';
-import {StandardPhases} from '../core-games-ui/phases/standard-phases.model';
+import {Game, GameCacheService, Player, PlayerService, StandardPhases} from 'jtb-core-games-ui';
 
 class MockBoostrapActions {
     accept = jasmine.createSpy('accept');

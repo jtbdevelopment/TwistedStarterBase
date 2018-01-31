@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GameCacheService} from '../core-games-ui/gamecache/game-cache.service';
-import {Game} from '../core-games-ui/games/game.model';
+import {Game, GameCacheService} from 'jtb-core-games-ui';
 
 
 @Component({

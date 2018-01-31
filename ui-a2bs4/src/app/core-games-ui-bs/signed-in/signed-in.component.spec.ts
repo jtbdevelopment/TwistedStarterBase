@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
-import {PlayerService} from '../../core-games-ui/player/player.service';
 import {SignedInComponent} from './signed-in.component';
 import {Router} from '@angular/router';
+import {PlayerService} from 'jtb-core-games-ui';
 
 
 class MockPlayerService {

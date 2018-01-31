@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {PlayerService} from '../../core-games-ui/player/player.service';
 import {Router} from '@angular/router';
+import {PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'signed-in',

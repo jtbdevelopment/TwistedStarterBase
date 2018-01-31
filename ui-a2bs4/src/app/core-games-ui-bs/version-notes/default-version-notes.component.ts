@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {AppConfig} from '../../core-games-ui/appconfig.interface';
+import {AppConfig} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'ngbd-modal-content',

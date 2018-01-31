@@ -1,9 +1,9 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {NavigationBarRightMenuComponent} from './navigation-bar-right-menu.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {PlayerService} from '../core-games-ui/player/player.service';
 import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 import {HelpDisplayService} from '../help/help-display.service';
+import {PlayerService} from 'jtb-core-games-ui';
 
 class MockPlayerService {
     logout = jasmine.createSpy('logout');

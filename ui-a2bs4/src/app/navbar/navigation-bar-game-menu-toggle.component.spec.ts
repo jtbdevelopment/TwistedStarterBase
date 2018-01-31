@@ -4,7 +4,7 @@ import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-t
 import {GameMenuService} from '../game-menu/game-menu.service';
 import {HelpDisplayService} from '../help/help-display.service';
 import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
-import {AppConfig} from '../core-games-ui/appconfig.interface';
+import {AppConfig} from 'jtb-core-games-ui';
 
 
 export class MockGameMenuService {

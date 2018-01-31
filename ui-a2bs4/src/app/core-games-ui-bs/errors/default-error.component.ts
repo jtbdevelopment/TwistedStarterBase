@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {PlayerService} from '../../core-games-ui/player/player.service';
+import {PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'ngbd-modal-content',

@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {Player} from '../../core-games-ui/player/player.model';
-import {PlayerService} from '../../core-games-ui/player/player.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {Player, PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'admin-switch-player',

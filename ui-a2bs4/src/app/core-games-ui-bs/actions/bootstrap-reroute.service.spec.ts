@@ -2,9 +2,8 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {BootstrapRerouteService} from './bootstrap-reroute.service';
 import {ReflectiveInjector} from '@angular/core';
-import {GameCacheService} from '../../core-games-ui/gamecache/game-cache.service';
 import {NavigationEnd, NavigationStart, Router} from '@angular/router';
-import {Game} from '../../core-games-ui/games/game.model';
+import {Game, GameCacheService} from 'jtb-core-games-ui';
 
 class MockGameCacheService {
     public observables: Map<string, Subject<Game>> = new Map<string, Subject<Game>>();

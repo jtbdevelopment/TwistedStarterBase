@@ -1,8 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {GameMenuGameItemComponent} from './game-menu-game-item.component';
-import {MapKeysPipe} from '../core-games-ui/utils/map-keys.pipe';
-import {Game} from '../core-games-ui/games/game.model';
+import {Game, MapKeysPipe} from 'jtb-core-games-ui';
 
 
 describe('Component:  game menu game item component', () => {

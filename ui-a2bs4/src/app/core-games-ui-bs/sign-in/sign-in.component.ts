@@ -1,6 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {FacebookLoginService} from '../../core-games-ui/facebook/facebook-login.service';
-import {FacebookInitializerService} from '../../core-games-ui/facebook/facebook-initializer.service';
+import {FacebookInitializerService, FacebookLoginService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'sign-in',

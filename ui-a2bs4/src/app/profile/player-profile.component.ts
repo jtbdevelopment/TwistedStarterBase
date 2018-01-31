@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {PlayerService} from '../core-games-ui/player/player.service';
-import {Player} from '../core-games-ui/player/player.model';
+import {Player, PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'player-profile',

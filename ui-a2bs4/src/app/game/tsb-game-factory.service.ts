@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {GameFactory} from '../core-games-ui/games/gamefactory.serviceinterface';
 import {TSBGame} from './tsb-game.model';
+import {GameFactory} from 'jtb-core-games-ui';
 
 @Injectable()
 export class TSBGameFactory implements GameFactory {

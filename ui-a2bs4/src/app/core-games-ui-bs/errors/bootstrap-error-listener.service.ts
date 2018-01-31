@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {MessageBusService} from '../../core-games-ui/messagebus/message-bus.service';
 import {DefaultErrorComponent} from './default-error.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {MessageBusService} from 'jtb-core-games-ui';
 
 @Injectable()
 export class BootstrapErrorListenerService {

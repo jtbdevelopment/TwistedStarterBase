@@ -1,11 +1,8 @@
 import {Component} from '@angular/core';
-import {FeatureCacheService} from '../core-games-ui/features/feature-cache.service';
-import {FeatureGroup} from '../core-games-ui/features/feature-group.model';
-import {FriendsService} from '../core-games-ui/friends/friends.service';
-import {Friend} from '../core-games-ui/friends/friend.model';
 import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {InviteComponent} from '../core-games-ui-bs/invite/invite.component';
+import {FeatureCacheService, FeatureGroup, Friend, FriendsService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'create-game',

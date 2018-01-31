@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {PlayerService} from '../core-games-ui/player/player.service';
 import {HelpDisplayService} from '../help/help-display.service';
 import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
+import {PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'navigation-bar-right-menu',

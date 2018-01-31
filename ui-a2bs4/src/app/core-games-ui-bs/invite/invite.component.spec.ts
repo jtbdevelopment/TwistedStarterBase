@@ -1,14 +1,11 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {AppConfig} from '../../core-games-ui/appconfig.interface';
-import {Invitable} from '../../core-games-ui/friends/invitable.model';
 import {Observable} from 'rxjs/Observable';
 import {InviteComponent} from './invite.component';
-import {FacebookInviteService} from '../../core-games-ui/facebook/facebook-invite.service';
-import {FriendsService} from '../../core-games-ui/friends/friends.service';
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MultiSelectModule} from 'primeng/primeng';
 import {FormsModule} from '@angular/forms';
+import {AppConfig, FacebookInviteService, FriendsService, Invitable} from 'jtb-core-games-ui';
 
 class MockFacebookInviteService {
     inviteFriends = jasmine.createSpy('inviteFriends');

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Game} from '../core-games-ui/games/game.model';
+import {Game} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'game-menu-game-item',

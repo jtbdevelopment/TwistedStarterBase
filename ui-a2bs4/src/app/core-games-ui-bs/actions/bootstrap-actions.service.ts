@@ -1,10 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {GameFactory} from '../../core-games-ui/games/gamefactory.serviceinterface';
-import {Game} from '../../core-games-ui/games/game.model';
 import {Observable} from 'rxjs/Observable';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {GameCacheService} from '../../core-games-ui/gamecache/game-cache.service';
 import {Subject} from 'rxjs/Subject';
 import {DefaultActionErrorComponent} from './default-action-error.component';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
@@ -12,6 +9,7 @@ import {Router} from '@angular/router';
 import {BootstrapAdsService} from '../ads/bootstrap-ads.service';
 import {BootstrapBackdropService} from '../backdrop/bootstrap-backdrop.service';
 import {HttpClient} from '@angular/common/http';
+import {Game, GameCacheService, GameFactory} from 'jtb-core-games-ui';
 
 @Injectable()
 export class BootstrapActionsService {

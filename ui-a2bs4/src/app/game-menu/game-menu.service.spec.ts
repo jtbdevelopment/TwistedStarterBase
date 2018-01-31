@@ -1,5 +1,5 @@
 import {GameMenuService} from './game-menu.service';
-import {MessageBusService} from '../core-games-ui/messagebus/message-bus.service';
+import {MessageBusService} from 'jtb-core-games-ui';
 
 describe('Service: game menu service', () => {
     let gameMenuService: GameMenuService;

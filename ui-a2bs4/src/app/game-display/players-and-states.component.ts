@@ -1,12 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
-import {GameCacheService} from '../core-games-ui/gamecache/game-cache.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {Player} from '../core-games-ui/player/player.model';
-import {PlayerService} from '../core-games-ui/player/player.service';
-import {Game} from '../core-games-ui/games/game.model';
-import {StandardPhases} from '../core-games-ui/phases/standard-phases.model';
-import {StandardPlayerStates} from '../core-games-ui/games/player-states.model';
+import {Game, GameCacheService, Player, PlayerService, StandardPhases, StandardPlayerStates} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'players-and-states',

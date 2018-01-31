@@ -1,8 +1,7 @@
 import {TestBed} from '@angular/core/testing';
-import {PlayerService} from '../core-games-ui/player/player.service';
-import {Player} from '../core-games-ui/player/player.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {PlayerProfileComponent} from './player-profile.component';
+import {Player, PlayerService} from 'jtb-core-games-ui';
 
 export class MockPlayerService {
     static playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());

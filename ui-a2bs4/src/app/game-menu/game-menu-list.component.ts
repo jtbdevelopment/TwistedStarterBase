@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
-import {GameClassifier} from '../core-games-ui/gamecache/game-classifier.serviceinterface';
 import {HelpDisplayService} from '../help/help-display.service';
 import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
+import {GameClassifier} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'game-menu-list',

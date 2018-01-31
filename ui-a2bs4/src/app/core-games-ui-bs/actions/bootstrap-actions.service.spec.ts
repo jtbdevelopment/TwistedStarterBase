@@ -1,9 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {BootstrapActionsService} from './bootstrap-actions.service';
-import {GameFactory} from '../../core-games-ui/games/gamefactory.serviceinterface';
-import {MultiPlayerGame} from '../../core-games-ui/games/multi-player-game.model';
-import {GameCacheService} from '../../core-games-ui/gamecache/game-cache.service';
 import {Router} from '@angular/router';
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {BootstrapAdsService} from '../ads/bootstrap-ads.service';
@@ -11,6 +8,7 @@ import {BootstrapBackdropService} from '../backdrop/bootstrap-backdrop.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {DefaultActionErrorComponent} from './default-action-error.component';
 import {DefaultActionConfirmComponent} from './default-action-confirm.component';
+import {GameCacheService, GameFactory, MultiPlayerGame} from 'jtb-core-games-ui';
 
 
 @Component({

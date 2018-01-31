@@ -1,12 +1,9 @@
 import {TestBed} from '@angular/core/testing';
 import {GameMenuCategoryListComponent} from './game-menu-category-list.component';
-import {GameCacheService} from '../core-games-ui/gamecache/game-cache.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {MultiPlayerGame} from '../core-games-ui/games/multi-player-game.model';
-import {Game} from '../core-games-ui/games/game.model';
-import {SinglePlayerGame} from '../core-games-ui/games/single-player-game.model';
 import {Component, Input} from '@angular/core';
 import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import {Game, GameCacheService, MultiPlayerGame, SinglePlayerGame} from 'jtb-core-games-ui';
 
 class MockGameCache {
     public static games: Map<string, BehaviorSubject<any[]>> = new Map<string, BehaviorSubject<any[]>>();
