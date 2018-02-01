@@ -4,7 +4,6 @@ import {routing} from './routes';
 import {MainComponent} from './main';
 import {TwistedAppConfig} from './app.config';
 import {NavigationBarModule} from './navbar/navigation-bar.module';
-import {JTBCoreGamesUIBootstrap} from './core-games-ui-bs/jtb.core.games.ui.bs.module';
 import {RootComponent} from './root.component';
 import {TSBGameFactory} from './game/tsb-game-factory.service';
 import {GameMenuModule} from './game-menu/game-menu.module';
@@ -13,6 +12,7 @@ import {TSBGameClassifier} from './game/tsb-game-classifier.service';
 import {PlayerProfileModule} from './profile/player-profile.module';
 import {CreateGameModule} from './create/create-game.module';
 import {GameDisplayModule} from './game-display/game-display.module';
+import {JTBCoreGamesUIBootstrap} from 'jtb-core-games-bootstrap-ui';
 
 @NgModule({
     imports: [

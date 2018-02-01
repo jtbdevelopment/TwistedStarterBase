@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Game, GameCacheService, Player, PlayerService, StandardPhases, StandardPlayerStates} from 'jtb-core-games-ui';
+import {BootstrapActionsService} from 'jtb-core-games-bootstrap-ui';
 
 @Component({
     selector: 'players-and-states',

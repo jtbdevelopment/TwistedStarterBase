@@ -2,12 +2,12 @@ import {TestBed} from '@angular/core/testing';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
 import {ActivatedRoute, ParamMap, RouterModule} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {TSBGame} from '../game/tsb-game.model';
 import {PlayersAndStatesComponent} from './players-and-states.component';
 import {Game, GameCacheService, Player, PlayerService, StandardPhases} from 'jtb-core-games-ui';
+import {BootstrapActionsService} from 'jtb-core-games-bootstrap-ui';
 
 class MockBoostrapActions {
     accept = jasmine.createSpy('accept');

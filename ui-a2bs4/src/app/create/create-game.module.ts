@@ -5,8 +5,8 @@ import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {CreateGameComponent} from './create-game.component';
 import {MultiSelectModule} from 'primeng/primeng';
-import {JTBCoreGamesUIBootstrap} from '../core-games-ui-bs/jtb.core.games.ui.bs.module';
 import {JTBCoreGamesUI} from 'jtb-core-games-ui';
+import {JTBCoreGamesUIBootstrap} from 'jtb-core-games-bootstrap-ui';
 
 @NgModule({
     imports: [

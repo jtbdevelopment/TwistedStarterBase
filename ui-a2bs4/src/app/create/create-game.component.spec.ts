@@ -3,9 +3,7 @@ import {NgbModal, NgbModule, NgbTabsetConfig, NgbTooltipConfig} from '@ng-bootst
 import {CreateGameComponent} from './create-game.component';
 import {FormsModule} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {BootstrapActionsService} from '../core-games-ui-bs/actions/bootstrap-actions.service';
 import {MultiSelectModule} from 'primeng/primeng';
-import {InviteComponent} from '../core-games-ui-bs/invite/invite.component';
 import {
     Feature,
     FeatureCacheService,
@@ -15,6 +13,7 @@ import {
     FriendsService,
     Invitable
 } from 'jtb-core-games-ui';
+import {BootstrapActionsService, InviteComponent} from 'jtb-core-games-bootstrap-ui';
 
 class MockFeatureService {
     public features: BehaviorSubject<FeatureGroup[]> = new BehaviorSubject<FeatureGroup[]>([]);

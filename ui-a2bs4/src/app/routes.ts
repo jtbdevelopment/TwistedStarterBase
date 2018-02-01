@@ -1,11 +1,9 @@
 import {RouterModule, Routes} from '@angular/router';
 import {MainComponent} from './main';
-import {SignInComponent} from './core-games-ui-bs/sign-in/sign-in.component';
-import {SignedInComponent} from './core-games-ui-bs/signed-in/signed-in.component';
 import {PlayerProfileComponent} from './profile/player-profile.component';
-import {AdminComponent} from './core-games-ui-bs/admin/admin.component';
 import {CreateGameComponent} from './create/create-game.component';
 import {PlayersAndStatesComponent} from './game-display/players-and-states.component';
+import {AdminComponent, SignedInComponent, SignInComponent} from 'jtb-core-games-bootstrap-ui';
 
 export const routes: Routes = [
     {
