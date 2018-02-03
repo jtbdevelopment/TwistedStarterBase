@@ -1,0 +1,12 @@
+.navbar-nav {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.navbar-nav .nav-link {
+  padding-right: .5rem;
+  padding-left: .5rem;
+}

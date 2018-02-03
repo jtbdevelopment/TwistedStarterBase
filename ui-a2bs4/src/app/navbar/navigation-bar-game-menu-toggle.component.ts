@@ -6,7 +6,8 @@ import {AppConfig} from 'jtb-core-games-ui';
 
 @Component({
   selector: 'app-navigation-bar-game-menu-toggle',
-  templateUrl: './navigation-bar-game-menu-toggle.component.html'
+  templateUrl: './navigation-bar-game-menu-toggle.component.html',
+  styleUrls: ['./navigation-bar-game-menu-toggle.component.html']
 })
 export class NavigationBarGameMenuToggleComponent extends AbstractHelpDisplayingComponent {
   @Input() playerLoaded: boolean;

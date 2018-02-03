@@ -14,19 +14,6 @@
   align-items: center;
 }
 
-.navbar-toggleable-sm .navbar-nav {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-.navbar-toggleable-sm .navbar-nav .nav-link {
-  padding-right: .5rem;
-  padding-left: .5rem;
-}
-
 .navbar-toggleable-sm > .container {
   display: -webkit-box;
   display: -webkit-flex;
