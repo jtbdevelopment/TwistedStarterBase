@@ -1,5 +1,6 @@
 <a [routerLink]="[game.standardLink()]"
    class="btn-group btn btn-light btn-group-game btn-group-game-{{style}}">
-    <img *ngFor="let md5 of game.players | mapKeys" class="player-image" src="{{game.playerImages[md5]}}">
-    <span class="game-description">{{describeGame()}}</span>
+  <img *ngFor="let md5 of game.players | mapKeys" class="player-image" src="{{game.playerImages[md5]}}">
+  <span class="game-description">{{describeGame()}}</span>
 </a>
+

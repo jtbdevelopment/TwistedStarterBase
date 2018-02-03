@@ -6,7 +6,7 @@
     </button>
     <div [ngbCollapse]="isCollapsed" class="games-collapse">
         <div *ngFor="let game of games;" class="btn-group-vertical btn-group-games">
-            <game-menu-game-item [game]="game" [style]="style" class="game-wrapper"></game-menu-game-item>
+            <app-game-menu-game-item [game]="game" [style]="style" class="game-wrapper"></app-game-menu-game-item>
         </div>
     </div>
 </div>

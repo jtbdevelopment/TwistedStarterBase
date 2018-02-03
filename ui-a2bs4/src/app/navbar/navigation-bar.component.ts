@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {AppConfig, PlayerService} from 'jtb-core-games-ui';
 
 @Component({
-    selector: 'navigation-bar',
+    selector: 'app-navigation-bar',
     templateUrl: './navigation-bar.component.html',
     styleUrls: ['./navigation-bar.component.scss']
 })

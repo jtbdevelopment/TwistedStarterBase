@@ -4,7 +4,7 @@ import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
 import {GameClassifier} from 'jtb-core-games-ui';
 
 @Component({
-    selector: 'game-menu-list',
+    selector: 'app-game-menu-list',
     templateUrl: './game-menu-list.component.html',
     styleUrls: ['./game-menu-list.component.scss']
 })

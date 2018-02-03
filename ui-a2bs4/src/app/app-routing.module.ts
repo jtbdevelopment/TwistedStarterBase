@@ -72,7 +72,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
       JTBCoreGamesUIBootstrap,
-      RouterModule.forRoot(routes)
+      RouterModule.forRoot(routes, {useHash: true})
   ],
   exports: [RouterModule]
 })

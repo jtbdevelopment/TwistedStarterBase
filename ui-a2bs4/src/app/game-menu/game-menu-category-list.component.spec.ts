@@ -15,7 +15,7 @@ class MockGameCache {
 }
 
 @Component({
-    selector: 'game-menu-game-item',
+    selector: 'app-game-menu-game-item',
     template: '<p>{{style}}</p><span>{{game.id}}</span>'
 })
 class MockGameItemComponent {
@@ -42,13 +42,13 @@ describe('Component:  game menu category list component', () => {
 
     it('initializes and subscribes to category from game cache', () => {
         const fixture = TestBed.createComponent(GameMenuCategoryListComponent);
-        let expectedGames = [
+        const expectedGames = [
             new Game({id: '1', lastUpdate: 10}),
             new MultiPlayerGame({id: '2', lastUpdate: 1}),
             new SinglePlayerGame({id: '3', lastUpdate: 5})
         ];
-        let category = 'cat';
-        let style = 's';
+        const category = 'cat';
+        const style = 's';
         MockGameCache.games.set(category, new BehaviorSubject([]));
         fixture.componentInstance.category = category;
         fixture.componentInstance.style = style;
@@ -59,7 +59,7 @@ describe('Component:  game menu category list component', () => {
         expect(fixture.componentInstance.games).toEqual([expectedGames[1], expectedGames[2], expectedGames[0]]);
         fixture.detectChanges();
 
-        let querySelectorAll = fixture.nativeElement.querySelectorAll('game-menu-game-item');
+        const querySelectorAll = fixture.nativeElement.querySelectorAll('app-game-menu-game-item');
         expect(querySelectorAll.length).toEqual(3);
         expect(querySelectorAll[0].textContent).toEqual(style + expectedGames[1].id);
         expect(querySelectorAll[1].textContent).toEqual(style + expectedGames[2].id);

@@ -23,7 +23,7 @@ class MockGameClassifier {
 }
 
 @Component({
-    selector: 'game-menu-category-list',
+    selector: 'app-game-menu-category-list',
     template: '<p>{{category}}</p><p>{{style}}</p><p>{{icon}}</p>'
 })
 class MockCategoryListComponent {
@@ -77,7 +77,7 @@ describe('Component:  game menu list component', () => {
         expect(fixture.componentInstance.styles).toEqual(expectedStyles);
         expect(JSON.stringify(fixture.componentInstance.icons)).toEqual(JSON.stringify(icons));
 
-        const querySelectorAll = fixture.nativeElement.querySelectorAll('game-menu-category-list');
+        const querySelectorAll = fixture.nativeElement.querySelectorAll('app-game-menu-category-list');
         expect(querySelectorAll.length).toEqual(3);
         expect(querySelectorAll[0].textContent).toEqual(categories[0] + expectedStyles[0] + 'icon1');
         expect(querySelectorAll[1].textContent).toEqual(categories[1] + expectedStyles[1] + 'icon2');

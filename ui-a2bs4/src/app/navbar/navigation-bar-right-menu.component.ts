@@ -4,7 +4,7 @@ import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
 import {PlayerService} from 'jtb-core-games-ui';
 
 @Component({
-    selector: 'navigation-bar-right-menu',
+    selector: 'app-navigation-bar-right-menu',
     templateUrl: './navigation-bar-right-menu.component.html'
 })
 export class NavigationBarRightMenuComponent extends AbstractHelpDisplayingComponent {

@@ -5,7 +5,7 @@ import {HelpDisplayService} from '../help/help-display.service';
 import {AppConfig} from 'jtb-core-games-ui';
 
 @Component({
-    selector: 'navigation-bar-game-menu-toggle',
+    selector: 'app-navigation-bar-game-menu-toggle',
     templateUrl: './navigation-bar-game-menu-toggle.component.html'
 })
 export class NavigationBarGameMenuToggleComponent extends AbstractHelpDisplayingComponent {

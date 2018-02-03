@@ -4,7 +4,7 @@ import {FeatureCacheService, FeatureGroup, Friend, FriendsService} from 'jtb-cor
 import {BootstrapActionsService, InviteComponent} from 'jtb-core-games-bootstrap-ui';
 
 @Component({
-    selector: 'create-game',
+    selector: 'app-create-game',
     templateUrl: './create-game.component.html',
     styleUrls: ['./create-game.component.scss']
 })

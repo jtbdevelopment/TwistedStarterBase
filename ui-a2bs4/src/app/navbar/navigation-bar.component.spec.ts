@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
 import {from} from 'rxjs/observable/from';
 
 @Component({
-    selector: 'navigation-bar-game-menu-toggle',
+    selector: 'app-navigation-bar-game-menu-toggle',
     template: '<p>{{playerLoaded}}</p>'
 })
 export class MockGameMenuToggleComponent {
@@ -15,7 +15,7 @@ export class MockGameMenuToggleComponent {
 }
 
 @Component({
-    selector: 'navigation-bar-new-game',
+    selector: 'app-navigation-bar-new-game',
     template: '<p>{{playerLoaded}}</p>'
 })
 export class MockNewGameComponent {
@@ -23,7 +23,7 @@ export class MockNewGameComponent {
 }
 
 @Component({
-    selector: 'navigation-bar-right-menu',
+    selector: 'app-navigation-bar-right-menu',
     template: '<p>{{playerLoaded}}/{{showAdmin}}/{{showLogout}}</p>'
 })
 export class MockRightBarMenuComponent {
@@ -76,9 +76,9 @@ describe('nav bar component', () => {
         expect(fixture.componentInstance.showLogout).toBeFalsy();
         expect(fixture.componentInstance.showAdmin).toBeFalsy();
         expect(fixture.componentInstance.appName).toEqual('Test');
-        expect(navBar.querySelector('navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
-        expect(navBar.querySelector('navigation-bar-new-game').textContent.trim()).toBe('false');
-        expect(navBar.querySelector('navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
+        expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
+        expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('false');
+        expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
         expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome');
     });
 
@@ -91,9 +91,9 @@ describe('nav bar component', () => {
         expect(fixture.componentInstance.showLogout).toBeFalsy();
         expect(fixture.componentInstance.showAdmin).toBeFalsy();
         expect(fixture.componentInstance.appName).toEqual('Test');
-        expect(navBar.querySelector('navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
-        expect(navBar.querySelector('navigation-bar-new-game').textContent.trim()).toBe('false');
-        expect(navBar.querySelector('navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
+        expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
+        expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('false');
+        expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
         expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome');
 
         let p: Player = new Player();
@@ -110,9 +110,9 @@ describe('nav bar component', () => {
         expect(fixture.componentInstance.showLogout).toBeFalsy();
         expect(fixture.componentInstance.showAdmin).toBeFalsy();
         expect(fixture.componentInstance.appName).toEqual('Test');
-        expect(navBar.querySelector('navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
-        expect(navBar.querySelector('navigation-bar-new-game').textContent.trim()).toBe('true');
-        expect(navBar.querySelector('navigation-bar-right-menu').textContent.trim()).toBe('true/false/false');
+        expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
+        expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('true');
+        expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('true/false/false');
         expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome XYZ');
     });
 
@@ -125,9 +125,9 @@ describe('nav bar component', () => {
         expect(fixture.componentInstance.showLogout).toBeFalsy();
         expect(fixture.componentInstance.showAdmin).toBeFalsy();
         expect(fixture.componentInstance.appName).toEqual('Test');
-        expect(navBar.querySelector('navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
-        expect(navBar.querySelector('navigation-bar-new-game').textContent.trim()).toBe('false');
-        expect(navBar.querySelector('navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
+        expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
+        expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('false');
+        expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
         expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome');
 
         let p: Player = new Player();
@@ -144,9 +144,9 @@ describe('nav bar component', () => {
         expect(fixture.componentInstance.showLogout).toBeTruthy();
         expect(fixture.componentInstance.showAdmin).toBeFalsy();
         expect(fixture.componentInstance.appName).toEqual('Test');
-        expect(navBar.querySelector('navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
-        expect(navBar.querySelector('navigation-bar-new-game').textContent.trim()).toBe('true');
-        expect(navBar.querySelector('navigation-bar-right-menu').textContent.trim()).toBe('true/false/true');
+        expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
+        expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('true');
+        expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('true/false/true');
         expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome XYZ');
     });
 
@@ -159,9 +159,9 @@ describe('nav bar component', () => {
         expect(fixture.componentInstance.showLogout).toBeFalsy();
         expect(fixture.componentInstance.showAdmin).toBeFalsy();
         expect(fixture.componentInstance.appName).toEqual('Test');
-        expect(navBar.querySelector('navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
-        expect(navBar.querySelector('navigation-bar-new-game').textContent.trim()).toBe('false');
-        expect(navBar.querySelector('navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
+        expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
+        expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('false');
+        expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
         expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome');
 
         let p: Player = new Player();
@@ -178,9 +178,9 @@ describe('nav bar component', () => {
         expect(fixture.componentInstance.showLogout).toBeFalsy();
         expect(fixture.componentInstance.showAdmin).toBeTruthy();
         expect(fixture.componentInstance.appName).toEqual('Test');
-        expect(navBar.querySelector('navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
-        expect(navBar.querySelector('navigation-bar-new-game').textContent.trim()).toBe('true');
-        expect(navBar.querySelector('navigation-bar-right-menu').textContent.trim()).toBe('true/true/false');
+        expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
+        expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('true');
+        expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('true/true/false');
         expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome XYZ');
     });
 });

@@ -5,14 +5,15 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {GameMenuService} from './game-menu/game-menu.service';
 
-@Component({selector: 'navigation-bar', template: '<div class="nb"></div>'})
+@Component({selector: 'app-navigation-bar', template: '<div class="nb"></div>'})
 class MockNavBarComponent {
 }
 
-@Component({selector: 'game-menu-list', template: '<div class="gml"></div>'})
+@Component({selector: 'app-game-menu-list', template: '<div class="gml"></div>'})
 class MockGameMenuComponent {
 }
 
+// noinspection TsLint
 @Component({selector: 'router-outlet', template: '<div class="ro"></div>'})
 class MockRouterOutlet {
 }

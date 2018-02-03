@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Player, PlayerService} from 'jtb-core-games-ui';
 
 @Component({
-    selector: 'player-profile',
+    selector: 'app-player-profile',
     templateUrl: './player-profile.component.html',
     styleUrls: ['./player-profile.component.scss']
 })
