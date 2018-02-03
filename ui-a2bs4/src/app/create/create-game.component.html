@@ -8,13 +8,13 @@
             <label class="option-label col-md-2"
                    ngbTooltip="{{feature.description}}">{{feature.label}}</label>
             <div class="col-md-10">
-              <div class="btn-group d-flex" ngbRadioGroup [(ngModel)]="choices[feature.feature]"
+              <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup [(ngModel)]="choices[feature.feature]"
                    name="{{feature.feature}}"
                    ngbRadioGroup>
-                <label ngbButtonLabel class="btn btn-primary w-100"
+                <label ngbButtonLabel class="btn-primary w-100"
                        *ngFor="let option of feature.options"
                        ngbTooltip="{{option.description}}">
-                  <input ngbButton type="radio" class="test" value="{{option.option}}"
+                  <input ngbButton type="radio" value="{{option.option}}"
                          id="{{option.option}}">
                   {{option.label}}
                 </label>
