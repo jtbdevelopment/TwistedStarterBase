@@ -1,12 +1,14 @@
 import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject, Observable} from 'rxjs';
 import {PlayerProfileComponent} from './player-profile.component';
 import {Player, PlayerService} from 'jtb-core-games-ui';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {from} from 'rxjs/observable/from';
 
 export class MockPlayerService {
     static playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
 
-    player: Observable<Player> = Observable.from<Player>(MockPlayerService.playerSubject);
+    player: Observable<Player> = from<Player>(MockPlayerService.playerSubject);
 }
 
 describe('player profile component', () => {

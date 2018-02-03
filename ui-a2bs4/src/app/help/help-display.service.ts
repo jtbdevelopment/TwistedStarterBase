@@ -1,6 +1,7 @@
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Injectable} from '@angular/core';
+import {from} from 'rxjs/observable/from';
 
 @Injectable()
 export class HelpDisplayService {
@@ -8,7 +9,7 @@ export class HelpDisplayService {
     private showHelpSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor() {
-        this.showHelp = Observable.from(this.showHelpSubject);
+        this.showHelp = from(this.showHelpSubject);
     }
 
     public toggleHelp(): void {

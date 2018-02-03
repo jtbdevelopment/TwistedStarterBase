@@ -1,6 +1,8 @@
-import {BehaviorSubject, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {MessageBusService} from 'jtb-core-games-ui';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {from} from 'rxjs/observable/from';
 
 @Injectable()
 export class GameMenuService {
@@ -9,7 +11,7 @@ export class GameMenuService {
     private showGamesSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor(private messageBus: MessageBusService) {
-        this.showGames = Observable.from<boolean>(this.showGamesSubject);
+        this.showGames = from<boolean>(this.showGamesSubject);
         this.messageBus.connectionStatus.subscribe(connected => {
             this.showGamesSubject.next(connected);
         });

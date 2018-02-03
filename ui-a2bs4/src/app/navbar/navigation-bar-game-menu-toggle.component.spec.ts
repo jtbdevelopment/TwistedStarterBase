@@ -1,17 +1,19 @@
 import {inject, TestBed} from '@angular/core/testing';
-import {BehaviorSubject, Observable} from 'rxjs';
 import {NavigationBarGameMenuToggleComponent} from './navigation-bar-game-menu-toggle.component';
 import {GameMenuService} from '../game-menu/game-menu.service';
 import {HelpDisplayService} from '../help/help-display.service';
 import {NgbModule, NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AppConfig} from 'jtb-core-games-ui';
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {from} from 'rxjs/observable/from';
 
 
 export class MockGameMenuService {
     static showGamesSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
     //noinspection JSUnusedGlobalSymbols
-    public showGames: Observable<boolean> = Observable.from(MockGameMenuService.showGamesSubject);
+    public showGames: Observable<boolean> = from(MockGameMenuService.showGamesSubject);
 
     //noinspection JSUnusedGlobalSymbols,JSMethodCanBeStatic
     setShowGames(show: boolean): void {

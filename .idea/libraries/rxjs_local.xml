@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="rxjs local" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="node_modules" />
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/ui-a2bs4/node_modules/rxjs" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/ui-a2bs4/node_modules/rxjs" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

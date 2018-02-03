@@ -8,8 +8,7 @@ import {TSBGame} from '../game/tsb-game.model';
 import {PlayersAndStatesComponent} from './players-and-states.component';
 import {Game, GameCacheService, Player, PlayerService, StandardPhases} from 'jtb-core-games-ui';
 import {BootstrapActionsService} from 'jtb-core-games-bootstrap-ui';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/from';
+import {from} from 'rxjs/observable/from';
 
 class MockBoostrapActions {
     accept = jasmine.createSpy('accept');
@@ -19,15 +18,15 @@ class MockBoostrapActions {
     declineRematch = jasmine.createSpy('decline');
 }
 
-let playerMD5: string = 'my-md5';
-let player: Player = new Player({md5: playerMD5});
+const playerMD5 = 'my-md5';
+const player: Player = new Player({md5: playerMD5});
 
 class MockPlayerService {
-    public player: Observable<Player> = Observable.from(new BehaviorSubject<Player>(player));
+    public player: Observable<Player> = from(new BehaviorSubject<Player>(player));
 }
 
-let gameID: string = 'the-game-id';
-let game: TSBGame = new TSBGame();
+const gameID = 'the-game-id';
+const game: TSBGame = new TSBGame();
 let baseGame: TSBGame;
 
 class MockGameCacheService {
@@ -35,7 +34,7 @@ class MockGameCacheService {
 
     public getGame(id: String): Observable<Game> {
         if (id === gameID) {
-            return Observable.from(this.testGameSubject);
+            return from(this.testGameSubject);
         } else {
             return null;
         }
@@ -160,7 +159,7 @@ describe('Component:  players and states component', () => {
     });
 
     it('pending accept from player', () => {
-        let newGame = new TSBGame(baseGame);
+        const newGame = new TSBGame(baseGame);
         gameService.testGameSubject.next(newGame);
         fixture.detectChanges();
         expect(JSON.stringify(fixture.componentInstance.groupPlayers)).toEqual(JSON.stringify({
@@ -226,7 +225,7 @@ describe('Component:  players and states component', () => {
     });
 
     it('pending accept from other player', () => {
-        let newGame = new TSBGame(baseGame);
+        const newGame = new TSBGame(baseGame);
         newGame.playerStates[playerMD5] = 'Accepted';
         gameService.testGameSubject.next(newGame);
         fixture.detectChanges();
@@ -256,7 +255,7 @@ describe('Component:  players and states component', () => {
     });
 
     it('pending accept from player not in phase to accept', () => {
-        let newGame = new TSBGame(baseGame);
+        const newGame = new TSBGame(baseGame);
         newGame.gamePhase = 'Nope';
         gameService.testGameSubject.next(newGame);
         fixture.detectChanges();
@@ -281,7 +280,7 @@ describe('Component:  players and states component', () => {
     });
 
     it('can quit in setup phase', () => {
-        let newGame = new TSBGame(baseGame);
+        const newGame = new TSBGame(baseGame);
         newGame.gamePhase = 'Setup';
         gameService.testGameSubject.next(newGame);
         fixture.detectChanges();
@@ -310,7 +309,7 @@ describe('Component:  players and states component', () => {
     });
 
     it('can quit in playing phase', () => {
-        let newGame = new TSBGame(baseGame);
+        const newGame = new TSBGame(baseGame);
         newGame.gamePhase = StandardPhases.Playing;
         gameService.testGameSubject.next(newGame);
         fixture.detectChanges();
@@ -339,7 +338,7 @@ describe('Component:  players and states component', () => {
     });
 
     it('can rematch or declined rematch in round over phase', () => {
-        let newGame = new TSBGame(baseGame);
+        const newGame = new TSBGame(baseGame);
         newGame.gamePhase = StandardPhases.RoundOver;
         gameService.testGameSubject.next(newGame);
         fixture.detectChanges();

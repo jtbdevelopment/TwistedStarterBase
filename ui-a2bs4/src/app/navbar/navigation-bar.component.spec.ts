@@ -1,8 +1,10 @@
 import {TestBed} from '@angular/core/testing';
 import {NavigationBarComponent} from './navigation-bar.component';
 import {Component, Input} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
 import {AppConfig, Player, PlayerService} from 'jtb-core-games-ui';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {from} from 'rxjs/observable/from';
 
 @Component({
     selector: 'navigation-bar-game-menu-toggle',
@@ -42,8 +44,8 @@ export class MockPlayerService {
     static playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
     static loggedInSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
 
-    player: Observable<Player> = Observable.from<Player>(MockPlayerService.playerSubject);
-    loggedInPlayer: Observable<Player> = Observable.from<Player>(MockPlayerService.loggedInSubject);
+    player: Observable<Player> = from<Player>(MockPlayerService.playerSubject);
+    loggedInPlayer: Observable<Player> = from<Player>(MockPlayerService.loggedInSubject);
 }
 
 describe('nav bar component', () => {

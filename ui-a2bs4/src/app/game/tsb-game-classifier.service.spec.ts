@@ -1,8 +1,8 @@
 import {ReflectiveInjector} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
 import {TSBGameClassifier} from './tsb-game-classifier.service';
 import {TSBGame} from './tsb-game.model';
 import {Player, PlayerService} from 'jtb-core-games-ui';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 class MockPlayerService {
     public player: BehaviorSubject<Player> = new BehaviorSubject<Player>(null);
