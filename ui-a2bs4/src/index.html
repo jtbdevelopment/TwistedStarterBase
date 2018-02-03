@@ -1,33 +1,29 @@
 <!doctype html>
-<html>
-  <head>
-    <base href="/">
-    <meta charset="utf-8">
-    <!--  TODO TSB -->
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!--  TODO TSB - change icon -->
-    <link rel="icon" type="image/png" href="http://fountainjs.io/assets/imgs/fountain.png" />
-  </head>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Testng</title>
+  <base href="/">
 
-  <body>
-    <fountain-root>Loading...</fountain-root>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+  <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <!--  TODO TSB changed XXX-X-->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXX-X"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
 
-    <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
-    <!--  TODO TSB changed XXX-X-->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXX-X"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+      function gtag() {
+          dataLayer.push(arguments);
+      }
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
+      gtag('js', new Date());
 
-        gtag('js', new Date());
-
-        gtag('config', 'UA-XXX-X');
-    </script>
-  </body>
+      gtag('config', 'UA-XXX-X');
+  </script>
+</body>
 </html>

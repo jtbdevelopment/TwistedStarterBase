@@ -1,11 +1,12 @@
-import {RouterModule, Routes} from '@angular/router';
-import {MainComponent} from './main';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import {PlayerProfileComponent} from './profile/player-profile.component';
 import {CreateGameComponent} from './create/create-game.component';
 import {PlayersAndStatesComponent} from './game-display/players-and-states.component';
-import {AdminComponent, SignedInComponent, SignInComponent} from 'jtb-core-games-bootstrap-ui';
+import {AdminComponent, JTBCoreGamesUIBootstrap, SignedInComponent, SignInComponent} from 'jtb-core-games-bootstrap-ui';
+import {MainComponent} from './main';
 
-export const routes: Routes = [
+const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
@@ -68,4 +69,11 @@ export const routes: Routes = [
     },
 ];
 
-export const routing = RouterModule.forRoot(routes, {useHash: true});
+@NgModule({
+  imports: [
+      JTBCoreGamesUIBootstrap,
+      RouterModule.forRoot(routes)
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

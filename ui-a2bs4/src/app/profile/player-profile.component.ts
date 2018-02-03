@@ -3,8 +3,8 @@ import {Player, PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'player-profile',
-    template: require('./player-profile.component.html'),
-    styles: [require('./player-profile.component.scss').toString()]
+    templateUrl: './player-profile.component.html',
+    styleUrls: ['./player-profile.component.scss']
 })
 export class PlayerProfileComponent {
     public player: Player;

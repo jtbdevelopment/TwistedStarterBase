@@ -5,7 +5,7 @@ import {PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'navigation-bar-right-menu',
-    template: require('./navigation-bar-right-menu.component.html')
+    templateUrl: './navigation-bar-right-menu.component.html'
 })
 export class NavigationBarRightMenuComponent extends AbstractHelpDisplayingComponent {
     @Input() playerLoaded: boolean;

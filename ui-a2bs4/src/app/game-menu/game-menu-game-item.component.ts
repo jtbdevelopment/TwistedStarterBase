@@ -3,7 +3,7 @@ import {Game} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'game-menu-game-item',
-    template: require('./game-menu-game-item.component.html')
+    templateUrl: './game-menu-game-item.component.html'
 })
 export class GameMenuGameItemComponent {
     @Input() public game: Game;

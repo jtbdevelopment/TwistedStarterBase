@@ -3,8 +3,8 @@ import {AppConfig, PlayerService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'navigation-bar',
-    template: require('./navigation-bar.component.html'),
-    styles: [require('./navigation-bar.component.scss').toString()]
+    templateUrl: './navigation-bar.component.html',
+    styleUrls: ['./navigation-bar.component.scss']
 })
 export class NavigationBarComponent {
     playerName: string;

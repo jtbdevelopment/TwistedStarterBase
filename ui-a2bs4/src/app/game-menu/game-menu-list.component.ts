@@ -5,8 +5,8 @@ import {GameClassifier} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'game-menu-list',
-    template: require('./game-menu-list.component.html'),
-    styles: [require('./game-menu-list.component.scss').toString()]
+    templateUrl: './game-menu-list.component.html',
+    styleUrls: ['./game-menu-list.component.scss']
 })
 export class GameMenuListComponent extends AbstractHelpDisplayingComponent {
     public categories: string[] = [];

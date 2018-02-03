@@ -55,7 +55,7 @@ describe('Component:  game menu list component', () => {
         fixture.detectChanges();
         expect(fixture.componentInstance.categories).toEqual([]);
         expect(fixture.componentInstance.styles).toEqual([]);
-        expect(JSON.stringify(fixture.componentInstance.icons)).toEqual(JSON.stringify([]));
+        expect(fixture.componentInstance.icons.size).toEqual(0);
     });
 
     it('subscribes to game classifier', () => {

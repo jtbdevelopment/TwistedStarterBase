@@ -5,8 +5,8 @@ import {BootstrapActionsService} from 'jtb-core-games-bootstrap-ui';
 
 @Component({
     selector: 'players-and-states',
-    template: require('./players-and-states.component.html'),
-    styles: [require('./players-and-states.component.scss').toString()]
+    templateUrl: './players-and-states.component.html',
+    styleUrls: ['./players-and-states.component.scss']
 })
 export class PlayersAndStatesComponent implements OnInit {
     public groups: string[] = [StandardPlayerStates.Pending, StandardPlayerStates.Accepted, StandardPlayerStates.Rejected, StandardPlayerStates.Quit];

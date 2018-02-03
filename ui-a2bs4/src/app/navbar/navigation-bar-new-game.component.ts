@@ -4,7 +4,7 @@ import {HelpDisplayService} from '../help/help-display.service';
 
 @Component({
     selector: 'navigation-bar-new-game',
-    template: require('./navigation-bar-new-game.component.html')
+    templateUrl: './navigation-bar-new-game.component.html'
 })
 export class NavigationBarNewGameComponent extends AbstractHelpDisplayingComponent {
     @Input() playerLoaded: boolean;

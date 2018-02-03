@@ -4,7 +4,7 @@ import {Game, GameCacheService} from 'jtb-core-games-ui';
 
 @Component({
     selector: 'game-menu-category-list',
-    template: require('./game-menu-category-list.component.html')
+    templateUrl: './game-menu-category-list.component.html'
 })
 export class GameMenuCategoryListComponent implements OnInit {
     @Input() public category: string;

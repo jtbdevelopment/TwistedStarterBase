@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 @Component({
   selector: 'fountain-app',
-  template: require('./main.html'),
-  styles: [require('./main.scss').toString()]
+  templateUrl: './main.html',
+  styleUrls: ['./main.scss']
 })
 export class MainComponent {}

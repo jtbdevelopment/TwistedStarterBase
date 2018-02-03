@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {GameMenuService} from './game-menu/game-menu.service';
 
 @Component({
-    selector: 'fountain-root',
-    template: require('./root.component.html')
+    selector: 'app-root',
+    templateUrl: './root.component.html'
 })
 export class RootComponent {
     public showGames: boolean = false;

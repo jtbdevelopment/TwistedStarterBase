@@ -5,8 +5,8 @@ import {BootstrapActionsService, InviteComponent} from 'jtb-core-games-bootstrap
 
 @Component({
     selector: 'create-game',
-    template: require('./create-game.component.html'),
-    styles: [require('./create-game.component.scss').toString()]
+    templateUrl: './create-game.component.html',
+    styleUrls: ['./create-game.component.scss']
 })
 export class CreateGameComponent {
     public choices = {};

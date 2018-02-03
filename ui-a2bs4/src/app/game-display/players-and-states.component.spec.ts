@@ -8,6 +8,8 @@ import {TSBGame} from '../game/tsb-game.model';
 import {PlayersAndStatesComponent} from './players-and-states.component';
 import {Game, GameCacheService, Player, PlayerService, StandardPhases} from 'jtb-core-games-ui';
 import {BootstrapActionsService} from 'jtb-core-games-bootstrap-ui';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/from';
 
 class MockBoostrapActions {
     accept = jasmine.createSpy('accept');
