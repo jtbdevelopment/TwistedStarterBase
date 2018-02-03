@@ -1,8 +1,8 @@
-import {ReflectiveInjector} from '@angular/core';
 import {TSBGameClassifier} from './tsb-game-classifier.service';
 import {TSBGame} from './tsb-game.model';
 import {Player, PlayerService} from 'jtb-core-games-ui';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {TestBed} from '@angular/core/testing';
 
 class MockPlayerService {
   public player: BehaviorSubject<Player> = new BehaviorSubject<Player>(null);
@@ -15,12 +15,14 @@ describe('Service: tsb game clasifier service', () => {
 
   beforeEach(() => {
     classifications = null;
-    this.injector = ReflectiveInjector.resolveAndCreate([
-      {provide: PlayerService, useClass: MockPlayerService},
-      TSBGameClassifier
-    ]);
-    classifier = this.injector.get(TSBGameClassifier);
-    playerService = this.injector.get(PlayerService) as MockPlayerService;
+    TestBed.configureTestingModule({
+      providers: [
+        {provide: PlayerService, useClass: MockPlayerService},
+        TSBGameClassifier
+      ]
+    });
+    classifier = TestBed.get(TSBGameClassifier);
+    playerService = TestBed.get(PlayerService) as MockPlayerService;
     classifier.getClassifications().subscribe(c => classifications = c);
   });
 
