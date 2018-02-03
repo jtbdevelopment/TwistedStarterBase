@@ -9,6 +9,7 @@ import {PlayersAndStatesComponent} from './players-and-states.component';
 import {Game, GameCacheService, Player, PlayerService, StandardPhases} from 'jtb-core-games-ui';
 import {BootstrapActionsService} from 'jtb-core-games-bootstrap-ui';
 import {from} from 'rxjs/observable/from';
+import {of} from 'rxjs/observable/of';
 
 class MockBoostrapActions {
     accept = jasmine.createSpy('accept');
@@ -108,7 +109,7 @@ describe('Component:  players and states component', () => {
                 {provide: PlayerService, useClass: MockPlayerService},
                 {provide: GameCacheService, useClass: MockGameCacheService},
                 {provide: BootstrapActionsService, useClass: MockBoostrapActions},
-                {provide: ActivatedRoute, useValue: {paramMap: Observable.of(new ParamMapImpl())}}
+                {provide: ActivatedRoute, useValue: {paramMap: of(new ParamMapImpl())}}
             ]
         });
         TestBed.compileComponents();
