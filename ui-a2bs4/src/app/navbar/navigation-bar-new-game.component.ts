@@ -3,13 +3,13 @@ import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
 import {HelpDisplayService} from '../help/help-display.service';
 
 @Component({
-    selector: 'app-navigation-bar-new-game',
-    templateUrl: './navigation-bar-new-game.component.html'
+  selector: 'app-navigation-bar-new-game',
+  templateUrl: './navigation-bar-new-game.component.html'
 })
 export class NavigationBarNewGameComponent extends AbstractHelpDisplayingComponent {
-    @Input() playerLoaded: boolean;
+  @Input() playerLoaded: boolean;
 
-    constructor(protected helpDisplay: HelpDisplayService) {
-        super(helpDisplay);
-    }
+  constructor(protected helpDisplay: HelpDisplayService) {
+    super(helpDisplay);
+  }
 }

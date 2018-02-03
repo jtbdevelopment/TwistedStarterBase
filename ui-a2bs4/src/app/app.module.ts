@@ -18,27 +18,27 @@ import {MainComponent} from './main';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NavigationBarModule,
-        JTBCoreGamesUIBootstrap,
-        GameMenuModule,
-        CreateGameModule,
-        PlayerProfileModule,
-        GameDisplayModule,
-        NgbModule.forRoot()
-    ],
-    declarations: [
-        RootComponent,
-        MainComponent
-    ],
-    bootstrap: [RootComponent],
-    providers: [
-        {provide: 'AppConfig', useClass: TwistedAppConfig},
-        {provide: 'GameFactory', useClass: TSBGameFactory},
-        {provide: 'GameClassifier', useClass: TSBGameClassifier}
-    ]
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NavigationBarModule,
+    JTBCoreGamesUIBootstrap,
+    GameMenuModule,
+    CreateGameModule,
+    PlayerProfileModule,
+    GameDisplayModule,
+    NgbModule.forRoot()
+  ],
+  declarations: [
+    RootComponent,
+    MainComponent
+  ],
+  bootstrap: [RootComponent],
+  providers: [
+    {provide: 'AppConfig', useClass: TwistedAppConfig},
+    {provide: 'GameFactory', useClass: TSBGameFactory},
+    {provide: 'GameClassifier', useClass: TSBGameClassifier}
+  ]
 })
 export class AppModule {
 }

@@ -4,7 +4,7 @@ import {GameFactory} from 'jtb-core-games-ui';
 
 @Injectable()
 export class TSBGameFactory implements GameFactory {
-    public newGame(original?: any): any {
-        return new TSBGame(original);
-    }
+  public newGame(original?: any): any {
+    return new TSBGame(original);
+  }
 }

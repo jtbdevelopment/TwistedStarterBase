@@ -1,4 +1,3 @@
-
 // This segment gets rid of the built in forced collapse from BS 4
 .navbar-toggleable-sm {
   -webkit-box-orient: horizontal;
@@ -14,6 +13,7 @@
   -ms-flex-align: center;
   align-items: center;
 }
+
 .navbar-toggleable-sm .navbar-nav {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -21,6 +21,7 @@
   -ms-flex-direction: row;
   flex-direction: row;
 }
+
 .navbar-toggleable-sm .navbar-nav .nav-link {
   padding-right: .5rem;
   padding-left: .5rem;

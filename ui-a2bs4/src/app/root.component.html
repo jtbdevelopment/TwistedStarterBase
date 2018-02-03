@@ -1,11 +1,11 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-2" *ngIf="showGames">
-            <app-game-menu-list></app-game-menu-list>
-        </div>
-        <div [ngClass]="{'col-10':showGames, 'col-12':(!showGames)}">
-            <router-outlet></router-outlet>
-        </div>
+  <div class="row">
+    <div class="col-2" *ngIf="showGames">
+      <app-game-menu-list></app-game-menu-list>
     </div>
+    <div [ngClass]="{'col-10':showGames, 'col-12':(!showGames)}">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
 <app-navigation-bar></app-navigation-bar>

@@ -9,21 +9,21 @@ import {JTBCoreGamesUI} from 'jtb-core-games-ui';
 import {JTBCoreGamesUIBootstrap} from 'jtb-core-games-bootstrap-ui';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        RouterModule,
-        FormsModule,
-        NgbModule,
-        MultiSelectModule,
-        JTBCoreGamesUIBootstrap,
-        JTBCoreGamesUI
-    ],
-    exports: [
-        CreateGameComponent
-    ],
-    declarations: [
-        CreateGameComponent
-    ]
+  imports: [
+    BrowserModule,
+    RouterModule,
+    FormsModule,
+    NgbModule,
+    MultiSelectModule,
+    JTBCoreGamesUIBootstrap,
+    JTBCoreGamesUI
+  ],
+  exports: [
+    CreateGameComponent
+  ],
+  declarations: [
+    CreateGameComponent
+  ]
 })
 export class CreateGameModule {
 }

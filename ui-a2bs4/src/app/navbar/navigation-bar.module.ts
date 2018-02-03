@@ -11,23 +11,23 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {JTBCoreGamesUI} from 'jtb-core-games-ui';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        JTBCoreGamesUI,
-        GameMenuModule,
-        RouterModule,
-        HelpModule,
-        NgbModule
-    ],
-    exports: [
-        NavigationBarComponent,
-    ],
-    declarations: [
-        NavigationBarComponent,
-        NavigationBarGameMenuToggleComponent,
-        NavigationBarNewGameComponent,
-        NavigationBarRightMenuComponent
-    ]
+  imports: [
+    BrowserModule,
+    JTBCoreGamesUI,
+    GameMenuModule,
+    RouterModule,
+    HelpModule,
+    NgbModule
+  ],
+  exports: [
+    NavigationBarComponent,
+  ],
+  declarations: [
+    NavigationBarComponent,
+    NavigationBarGameMenuToggleComponent,
+    NavigationBarNewGameComponent,
+    NavigationBarRightMenuComponent
+  ]
 })
 export class NavigationBarModule {
 }
