@@ -14,7 +14,7 @@ export class CreateGameComponent {
   public friends: Friend[] = [];
   public chosenFriends: Friend[] = [];
   //  TODO - TSB - customize when create is enabled
-  public disableCreate: boolean = true;
+  public disableCreate = true;
   public createGameText: String = 'Create Game!';
 
   constructor(private featureCache: FeatureCacheService,
@@ -45,14 +45,16 @@ export class CreateGameComponent {
     this.createGameText = 'Creating game...';
     this.disableCreate = true;
 
-    let featureSet = [];
-    for (let choice in this.choices) {
-      featureSet.push(this.choices[choice]);
+    const featureSet = [];
+    for (const choice in this.choices) {
+      if (this.choices.hasOwnProperty(choice)) {
+        featureSet.push(this.choices[choice]);
+      }
     }
-    let players = this.chosenFriends.map(function (player: Friend) {
+    const players = this.chosenFriends.map(function (player: Friend) {
       return player.md5;
     });
-    let playersAndFeatures = {'players': players, 'features': featureSet};
+    const playersAndFeatures = {'players': players, 'features': featureSet};
     this.gameActions.newGame(playersAndFeatures);
   }
 }

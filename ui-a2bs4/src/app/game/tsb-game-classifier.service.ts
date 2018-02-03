@@ -10,7 +10,7 @@ import {
 @Injectable()
 export class TSBGameClassifier extends AbstractTurnClassifier implements GameClassifier<MultiPlayerGame> {
 
-  private md5: string = '';
+  private md5 = '';
 
   constructor(private playerService: PlayerService) {
     super();
@@ -30,7 +30,10 @@ export class TSBGameClassifier extends AbstractTurnClassifier implements GameCla
       return AbstractTurnClassifier.YOUR_TURN;
     }
 
-    if (game.gamePhase === StandardPhases.Declined || game.gamePhase === StandardPhases.Quit || game.gamePhase === StandardPhases.NextRoundStarted) {
+    if (
+      game.gamePhase === StandardPhases.Declined ||
+      game.gamePhase === StandardPhases.Quit ||
+      game.gamePhase === StandardPhases.NextRoundStarted) {
       return AbstractTurnClassifier.OLDER_GAMES;
     }
 

@@ -6,7 +6,7 @@ import {GameMenuService} from './game-menu/game-menu.service';
   templateUrl: './root.component.html'
 })
 export class RootComponent {
-  public showGames: boolean = false;
+  public showGames = false;
 
   constructor(menuService: GameMenuService) {
     menuService.showGames.subscribe(x => this.showGames = x);

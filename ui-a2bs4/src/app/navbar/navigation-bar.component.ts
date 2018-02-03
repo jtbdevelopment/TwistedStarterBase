@@ -8,10 +8,10 @@ import {AppConfig, PlayerService} from 'jtb-core-games-ui';
 })
 export class NavigationBarComponent {
   playerName: string;
-  showAdmin: boolean = false;
-  showLogout: boolean = false;
+  showAdmin = false;
+  showLogout = false;
   appName: string;
-  playerLoaded: boolean = false;
+  playerLoaded = false;
 
   constructor(@Inject('AppConfig') private config: AppConfig, private playerService: PlayerService) {
     this.appName = config.appName;

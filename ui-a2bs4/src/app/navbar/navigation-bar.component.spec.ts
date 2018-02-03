@@ -33,11 +33,11 @@ export class MockRightBarMenuComponent {
 }
 
 export class MockAppConfig implements AppConfig {
-  appName: string = 'Test';
+  appName = 'Test';
   hoverMenu: boolean;
-  version: string = '';
-  releaseNotes: string = '';
-  inviteFriendsMessage: string = '';
+  version = '';
+  releaseNotes = '';
+  inviteFriendsMessage = '';
 }
 
 export class MockPlayerService {
@@ -79,7 +79,7 @@ describe('nav bar component', () => {
     expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
     expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('false');
     expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
-    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome');
+    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n    Welcome');
   });
 
   it('should update for a regular non manual player', () => {
@@ -94,9 +94,9 @@ describe('nav bar component', () => {
     expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
     expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('false');
     expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
-    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome');
+    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n    Welcome');
 
-    let p: Player = new Player();
+    const p: Player = new Player();
     p.displayName = 'XYZ';
     p.source = 'Facebook';
     p.adminUser = false;
@@ -113,7 +113,7 @@ describe('nav bar component', () => {
     expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
     expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('true');
     expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('true/false/false');
-    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome XYZ');
+    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n    Welcome XYZ');
   });
 
   it('should update for a regular manual player', () => {
@@ -128,9 +128,9 @@ describe('nav bar component', () => {
     expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
     expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('false');
     expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
-    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome');
+    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n    Welcome');
 
-    let p: Player = new Player();
+    const p: Player = new Player();
     p.displayName = 'XYZ';
     p.source = 'MANUAL';
     p.adminUser = false;
@@ -147,7 +147,7 @@ describe('nav bar component', () => {
     expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
     expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('true');
     expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('true/false/true');
-    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome XYZ');
+    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n    Welcome XYZ');
   });
 
   it('should update for a admin non manual player', () => {
@@ -162,9 +162,9 @@ describe('nav bar component', () => {
     expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('false');
     expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('false');
     expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('false/false/false');
-    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome');
+    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n    Welcome');
 
-    let p: Player = new Player();
+    const p: Player = new Player();
     p.displayName = 'XYZ';
     p.source = 'Facebook';
     p.adminUser = true;
@@ -181,6 +181,6 @@ describe('nav bar component', () => {
     expect(navBar.querySelector('app-navigation-bar-game-menu-toggle').textContent.trim()).toBe('true');
     expect(navBar.querySelector('app-navigation-bar-new-game').textContent.trim()).toBe('true');
     expect(navBar.querySelector('app-navigation-bar-right-menu').textContent.trim()).toBe('true/true/false');
-    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n        Welcome XYZ');
+    expect(navBar.querySelector('a').textContent.trim()).toBe('Test\n    Welcome XYZ');
   });
 });

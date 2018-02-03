@@ -30,7 +30,7 @@ class MockBoostrapActions {
   newGame = jasmine.createSpy('newGame');
 }
 
-let groups: FeatureGroup[] = [
+const groups: FeatureGroup[] = [
   new FeatureGroup('Group1'),
   new FeatureGroup('Group2')
 ];
@@ -97,7 +97,7 @@ describe('Component:  create game component', () => {
     const fixture = TestBed.createComponent(CreateGameComponent);
 
     fixture.detectChanges();
-    let empty = {};
+    const empty = {};
     expect(fixture.componentInstance.choices).toEqual(empty);
     expect(fixture.componentInstance.groups).toEqual([]);
     expect(fixture.componentInstance.friends).toEqual([]);
@@ -123,7 +123,7 @@ describe('Component:  create game component', () => {
 
 
     groups.forEach(group => {
-      let tab = fixture.nativeElement.querySelector('#' + group.groupType);
+      const tab = fixture.nativeElement.querySelector('#' + group.groupType);
       expect(tab).toBeDefined();
     });
   });
@@ -131,8 +131,8 @@ describe('Component:  create game component', () => {
   it('subscribes to friends', () => {
     const fixture = TestBed.createComponent(CreateGameComponent);
     expect(friendService.refreshFriends).toHaveBeenCalledTimes(1);
-    let newFriend: Friend[] = [new Friend('md5', 'dn1'), new Friend('md', 'dn')];
-    let newInt: Invitable[] = [new Invitable('id1', '1')];
+    const newFriend: Friend[] = [new Friend('md5', 'dn1'), new Friend('md', 'dn')];
+    const newInt: Invitable[] = [new Invitable('id1', '1')];
     friendService.friends.next(newFriend);
     friendService.invitableFriends.next(newInt);
     expect(fixture.componentInstance.friends).toEqual(newFriend);

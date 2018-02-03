@@ -27,11 +27,12 @@ export class MockGameMenuService {
 }
 
 export class MockAppConfig implements AppConfig {
-  appName: string = 'Twisted Starter Base';
-  hoverMenu: boolean = true;
-  version: string = '';
-  releaseNotes: string = '';
-  inviteFriendsMessage: string = '';
+  appName = 'Twisted Starter Base';
+  hoverMenu = true;
+  version = '';
+  releaseNotes = '';
+  // noinspection JSUnusedGlobalSymbols
+  inviteFriendsMessage = '';
 }
 
 describe('Component:  nav bar game menu toggle component', () => {

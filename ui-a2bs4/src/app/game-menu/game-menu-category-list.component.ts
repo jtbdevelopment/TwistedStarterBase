@@ -12,7 +12,7 @@ export class GameMenuCategoryListComponent implements OnInit {
   @Input() public icon: string;
   @Input() public style: string;
   public games: Game[] = [];
-  public isCollapsed: boolean = false;
+  public isCollapsed = false;
 
   constructor(private gameCache: GameCacheService) {
   }

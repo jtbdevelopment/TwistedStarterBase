@@ -13,9 +13,13 @@ class MockNavBarComponent {
 class MockGameMenuComponent {
 }
 
-// noinspection TsLint
-@Component({selector: 'router-outlet', template: '<div class="ro"></div>'})
-class MockRouterOutlet {
+@Component(
+  {
+    selector: 'router-outlet',     // tslint:disable-line
+    template: '<div class="ro"></div>'
+  }
+)
+class MockRouterOutletComponent {
 }
 
 class MockGameMenuService {
@@ -34,7 +38,7 @@ describe('Root Component', () => {
         RootComponent,
         MockNavBarComponent,
         MockGameMenuComponent,
-        MockRouterOutlet
+        MockRouterOutletComponent
       ]
     });
     TestBed.compileComponents();

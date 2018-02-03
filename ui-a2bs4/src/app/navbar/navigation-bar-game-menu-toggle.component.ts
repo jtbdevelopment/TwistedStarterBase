@@ -12,7 +12,7 @@ export class NavigationBarGameMenuToggleComponent extends AbstractHelpDisplaying
   @Input() playerLoaded: boolean;
 
   private beforeHoverMenuValue: boolean;
-  private hovering: boolean = false;
+  private hovering = false;
 
   constructor(@Inject('AppConfig') private config: AppConfig,
               private gameMenuService: GameMenuService,

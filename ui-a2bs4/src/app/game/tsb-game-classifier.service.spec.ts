@@ -39,26 +39,26 @@ describe('Service: tsb game clasifier service', () => {
   });
 
   it('Playing comes out your turn', () => {
-    let g = new TSBGame({gamePhase: 'Playing'});
+    const g = new TSBGame({gamePhase: 'Playing'});
     expect(classifier.classifyGame(g)).toEqual('Your Turn');
   });
 
   it('Round over comes out your turn', () => {
-    let g = new TSBGame({gamePhase: 'RoundOver'});
+    const g = new TSBGame({gamePhase: 'RoundOver'});
     expect(classifier.classifyGame(g)).toEqual('Your Turn');
   });
 
   it('Challenged when player md5 is defined and playerState is pending comes out your turn', () => {
-    let md5 = 'mymd5';
-    let p = new Player({md5: md5});
+    const md5 = 'mymd5';
+    const p = new Player({md5: md5});
     playerService.player.next(p);
-    let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5: 'Pending'}});
+    const g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5: 'Pending'}});
     expect(classifier.classifyGame(g)).toEqual('Your Turn');
   });
 
   it('Challenged when player md5 is defined and playerState is not pending comes out their turn', () => {
-    let md5 = 'mymd5';
-    let p = new Player({md5: md5});
+    const md5 = 'mymd5';
+    const p = new Player({md5: md5});
     playerService.player.next(p);
     let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5: 'Accepted'}});
     expect(classifier.classifyGame(g)).toEqual('Their Turn');
@@ -69,8 +69,8 @@ describe('Service: tsb game clasifier service', () => {
   });
 
   it('Challenged when player md5 is defined and playerState is not available comes out their turn', () => {
-    let md5 = 'mymd5';
-    let p = new Player({md5: md5});
+    const md5 = 'mymd5';
+    const p = new Player({md5: md5});
     playerService.player.next(p);
     let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5other: 'Pending'}});
     expect(classifier.classifyGame(g)).toEqual('Their Turn');
@@ -79,29 +79,29 @@ describe('Service: tsb game clasifier service', () => {
   });
 
   it('Challenged when player md5 is not defined comes out their turn', () => {
-    let p = new Player();
+    const p = new Player();
     playerService.player.next(p);
-    let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5other: 'Pending'}});
+    const g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5other: 'Pending'}});
     expect(classifier.classifyGame(g)).toEqual('Their Turn');
   });
 
   it('Challenged when player is not defined comes out their turn', () => {
-    let g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5other: 'Pending'}});
+    const g = new TSBGame({gamePhase: 'Challenged', playerStates: {mymd5other: 'Pending'}});
     expect(classifier.classifyGame(g)).toEqual('Their Turn');
   });
 
   it('Quit over comes out older games', () => {
-    let g = new TSBGame({gamePhase: 'Quit'});
+    const g = new TSBGame({gamePhase: 'Quit'});
     expect(classifier.classifyGame(g)).toEqual('Older Games');
   });
 
   it('NextRoundStarted over comes out older games', () => {
-    let g = new TSBGame({gamePhase: 'NextRoundStarted'});
+    const g = new TSBGame({gamePhase: 'NextRoundStarted'});
     expect(classifier.classifyGame(g)).toEqual('Older Games');
   });
 
   it('Declined over comes out older games', () => {
-    let g = new TSBGame({gamePhase: 'Declined'});
+    const g = new TSBGame({gamePhase: 'Declined'});
     expect(classifier.classifyGame(g)).toEqual('Older Games');
   });
 

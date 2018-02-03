@@ -12,7 +12,7 @@ export class MockPlayerService {
 }
 
 describe('player profile component', () => {
-  let player = new Player({
+  const player = new Player({
     displayName: 'Name',
     source: 'test',
     imageUrl: '',
@@ -36,7 +36,7 @@ describe('player profile component', () => {
     fixture.detectChanges();
     const navBar = fixture.nativeElement;
     expect(fixture.componentInstance.player).toEqual(player);
-    let content = navBar.querySelector('table').textContent.trim();
+    const content = navBar.querySelector('table').textContent.trim();
     expect(content).toContain(player.displayName);
     expect(content).toContain(player.source);
     expect(content).toContain(player.gameSpecificPlayerAttributes.freeGamesUsedToday);
@@ -48,7 +48,7 @@ describe('player profile component', () => {
     const navBar = fixture.nativeElement;
     expect(fixture.componentInstance.player).toEqual(player);
 
-    let newPlayer: Player = new Player({
+    const newPlayer: Player = new Player({
       displayName: 'New Name',
       source: 'test2',
       imageUrl: '',
@@ -58,7 +58,7 @@ describe('player profile component', () => {
     MockPlayerService.playerSubject.next(newPlayer);
     fixture.detectChanges();
 
-    let content = navBar.querySelector('table').textContent.trim();
+    const content = navBar.querySelector('table').textContent.trim();
     expect(content).toContain(newPlayer.displayName);
     expect(content).toContain(newPlayer.source);
     expect(content).toContain(newPlayer.gameSpecificPlayerAttributes.freeGamesUsedToday);
