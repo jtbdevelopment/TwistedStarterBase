@@ -45,7 +45,6 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <!--  TODO - why does aot/build optimizer break -->
                             <arguments>run build</arguments>
                         </configuration>
                     </execution>

@@ -14,8 +14,8 @@
     "bootstrap": "^4.0.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
-    "jtb-core-games-bootstrap-ui": "^2.0.1",
-    "jtb-core-games-ui": "^3.0.6",
+    "jtb-core-games-bootstrap-ui": "^2.0.2",
+    "jtb-core-games-ui": "^3.0.7",
     "primeng": "^5.2.0",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
@@ -43,7 +43,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --prod --aot=false --build-optimizer=false",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
