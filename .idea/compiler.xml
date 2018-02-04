@@ -18,7 +18,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="example-war" />
         <module name="game" />
-        <module name="ui" />
         <module name="ui-a2bs4" />
         <module name="war" />
       </profile>
