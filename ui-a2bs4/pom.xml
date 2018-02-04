@@ -24,8 +24,8 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>v6.9.2</nodeVersion>
-                            <npmVersion>4.1.1</npmVersion>
+                            <nodeVersion>v8.9.4</nodeVersion>
+                            <npmVersion>5.6.0</npmVersion>
                         </configuration>
                     </execution>
 
@@ -40,12 +40,13 @@
                     </execution>
 
                     <execution>
-                        <id>gulp build</id>
+                        <id>ng build</id>
                         <goals>
-                            <goal>gulp</goal>
+                            <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>--no-color --force</arguments>
+                            <!--  TODO - why does aot/build optimizer break -->
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
 
