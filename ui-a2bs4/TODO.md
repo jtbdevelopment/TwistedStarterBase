@@ -5,6 +5,3 @@ update build/test framework
 
 Multiselect style looks broken now
 
-Common code style
-Common lint
-why do js linger
