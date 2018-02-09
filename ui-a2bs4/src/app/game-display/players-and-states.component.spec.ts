@@ -72,11 +72,10 @@ describe('Component:  players and states component', () => {
         'md2': 'p2',
         'md3': 'p3',
       },
-      //  TODO - causes issues with karma
       playerImages: {
-        // 'md1': '/src/images/avatars/malprofile.png',
-        // 'md2': '/p2.img',
-        // 'md3': 'http://thenetwork.com/url?33f.img',
+          'md1': '/assets/avatars/maleprofile.png',
+          'md2': '/p2.img',
+          'md3': 'http://thenetwork.com/url?33f.img',
       },
       playerStates: {
         'md1': 'Accepted',
@@ -167,7 +166,7 @@ describe('Component:  players and states component', () => {
       'Pending': [
         {
           displayName: 'p3',
-          playerImage: undefined,
+            playerImage: 'http://thenetwork.com/url?33f.img',
           playerProfile: 'http://www.com',
           state: 'Pending'
         },
@@ -181,7 +180,7 @@ describe('Component:  players and states component', () => {
       'Accepted': [
         {
           displayName: 'p1',
-          playerImage: undefined,
+            playerImage: '/assets/avatars/maleprofile.png',
           playerProfile: 'link1.html',
           state: 'Accepted'
         },
@@ -189,7 +188,7 @@ describe('Component:  players and states component', () => {
       'Rejected': [
         {
           displayName: 'p2',
-          playerImage: undefined,
+            playerImage: '/p2.img',
           playerProfile: '/link2',
           state: 'Rejected'
         },
