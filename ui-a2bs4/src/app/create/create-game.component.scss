@@ -4,8 +4,15 @@
     margin: auto;
   }
 
-  .ui-multiselect {
-    width: 100%;
-    padding: 0;
+  ::ng-deep .ui-multiselect {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  ::ng-deep .ui-multiselect-label-container {
+    .ui-multiselect-label {
+      margin-bottom: 0;
+    }
   }
 }
+
