@@ -1,2 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.invite-dialog {
+  .ui-multiselect {
+    width: 100%;
+    padding: 0;
+
+    .ui-multiselect-label-container {
+      .ui-multiselect-label {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
