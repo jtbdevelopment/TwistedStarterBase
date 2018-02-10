@@ -6,61 +6,55 @@ import {Observable} from 'rxjs/Observable';
 import {from} from 'rxjs/observable/from';
 
 export class MockPlayerService {
-  static playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
+    static playerSubject: BehaviorSubject<Player> = new BehaviorSubject(new Player());
 
-  player: Observable<Player> = from<Player>(MockPlayerService.playerSubject);
+    player: Observable<Player> = from<Player>(MockPlayerService.playerSubject);
 }
 
 describe('player profile component', () => {
-  const player = new Player({
-    displayName: 'Name',
-    source: 'test',
-    imageUrl: '',
-    gameSpecificPlayerAttributes: {freeGamesUsedToday: 20}
-  });
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerProfileComponent
-      ],
-      providers: [
-        {provide: PlayerService, useClass: MockPlayerService}
-      ],
+    const player = new Player({
+        displayName: 'Name',
+        source: 'test',
+        imageUrl: '',
+        gameSpecificPlayerAttributes: {freeGamesUsedToday: 20}
     });
-    TestBed.compileComponents();
-    MockPlayerService.playerSubject.next(player);
-  });
-
-  it('should render basics', () => {
-    const fixture = TestBed.createComponent(PlayerProfileComponent);
-    fixture.detectChanges();
-    const navBar = fixture.nativeElement;
-    expect(fixture.componentInstance.player).toEqual(player);
-    const content = navBar.querySelector('table').textContent.trim();
-    expect(content).toContain(player.displayName);
-    expect(content).toContain(player.source);
-    expect(content).toContain(player.gameSpecificPlayerAttributes.freeGamesUsedToday);
-  });
-
-  it('should update for a player', () => {
-    const fixture = TestBed.createComponent(PlayerProfileComponent);
-    fixture.detectChanges();
-    const navBar = fixture.nativeElement;
-    expect(fixture.componentInstance.player).toEqual(player);
-
-    const newPlayer: Player = new Player({
-      displayName: 'New Name',
-      source: 'test2',
-      imageUrl: '',
-      gameSpecificPlayerAttributes: {freeGamesUsedToday: 30}
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                PlayerProfileComponent
+            ],
+            providers: [
+                {provide: PlayerService, useClass: MockPlayerService}
+            ],
+        });
+        TestBed.compileComponents();
+        MockPlayerService.playerSubject.next(player);
     });
 
-    MockPlayerService.playerSubject.next(newPlayer);
-    fixture.detectChanges();
+    it('should render basics', () => {
+        const fixture = TestBed.createComponent(PlayerProfileComponent);
+        fixture.detectChanges();
+        const navBar = fixture.nativeElement;
+        expect(fixture.componentInstance.player).toEqual(player);
+        expect(fixture).toMatchSnapshot();
+    });
 
-    const content = navBar.querySelector('table').textContent.trim();
-    expect(content).toContain(newPlayer.displayName);
-    expect(content).toContain(newPlayer.source);
-    expect(content).toContain(newPlayer.gameSpecificPlayerAttributes.freeGamesUsedToday);
-  });
+    it('should update for a player', () => {
+        const fixture = TestBed.createComponent(PlayerProfileComponent);
+        fixture.detectChanges();
+        const navBar = fixture.nativeElement;
+        expect(fixture.componentInstance.player).toEqual(player);
+
+        const newPlayer: Player = new Player({
+            displayName: 'New Name',
+            source: 'test2',
+            imageUrl: '',
+            gameSpecificPlayerAttributes: {freeGamesUsedToday: 30}
+        });
+
+        MockPlayerService.playerSubject.next(newPlayer);
+        fixture.detectChanges();
+
+        expect(fixture).toMatchSnapshot();
+    });
 });

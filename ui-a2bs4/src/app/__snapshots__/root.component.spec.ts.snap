@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Root Component should render the shell when no show games 1`] = `
+<app-root
+  showGames="false"
+>
+  <div
+    class="container-fluid"
+  >
+    
+    
+    <div
+      class="row"
+    >
+      
+      
+      
+      
+      
+      <div
+        class="col-12"
+        ng-reflect-ng-class="[object Object]"
+      >
+        
+        
+        <router-outlet>
+          <div
+            class="ro"
+          />
+        </router-outlet>
+        
+      
+      </div>
+      
+    
+    </div>
+    
+  
+  </div>
+  <app-navigation-bar>
+    <div
+      class="nb"
+    />
+  </app-navigation-bar>
+  
+</app-root>
+`;
+
+exports[`Root Component should render the shell when show games 1`] = `
+<app-root
+  showGames={[Function Boolean]}
+>
+  <div
+    class="container-fluid"
+  >
+    
+    
+    <div
+      class="row"
+    >
+      
+      
+      
+      <div
+        class="col-2"
+      >
+        
+        
+        <app-game-menu-list>
+          <div
+            class="gml"
+          />
+        </app-game-menu-list>
+        
+      
+      </div>
+      
+      
+      <div
+        class="col-10"
+        ng-reflect-ng-class="[object Object]"
+      >
+        
+        
+        <router-outlet>
+          <div
+            class="ro"
+          />
+        </router-outlet>
+        
+      
+      </div>
+      
+    
+    </div>
+    
+  
+  </div>
+  <app-navigation-bar>
+    <div
+      class="nb"
+    />
+  </app-navigation-bar>
+  
+</app-root>
+`;

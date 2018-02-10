@@ -3,20 +3,19 @@ import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 
 describe('Main Component', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [
-        MainComponent
-      ]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [RouterTestingModule],
+            declarations: [
+                MainComponent
+            ]
+        });
+        TestBed.compileComponents();
     });
-    TestBed.compileComponents();
-  });
 
-  it('should render the header, title, techs and footer', () => {
-    const fixture = TestBed.createComponent(MainComponent);
-    fixture.detectChanges();
-    const main = fixture.nativeElement;
-    expect(main.querySelector('.welcome-landing')).not.toBeNull();
-  });
+    it('should render the header, title, techs and footer', () => {
+        const fixture = TestBed.createComponent(MainComponent);
+        fixture.detectChanges();
+        expect(fixture).toMatchSnapshot();
+    });
 });
