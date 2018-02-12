@@ -6,19 +6,19 @@ import {PlayersAndStatesComponent} from './players-and-states.component';
 import {JTBCoreGamesUIBootstrap} from 'jtb-core-games-bootstrap-ui';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    RouterModule,
-    NgbModule,
-    JTBCoreGamesUIBootstrap
-  ],
-  exports: [
-    PlayersAndStatesComponent
-  ],
-  providers: [],
-  declarations: [
-    PlayersAndStatesComponent
-  ]
+    imports: [
+        BrowserModule,
+        RouterModule,
+        NgbModule,
+        JTBCoreGamesUIBootstrap
+    ],
+    exports: [
+        PlayersAndStatesComponent
+    ],
+    providers: [],
+    declarations: [
+        PlayersAndStatesComponent
+    ]
 })
 export class GameDisplayModule {
 }

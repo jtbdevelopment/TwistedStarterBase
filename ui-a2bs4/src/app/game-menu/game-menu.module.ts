@@ -9,26 +9,26 @@ import {RouterModule} from '@angular/router';
 import {JTBCoreGamesUI} from 'jtb-core-games-ui';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    RouterModule,
-    NgbModule,
-    JTBCoreGamesUI
-  ],
-  exports: [
-    GameMenuListComponent
-  ],
-  providers: [
-    GameMenuService,
-  ],
-  declarations: [
-    GameMenuListComponent,
-    GameMenuCategoryListComponent,
-    GameMenuGameItemComponent
-  ]
+    imports: [
+        BrowserModule,
+        RouterModule,
+        NgbModule,
+        JTBCoreGamesUI
+    ],
+    exports: [
+        GameMenuListComponent
+    ],
+    providers: [
+        GameMenuService,
+    ],
+    declarations: [
+        GameMenuListComponent,
+        GameMenuCategoryListComponent,
+        GameMenuGameItemComponent
+    ]
 })
 export class GameMenuModule {
-  constructor(private gameMenuService: GameMenuService) {
-  }
+    constructor(private gameMenuService: GameMenuService) {
+    }
 }
 

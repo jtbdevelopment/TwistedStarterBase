@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component:  nav bar new game component display disabled when player not loaded 1`] = `
+<app-navigation-bar-new-game
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  playerLoaded="false"
+>
+  
+  
+</app-navigation-bar-new-game>
+`;
+
+exports[`Component:  nav bar new game component displays toggle when player loaded 1`] = `
+<app-navigation-bar-new-game
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  playerLoaded={[Function Boolean]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    <li
+      class="nav-item"
+      ng-reflect-ngb-popover="Create a brand new game."
+      ng-reflect-placement="right"
+      ng-reflect-popover-title="New Game"
+      ng-reflect-triggers="manual"
+      ngbpopover="Create a brand new game."
+      placement="right"
+      popovertitle="New Game"
+      triggers="manual"
+    >
+      
+          
+      <a
+        class="nav-link"
+        href="/create"
+        ng-reflect-router-link="/create"
+      >
+        
+              
+        <span
+          class="fa fa-plus"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+  
+  </ul>
+  
+</app-navigation-bar-new-game>
+`;
+
+exports[`Component:  nav bar new game component toggling help on/off shows/hides popover 1`] = `
+<app-navigation-bar-new-game
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  playerLoaded={[Function Boolean]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    <li
+      aria-describedby="ngb-popover-1"
+      class="nav-item"
+      ng-reflect-ngb-popover="Create a brand new game."
+      ng-reflect-placement="right"
+      ng-reflect-popover-title="New Game"
+      ng-reflect-triggers="manual"
+      ngbpopover="Create a brand new game."
+      placement="right"
+      popovertitle="New Game"
+      triggers="manual"
+    >
+      
+          
+      <a
+        class="nav-link"
+        href="/create"
+        ng-reflect-router-link="/create"
+      >
+        
+              
+        <span
+          class="fa fa-plus"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    <ngb-popover-window
+      _nghost-c0=""
+      class="popover bs-popover-right"
+      id="ngb-popover-1"
+      role="tooltip"
+      style="top: 0px; left: 0px;"
+    >
+      
+      
+      <div
+        _ngcontent-c0=""
+        class="arrow"
+      />
+      
+      
+      <h3
+        _ngcontent-c0=""
+        class="popover-header"
+      >
+        New Game
+      </h3>
+      <div
+        _ngcontent-c0=""
+        class="popover-body"
+      >
+        Create a brand new game.
+      </div>
+    </ngb-popover-window>
+    
+  
+  </ul>
+  
+</app-navigation-bar-new-game>
+`;
+
+exports[`Component:  nav bar new game component toggling help on/off shows/hides popover 2`] = `
+<app-navigation-bar-new-game
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  playerLoaded={[Function Boolean]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    <li
+      class="nav-item"
+      ng-reflect-ngb-popover="Create a brand new game."
+      ng-reflect-placement="right"
+      ng-reflect-popover-title="New Game"
+      ng-reflect-triggers="manual"
+      ngbpopover="Create a brand new game."
+      placement="right"
+      popovertitle="New Game"
+      triggers="manual"
+    >
+      
+          
+      <a
+        class="nav-link"
+        href="/create"
+        ng-reflect-router-link="/create"
+      >
+        
+              
+        <span
+          class="fa fa-plus"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+  
+  </ul>
+  
+</app-navigation-bar-new-game>
+`;

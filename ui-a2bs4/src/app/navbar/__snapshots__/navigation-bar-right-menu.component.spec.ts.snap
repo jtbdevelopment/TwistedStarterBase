@@ -1,0 +1,282 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component:  nav bar right menu component display disabled when player not loaded 1`] = `
+<app-navigation-bar-right-menu
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  playerLoaded="false"
+  playerService={[Function MockPlayerService]}
+>
+  
+  
+</app-navigation-bar-right-menu>
+`;
+
+exports[`Component:  nav bar right menu component displays toggle when player loaded 1`] = `
+<app-navigation-bar-right-menu
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  playerLoaded={[Function Boolean]}
+  playerService={[Function MockPlayerService]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    <li>
+      
+          
+      <a
+        class="nav-link"
+        href="/profile"
+        ng-reflect-ngb-popover="Show your profile and stats"
+        ng-reflect-placement="top"
+        ng-reflect-popover-title="Profile"
+        ng-reflect-router-link="/profile"
+        ng-reflect-triggers="manual"
+        ngbpopover="Show your profile and stats"
+        placement="top"
+        popovertitle="Profile"
+        triggers="manual"
+      >
+        
+              
+        <span
+          class="fa fa-user"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+      
+    <li>
+      
+          
+      <a
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        
+              
+        <span
+          class="fa fa-question-circle"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+      
+    <li>
+      
+          
+      
+      
+      
+    </li>
+    
+      
+    <li>
+      
+    </li>
+    
+  
+  </ul>
+  
+</app-navigation-bar-right-menu>
+`;
+
+exports[`Component:  nav bar right menu component toggling help on/off shows/hides popover 1`] = `
+<app-navigation-bar-right-menu
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  playerLoaded={[Function Boolean]}
+  playerService={[Function MockPlayerService]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    <li>
+      
+          
+      <a
+        aria-describedby="ngb-popover-1"
+        class="nav-link"
+        href="/profile"
+        ng-reflect-ngb-popover="Show your profile and stats"
+        ng-reflect-placement="top"
+        ng-reflect-popover-title="Profile"
+        ng-reflect-router-link="/profile"
+        ng-reflect-triggers="manual"
+        ngbpopover="Show your profile and stats"
+        placement="top"
+        popovertitle="Profile"
+        triggers="manual"
+      >
+        
+              
+        <span
+          class="fa fa-user"
+        />
+        
+          
+      </a>
+      <ngb-popover-window
+        _nghost-c0=""
+        class="popover bs-popover-top"
+        id="ngb-popover-1"
+        role="tooltip"
+        style="left: 0px;"
+      >
+        
+      
+        <div
+          _ngcontent-c0=""
+          class="arrow"
+        />
+        
+      
+        <h3
+          _ngcontent-c0=""
+          class="popover-header"
+        >
+          Profile
+        </h3>
+        <div
+          _ngcontent-c0=""
+          class="popover-body"
+        >
+          Show your profile and stats
+        </div>
+      </ngb-popover-window>
+      
+      
+    </li>
+    
+      
+    <li>
+      
+          
+      <a
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        
+              
+        <span
+          class="fa fa-question-circle"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+      
+    <li>
+      
+          
+      
+      
+      
+    </li>
+    
+      
+    <li>
+      
+    </li>
+    
+  
+  </ul>
+  
+</app-navigation-bar-right-menu>
+`;
+
+exports[`Component:  nav bar right menu component toggling help on/off shows/hides popover 2`] = `
+<app-navigation-bar-right-menu
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  playerLoaded={[Function Boolean]}
+  playerService={[Function MockPlayerService]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    <li>
+      
+          
+      <a
+        class="nav-link"
+        href="/profile"
+        ng-reflect-ngb-popover="Show your profile and stats"
+        ng-reflect-placement="top"
+        ng-reflect-popover-title="Profile"
+        ng-reflect-router-link="/profile"
+        ng-reflect-triggers="manual"
+        ngbpopover="Show your profile and stats"
+        placement="top"
+        popovertitle="Profile"
+        triggers="manual"
+      >
+        
+              
+        <span
+          class="fa fa-user"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+      
+    <li>
+      
+          
+      <a
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        
+              
+        <span
+          class="fa fa-question-circle"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+      
+    <li>
+      
+          
+      
+      
+      
+    </li>
+    
+      
+    <li>
+      
+    </li>
+    
+  
+  </ul>
+  
+</app-navigation-bar-right-menu>
+`;

@@ -1,53 +1,54 @@
 <div class="create-game">
-  <form #f="ngForm">
-    <!--  TODO - justify pills -->
-    <ngb-tabset type="pills">
-      <ngb-tab *ngFor="let group of groups" title="{{group.groupType}}" id="{{group.groupType}}">
-        <ng-template ngbTabContent>
-          <div class="form-group row" *ngFor="let feature of group.features">
-            <label class="option-label col-md-2"
-                   ngbTooltip="{{feature.description}}">{{feature.label}}</label>
+    <form #f="ngForm">
+        <!--  TODO - justify pills -->
+        <ngb-tabset type="pills">
+            <ngb-tab *ngFor="let group of groups" title="{{group.groupType}}" id="{{group.groupType}}">
+                <ng-template ngbTabContent>
+                    <div class="form-group row" *ngFor="let feature of group.features">
+                        <label class="option-label col-md-2"
+                               ngbTooltip="{{feature.description}}">{{feature.label}}</label>
+                        <div class="col-md-10">
+                            <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup
+                                 [(ngModel)]="choices[feature.feature]"
+                                 name="{{feature.feature}}"
+                                 ngbRadioGroup>
+                                <label ngbButtonLabel class="btn-primary w-100"
+                                       *ngFor="let option of feature.options"
+                                       ngbTooltip="{{option.description}}">
+                                    <input ngbButton type="radio" value="{{option.option}}"
+                                           id="{{option.option}}">
+                                    {{option.label}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+        <div class="row">
+            <label class="option-label col-md-2">Opponents</label>
             <div class="col-md-10">
-              <div class="btn-group btn-group-toggle d-flex" ngbRadioGroup [(ngModel)]="choices[feature.feature]"
-                   name="{{feature.feature}}"
-                   ngbRadioGroup>
-                <label ngbButtonLabel class="btn-primary w-100"
-                       *ngFor="let option of feature.options"
-                       ngbTooltip="{{option.description}}">
-                  <input ngbButton type="radio" value="{{option.option}}"
-                         id="{{option.option}}">
-                  {{option.label}}
-                </label>
-              </div>
+                <p-multiSelect [options]="friends"
+                               dataKey="md5"
+                               optionLabel="displayName"
+                               maxSelectedLabels="10"
+                               [(ngModel)]="chosenFriends"
+                               [ngModelOptions]="{standalone: true}">
+                </p-multiSelect>
             </div>
-          </div>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-    <div class="row">
-      <label class="option-label col-md-2">Opponents</label>
-      <div class="col-md-10">
-        <p-multiSelect [options]="friends"
-                       dataKey="md5"
-                       optionLabel="displayName"
-                       maxSelectedLabels="10"
-                       [(ngModel)]="chosenFriends"
-                       [ngModelOptions]="{standalone: true}">
-        </p-multiSelect>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <button class="btn btn-primary create-game-button w-100" (click)="createGame()"
-                [disabled]="disableCreate">
-          {{createGameText}}
-        </button>
-      </div>
-      <div class="col-md-6">
-        <button class="btn btn-info invite-friends-button w-100" (click)="inviteFriends()">
-          Invite friends to play
-        </button>
-      </div>
-    </div>
-  </form>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary create-game-button w-100" (click)="createGame()"
+                        [disabled]="disableCreate">
+                    {{createGameText}}
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-info invite-friends-button w-100" (click)="inviteFriends()">
+                    Invite friends to play
+                </button>
+            </div>
+        </div>
+    </form>
 </div>

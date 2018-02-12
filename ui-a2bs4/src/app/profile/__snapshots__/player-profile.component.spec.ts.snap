@@ -9,133 +9,133 @@ exports[`player profile component should render basics 1`] = `
     class="player-profile"
   >
     
-    
+      
     <h2>
       Your profile:
     </h2>
     
-    
+      
     <table
       class="table table-hover table-sm text-right"
     >
       
-      
+          
       <tbody>
         <tr>
           
-        
+              
           <th>
             Name
           </th>
           
-        
+              
           <td>
             Name
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Logged In From
           </th>
           
-        
+              
           <td>
             test
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Type
           </th>
           
-        
+              
           <td>
             
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Daily Free Games
           </th>
           
-        
+              
           <td>
             
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Free Games Used Today
           </th>
           
-        
+              
           <td>
             20
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Free Games Remaining Today
           </th>
           
-        
+              
           <td>
             NaN
-        
+              
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Profile Image
           </th>
           
-        
+              
           <td>
             <img
               src=""
             />
           </td>
           
-      
+          
         </tr>
         
-    
+      
       </tbody>
     </table>
     
@@ -154,133 +154,133 @@ exports[`player profile component should update for a player 1`] = `
     class="player-profile"
   >
     
-    
+      
     <h2>
       Your profile:
     </h2>
     
-    
+      
     <table
       class="table table-hover table-sm text-right"
     >
       
-      
+          
       <tbody>
         <tr>
           
-        
+              
           <th>
             Name
           </th>
           
-        
+              
           <td>
             New Name
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Logged In From
           </th>
           
-        
+              
           <td>
             test2
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Type
           </th>
           
-        
+              
           <td>
             
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Daily Free Games
           </th>
           
-        
+              
           <td>
             
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Free Games Used Today
           </th>
           
-        
+              
           <td>
             30
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Free Games Remaining Today
           </th>
           
-        
+              
           <td>
             NaN
-        
+              
           </td>
           
-      
+          
         </tr>
         
-      
+          
         <tr>
           
-        
+              
           <th>
             Profile Image
           </th>
           
-        
+              
           <td>
             <img
               src=""
             />
           </td>
           
-      
+          
         </tr>
         
-    
+      
       </tbody>
     </table>
     

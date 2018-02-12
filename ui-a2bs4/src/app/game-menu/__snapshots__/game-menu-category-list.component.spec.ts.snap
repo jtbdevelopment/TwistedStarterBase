@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component:  game menu category list component initializes and subscribes to category from game cache 1`] = `
+<app-game-menu-category-list
+  category={[Function String]}
+  gameCache={[Function MockGameCache]}
+  games={[Function Array]}
+  isCollapsed="false"
+  style={[Function String]}
+>
+  <div
+    class="category-wrapper"
+  >
+    
+      
+    <button
+      class="list-group-item btn-group btn btn-group-s"
+    >
+      
+          
+      <span
+        class="fa fa- float-left"
+      />
+      
+          
+      <span
+        class="float-left"
+      >
+        cat
+      </span>
+      
+          
+      <span
+        class="badge badge-secondary badge-pill align-middle float-right ml-auto"
+      >
+        3
+      </span>
+      
+      
+    </button>
+    
+      
+    <div
+      class="games-collapse collapse show"
+      ng-reflect-collapsed="false"
+    >
+      
+          
+      
+      <div
+        class="btn-group-vertical btn-group-games"
+      >
+        
+              
+        <app-game-menu-game-item
+          class="game-wrapper"
+          ng-reflect-game="[object Object]"
+          ng-reflect-style="s"
+        >
+          <p>
+            s
+          </p>
+          <span>
+            2
+          </span>
+        </app-game-menu-game-item>
+        
+          
+      </div>
+      <div
+        class="btn-group-vertical btn-group-games"
+      >
+        
+              
+        <app-game-menu-game-item
+          class="game-wrapper"
+          ng-reflect-game="[object Object]"
+          ng-reflect-style="s"
+        >
+          <p>
+            s
+          </p>
+          <span>
+            3
+          </span>
+        </app-game-menu-game-item>
+        
+          
+      </div>
+      <div
+        class="btn-group-vertical btn-group-games"
+      >
+        
+              
+        <app-game-menu-game-item
+          class="game-wrapper"
+          ng-reflect-game="[object Object]"
+          ng-reflect-style="s"
+        >
+          <p>
+            s
+          </p>
+          <span>
+            1
+          </span>
+        </app-game-menu-game-item>
+        
+          
+      </div>
+      
+      
+    </div>
+    
+  
+  </div>
+  
+</app-game-menu-category-list>
+`;

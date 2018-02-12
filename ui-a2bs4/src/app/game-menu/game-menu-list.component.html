@@ -4,11 +4,11 @@
      popoverTitle="Games"
      placement="bottom"
      #help="ngbPopover">
-  <div *ngFor="let category of categories; let i = index;"
-       class="list-group list-group-games list-group-{{styles[i]}}">
-    <app-game-menu-category-list [category]="category"
-                                 [icon]="icons.get(category)"
-                                 [style]="styles[i]">
-    </app-game-menu-category-list>
-  </div>
+    <div *ngFor="let category of categories; let i = index;"
+         class="list-group list-group-games list-group-{{styles[i]}}">
+        <app-game-menu-category-list [category]="category"
+                                     [icon]="icons.get(category)"
+                                     [style]="styles[i]">
+        </app-game-menu-category-list>
+    </div>
 </div>

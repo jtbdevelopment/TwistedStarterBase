@@ -6,62 +6,60 @@ import {HelpDisplayService} from '../help/help-display.service';
 import {PlayerService} from 'jtb-core-games-ui';
 
 class MockPlayerService {
-  logout = jasmine.createSpy('logout');
+    logout = jasmine.createSpy('logout');
 }
 
 describe('Component:  nav bar right menu component', () => {
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        NgbModule
-      ],
-      providers: [
-        {provide: PlayerService, useClass: MockPlayerService},
-        HelpDisplayService,
-        NgbPopoverConfig
-      ],
-      declarations: [
-        NavigationBarRightMenuComponent
-      ],
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule,
+                NgbModule
+            ],
+            providers: [
+                {provide: PlayerService, useClass: MockPlayerService},
+                HelpDisplayService,
+                NgbPopoverConfig
+            ],
+            declarations: [
+                NavigationBarRightMenuComponent
+            ],
+        });
+        TestBed.compileComponents();
     });
-    TestBed.compileComponents();
-  });
 
-  it('display disabled when player not loaded', () => {
-    const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
-    fixture.componentInstance.playerLoaded = false;
-    fixture.detectChanges();
-    const toggle = fixture.nativeElement;
-    expect(toggle.querySelector('ul')).toBeNull();
-  });
+    it('display disabled when player not loaded', () => {
+        const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
+        fixture.componentInstance.playerLoaded = false;
+        fixture.detectChanges();
+        expect(fixture).toMatchSnapshot();
+    });
 
-  //  TODO - this test seems lame
-  it('displays toggle when player loaded', () => {
-    const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
-    fixture.componentInstance.playerLoaded = true;
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('ul').textContent.trim()).toBe('');
-  });
+    it('displays toggle when player loaded', () => {
+        const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
+        fixture.componentInstance.playerLoaded = true;
+        fixture.detectChanges();
+        expect(fixture).toMatchSnapshot();
+    });
 
-  it('toggling help on/off shows/hides popover', inject([HelpDisplayService], (helpService) => {
-    const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
-    fixture.componentInstance.playerLoaded = true;
-    fixture.detectChanges();
-    fixture.componentInstance.toggleHelp();
-    expect(helpService.isShown()).toBeTruthy();
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(1);
-    fixture.componentInstance.toggleHelp();
-    expect(helpService.isShown()).toBeFalsy();
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelectorAll('.popover').length).toBeCloseTo(0);
-  }));
+    it('toggling help on/off shows/hides popover', inject([HelpDisplayService], (helpService) => {
+        const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
+        fixture.componentInstance.playerLoaded = true;
+        fixture.detectChanges();
+        fixture.componentInstance.toggleHelp();
+        expect(helpService.isShown()).toBeTruthy();
+        fixture.detectChanges();
+        expect(fixture).toMatchSnapshot();
+        fixture.componentInstance.toggleHelp();
+        expect(helpService.isShown()).toBeFalsy();
+        fixture.detectChanges();
+        expect(fixture).toMatchSnapshot();
+    }));
 
-  it('test logout propogates to player service', inject([PlayerService], (playerService) => {
-    const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
-    fixture.componentInstance.logout();
-    expect(playerService.logout).toHaveBeenCalledTimes(1);
-  }));
+    it('test logout propogates to player service', inject([PlayerService], (playerService) => {
+        const fixture = TestBed.createComponent(NavigationBarRightMenuComponent);
+        fixture.componentInstance.logout();
+        expect(playerService.logout).toHaveBeenCalledTimes(1);
+    }));
 });

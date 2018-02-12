@@ -2,30 +2,30 @@ import {Component, Inject} from '@angular/core';
 import {AppConfig, PlayerService} from 'jtb-core-games-ui';
 
 @Component({
-  selector: 'app-navigation-bar',
-  templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.scss']
+    selector: 'app-navigation-bar',
+    templateUrl: './navigation-bar.component.html',
+    styleUrls: ['./navigation-bar.component.scss']
 })
 export class NavigationBarComponent {
-  playerName: string;
-  showAdmin = false;
-  showLogout = false;
-  appName: string;
-  playerLoaded = false;
+    playerName: string;
+    showAdmin = false;
+    showLogout = false;
+    appName: string;
+    playerLoaded = false;
 
-  constructor(@Inject('AppConfig') private config: AppConfig, private playerService: PlayerService) {
-    this.appName = config.appName;
-    playerService.loggedInPlayer.subscribe(login => {
-      this.showAdmin = login.adminUser;
-      this.playerLoaded =
-        login !== undefined &&
-        login.displayName !== undefined &&
-        login.displayName !== '';
-    });
-    playerService.player.subscribe(user => {
-      this.showLogout = (user.source === 'MANUAL');
-      this.playerName = user.displayName;
-    });
-  }
+    constructor(@Inject('AppConfig') private config: AppConfig, private playerService: PlayerService) {
+        this.appName = config.appName;
+        playerService.loggedInPlayer.subscribe(login => {
+            this.showAdmin = login.adminUser;
+            this.playerLoaded =
+                login !== undefined &&
+                login.displayName !== undefined &&
+                login.displayName !== '';
+        });
+        playerService.player.subscribe(user => {
+            this.showLogout = (user.source === 'MANUAL');
+            this.playerName = user.displayName;
+        });
+    }
 }
 

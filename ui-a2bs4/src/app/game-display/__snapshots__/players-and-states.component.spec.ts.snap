@@ -21,308 +21,308 @@ exports[`Component:  players and states component can quit in playing phase: rou
     class="player-list"
   >
     
+      
     
+      
     
+      
     
-    
-    
-    
-    
+      
     <div
       class="player-actions"
     >
       
+          
       
       
+          
       
       
-      
-      
-      
+          
       
       <button
         class="btn btn-quit-game"
       >
         
-        Quit Game
-      
+              Quit Game
+          
       </button>
       
+          
+      
+      
+          
       
       
       
-      
-      
-      
-    
     </div>
     
-    
+      
     
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Pending"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Pending"
         >
           
-          
+                  
           <span
             class="fa fa-question"
           />
           
-          Pending
-          
+                  Pending
+                  
           <span
             class="badge"
           >
             2
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Pending"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Pending"
           >
             
-            
+                      
             <img
               class="player-image"
               src="http://thenetwork.com/url?33f.img"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p3
             </span>
             
-          
+                  
           </li>
           <li
             class="list-group-item list-group-item-player list-group-item-player-Pending"
           >
             
-            
+                      
             <img
               class="player-image"
               src=""
             />
             
-            
+                      
             <span
               class="player-name"
             >
               me
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Accepted"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Accepted"
         >
           
-          
+                  
           <span
             class="fa fa-thumbs-up"
           />
           
-          Accepted
-          
+                  Accepted
+                  
           <span
             class="badge"
           >
             1
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Accepted"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Accepted"
           >
             
-            
+                      
             <img
               class="player-image"
               src="/assets/avatars/maleprofile.png"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p1
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Rejected"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Rejected"
         >
           
-          
+                  
           <span
             class="fa fa-"
           />
           
-          Rejected
-          
+                  Rejected
+                  
           <span
             class="badge"
           >
             1
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Rejected"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Rejected"
           >
             
-            
+                      
             <img
               class="player-image"
               src="/p2.img"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p2
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
+          
       
       
-      
-      
+          
       <div
         class="list-group-hidden collapse show"
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Quit"
         >
           
+                  
           
           
-          
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     
   
@@ -352,308 +352,308 @@ exports[`Component:  players and states component can quit in setup phase: round
     class="player-list"
   >
     
+      
     
+      
     
+      
     
-    
-    
-    
-    
+      
     <div
       class="player-actions"
     >
       
+          
       
       
+          
       
       
-      
-      
-      
+          
       
       <button
         class="btn btn-quit-game"
       >
         
-        Quit Game
-      
+              Quit Game
+          
       </button>
       
+          
+      
+      
+          
       
       
       
-      
-      
-      
-    
     </div>
     
-    
+      
     
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Pending"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Pending"
         >
           
-          
+                  
           <span
             class="fa fa-question"
           />
           
-          Pending
-          
+                  Pending
+                  
           <span
             class="badge"
           >
             2
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Pending"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Pending"
           >
             
-            
+                      
             <img
               class="player-image"
               src="http://thenetwork.com/url?33f.img"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p3
             </span>
             
-          
+                  
           </li>
           <li
             class="list-group-item list-group-item-player list-group-item-player-Pending"
           >
             
-            
+                      
             <img
               class="player-image"
               src=""
             />
             
-            
+                      
             <span
               class="player-name"
             >
               me
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Accepted"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Accepted"
         >
           
-          
+                  
           <span
             class="fa fa-thumbs-up"
           />
           
-          Accepted
-          
+                  Accepted
+                  
           <span
             class="badge"
           >
             1
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Accepted"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Accepted"
           >
             
-            
+                      
             <img
               class="player-image"
               src="/assets/avatars/maleprofile.png"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p1
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Rejected"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Rejected"
         >
           
-          
+                  
           <span
             class="fa fa-"
           />
           
-          Rejected
-          
+                  Rejected
+                  
           <span
             class="badge"
           >
             1
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Rejected"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Rejected"
           >
             
-            
+                      
             <img
               class="player-image"
               src="/p2.img"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p2
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
+          
       
       
-      
-      
+          
       <div
         class="list-group-hidden collapse show"
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Quit"
         >
           
+                  
           
           
-          
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     
   
@@ -683,315 +683,315 @@ exports[`Component:  players and states component can rematch or declined rematc
     class="player-list"
   >
     
+      
     
+      
     
+      
     
-    
-    
-    
-    
+      
     <div
       class="player-actions"
     >
       
+          
       
       
+          
       
       
+          
       
       
-      
-      
-      
-      
+          
       
       <button
         class="btn btn-rematch-game"
       >
         
-        Rematch!
-      
+              Rematch!
+          
       </button>
       
-      
+          
       
       <button
         class="btn btn-end-rematch-game"
       >
         
-        No More Rematches
-      
+              No More Rematches
+          
       </button>
       
-    
+      
     </div>
     
-    
+      
     
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Pending"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Pending"
         >
           
-          
+                  
           <span
             class="fa fa-question"
           />
           
-          Pending
-          
+                  Pending
+                  
           <span
             class="badge"
           >
             2
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Pending"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Pending"
           >
             
-            
+                      
             <img
               class="player-image"
               src="http://thenetwork.com/url?33f.img"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p3
             </span>
             
-          
+                  
           </li>
           <li
             class="list-group-item list-group-item-player list-group-item-player-Pending"
           >
             
-            
+                      
             <img
               class="player-image"
               src=""
             />
             
-            
+                      
             <span
               class="player-name"
             >
               me
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Accepted"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Accepted"
         >
           
-          
+                  
           <span
             class="fa fa-thumbs-up"
           />
           
-          Accepted
-          
+                  Accepted
+                  
           <span
             class="badge"
           >
             1
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Accepted"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Accepted"
           >
             
-            
+                      
             <img
               class="player-image"
               src="/assets/avatars/maleprofile.png"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p1
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Rejected"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Rejected"
         >
           
-          
+                  
           <span
             class="fa fa-"
           />
           
-          Rejected
-          
+                  Rejected
+                  
           <span
             class="badge"
           >
             1
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Rejected"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Rejected"
           >
             
-            
+                      
             <img
               class="player-image"
               src="/p2.img"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p2
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
+          
       
       
-      
-      
+          
       <div
         class="list-group-hidden collapse show"
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Quit"
         >
           
+                  
           
           
-          
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     
   
@@ -1021,301 +1021,301 @@ exports[`Component:  players and states component pending accept from player not
     class="player-list"
   >
     
+      
     
+      
     
+      
     
-    
-    
-    
-    
+      
     <div
       class="player-actions"
     >
       
+          
+      
+      
+          
+      
+      
+          
+      
+      
+          
+      
+      
+          
       
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    
     </div>
     
-    
+      
     
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Pending"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Pending"
         >
           
-          
+                  
           <span
             class="fa fa-question"
           />
           
-          Pending
-          
+                  Pending
+                  
           <span
             class="badge"
           >
             2
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Pending"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Pending"
           >
             
-            
+                      
             <img
               class="player-image"
               src="http://thenetwork.com/url?33f.img"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p3
             </span>
             
-          
+                  
           </li>
           <li
             class="list-group-item list-group-item-player list-group-item-player-Pending"
           >
             
-            
+                      
             <img
               class="player-image"
               src=""
             />
             
-            
+                      
             <span
               class="player-name"
             >
               me
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Accepted"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Accepted"
         >
           
-          
+                  
           <span
             class="fa fa-thumbs-up"
           />
           
-          Accepted
-          
+                  Accepted
+                  
           <span
             class="badge"
           >
             1
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Accepted"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Accepted"
           >
             
-            
+                      
             <img
               class="player-image"
               src="/assets/avatars/maleprofile.png"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p1
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
-      
+          
       
       <div
         class="list-group list-group-players-group list-players-group-Rejected"
       >
         
-        
+              
         <button
           class="list-group-item btn-players-group-Rejected"
         >
           
-          
+                  
           <span
             class="fa fa-"
           />
           
-          Rejected
-          
+                  Rejected
+                  
           <span
             class="badge"
           >
             1
           </span>
           
-        
+              
         </button>
         
-      
+          
       </div>
       
-      
+          
       <div
         class=""
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Rejected"
         >
           
-          
+                  
           
           <li
             class="list-group-item list-group-item-player list-group-item-player-Rejected"
           >
             
-            
+                      
             <img
               class="player-image"
               src="/p2.img"
             />
             
-            
+                      
             <span
               class="player-name"
             >
               p2
             </span>
             
-          
+                  
           </li>
           
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     <div>
       
+          
       
       
-      
-      
+          
       <div
         class="list-group-hidden collapse show"
         ng-reflect-collapsed="false"
       >
         
-        
+              
         <div
           class="list-group list-group-players list-group-players-Quit"
         >
           
+                  
           
           
-          
-        
+              
         </div>
         
-      
+          
       </div>
       
-    
+      
     </div>
     
   

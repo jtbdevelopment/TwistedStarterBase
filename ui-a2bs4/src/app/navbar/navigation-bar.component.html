@@ -1,13 +1,13 @@
 <nav class="navbar navbar-toggleable-sm navbar-light fixed-bottom">
-  <app-navigation-bar-game-menu-toggle [playerLoaded]="playerLoaded"></app-navigation-bar-game-menu-toggle>
-  <app-navigation-bar-new-game [playerLoaded]="playerLoaded"></app-navigation-bar-new-game>
-  <a class="navbar-brand" href="/">{{appName}}
-    <small>Welcome {{playerName}}</small>
-  </a>
-  <app-navigation-bar-right-menu
-    class="ml-auto float-right"
-    [playerLoaded]="playerLoaded"
-    [showAdmin]="showAdmin"
-    [showLogout]="showLogout">
-  </app-navigation-bar-right-menu>
+    <app-navigation-bar-game-menu-toggle [playerLoaded]="playerLoaded"></app-navigation-bar-game-menu-toggle>
+    <app-navigation-bar-new-game [playerLoaded]="playerLoaded"></app-navigation-bar-new-game>
+    <a class="navbar-brand" href="/">{{appName}}
+        <small>Welcome {{playerName}}</small>
+    </a>
+    <app-navigation-bar-right-menu
+            class="ml-auto float-right"
+            [playerLoaded]="playerLoaded"
+            [showAdmin]="showAdmin"
+            [showLogout]="showLogout">
+    </app-navigation-bar-right-menu>
 </nav>

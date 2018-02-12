@@ -1,0 +1,449 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`nav bar component should render basics when no player logged in 1`] = `
+<app-navigation-bar
+  appName={[Function String]}
+  config={[Function MockAppConfig]}
+  playerLoaded="false"
+  playerName="undefined"
+  playerService={[Function MockPlayerService]}
+  showAdmin="false"
+  showLogout="false"
+>
+  <nav
+    class="navbar navbar-toggleable-sm navbar-light fixed-bottom"
+  >
+    
+      
+    <app-navigation-bar-game-menu-toggle
+      ng-reflect-player-loaded="false"
+    >
+      <p>
+        false
+      </p>
+    </app-navigation-bar-game-menu-toggle>
+    
+      
+    <app-navigation-bar-new-game
+      ng-reflect-player-loaded="false"
+    >
+      <p>
+        false
+      </p>
+    </app-navigation-bar-new-game>
+    
+      
+    <a
+      class="navbar-brand"
+      href="/"
+    >
+      Test
+          
+      <small>
+        Welcome 
+      </small>
+      
+      
+    </a>
+    
+      
+    <app-navigation-bar-right-menu
+      class="ml-auto float-right"
+      ng-reflect-player-loaded="false"
+      ng-reflect-show-admin="false"
+      ng-reflect-show-logout="false"
+    >
+      <p>
+        false/false/false
+      </p>
+    </app-navigation-bar-right-menu>
+    
+  
+  </nav>
+  
+</app-navigation-bar>
+`;
+
+exports[`nav bar component should update for a admin non manual player 1`] = `
+<app-navigation-bar
+  appName={[Function String]}
+  config={[Function MockAppConfig]}
+  playerLoaded="false"
+  playerName="undefined"
+  playerService={[Function MockPlayerService]}
+  showAdmin="false"
+  showLogout="false"
+>
+  <nav
+    class="navbar navbar-toggleable-sm navbar-light fixed-bottom"
+  >
+    
+      
+    <app-navigation-bar-game-menu-toggle
+      ng-reflect-player-loaded="false"
+    >
+      <p>
+        false
+      </p>
+    </app-navigation-bar-game-menu-toggle>
+    
+      
+    <app-navigation-bar-new-game
+      ng-reflect-player-loaded="false"
+    >
+      <p>
+        false
+      </p>
+    </app-navigation-bar-new-game>
+    
+      
+    <a
+      class="navbar-brand"
+      href="/"
+    >
+      Test
+          
+      <small>
+        Welcome 
+      </small>
+      
+      
+    </a>
+    
+      
+    <app-navigation-bar-right-menu
+      class="ml-auto float-right"
+      ng-reflect-player-loaded="false"
+      ng-reflect-show-admin="false"
+      ng-reflect-show-logout="false"
+    >
+      <p>
+        false/false/false
+      </p>
+    </app-navigation-bar-right-menu>
+    
+  
+  </nav>
+  
+</app-navigation-bar>
+`;
+
+exports[`nav bar component should update for a admin non manual player 2`] = `
+<app-navigation-bar
+  appName={[Function String]}
+  config={[Function MockAppConfig]}
+  playerLoaded={[Function Boolean]}
+  playerName={[Function String]}
+  playerService={[Function MockPlayerService]}
+  showAdmin={[Function Boolean]}
+  showLogout="false"
+>
+  <nav
+    class="navbar navbar-toggleable-sm navbar-light fixed-bottom"
+  >
+    
+      
+    <app-navigation-bar-game-menu-toggle
+      ng-reflect-player-loaded="true"
+    >
+      <p>
+        true
+      </p>
+    </app-navigation-bar-game-menu-toggle>
+    
+      
+    <app-navigation-bar-new-game
+      ng-reflect-player-loaded="true"
+    >
+      <p>
+        true
+      </p>
+    </app-navigation-bar-new-game>
+    
+      
+    <a
+      class="navbar-brand"
+      href="/"
+    >
+      Test
+          
+      <small>
+        Welcome XYZ
+      </small>
+      
+      
+    </a>
+    
+      
+    <app-navigation-bar-right-menu
+      class="ml-auto float-right"
+      ng-reflect-player-loaded="true"
+      ng-reflect-show-admin="true"
+      ng-reflect-show-logout="false"
+    >
+      <p>
+        true/true/false
+      </p>
+    </app-navigation-bar-right-menu>
+    
+  
+  </nav>
+  
+</app-navigation-bar>
+`;
+
+exports[`nav bar component should update for a regular manual player 1`] = `
+<app-navigation-bar
+  appName={[Function String]}
+  config={[Function MockAppConfig]}
+  playerLoaded="false"
+  playerName="undefined"
+  playerService={[Function MockPlayerService]}
+  showAdmin="false"
+  showLogout="false"
+>
+  <nav
+    class="navbar navbar-toggleable-sm navbar-light fixed-bottom"
+  >
+    
+      
+    <app-navigation-bar-game-menu-toggle
+      ng-reflect-player-loaded="false"
+    >
+      <p>
+        false
+      </p>
+    </app-navigation-bar-game-menu-toggle>
+    
+      
+    <app-navigation-bar-new-game
+      ng-reflect-player-loaded="false"
+    >
+      <p>
+        false
+      </p>
+    </app-navigation-bar-new-game>
+    
+      
+    <a
+      class="navbar-brand"
+      href="/"
+    >
+      Test
+          
+      <small>
+        Welcome 
+      </small>
+      
+      
+    </a>
+    
+      
+    <app-navigation-bar-right-menu
+      class="ml-auto float-right"
+      ng-reflect-player-loaded="false"
+      ng-reflect-show-admin="false"
+      ng-reflect-show-logout="false"
+    >
+      <p>
+        false/false/false
+      </p>
+    </app-navigation-bar-right-menu>
+    
+  
+  </nav>
+  
+</app-navigation-bar>
+`;
+
+exports[`nav bar component should update for a regular manual player 2`] = `
+<app-navigation-bar
+  appName={[Function String]}
+  config={[Function MockAppConfig]}
+  playerLoaded={[Function Boolean]}
+  playerName={[Function String]}
+  playerService={[Function MockPlayerService]}
+  showAdmin="false"
+  showLogout={[Function Boolean]}
+>
+  <nav
+    class="navbar navbar-toggleable-sm navbar-light fixed-bottom"
+  >
+    
+      
+    <app-navigation-bar-game-menu-toggle
+      ng-reflect-player-loaded="true"
+    >
+      <p>
+        true
+      </p>
+    </app-navigation-bar-game-menu-toggle>
+    
+      
+    <app-navigation-bar-new-game
+      ng-reflect-player-loaded="true"
+    >
+      <p>
+        true
+      </p>
+    </app-navigation-bar-new-game>
+    
+      
+    <a
+      class="navbar-brand"
+      href="/"
+    >
+      Test
+          
+      <small>
+        Welcome XYZ
+      </small>
+      
+      
+    </a>
+    
+      
+    <app-navigation-bar-right-menu
+      class="ml-auto float-right"
+      ng-reflect-player-loaded="true"
+      ng-reflect-show-admin="false"
+      ng-reflect-show-logout="true"
+    >
+      <p>
+        true/false/true
+      </p>
+    </app-navigation-bar-right-menu>
+    
+  
+  </nav>
+  
+</app-navigation-bar>
+`;
+
+exports[`nav bar component should update for a regular non manual player 1`] = `
+<app-navigation-bar
+  appName={[Function String]}
+  config={[Function MockAppConfig]}
+  playerLoaded="false"
+  playerName="undefined"
+  playerService={[Function MockPlayerService]}
+  showAdmin="false"
+  showLogout="false"
+>
+  <nav
+    class="navbar navbar-toggleable-sm navbar-light fixed-bottom"
+  >
+    
+      
+    <app-navigation-bar-game-menu-toggle
+      ng-reflect-player-loaded="false"
+    >
+      <p>
+        false
+      </p>
+    </app-navigation-bar-game-menu-toggle>
+    
+      
+    <app-navigation-bar-new-game
+      ng-reflect-player-loaded="false"
+    >
+      <p>
+        false
+      </p>
+    </app-navigation-bar-new-game>
+    
+      
+    <a
+      class="navbar-brand"
+      href="/"
+    >
+      Test
+          
+      <small>
+        Welcome 
+      </small>
+      
+      
+    </a>
+    
+      
+    <app-navigation-bar-right-menu
+      class="ml-auto float-right"
+      ng-reflect-player-loaded="false"
+      ng-reflect-show-admin="false"
+      ng-reflect-show-logout="false"
+    >
+      <p>
+        false/false/false
+      </p>
+    </app-navigation-bar-right-menu>
+    
+  
+  </nav>
+  
+</app-navigation-bar>
+`;
+
+exports[`nav bar component should update for a regular non manual player 2`] = `
+<app-navigation-bar
+  appName={[Function String]}
+  config={[Function MockAppConfig]}
+  playerLoaded={[Function Boolean]}
+  playerName={[Function String]}
+  playerService={[Function MockPlayerService]}
+  showAdmin="false"
+  showLogout="false"
+>
+  <nav
+    class="navbar navbar-toggleable-sm navbar-light fixed-bottom"
+  >
+    
+      
+    <app-navigation-bar-game-menu-toggle
+      ng-reflect-player-loaded="true"
+    >
+      <p>
+        true
+      </p>
+    </app-navigation-bar-game-menu-toggle>
+    
+      
+    <app-navigation-bar-new-game
+      ng-reflect-player-loaded="true"
+    >
+      <p>
+        true
+      </p>
+    </app-navigation-bar-new-game>
+    
+      
+    <a
+      class="navbar-brand"
+      href="/"
+    >
+      Test
+          
+      <small>
+        Welcome XYZ
+      </small>
+      
+      
+    </a>
+    
+      
+    <app-navigation-bar-right-menu
+      class="ml-auto float-right"
+      ng-reflect-player-loaded="true"
+      ng-reflect-show-admin="false"
+      ng-reflect-show-logout="false"
+    >
+      <p>
+        true/false/false
+      </p>
+    </app-navigation-bar-right-menu>
+    
+  
+  </nav>
+  
+</app-navigation-bar>
+`;

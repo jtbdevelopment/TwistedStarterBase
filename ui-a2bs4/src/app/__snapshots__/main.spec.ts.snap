@@ -6,60 +6,61 @@ exports[`Main Component should render the header, title, techs and footer 1`] = 
     class="welcome-landing"
   >
     
-    
+      
     <div
       class="jumbotron"
     >
       
+          
       
-      
-      
+          
       <h1>
         Welcome
       </h1>
       
-      
+          
       <p>
         Click one of your existing games to the left or
       </p>
       
-      
+          
       <p>
         
-        
+              
         <a
           class="btn btn-lg btn-primary create-game-button"
           href="/create"
           ng-reflect-router-link="/create"
         >
           
-          
+                  
           <span
             class="fa fa-plus"
           />
           
-          Start a new game!
-        
+                  Start a new game!
+              
         </a>
         
-      
+          
       </p>
       
+          
       
-      
-      
+          
       <p
         class="small-screen-warning"
       >
         
-        Best experience on tablet or desktop.
-      
+              Best experience on tablet or desktop.
+          
       </p>
       
-    
+      
     </div>
     
   
   </div>
+  
 </app-main>
 `;

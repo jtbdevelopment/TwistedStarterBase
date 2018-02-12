@@ -1,0 +1,356 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component:  game menu list component initializes 1`] = `
+<app-game-menu-list
+  categories={[Function Array]}
+  gameClassifier={[Function MockGameClassifier]}
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  icons={[Function Map]}
+  styles={[Function Array]}
+>
+  <div
+    class="game-bar"
+    ng-reflect-ngb-popover="Here are where your games are/"
+    ng-reflect-placement="bottom"
+    ng-reflect-popover-title="Games"
+    ng-reflect-triggers="manual"
+    ngbpopover="Here are where your games are/will be.  Click on one to play it."
+    placement="bottom"
+    popovertitle="Games"
+    triggers="manual"
+  >
+    
+      
+    
+    
+  
+  </div>
+  
+</app-game-menu-list>
+`;
+
+exports[`Component:  game menu list component subscribes to game classifier 1`] = `
+<app-game-menu-list
+  categories={[Function Array]}
+  gameClassifier={[Function MockGameClassifier]}
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  icons={[Function Map]}
+  styles={[Function Array]}
+>
+  <div
+    class="game-bar"
+    ng-reflect-ngb-popover="Here are where your games are/"
+    ng-reflect-placement="bottom"
+    ng-reflect-popover-title="Games"
+    ng-reflect-triggers="manual"
+    ngbpopover="Here are where your games are/will be.  Click on one to play it."
+    placement="bottom"
+    popovertitle="Games"
+    triggers="manual"
+  >
+    
+      
+    
+    <div
+      class="list-group list-group-games list-group-c1"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="C1"
+        ng-reflect-icon="icon1"
+        ng-reflect-style="c1"
+      >
+        <p>
+          C1
+        </p>
+        <p>
+          c1
+        </p>
+        <p>
+          icon1
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    <div
+      class="list-group list-group-games list-group-category-2"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="Category 2"
+        ng-reflect-icon="icon2"
+        ng-reflect-style="category-2"
+      >
+        <p>
+          Category 2
+        </p>
+        <p>
+          category-2
+        </p>
+        <p>
+          icon2
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    <div
+      class="list-group list-group-games list-group-category-number3"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="Category Number.3"
+        ng-reflect-icon="icon3"
+        ng-reflect-style="category-number3"
+      >
+        <p>
+          Category Number.3
+        </p>
+        <p>
+          category-number3
+        </p>
+        <p>
+          icon3
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    
+  
+  </div>
+  
+</app-game-menu-list>
+`;
+
+exports[`Component:  game menu list component toggling help on/off shows/hides popover 1`] = `
+<app-game-menu-list
+  categories={[Function Array]}
+  gameClassifier={[Function MockGameClassifier]}
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  icons={[Function Map]}
+  styles={[Function Array]}
+>
+  <div
+    aria-describedby="ngb-popover-2"
+    class="game-bar"
+    ng-reflect-ngb-popover="Here are where your games are/"
+    ng-reflect-placement="bottom"
+    ng-reflect-popover-title="Games"
+    ng-reflect-triggers="manual"
+    ngbpopover="Here are where your games are/will be.  Click on one to play it."
+    placement="bottom"
+    popovertitle="Games"
+    triggers="manual"
+  >
+    
+      
+    
+    <div
+      class="list-group list-group-games list-group-c1"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="C1"
+        ng-reflect-icon="icon1"
+        ng-reflect-style="c1"
+      >
+        <p>
+          C1
+        </p>
+        <p>
+          c1
+        </p>
+        <p>
+          icon1
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    <div
+      class="list-group list-group-games list-group-category-2"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="Category 2"
+        ng-reflect-icon="icon2"
+        ng-reflect-style="category-2"
+      >
+        <p>
+          Category 2
+        </p>
+        <p>
+          category-2
+        </p>
+        <p>
+          icon2
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    <div
+      class="list-group list-group-games list-group-category-number3"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="Category Number.3"
+        ng-reflect-icon="icon3"
+        ng-reflect-style="category-number3"
+      >
+        <p>
+          Category Number.3
+        </p>
+        <p>
+          category-number3
+        </p>
+        <p>
+          icon3
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    
+  
+  </div><ngb-popover-window
+    _nghost-c0=""
+    class="popover bs-popover-bottom"
+    id="ngb-popover-2"
+    role="tooltip"
+    style="top: 0px; left: 0px;"
+  >
+    
+      
+    <div
+      _ngcontent-c0=""
+      class="arrow"
+    />
+    
+      
+    <h3
+      _ngcontent-c0=""
+      class="popover-header"
+    >
+      Games
+    </h3>
+    <div
+      _ngcontent-c0=""
+      class="popover-body"
+    >
+      Here are where your games are/will be.  Click on one to play it.
+    </div>
+  </ngb-popover-window>
+  
+</app-game-menu-list>
+`;
+
+exports[`Component:  game menu list component toggling help on/off shows/hides popover 2`] = `
+<app-game-menu-list
+  categories={[Function Array]}
+  gameClassifier={[Function MockGameClassifier]}
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  icons={[Function Map]}
+  styles={[Function Array]}
+>
+  <div
+    class="game-bar"
+    ng-reflect-ngb-popover="Here are where your games are/"
+    ng-reflect-placement="bottom"
+    ng-reflect-popover-title="Games"
+    ng-reflect-triggers="manual"
+    ngbpopover="Here are where your games are/will be.  Click on one to play it."
+    placement="bottom"
+    popovertitle="Games"
+    triggers="manual"
+  >
+    
+      
+    
+    <div
+      class="list-group list-group-games list-group-c1"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="C1"
+        ng-reflect-icon="icon1"
+        ng-reflect-style="c1"
+      >
+        <p>
+          C1
+        </p>
+        <p>
+          c1
+        </p>
+        <p>
+          icon1
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    <div
+      class="list-group list-group-games list-group-category-2"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="Category 2"
+        ng-reflect-icon="icon2"
+        ng-reflect-style="category-2"
+      >
+        <p>
+          Category 2
+        </p>
+        <p>
+          category-2
+        </p>
+        <p>
+          icon2
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    <div
+      class="list-group list-group-games list-group-category-number3"
+    >
+      
+          
+      <app-game-menu-category-list
+        ng-reflect-category="Category Number.3"
+        ng-reflect-icon="icon3"
+        ng-reflect-style="category-number3"
+      >
+        <p>
+          Category Number.3
+        </p>
+        <p>
+          category-number3
+        </p>
+        <p>
+          icon3
+        </p>
+      </app-game-menu-category-list>
+      
+      
+    </div>
+    
+  
+  </div>
+  
+</app-game-menu-list>
+`;

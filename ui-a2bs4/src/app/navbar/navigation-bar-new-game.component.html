@@ -1,13 +1,12 @@
 <ul class="navbar-nav" *ngIf="playerLoaded">
-  <li class="nav-item"
-      ngbPopover="Create a brand new game."
-      triggers="manual"
-      popoverTitle="New Game"
-      placement="right"
-      #help="ngbPopover">
-    <!--  TODO -->
-    <a [routerLink]="['/create']" class="nav-link">
-      <span class="fa fa-plus"></span>
-    </a>
-  </li>
+    <li class="nav-item"
+        ngbPopover="Create a brand new game."
+        triggers="manual"
+        popoverTitle="New Game"
+        placement="right"
+        #help="ngbPopover">
+        <a [routerLink]="['/create']" class="nav-link">
+            <span class="fa fa-plus"></span>
+        </a>
+    </li>
 </ul>

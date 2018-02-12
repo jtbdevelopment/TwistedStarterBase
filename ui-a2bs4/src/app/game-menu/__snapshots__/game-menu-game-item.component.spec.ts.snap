@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component:  game menu game item component displays game 1`] = `
+<app-game-menu-game-item
+  game={[Function Game]}
+>
+  <a
+    class="btn-group btn btn-light btn-group-game btn-group-game-"
+    href="/game/playing/1234"
+    ng-reflect-router-link="/game/playing/1234"
+  >
+    
+      
+    
+    <img
+      class="player-image"
+      src=""
+    />
+    <img
+      class="player-image"
+      src=""
+    />
+    
+      
+    <span
+      class="game-description"
+    >
+      TODO
+    </span>
+    
+  
+  </a>
+  
+  
+</app-game-menu-game-item>
+`;

@@ -5,42 +5,42 @@ import {HelpDisplayService} from '../help/help-display.service';
 import {AppConfig} from 'jtb-core-games-ui';
 
 @Component({
-  selector: 'app-navigation-bar-game-menu-toggle',
-  templateUrl: './navigation-bar-game-menu-toggle.component.html',
-  styleUrls: ['./navigation-bar-game-menu-toggle.component.html']
+    selector: 'app-navigation-bar-game-menu-toggle',
+    templateUrl: './navigation-bar-game-menu-toggle.component.html',
+    styleUrls: ['./navigation-bar-game-menu-toggle.component.html']
 })
 export class NavigationBarGameMenuToggleComponent extends AbstractHelpDisplayingComponent {
-  @Input() playerLoaded: boolean;
+    @Input() playerLoaded: boolean;
 
-  private beforeHoverMenuValue: boolean;
-  private hovering = false;
+    private beforeHoverMenuValue: boolean;
+    private hovering = false;
 
-  constructor(@Inject('AppConfig') private config: AppConfig,
-              private gameMenuService: GameMenuService,
-              protected helpDisplay: HelpDisplayService) {
-    super(helpDisplay);
-  }
-
-  hoverGameMenu(): void {
-    if (this.config.hoverMenu) {
-      this.beforeHoverMenuValue = this.gameMenuService.getShowGames();
-      this.gameMenuService.setShowGames(true);
-      this.hovering = true;
+    constructor(@Inject('AppConfig') private config: AppConfig,
+                private gameMenuService: GameMenuService,
+                protected helpDisplay: HelpDisplayService) {
+        super(helpDisplay);
     }
-  }
 
-  stopHoverGameMenu(): void {
-    if (this.config.hoverMenu) {
-      this.gameMenuService.setShowGames(this.beforeHoverMenuValue);
-      this.hovering = false;
+    hoverGameMenu(): void {
+        if (this.config.hoverMenu) {
+            this.beforeHoverMenuValue = this.gameMenuService.getShowGames();
+            this.gameMenuService.setShowGames(true);
+            this.hovering = true;
+        }
     }
-  }
 
-  toggleGameMenu(): void {
-    if (this.hovering) {
-      this.stopHoverGameMenu();  // revert
+    stopHoverGameMenu(): void {
+        if (this.config.hoverMenu) {
+            this.gameMenuService.setShowGames(this.beforeHoverMenuValue);
+            this.hovering = false;
+        }
     }
-    this.gameMenuService.setShowGames(!this.gameMenuService.getShowGames());
-    this.beforeHoverMenuValue = this.gameMenuService.getShowGames();
-  }
+
+    toggleGameMenu(): void {
+        if (this.hovering) {
+            this.stopHoverGameMenu();  // revert
+        }
+        this.gameMenuService.setShowGames(!this.gameMenuService.getShowGames());
+        this.beforeHoverMenuValue = this.gameMenuService.getShowGames();
+    }
 }

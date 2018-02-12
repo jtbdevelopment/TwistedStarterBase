@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component:  nav bar game menu toggle component displays no toggle when player loaded 1`] = `
+<app-navigation-bar-game-menu-toggle
+  config={[Function MockAppConfig]}
+  gameMenuService={[Function MockGameMenuService]}
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  hovering="false"
+  playerLoaded="false"
+>
+  
+  
+</app-navigation-bar-game-menu-toggle>
+`;
+
+exports[`Component:  nav bar game menu toggle component displays toggle when player loaded 1`] = `
+<app-navigation-bar-game-menu-toggle
+  config={[Function MockAppConfig]}
+  gameMenuService={[Function MockGameMenuService]}
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  hovering="false"
+  playerLoaded={[Function Boolean]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    
+      
+    <li
+      class="nav-item"
+      ng-reflect-ngb-popover="Show/hide your game list for m"
+      ng-reflect-placement="top"
+      ng-reflect-popover-title="Games"
+      ng-reflect-triggers="manual"
+      ngbpopover="Show/hide your game list for more room on the screen."
+      placement="top"
+      popovertitle="Games"
+      triggers="manual"
+    >
+      
+          
+      <a
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        
+              
+        <span
+          class="fa fa-bars"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+  
+  </ul>
+  
+</app-navigation-bar-game-menu-toggle>
+`;
+
+exports[`Component:  nav bar game menu toggle component toggling help on/off shows/hides popover 1`] = `
+<app-navigation-bar-game-menu-toggle
+  config={[Function MockAppConfig]}
+  gameMenuService={[Function MockGameMenuService]}
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  hovering="false"
+  playerLoaded={[Function Boolean]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    
+      
+    <li
+      aria-describedby="ngb-popover-1"
+      class="nav-item"
+      ng-reflect-ngb-popover="Show/hide your game list for m"
+      ng-reflect-placement="top"
+      ng-reflect-popover-title="Games"
+      ng-reflect-triggers="manual"
+      ngbpopover="Show/hide your game list for more room on the screen."
+      placement="top"
+      popovertitle="Games"
+      triggers="manual"
+    >
+      
+          
+      <a
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        
+              
+        <span
+          class="fa fa-bars"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    <ngb-popover-window
+      _nghost-c0=""
+      class="popover bs-popover-top"
+      id="ngb-popover-1"
+      role="tooltip"
+      style="left: 0px;"
+    >
+      
+      
+      <div
+        _ngcontent-c0=""
+        class="arrow"
+      />
+      
+      
+      <h3
+        _ngcontent-c0=""
+        class="popover-header"
+      >
+        Games
+      </h3>
+      <div
+        _ngcontent-c0=""
+        class="popover-body"
+      >
+        Show/hide your game list for more room on the screen.
+      </div>
+    </ngb-popover-window>
+    
+  
+  </ul>
+  
+</app-navigation-bar-game-menu-toggle>
+`;
+
+exports[`Component:  nav bar game menu toggle component toggling help on/off shows/hides popover 2`] = `
+<app-navigation-bar-game-menu-toggle
+  config={[Function MockAppConfig]}
+  gameMenuService={[Function MockGameMenuService]}
+  helpDisplay={[Function HelpDisplayService]}
+  helpPopovers={[Function QueryList]}
+  hovering="false"
+  playerLoaded={[Function Boolean]}
+>
+  <ul
+    class="navbar-nav"
+  >
+    
+      
+    
+      
+    <li
+      class="nav-item"
+      ng-reflect-ngb-popover="Show/hide your game list for m"
+      ng-reflect-placement="top"
+      ng-reflect-popover-title="Games"
+      ng-reflect-triggers="manual"
+      ngbpopover="Show/hide your game list for more room on the screen."
+      placement="top"
+      popovertitle="Games"
+      triggers="manual"
+    >
+      
+          
+      <a
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        
+              
+        <span
+          class="fa fa-bars"
+        />
+        
+          
+      </a>
+      
+      
+    </li>
+    
+  
+  </ul>
+  
+</app-navigation-bar-game-menu-toggle>
+`;

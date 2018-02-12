@@ -1,17 +1,17 @@
 <ul class="navbar-nav" *ngIf="playerLoaded">
-  <!--  TODO - placement needs top left - not current in ng bootstrap  -->
-  <li class="nav-item"
-      ngbPopover="Show/hide your game list for more room on the screen."
-      triggers="manual"
-      popoverTitle="Games"
-      placement="top"
-      #help="ngbPopover">
-    <a href="javascript:void(0)"
-       (click)="toggleGameMenu()"
-       (mouseenter)="hoverGameMenu()"
-       (mouseleave)="stopHoverGameMenu()"
-       class="nav-link">
-      <span class="fa fa-bars"></span>
-    </a>
-  </li>
+    <!--  TODO - placement needs top left - not current in ng bootstrap  -->
+    <li class="nav-item"
+        ngbPopover="Show/hide your game list for more room on the screen."
+        triggers="manual"
+        popoverTitle="Games"
+        placement="top"
+        #help="ngbPopover">
+        <a href="javascript:void(0)"
+           (click)="toggleGameMenu()"
+           (mouseenter)="hoverGameMenu()"
+           (mouseleave)="stopHoverGameMenu()"
+           class="nav-link">
+            <span class="fa fa-bars"></span>
+        </a>
+    </li>
 </ul>

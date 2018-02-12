@@ -4,24 +4,24 @@ import {AbstractHelpDisplayingComponent} from '../help/abstract-help.component';
 import {PlayerService} from 'jtb-core-games-ui';
 
 @Component({
-  selector: 'app-navigation-bar-right-menu',
-  templateUrl: './navigation-bar-right-menu.component.html',
-  styleUrls: ['./navigation-bar-right-menu.component.scss']
+    selector: 'app-navigation-bar-right-menu',
+    templateUrl: './navigation-bar-right-menu.component.html',
+    styleUrls: ['./navigation-bar-right-menu.component.scss']
 })
 export class NavigationBarRightMenuComponent extends AbstractHelpDisplayingComponent {
-  @Input() playerLoaded: boolean;
-  @Input() showAdmin: boolean;
-  @Input() showLogout: boolean;
+    @Input() playerLoaded: boolean;
+    @Input() showAdmin: boolean;
+    @Input() showLogout: boolean;
 
-  constructor(private playerService: PlayerService, protected helpDisplay: HelpDisplayService) {
-    super(helpDisplay);
-  }
+    constructor(private playerService: PlayerService, protected helpDisplay: HelpDisplayService) {
+        super(helpDisplay);
+    }
 
-  public logout(): void {
-    this.playerService.logout();
-  }
+    public logout(): void {
+        this.playerService.logout();
+    }
 
-  public toggleHelp(): void {
-    this.helpDisplay.toggleHelp();
-  }
+    public toggleHelp(): void {
+        this.helpDisplay.toggleHelp();
+    }
 }
