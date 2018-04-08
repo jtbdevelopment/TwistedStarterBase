@@ -2,7 +2,7 @@ package com.jtbdevelopment.TwistedStarterBase.json
 
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.jtbdevelopment.TwistedStarterBase.player.TSBPlayerAttributes
-import com.jtbdevelopment.TwistedStarterBase.state.masking.MaskedGame
+import com.jtbdevelopment.TwistedStarterBase.state.masking.TSBMaskedGame
 import com.jtbdevelopment.games.players.GameSpecificPlayerAttributes
 import com.jtbdevelopment.games.state.masking.MaskedMultiPlayerGame
 
@@ -24,7 +24,7 @@ class TSBJacksonRegistrationTest extends GroovyTestCase {
                             return null
                         }
                         if (MaskedMultiPlayerGame.class.is(iface)) {
-                            assert MaskedGame.class.is(impl)
+                            assert TSBMaskedGame.class.is(impl)
                             registeredMaskedGame = true
                             return null
                         }

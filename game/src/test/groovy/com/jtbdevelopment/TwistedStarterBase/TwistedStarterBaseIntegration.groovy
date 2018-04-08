@@ -5,7 +5,7 @@ import com.jtbdevelopment.TwistedStarterBase.rest.data.FeaturesAndPlayers
 import com.jtbdevelopment.TwistedStarterBase.rest.data.GameFeatureInfo
 import com.jtbdevelopment.TwistedStarterBase.state.GameFeature
 import com.jtbdevelopment.TwistedStarterBase.state.TSBGame
-import com.jtbdevelopment.TwistedStarterBase.state.masking.MaskedGame
+import com.jtbdevelopment.TwistedStarterBase.state.masking.TSBMaskedGame
 import com.jtbdevelopment.core.hazelcast.caching.HazelcastCacheManager
 import com.jtbdevelopment.games.dao.AbstractGameRepository
 import com.jtbdevelopment.games.dev.utilities.integrationtesting.AbstractGameIntegration
@@ -21,9 +21,9 @@ import javax.ws.rs.core.MediaType
  * Date: 7/13/16
  * Time: 6:57 PM
  */
-class TwistedStarterBaseIntegration extends AbstractGameIntegration<TSBGame, MaskedGame> {
-    Class<MaskedGame> returnedGameClass() {
-        return MaskedGame.class
+class TwistedStarterBaseIntegration extends AbstractGameIntegration<TSBGame, TSBMaskedGame> {
+    Class<TSBMaskedGame> returnedGameClass() {
+        return TSBMaskedGame.class
     }
 
     Class<TSBGame> internalGameClass() {
@@ -83,7 +83,7 @@ class TwistedStarterBaseIntegration extends AbstractGameIntegration<TSBGame, Mas
     @Test
     void testCreateNewGame() {
         def P3 = createPlayerAPITarget(TEST_PLAYER3)
-        MaskedGame game = newGame(P3,
+        def game = newGame(P3,
                 new FeaturesAndPlayers(
                         features: [
                                 GameFeature.Option2No,
@@ -95,7 +95,7 @@ class TwistedStarterBaseIntegration extends AbstractGameIntegration<TSBGame, Mas
         assert game
     }
 
-    protected MaskedGame newGame(WebTarget target, FeaturesAndPlayers featuresAndPlayers) {
+    protected String newGame(WebTarget target, FeaturesAndPlayers featuresAndPlayers) {
         def entity = Entity.entity(
                 featuresAndPlayers,
                 MediaType.APPLICATION_JSON)

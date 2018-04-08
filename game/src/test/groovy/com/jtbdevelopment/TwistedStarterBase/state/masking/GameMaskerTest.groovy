@@ -10,7 +10,7 @@ class GameMaskerTest extends GroovyTestCase {
     GameMasker masker = new GameMasker()
 
     void testNewMaskedGame() {
-        MaskedGame game = masker.newMaskedGame()
+        TSBMaskedGame game = masker.newMaskedGame()
         assertNotNull game
     }
 

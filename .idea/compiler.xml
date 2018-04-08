@@ -24,12 +24,12 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="example-war" target="1.5" />
-      <module name="game" target="1.5" />
-      <module name="TwistedStarterBase" target="1.5" />
+      <module name="game" target="1.8" />
+      <module name="TwistedStarterBase" target="1.8" />
       <module name="TwistedWordSearch" target="1.5" />
       <module name="ui" target="1.5" />
-      <module name="ui-a2bs4" target="1.5" />
-      <module name="war" target="1.5" />
+      <module name="ui-a2bs4" target="1.8" />
+      <module name="war" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

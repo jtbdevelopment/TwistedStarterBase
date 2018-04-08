@@ -2,7 +2,7 @@ package com.jtbdevelopment.TwistedStarterBase.rest.services
 
 import com.jtbdevelopment.TwistedStarterBase.rest.data.FeaturesAndPlayers
 import com.jtbdevelopment.TwistedStarterBase.state.GameFeature
-import com.jtbdevelopment.TwistedStarterBase.state.masking.MaskedGame
+import com.jtbdevelopment.TwistedStarterBase.state.masking.TSBMaskedGame
 import com.jtbdevelopment.games.rest.handlers.NewGameHandler
 import groovy.transform.TypeChecked
 import org.bson.types.ObjectId
@@ -26,7 +26,7 @@ class TSBPlayerServicesTest extends GroovyTestCase {
         def features = [GameFeature.Option2No, GameFeature.Compete] as Set
         def players = ["1", "2", "3"]
         FeaturesAndPlayers input = new FeaturesAndPlayers(features: features, players: players)
-        MaskedGame game = new MaskedGame()
+        TSBMaskedGame game = new TSBMaskedGame()
         playerServices.newGameHandler = [
                 handleCreateNewGame: {
                     ObjectId i, List<String> p, Set<GameFeature> f ->
