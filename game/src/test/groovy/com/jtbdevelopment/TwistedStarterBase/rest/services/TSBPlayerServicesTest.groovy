@@ -29,7 +29,7 @@ class TSBPlayerServicesTest extends GroovyTestCase {
         TSBMaskedGame game = new TSBMaskedGame()
         playerServices.newGameHandler = [
                 handleCreateNewGame: {
-                    ObjectId i, List<String> p, Set<GameFeature> f ->
+                    Serializable i, List<String> p, Set<GameFeature> f ->
                         assert i == APLAYER
                         assert p == players
                         assert f == features

@@ -95,7 +95,7 @@ class TwistedStarterBaseIntegration extends AbstractGameIntegration<TSBGame, TSB
         assert game
     }
 
-    protected String newGame(WebTarget target, FeaturesAndPlayers featuresAndPlayers) {
+    protected Object newGame(WebTarget target, FeaturesAndPlayers featuresAndPlayers) {
         def entity = Entity.entity(
                 featuresAndPlayers,
                 MediaType.APPLICATION_JSON)
