@@ -47,12 +47,13 @@
           <element id="library" level="project" name="Maven: com.jtbdevelopment.core-games:games-events:1.8-SNAPSHOT" />
           <element id="library" level="project" name="Maven: com.jtbdevelopment.core-games:games-web:1.8-SNAPSHOT" />
           <element id="library" level="project" name="Maven: com.jtbdevelopment.core-common:core-spring-web:1.10-SNAPSHOT" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.0.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:4.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-core:1.1.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aspects:5.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.13" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.0.4.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.0.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:4.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:4.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-security:1.1.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.social:spring-social-web:1.1.6.RELEASE" />

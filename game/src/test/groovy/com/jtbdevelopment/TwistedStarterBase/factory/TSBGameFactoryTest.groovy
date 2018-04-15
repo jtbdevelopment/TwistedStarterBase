@@ -7,7 +7,7 @@ import com.jtbdevelopment.TwistedStarterBase.state.TSBGame
  * Time: 9:32 PM
  */
 class TSBGameFactoryTest extends GroovyTestCase {
-    TSBGameFactory factory = new TSBGameFactory()
+    TSBGameFactory factory = new TSBGameFactory([], [])
 
     void testCreatesNewGame() {
         TSBGame game1 = factory.newGame()

@@ -50,6 +50,9 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.jtbdevelopment.core-games:games-web:test-jar:tests:1.4-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.jtbdevelopment.core-games:games-mongo:test-jar:tests:1.4-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.jtbdevelopment.core-games:games-dev-utilities:1.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.0.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.0.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.jtbdevelopment.core-games:games-mongo:1.8-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.jtbdevelopment.core-common:core-spring-jackson:1.10-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.5" level="project" />
@@ -92,12 +95,13 @@
     <orderEntry type="library" name="Maven: com.jtbdevelopment.core-games:games-events:1.8-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.jtbdevelopment.core-games:games-web:1.8-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.jtbdevelopment.core-common:core-spring-web:1.10-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.0.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.2.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.social:spring-social-core:1.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.13" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.0.4.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.0.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.2.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:4.2.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.social:spring-social-security:1.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:5.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.social:spring-social-web:1.1.6.RELEASE" level="project" />
