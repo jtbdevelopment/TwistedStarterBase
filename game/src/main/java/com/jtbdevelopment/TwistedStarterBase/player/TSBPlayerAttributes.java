@@ -15,7 +15,6 @@ public class TSBPlayerAttributes extends AbstractPlayerGameTrackingAttributes {
     @Transient
     private int maxDailyFreeGames;
 
-    @Transient
     @Override
     public void setPlayer(final Player player) {
         super.setPlayer(player);
