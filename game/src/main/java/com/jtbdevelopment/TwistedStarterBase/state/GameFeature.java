@@ -1,5 +1,8 @@
 package com.jtbdevelopment.TwistedStarterBase.state;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.Transient;
+
 import java.util.*;
 
 /**
@@ -20,10 +23,20 @@ public enum GameFeature {
     Compete(3, "Enemies", "Play head to head.", Option3);
 
     private static final Map<GameFeature, List<GameFeature>> groupedFeatures = new LinkedHashMap<>();
+    @Transient
+    @JsonIgnore
     private final GameFeatureGroupType groupType;
+    @Transient
+    @JsonIgnore
     private final GameFeature group;
+    @Transient
+    @JsonIgnore
     private final String label;
+    @Transient
+    @JsonIgnore
     private final String description;
+    @Transient
+    @JsonIgnore
     private final int order;
 
     GameFeature(final int order, final GameFeatureGroupType groupType, final String label, final String description) {
@@ -60,22 +73,32 @@ public enum GameFeature {
         return groupedFeatures;
     }
 
+    @Transient
+    @JsonIgnore
     public final GameFeatureGroupType getGroupType() {
         return groupType;
     }
 
+    @Transient
+    @JsonIgnore
     public final GameFeature getGroup() {
         return group;
     }
 
+    @Transient
+    @JsonIgnore
     public final String getLabel() {
         return label;
     }
 
+    @Transient
+    @JsonIgnore
     public final String getDescription() {
         return description;
     }
 
+    @Transient
+    @JsonIgnore
     public final int getOrder() {
         return order;
     }

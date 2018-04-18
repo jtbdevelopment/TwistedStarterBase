@@ -56,7 +56,7 @@ public class TwistedStarterBaseIntegration extends AbstractGameIntegration<TSBGa
 
     @Test
     public void testGetFeatures() {
-        WebTarget client = AbstractGameIntegration.createAPITarget(AbstractGameIntegration.getTEST_PLAYER2());
+        WebTarget client = AbstractGameIntegration.createAPITarget(TEST_PLAYER2);
         List<GameFeatureInfo> features = client.path("features")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(new GenericType<List<GameFeatureInfo>>() {
@@ -73,11 +73,11 @@ public class TwistedStarterBaseIntegration extends AbstractGameIntegration<TSBGa
 
     @Test
     public void testCreateNewGame() {
-        WebTarget P3 = AbstractGameIntegration.createPlayerAPITarget(AbstractGameIntegration.getTEST_PLAYER3());
+        WebTarget P3 = AbstractGameIntegration.createPlayerAPITarget(TEST_PLAYER3);
         FeaturesAndPlayers players = new FeaturesAndPlayers();
 
         players.setFeatures(new HashSet<>(Arrays.asList(GameFeature.Option2No, GameFeature.Choice3, GameFeature.Compete)));
-        players.setPlayers(Collections.singletonList(AbstractGameIntegration.getTEST_PLAYER3().getMd5()));
+        players.setPlayers(Collections.singletonList(TEST_PLAYER3.getMd5()));
 
         Object game = newGame(P3, players);
         assertNotNull(game);
