@@ -1,6 +1,5 @@
 package com.jtbdevelopment.TwistedStarterBase.state;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Transient;
 
 import java.util.*;
@@ -64,25 +63,21 @@ public enum GameFeature {
     }
 
     @Transient
-    @JsonIgnore
     public final GameFeatureGroupType getGroupType() {
         return groupType;
     }
 
     @Transient
-    @JsonIgnore
     public final GameFeature getGroup() {
         return group;
     }
 
     @Transient
-    @JsonIgnore
     public final String getLabel() {
         return label;
     }
 
     @Transient
-    @JsonIgnore
     public final String getDescription() {
         return description;
     }
