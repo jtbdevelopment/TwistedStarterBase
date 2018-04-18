@@ -11,6 +11,7 @@ class TSBPlayerGatewayServiceTest extends GroovyTestCase {
     TSBPlayerGatewayService service = new TSBPlayerGatewayService()
 
     void testFeaturesAndDescriptions() {
+        def descriptions = service.featuresAndDescriptions()
         assert [
                 new GameFeatureInfo(
                         GameFeature.Option1,
@@ -35,6 +36,6 @@ class TSBPlayerGatewayServiceTest extends GroovyTestCase {
                                 new GameFeatureInfo.Detail(GameFeature.Compete),
                         ]
                 ),
-        ] == service.featuresAndDescriptions()
+        ] == descriptions
     }
 }
