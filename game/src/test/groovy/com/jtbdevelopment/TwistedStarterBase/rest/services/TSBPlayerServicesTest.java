@@ -4,7 +4,6 @@ import com.jtbdevelopment.TwistedStarterBase.rest.data.FeaturesAndPlayers;
 import com.jtbdevelopment.TwistedStarterBase.state.GameFeature;
 import com.jtbdevelopment.TwistedStarterBase.state.masking.TSBMaskedGame;
 import com.jtbdevelopment.games.rest.handlers.NewGameHandler;
-import groovy.transform.TypeChecked;
 import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -45,9 +44,7 @@ public class TSBPlayerServicesTest {
     @Test
     public void testCreateNewGameAnnotations() throws NoSuchMethodException {
         Method gameServices = TSBPlayerServices.class.getMethod("createNewGame", FeaturesAndPlayers.class);
-        assertTrue(
-                gameServices.getAnnotations().length == 4 ||
-                        (gameServices.isAnnotationPresent(TypeChecked.TypeCheckingInfo.class) && gameServices.getAnnotations().length == 5));
+        assertEquals(4, gameServices.getAnnotations().length);
         assertTrue(gameServices.isAnnotationPresent(Path.class));
         assertEquals("new", gameServices.getAnnotation(Path.class).value());
         assertTrue(gameServices.isAnnotationPresent(Consumes.class));
