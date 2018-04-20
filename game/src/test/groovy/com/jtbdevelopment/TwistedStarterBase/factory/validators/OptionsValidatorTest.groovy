@@ -2,15 +2,19 @@ package com.jtbdevelopment.TwistedStarterBase.factory.validators
 
 import com.jtbdevelopment.TwistedStarterBase.state.GameFeature
 import com.jtbdevelopment.TwistedStarterBase.state.TSBGame
+import org.junit.Test
+
+import static org.junit.Assert.assertFalse
 
 
 /**
  * Date: 4/20/15
  * Time: 6:49 PM
  */
-class OptionsValidatorTest extends GroovyTestCase {
-    OptionsValidator validator = new OptionsValidator()
+class OptionsValidatorTest {
+    private OptionsValidator validator = new OptionsValidator()
 
+    @Test
     void testGameFailsIfMissingAnOptionFromAGroup() {
         Random random = new Random()
         GameFeature.groupedFeatures.each {
@@ -29,6 +33,7 @@ class OptionsValidatorTest extends GroovyTestCase {
         }
     }
 
+    @Test
     void testGameFailsIfUsingGroupingOptions() {
         Random random = new Random()
         GameFeature.groupedFeatures.each {
@@ -48,6 +53,7 @@ class OptionsValidatorTest extends GroovyTestCase {
         }
     }
 
+    @Test
     void testGameFailsIfOneGroupHasMultipleOptionsFromOneGroup() {
         GameFeature.groupedFeatures.each {
                 //  This is the group we will double
@@ -67,6 +73,7 @@ class OptionsValidatorTest extends GroovyTestCase {
         }
     }
 
+    @Test
     void testAValidGame() {
         Random random = new Random()
         Set<GameFeature> features = [] as Set
@@ -78,6 +85,7 @@ class OptionsValidatorTest extends GroovyTestCase {
         assert validator.validateGame(game)
     }
 
+    @Test
     void testErrorMessage() {
         assert validator.errorMessage() == "Invalid combination of options!"
     }
