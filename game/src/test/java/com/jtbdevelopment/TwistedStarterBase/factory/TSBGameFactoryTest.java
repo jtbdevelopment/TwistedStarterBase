@@ -1,11 +1,12 @@
 package com.jtbdevelopment.TwistedStarterBase.factory;
 
 import com.jtbdevelopment.TwistedStarterBase.state.TSBGame;
-import org.codehaus.groovy.runtime.DefaultGroovyMethods;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Collections;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Date: 7/13/16
@@ -19,8 +20,8 @@ public class TSBGameFactoryTest {
         TSBGame game1 = factory.newGame();
         TSBGame game2 = factory.newGame();
 
-        Assert.assertNotNull(game1);
-        Assert.assertNotNull(game2);
-        Assert.assertFalse(DefaultGroovyMethods.is(game1, game2));
+        assertNotNull(game1);
+        assertNotNull(game2);
+        assertNotSame(game1, game2);
     }
 }

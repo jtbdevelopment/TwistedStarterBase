@@ -42,7 +42,7 @@
             <artifactId>games-websocket</artifactId>
             <version>${core.games.version}</version>
         </dependency>
-        <!--  TODO - are these what this game wants  -->
+        <!--  TODO - TSB are these what this game wants  -->
         <dependency>
             <groupId>com.jtbdevelopment.core-games</groupId>
             <artifactId>games-std-tracker</artifactId>
@@ -53,6 +53,7 @@
             <artifactId>games-std-maintenance</artifactId>
             <version>${core.games.version}</version>
         </dependency>
+        <!--  TODO - TSB are these what this game wants  -->
         <!--
         <dependency>
             <groupId>com.jtbdevelopment.core-games</groupId>

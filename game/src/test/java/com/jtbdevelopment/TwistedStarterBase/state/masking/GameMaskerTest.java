@@ -1,15 +1,16 @@
 package com.jtbdevelopment.TwistedStarterBase.state.masking;
 
-import groovy.util.GroovyTestCase;
 import junit.framework.TestCase;
 import org.bson.types.ObjectId;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Date: 7/13/16
  * Time: 7:09 PM
  */
-public class GameMaskerTest extends GroovyTestCase {
+public class GameMaskerTest {
     private GameMasker masker = new GameMasker();
 
     @Test
@@ -20,6 +21,6 @@ public class GameMaskerTest extends GroovyTestCase {
 
     @Test
     public void testGetIDClass() {
-        GroovyTestCase.assertEquals(ObjectId.class, masker.getIDClass());
+        assertEquals(ObjectId.class, masker.getIDClass());
     }
 }
