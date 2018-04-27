@@ -5,5 +5,5 @@ package com.jtbdevelopment.TwistedStarterBase.state;
  * Time: 6:57 PM
  */
 public enum GameFeatureGroupType {
-    Difficulty, MultiPlayer;
+    Difficulty, MultiPlayer
 }

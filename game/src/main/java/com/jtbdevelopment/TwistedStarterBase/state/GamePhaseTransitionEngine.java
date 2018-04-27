@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
  * Date: 7/13/16
  * Time: 9:26 PM
  */
+@SuppressWarnings("unused")
 @Component
 public class GamePhaseTransitionEngine extends AbstractMPGamePhaseTransitionEngine<TSBGame> {
     public GamePhaseTransitionEngine(final GameScorer<TSBGame> gameScorer) {

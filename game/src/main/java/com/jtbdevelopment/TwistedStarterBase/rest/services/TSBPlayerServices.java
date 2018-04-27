@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 public class TSBPlayerServices extends AbstractMultiPlayerServices<ObjectId> {
     private final NewGameHandler newGameHandler;
 
-    public TSBPlayerServices(final NewGameHandler newGameHandler) {
+    TSBPlayerServices(final NewGameHandler newGameHandler) {
         this.newGameHandler = newGameHandler;
     }
 

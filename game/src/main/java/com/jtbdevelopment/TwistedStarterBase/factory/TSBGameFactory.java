@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Component
 public class TSBGameFactory extends AbstractMultiPlayerGameFactory<TSBGame, GameFeature> {
-    public TSBGameFactory(
+    TSBGameFactory(
             final List<GameInitializer> gameInitializers,
             final List<GameValidator> gameValidators) {
         super(gameInitializers, gameValidators);

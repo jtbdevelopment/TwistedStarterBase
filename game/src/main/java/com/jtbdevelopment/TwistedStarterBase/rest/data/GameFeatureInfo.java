@@ -10,6 +10,7 @@ import java.util.List;
  * Date: 4/28/15
  * Time: 6:54 PM
  */
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class GameFeatureInfo {
     private Detail feature;
     private List<Detail> options = new ArrayList<>();

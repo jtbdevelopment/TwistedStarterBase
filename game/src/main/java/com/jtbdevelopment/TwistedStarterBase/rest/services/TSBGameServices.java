@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
  * Date: 11/11/14
  * Time: 9:42 PM
  */
+@SuppressWarnings("unused")
 @Component
 public class TSBGameServices extends AbstractMultiPlayerGameServices<ObjectId> {
 }
