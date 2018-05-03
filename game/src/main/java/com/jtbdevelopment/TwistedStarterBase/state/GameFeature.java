@@ -1,7 +1,5 @@
 package com.jtbdevelopment.TwistedStarterBase.state;
 
-import org.springframework.data.annotation.Transient;
-
 import java.util.*;
 
 /**
@@ -62,22 +60,18 @@ public enum GameFeature {
         return groupedFeatures;
     }
 
-    @Transient
     public final GameFeatureGroupType getGroupType() {
         return groupType;
     }
 
-    @Transient
     public final GameFeature getGroup() {
         return group;
     }
 
-    @Transient
     public final String getLabel() {
         return label;
     }
 
-    @Transient
     public final String getDescription() {
         return description;
     }

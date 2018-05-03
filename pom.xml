@@ -15,6 +15,9 @@
     <packaging>pom</packaging>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
         <core.common.version>1.10-SNAPSHOT</core.common.version>
         <core.games.version>1.8-SNAPSHOT</core.games.version>
         <core.games.devutilities.version>1.8-SNAPSHOT</core.games.devutilities.version>
@@ -62,20 +65,6 @@
         </repository>
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>bintray</id>
-            <name>Groovy Bintray</name>
-            <url>https://dl.bintray.com/groovy/maven</url>
-            <releases>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -94,7 +83,6 @@
                 <configuration>
                     <includes>
                         <include>**/*Integration.java</include>
-                        <include>**/*Integration.groovy</include>
                     </includes>
                 </configuration>
 
@@ -123,32 +111,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.16</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <!-- 2.8.0-01 and later require maven-compiler-plugin 3.1 or higher -->
-                <version>3.7.0</version>
-                <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <!-- set verbose to be true if you want lots of uninteresting messages -->
-                    <!-- <verbose>true</verbose> -->
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-                <extensions>true</extensions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.9.2-04</version>
-                    </dependency>
-                    <!-- for 2.8.0-01 and later you must have an explicit dependency on groovy-eclipse-batch -->
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.4.14-01</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
