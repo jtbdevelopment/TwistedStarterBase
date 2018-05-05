@@ -2,6 +2,7 @@ package com.jtbdevelopment.TwistedStarterBase.state;
 
 import com.jtbdevelopment.games.state.scoring.GameScorer;
 import com.jtbdevelopment.games.state.transition.AbstractMPGamePhaseTransitionEngine;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @SuppressWarnings("unused")
 @Component
-public class GamePhaseTransitionEngine extends AbstractMPGamePhaseTransitionEngine<TSBGame> {
+public class GamePhaseTransitionEngine extends AbstractMPGamePhaseTransitionEngine<ObjectId, TSBGame> {
     public GamePhaseTransitionEngine(final GameScorer<TSBGame> gameScorer) {
         super(gameScorer);
     }
