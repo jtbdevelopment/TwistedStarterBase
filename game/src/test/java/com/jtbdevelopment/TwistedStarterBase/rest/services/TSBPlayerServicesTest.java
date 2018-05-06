@@ -4,6 +4,7 @@ import com.jtbdevelopment.TwistedStarterBase.rest.data.FeaturesAndPlayers;
 import com.jtbdevelopment.TwistedStarterBase.state.GameFeature;
 import com.jtbdevelopment.TwistedStarterBase.state.TSBGame;
 import com.jtbdevelopment.TwistedStarterBase.state.masking.TSBMaskedGame;
+import com.jtbdevelopment.games.mongo.players.MongoPlayer;
 import com.jtbdevelopment.games.rest.handlers.NewGameHandler;
 import org.bson.types.ObjectId;
 import org.junit.Test;
@@ -25,7 +26,7 @@ import static org.junit.Assert.*;
  * Time: 9:44 PM
  */
 public class TSBPlayerServicesTest {
-    private NewGameHandler<ObjectId, GameFeature, TSBGame, TSBMaskedGame> newGameHandler = Mockito.mock(NewGameHandler.class);
+    private NewGameHandler<ObjectId, GameFeature, TSBGame, TSBMaskedGame, MongoPlayer> newGameHandler = Mockito.mock(NewGameHandler.class);
     private TSBPlayerServices playerServices = new TSBPlayerServices(newGameHandler);
 
     @Test
