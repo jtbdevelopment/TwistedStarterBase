@@ -38,18 +38,22 @@ public class TwistedStarterBaseIntegration extends AbstractGameIntegration<TSBGa
         gameRepository = context.getBean(GameRepository.class);
     }
 
-    public Class<TSBMaskedGame> returnedGameClass() {
+    @Override
+    protected Class<TSBMaskedGame> returnedGameClass() {
         return TSBMaskedGame.class;
     }
 
-    public Class<TSBGame> internalGameClass() {
+    @Override
+    protected Class<TSBGame> internalGameClass() {
         return TSBGame.class;
     }
 
+    @Override
     public TSBGame newGame() {
         return new TSBGame();
     }
 
+    @Override
     public AbstractGameRepository gameRepository() {
         return gameRepository;
     }

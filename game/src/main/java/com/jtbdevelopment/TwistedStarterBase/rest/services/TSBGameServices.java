@@ -1,5 +1,9 @@
 package com.jtbdevelopment.TwistedStarterBase.rest.services;
 
+import com.jtbdevelopment.TwistedStarterBase.state.GameFeature;
+import com.jtbdevelopment.TwistedStarterBase.state.TSBGame;
+import com.jtbdevelopment.TwistedStarterBase.state.masking.TSBMaskedGame;
+import com.jtbdevelopment.games.mongo.players.MongoPlayer;
 import com.jtbdevelopment.games.rest.AbstractMultiPlayerGameServices;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
@@ -10,5 +14,5 @@ import org.springframework.stereotype.Component;
  */
 @SuppressWarnings("unused")
 @Component
-public class TSBGameServices extends AbstractMultiPlayerGameServices<ObjectId> {
+public class TSBGameServices extends AbstractMultiPlayerGameServices<ObjectId, GameFeature, TSBGame, TSBMaskedGame, MongoPlayer> {
 }

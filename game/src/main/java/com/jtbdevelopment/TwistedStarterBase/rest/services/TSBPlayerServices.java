@@ -1,7 +1,10 @@
 package com.jtbdevelopment.TwistedStarterBase.rest.services;
 
 import com.jtbdevelopment.TwistedStarterBase.rest.data.FeaturesAndPlayers;
+import com.jtbdevelopment.TwistedStarterBase.state.GameFeature;
+import com.jtbdevelopment.TwistedStarterBase.state.TSBGame;
 import com.jtbdevelopment.TwistedStarterBase.state.masking.TSBMaskedGame;
+import com.jtbdevelopment.games.mongo.players.MongoPlayer;
 import com.jtbdevelopment.games.rest.AbstractMultiPlayerServices;
 import com.jtbdevelopment.games.rest.handlers.NewGameHandler;
 import org.bson.types.ObjectId;
@@ -18,10 +21,10 @@ import javax.ws.rs.core.MediaType;
  * Time: 6:40 AM
  */
 @Component
-public class TSBPlayerServices extends AbstractMultiPlayerServices<ObjectId> {
-    private final NewGameHandler newGameHandler;
+public class TSBPlayerServices extends AbstractMultiPlayerServices<ObjectId, GameFeature, TSBGame, TSBMaskedGame, MongoPlayer> {
+    private final NewGameHandler<ObjectId, GameFeature, TSBGame, TSBMaskedGame, MongoPlayer> newGameHandler;
 
-    TSBPlayerServices(final NewGameHandler newGameHandler) {
+    TSBPlayerServices(final NewGameHandler<ObjectId, GameFeature, TSBGame, TSBMaskedGame, MongoPlayer> newGameHandler) {
         this.newGameHandler = newGameHandler;
     }
 
@@ -30,6 +33,6 @@ public class TSBPlayerServices extends AbstractMultiPlayerServices<ObjectId> {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("new")
     public TSBMaskedGame createNewGame(final FeaturesAndPlayers featuresAndPlayers) {
-        return (TSBMaskedGame) newGameHandler.handleCreateNewGame(getPlayerID().get(), featuresAndPlayers.getPlayers(), featuresAndPlayers.getFeatures());
+        return newGameHandler.handleCreateNewGame(getPlayerID().get(), featuresAndPlayers.getPlayers(), featuresAndPlayers.getFeatures());
     }
 }
