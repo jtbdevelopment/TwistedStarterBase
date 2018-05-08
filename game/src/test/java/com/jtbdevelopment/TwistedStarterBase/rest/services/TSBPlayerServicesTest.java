@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
  */
 public class TSBPlayerServicesTest {
     private NewGameHandler<ObjectId, GameFeature, TSBGame, TSBMaskedGame, MongoPlayer> newGameHandler = Mockito.mock(NewGameHandler.class);
-    private TSBPlayerServices playerServices = new TSBPlayerServices(newGameHandler);
+    private TSBPlayerServices playerServices = new TSBPlayerServices(null, null, null, null, null, newGameHandler);
 
     @Test
     public void testCreateNewGame() {

@@ -2,8 +2,11 @@ package com.jtbdevelopment.TwistedStarterBase.rest.services;
 
 import com.jtbdevelopment.TwistedStarterBase.rest.data.GameFeatureInfo;
 import com.jtbdevelopment.TwistedStarterBase.state.GameFeature;
+import com.jtbdevelopment.TwistedStarterBase.state.TSBGame;
+import com.jtbdevelopment.TwistedStarterBase.state.masking.TSBMaskedGame;
 import com.jtbdevelopment.games.mongo.players.MongoPlayer;
 import com.jtbdevelopment.games.rest.services.AbstractPlayerGatewayService;
+import com.jtbdevelopment.games.rest.services.AbstractPlayerServices;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +23,12 @@ import java.util.stream.Collectors;
  */
 @Path("/")
 @Component
-public class TSBPlayerGatewayService extends AbstractPlayerGatewayService<ObjectId, MongoPlayer> {
+public class TSBPlayerGatewayService extends AbstractPlayerGatewayService<ObjectId, GameFeature, TSBGame, TSBMaskedGame, MongoPlayer> {
+    TSBPlayerGatewayService(
+            final AbstractPlayerServices<ObjectId, GameFeature, TSBGame, TSBMaskedGame, MongoPlayer> playerServices) {
+        super(playerServices);
+    }
+
     @GET
     @Path("features")
     @Produces(MediaType.APPLICATION_JSON)

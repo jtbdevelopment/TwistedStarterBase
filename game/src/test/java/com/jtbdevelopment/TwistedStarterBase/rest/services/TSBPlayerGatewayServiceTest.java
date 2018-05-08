@@ -13,7 +13,7 @@ import java.util.List;
  * Time: 4:14 PM
  */
 public class TSBPlayerGatewayServiceTest {
-    private TSBPlayerGatewayService service = new TSBPlayerGatewayService();
+    private TSBPlayerGatewayService service = new TSBPlayerGatewayService(null);
 
     @Test
     public void testFeaturesAndDescriptions() {
