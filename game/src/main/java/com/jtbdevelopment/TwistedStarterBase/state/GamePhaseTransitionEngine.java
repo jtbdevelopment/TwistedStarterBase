@@ -6,13 +6,14 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 /**
- * Date: 7/13/16
- * Time: 9:26 PM
+ * Date: 7/13/16 Time: 9:26 PM
  */
 @SuppressWarnings("unused")
 @Component
-public class GamePhaseTransitionEngine extends AbstractMPGamePhaseTransitionEngine<ObjectId, GameFeature, TSBGame> {
-    public GamePhaseTransitionEngine(final GameScorer<TSBGame> gameScorer) {
-        super(gameScorer);
-    }
+public class GamePhaseTransitionEngine extends
+    AbstractMPGamePhaseTransitionEngine<ObjectId, GameFeature, TSBGame> {
+
+  public GamePhaseTransitionEngine(final GameScorer<TSBGame> gameScorer) {
+    super(gameScorer);
+  }
 }
